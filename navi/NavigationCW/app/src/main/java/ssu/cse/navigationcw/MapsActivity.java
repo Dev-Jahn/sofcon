@@ -1,7 +1,7 @@
 package ssu.cse.navigationcw;
 
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -13,6 +13,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private static final int REQUEST_CODE_LOCATION = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +40,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+        MarkerOptions markerOptions1 = new MarkerOptions();
+        MarkerOptions markerOptions2 = new MarkerOptions();
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(37.525007, 126.971547);
-        LatLng sydney2 = new LatLng(37.625007, 127.071547);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("마크1"));
-        mMap.addMarker(new MarkerOptions().position(sydney2).title("마크2"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        LatLng startLatLng = new LatLng(37.525007, 126.971547);
+        LatLng destLatLng = new LatLng(37.625007, 127.071547);
+
+        markerOptions1.position(startLatLng);
+        markerOptions2.position(destLatLng);
+        markerOptions1.title("출발지");
+        markerOptions2.title("도착지");
+
+        mMap.addMarker(markerOptions1);
+        mMap.addMarker(markerOptions2);
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(startLatLng));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
     }
 }

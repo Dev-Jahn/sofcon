@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">NavigationCW</string>
     <string name="title_activity_maps">Map</string>
+
+    <string name="map_button_txt">Map API 예제</string>
+    <string name="place_button_txt">Place API 예제</string>
 </resources>
