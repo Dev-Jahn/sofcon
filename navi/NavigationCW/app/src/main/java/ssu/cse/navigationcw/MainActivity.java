@@ -8,12 +8,16 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
     // Request code for ACCESS_FINE_LOCATION
     private static final int REQUEST_CODE_LOCATION = 3125;
+    // Request code for PLACE_PICK
+    private static final int REQUEST_PLACE_PICKER = 4125;
+
     private Button buttonMap;
     private Button buttonPlace;
     private Resources resources;
@@ -24,7 +28,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         buttonMap = (Button)findViewById(R.id.buttonMap);
+        buttonMap.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
         buttonPlace = (Button)findViewById(R.id.buttonPlace);
+        buttonPlace.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
         resources = getResources();
 
         /**
