@@ -1,6 +1,7 @@
 package ssu.cse.navigationcw;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
@@ -42,7 +43,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         resources = getResources();
+        getPermission(Manifest.permission.ACCESS_FINE_LOCATION, REQUEST_CODE_LOCATION);
 
+    }
+
+    protected void getPermission(final String permissionName, final int requestCode) {
         /**
          * Check Permissions
          * - ACCESS_FINE_LOCATION
@@ -52,11 +57,12 @@ public class MainActivity extends AppCompatActivity {
          *   @ NOT IMPLEMENTED YET!!!!!
          *   @ by archslaveCW
          */
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+        if (ActivityCompat.checkSelfPermission(this, permissionName)
                 != PackageManager.PERMISSION_GRANTED) {
 
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.ACCESS_FINE_LOCATION)) {
+
                 // Display UI and wait for user interaction
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
@@ -66,31 +72,32 @@ public class MainActivity extends AppCompatActivity {
                 announce += "\n";
                 announce += resources.getString(R.string.permission_request_announce2);
                 builder.setMessage(announce);
-
-                builder.setPositiveButton(R.string.allow_permission,
-                        new android.content.DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        });
                 builder.setNegativeButton(R.string.disallow_permission, new android.content.DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
                     }
                 });
+                builder.setPositiveButton(R.string.allow_permission,
+                        new android.content.DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                ActivityCompat.requestPermissions(getActivity(), new String[]{permissionName},
+                                        requestCode);
+                            }
+                        });
+
                 builder.setCancelable(false);
                 builder.show();
+
             } else {
                 // Request missing location permission.
                 ActivityCompat.requestPermissions(
-                        this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                        REQUEST_CODE_LOCATION);
+                        this, new String[]{permissionName},
+                        requestCode);
             }
         } else {
             // Location permission has been granted, continue as usual.
-
         }
     }
 
@@ -108,4 +115,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+    private Activity getActivity() { return this; }
 }
