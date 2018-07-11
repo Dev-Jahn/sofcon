@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -32,14 +33,14 @@ public class MainActivity extends AppCompatActivity {
         buttonMap.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                startActivity(new Intent(MainActivity.this, MapsActivity.class));
             }
         });
         buttonPlace = (Button)findViewById(R.id.buttonPlace);
         buttonPlace.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                startActivity(new Intent(MainActivity.this, PlaceActivity.class));
             }
         });
         resources = getResources();
