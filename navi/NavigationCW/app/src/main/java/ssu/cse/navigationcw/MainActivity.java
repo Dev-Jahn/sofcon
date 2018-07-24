@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Button buttonMap;
     private Button buttonPlace;
+    private Button buttonLine;
     private Resources resources;
 
     @Override
@@ -41,6 +42,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, PlaceActivity.class));
+            }
+        });
+        buttonLine = (Button)findViewById(R.id.buttonLine);
+        buttonLine.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, TestActivity.class));
             }
         });
         resources = getResources();

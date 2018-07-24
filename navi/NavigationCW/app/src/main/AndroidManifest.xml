@@ -39,7 +39,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".MapsActivity" />
-        <activity android:name=".PlaceActivity"></activity>
+        <activity android:name=".PlaceActivity" />
+        <activity android:name=".TestActivity"></activity>
     </application>
 
 </manifest>

@@ -3,8 +3,9 @@
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_main">Main</string>
 
-    <string name="map_button_txt">Map API 예제</string>
-    <string name="place_button_txt">Place API 예제</string>
+    <string name="map_button_txt">Map API</string>
+    <string name="place_button_txt">Place API</string>
+    <string name="line_button_txt">Line API</string>
 
     <string name="permission_request_announce1">저희 앱을 사용하시기 위해서는 위치 권한을 허용해주셔야 합니다.</string>
     <string name="permission_request_announce2">수집된 정보는 저장되지 않고 파기됩니다.</string>
