@@ -9,6 +9,8 @@
 
     <string name="permission_request_announce1">저희 앱을 사용하시기 위해서는 위치 권한을 허용해주셔야 합니다.</string>
     <string name="permission_request_announce2">수집된 정보는 저장되지 않고 파기됩니다.</string>
+
+    <string name="test_description_txt">Test View for add polylines</string>
     <string name="allow_permission">허용</string>
     <string name="disallow_permission">거부</string>
 </resources>

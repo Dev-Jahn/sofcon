@@ -15,11 +15,6 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    // Request code for ACCESS_FINE_LOCATION
-    private static final int REQUEST_CODE_LOCATION = 3125;
-    // Request code for PLACE_PICK
-    private static final int REQUEST_PLACE_PICKER = 4125;
-
     private Button buttonMap;
     private Button buttonPlace;
     private Button buttonLine;
@@ -48,11 +43,13 @@ public class MainActivity extends AppCompatActivity {
         buttonLine.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, TestActivity.class));
+                startActivity(new Intent(MainActivity.this, RoutesActivity.class));
             }
         });
         resources = getResources();
-        getPermission(Manifest.permission.ACCESS_FINE_LOCATION, REQUEST_CODE_LOCATION);
+
+        getPermission(Manifest.permission.ACCESS_FINE_LOCATION, PermissionCodes.REQUEST_CODE_FINE_LOCATION);
+        getPermission(Manifest.permission.ACCESS_COARSE_LOCATION, PermissionCodes.REQUEST_CODE_COARSE_LOCATION);
 
     }
 
@@ -61,10 +58,10 @@ public class MainActivity extends AppCompatActivity {
          * Check Permissions
          * - ACCESS_FINE_LOCATION
          *
-         * @ IF permission was not allowed,
-         *   We should show some dialogs that why we needs this permissions
-         *   @ NOT IMPLEMENTED YET!!!!!
-         *   @ by archslaveCW
+         *  @ IF permission was not allowed,
+         *    We should show some dialogs that why we needs this permissions
+         *    NOT IMPLEMENTED YET!!!!!
+         *    by archslaveCW
          */
         if (ActivityCompat.checkSelfPermission(this, permissionName)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -114,7 +111,15 @@ public class MainActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode,
                                            String[] permissions,
                                            int[] grantResults) {
-        if (requestCode == REQUEST_CODE_LOCATION) {
+        if (requestCode == PermissionCodes.REQUEST_CODE_FINE_LOCATION) {
+            if (grantResults.length == 1
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // IF permission was allowed
+
+            } else {
+                // IF Permission was denied or request was cancelled
+            }
+        } else if (requestCode == PermissionCodes.REQUEST_CODE_COARSE_LOCATION) {
             if (grantResults.length == 1
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // IF permission was allowed
