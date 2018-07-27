@@ -20,6 +20,7 @@ public class PlaceActivity extends AppCompatActivity {
         setContentView(R.layout.activity_place);
 
         PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+
         try {
             startActivityForResult(builder.build(this), PLACE_PICKER_REQUEST);
         } catch(GooglePlayServicesNotAvailableException e) {
