@@ -3,7 +3,7 @@ const http = require('http');
 const mongoose = require('mongoose');
 let url = require('url');
 
-mongoose.connect('mongodb://localhost:27017/test');
+mongoose.connect('mongodb://localhost:27017/softcon');
 let db = mongoose.connection;
 
 db.on('error', function(){
