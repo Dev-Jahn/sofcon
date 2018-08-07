@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class TripPlanActivity extends Activity {
@@ -107,6 +108,16 @@ public class TripPlanActivity extends Activity {
             final View rootView = inflater.inflate(R.layout.fragment_plan, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.dt);
             Button test = (Button) rootView.findViewById(R.id.plan_self);
+            ImageView left = (ImageView) rootView.findViewById(R.id.left);
+            ImageView right = (ImageView) rootView.findViewById(R.id.right);
+            if(getArguments().getInt(ARG_SECTION_NUMBER) == 1)//get arrow distinguished
+                left.setVisibility(View.INVISIBLE);
+            else
+                left.setVisibility(View.VISIBLE);
+            if(getArguments().getInt(ARG_SECTION_NUMBER) == 3)//get arrow distinguished
+                right.setVisibility(View.INVISIBLE);
+            else
+                right.setVisibility(View.VISIBLE);
             test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
