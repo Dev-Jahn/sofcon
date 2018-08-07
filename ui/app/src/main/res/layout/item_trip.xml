@@ -3,8 +3,12 @@
     android:layout_height="match_parent"
     android:id="@+id/cardview"
     xmlns:tools="http://schemas.android.com/tools"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="2dp"
+    android:background="#FF0000"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,8 +23,7 @@
                 android:id="@+id/placeImg"
                 android:layout_width="match_parent"
                 android:layout_height="240dp"
-                app:srcCompat="@drawable/main_background"
-                />
+                app:srcCompat="@drawable/main_background" />
 
             <Space
                 android:id="@+id/marginspacer"
@@ -38,12 +41,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Place"
-                android:textSize="48dp"
                 android:textColor="#FFFFFF"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
+                android:textSize="48dp"
                 app:layout_constraintBottom_toBottomOf="@id/marginspacer"
-                />
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
         </android.support.constraint.ConstraintLayout>
 
         <TextView
@@ -51,7 +53,8 @@
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:gravity="center_horizontal"
-            android:text="1.1 ~ 1.10" />
+            android:text="day" />
 
     </LinearLayout>
+
 </android.support.v7.widget.CardView>
