@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(
                         getApplicationContext(),
-                        TripPlanActivity.class);
+                        NewActivity.class);
                 startActivity(intent);
             }
         });
