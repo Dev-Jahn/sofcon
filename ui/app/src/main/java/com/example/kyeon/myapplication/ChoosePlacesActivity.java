@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class ChoosePlacesActivity extends Activity {
 
@@ -11,8 +12,7 @@ public class ChoosePlacesActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_places);
-
-        Button test = (Button) findViewById(R.id.test);
+        ImageButton test = (ImageButton) findViewById(R.id.closeButton);
         test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
