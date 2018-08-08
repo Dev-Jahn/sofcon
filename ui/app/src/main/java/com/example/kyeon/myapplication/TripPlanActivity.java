@@ -19,7 +19,9 @@ import android.view.ViewGroup;
 
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class TripPlanActivity extends AppCompatActivity {
 
@@ -115,7 +117,23 @@ public class TripPlanActivity extends AppCompatActivity {
             else
                 left.setVisibility(View.VISIBLE);
             if(getArguments().getInt(ARG_SECTION_NUMBER) == 3)//get arrow distinguished
+            {
                 right.setVisibility(View.INVISIBLE);
+                LinearLayout linearLayout = rootView.findViewById(R.id.linear_layout_fragment);
+                Button comp_button = new Button(getContext());
+                comp_button.setText("완료");
+                comp_button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        /*
+                            save to local~~~~
+                         */
+                        Toast.makeText(getContext(), "sibal", Toast.LENGTH_SHORT).show();
+                        getActivity().finish();
+                    }
+                });
+                linearLayout.addView(comp_button);
+            }
             else
                 right.setVisibility(View.VISIBLE);
             Button plan_self = (Button) rootView.findViewById(R.id.plan_self);
@@ -124,7 +142,7 @@ public class TripPlanActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Log.d("test", "onCreateView: "+ getArguments().getInt(ARG_SECTION_NUMBER));
                 Intent choose_places = new Intent(getActivity(), ChoosePlacesActivity.class);
-                startActivity(choose_places);
+                startActivityForResult(choose_places,getArguments().getInt(ARG_SECTION_NUMBER));
                 getActivity().overridePendingTransition(R.anim.sliding_up, R.anim.stay);
             }
 

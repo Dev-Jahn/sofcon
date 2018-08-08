@@ -2,6 +2,7 @@ package com.example.kyeon.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -41,6 +42,7 @@ public class NewActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(NewActivity.this, TripPlanActivity.class);
                 startActivity(i);
+                finish();
             }
         });
     }
@@ -49,4 +51,5 @@ public class NewActivity extends AppCompatActivity {
         Intent intent = new Intent(this, Calendar.class);
         startActivityForResult(intent, 1);
     }
+
 }
