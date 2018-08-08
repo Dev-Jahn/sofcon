@@ -7,9 +7,8 @@ from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.text import text_to_word_sequence
 
 #전처리
-#preprocess
 df_raw = pd.read_csv('hotel_review.csv', names=['placeId','userId','score','title','review'],encoding='ms949')
-df_raw = df_raw.drop(df.columns[5:],axis=1)
+df_raw = df_raw.drop(df_raw.columns[5:],axis=1)
 df_raw = df_raw.dropna()
 df_raw['score'] = df_raw['score']/10
 df_raw['score'] = df_raw['score'].apply(int)
