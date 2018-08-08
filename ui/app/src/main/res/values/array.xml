@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="question">
+        <item>선택</item>
         <item>2명</item>
         <item>3명</item>
         <item>4명</item>
-        <item>단체</item>
+        <item>단체(4인 이상)</item>
     </string-array>
 </resources>
