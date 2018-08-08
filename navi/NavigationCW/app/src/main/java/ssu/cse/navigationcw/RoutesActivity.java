@@ -42,6 +42,7 @@ public class RoutesActivity extends AppCompatActivity implements OnMapReadyCallb
 
     private TextView mNoticeTextView;
 
+    private Context mContext;
     private GoogleMap mMap;
     private ArrayList<LatLng> listLocsToDraw;
 
@@ -61,7 +62,7 @@ public class RoutesActivity extends AppCompatActivity implements OnMapReadyCallb
         setContentView(R.layout.activity_routes);
 
         mNoticeTextView = (TextView)findViewById(R.id.noticeTextView);
-
+        mContext = this;
         listLocsToDraw = new ArrayList<>();
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -70,6 +71,8 @@ public class RoutesActivity extends AppCompatActivity implements OnMapReadyCallb
 
         mapFragment.getMapAsync(this);
     }
+
+    private Context getContext() { return mContext; }
 
     public Location getCurrentLocation() {
 
@@ -117,13 +120,24 @@ public class RoutesActivity extends AppCompatActivity implements OnMapReadyCallb
         return null;
     }
 
+    /**
+     * This method requests a code for draw routes between origin & dest
+     * @param origin
+     * @param dest
+     * @return url
+     */
     private String getDirectionsUrl(LatLng origin, LatLng dest) {
 
         String originString = "origin=" + origin.latitude + "," + origin.longitude;
         String destString = "destination=" + dest.latitude + "," + dest.longitude;
 
         String sensor = "sensor=false";
-        String mode = "mode=driving";
+        /**
+         * DO NOT THINK ABOUT MODIFYING THIS CODE
+         * mode : driving / walking / bicycling / transit
+         * In korea, it only works if mode is transit
+         */
+        String mode = "mode=transit";
 
         String parameters = originString + "&" + destString + "&" + sensor + "&" + mode;
         String output = "json";
@@ -169,7 +183,7 @@ public class RoutesActivity extends AppCompatActivity implements OnMapReadyCallb
 
         @Override
         public void onProviderEnabled(String s) {
-
+            getCurrentLocation();
         }
 
         @Override
@@ -188,14 +202,21 @@ public class RoutesActivity extends AppCompatActivity implements OnMapReadyCallb
         if(curLocation == null) {
             // Base View Point
             curLatLng = new LatLng(37.525007, 126.971547);
+            // Below code is just debug code, delete it if test is over
             Toast.makeText(this, "location is not updated", Toast.LENGTH_LONG).show();
+            /**
+             * If needed, we can request to users to enable their GPS
+             * Reference codes at MapsActivity
+             */
         } else {
             curLatLng = new LatLng(curLocation.getLatitude(), curLocation.getLongitude());
+            // Below code is just debug code, delete it if test is over
             Toast.makeText(this, "location is updated", Toast.LENGTH_LONG).show();
-
         }
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(curLatLng));
+        // We must discuss about default camera zoom level
+        // I think level 16 is appropriate
         mMap.animateCamera(CameraUpdateFactory.zoomTo(16));
 
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
@@ -211,8 +232,10 @@ public class RoutesActivity extends AppCompatActivity implements OnMapReadyCallb
                MarkerOptions options = new MarkerOptions();
                options.position(latLng);
                if(listLocsToDraw.size() == 1)
+                   // origin marker is green
                    options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
                else if(listLocsToDraw.size() == 2)
+                   // dest marker is red
                    options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
 
                mMap.addMarker(options);
@@ -221,59 +244,30 @@ public class RoutesActivity extends AppCompatActivity implements OnMapReadyCallb
                    LatLng origin = (LatLng) listLocsToDraw.get(0);
                    LatLng dest = (LatLng) listLocsToDraw.get(1);
 
+                   /**
+                    * requests draw a line for origin & dest
+                    */
                    String url = getDirectionsUrl(origin, dest);
                    DownloadTask downloadTask = new DownloadTask();
-
                    downloadTask.execute(url);
 
                }
 
            }
         });
-
-
-        // listLocsToDraw.add(startLatLng);
-        // listLocsToDraw.add(destLatLng);
-        // drawLinePath();
     }
-/*
-    private void drawLinePath()
-    {
-        if(mMap == null)
-        {
-            return;
-        }
-        if(listLocsToDraw.size() < 2)
-        {
-            return;
-        }
 
-        PolylineOptions options = new PolylineOptions();
-
-        options.color(Color.parseColor("#CC0000FF"));
-        options.width(5);
-        options.visible(true);
-
-        for(LatLng locRecorded : listLocsToDraw)
-        {
-            options.add(locRecorded);
-        }
-        mMap.addPolyline(options);
-    }
-*/
     private class DownloadTask extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... url) {
 
             String data = "";
-
             try {
                 data = downloadUrl(url[0]);
             } catch (Exception e) {
                 Log.d("DEBUG-Error", e.toString());
             }
-
             return data;
         }
 
@@ -282,7 +276,6 @@ public class RoutesActivity extends AppCompatActivity implements OnMapReadyCallb
             super.onPostExecute(result);
 
             ParserTask parserTask = new ParserTask();
-
             parserTask.execute(result);
         }
     }
@@ -308,7 +301,6 @@ public class RoutesActivity extends AppCompatActivity implements OnMapReadyCallb
         protected void onPostExecute(List<List<HashMap<String, String>>> result) {
             ArrayList points = null;
             PolylineOptions lineOptions = null;
-            MarkerOptions markerOptions = new MarkerOptions();
 
             Log.d(".java", "result.size = " + result.size());
 
@@ -333,13 +325,21 @@ public class RoutesActivity extends AppCompatActivity implements OnMapReadyCallb
                 lineOptions.color(Color.RED);
                 lineOptions.geodesic(true);
             }
-            mMap.addPolyline(lineOptions);
+            /**
+             * This is the case of cannot drawing a route
+             */
+            if(result.size() == 0) {
+                Toast.makeText(getContext(), "Invalid travel routes", Toast.LENGTH_LONG).show();
+            }
+            else {
+                mMap.addPolyline(lineOptions);
+            }
         }
     }
 
     private String downloadUrl(String strUrl) throws IOException {
         String data = "";
-        InputStream iStream = null;
+        InputStream is = null;
         HttpURLConnection urlConnection = null;
         try {
             URL url = new URL(strUrl);
@@ -348,9 +348,9 @@ public class RoutesActivity extends AppCompatActivity implements OnMapReadyCallb
 
             urlConnection.connect();
 
-            iStream = urlConnection.getInputStream();
+            is = urlConnection.getInputStream();
 
-            BufferedReader br = new BufferedReader(new InputStreamReader(iStream));
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
             StringBuffer sb = new StringBuffer();
 
@@ -366,7 +366,7 @@ public class RoutesActivity extends AppCompatActivity implements OnMapReadyCallb
         } catch (Exception e) {
             Log.d("Exception", e.toString());
         } finally {
-            iStream.close();
+            is.close();
             urlConnection.disconnect();
         }
         return data;
