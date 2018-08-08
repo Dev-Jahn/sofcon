@@ -3,6 +3,7 @@ package com.example.kyeon.myapplication;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -14,6 +15,7 @@ import com.example.kyeon.myapplication.decorator.SundayDecorator;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 
 //import com.example.kyeon.myapplication.decorator.EventDecorator;
 
@@ -21,6 +23,8 @@ import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 public class Calendar extends Activity {
 
     TextView txtText;
+    int yy, mm, dd;
+    String date;
     private final OneDayDecorator oneDayDecorator = new OneDayDecorator();
     MaterialCalendarView materialCalendarView;
 
@@ -43,6 +47,14 @@ public class Calendar extends Activity {
                 new SundayDecorator(),
                 new SaturdayDecorator());
 
+        materialCalendarView.setOnDateChangedListener(new OnDateSelectedListener() {
+            @Override
+            public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
+                yy = materialCalendarView.getSelectedDate().getYear();
+                mm = materialCalendarView.getSelectedDate().getMonth()+1;
+                dd = materialCalendarView.getSelectedDate().getDay();
+            }
+        });
     }
 
     public void mOnClose(View v){
@@ -64,10 +76,10 @@ public class Calendar extends Activity {
         return true;
     }
 
-   /* @Override
+    @Override
     public void onBackPressed() {
         //안드로이드 백버튼 막기
         return;
-    }*/
+    }
 
 }
