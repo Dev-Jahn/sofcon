@@ -25,7 +25,7 @@ text = ''
 text = text.join([review+'\n' for review in df['review']])
 text = re.sub(r'[^ 가-힣0-9\n]',' ',text)
 text = re.sub(r' +',' ',text)
-array = text.split('\n')[:9692]
+array = text.split('\n')[:]
 array
 
 #형태소 분리
@@ -57,7 +57,7 @@ from gensim.models import Word2Vec
 import time
 start = time.time()
 print("train start")
-model = Word2Vec(corpus, size=300, window=10, min_count=10, workers=8, iter=100, sg=1, sample=1e-3)
+model = Word2Vec(corpus, size=300, window=50, min_count=10, workers=8, iter=100, sg=1, sample=1e-3)
 model.save("hotel2.model")
 print("train end")
 print("Elapsed time: %s sec" % (time.time() - start))
