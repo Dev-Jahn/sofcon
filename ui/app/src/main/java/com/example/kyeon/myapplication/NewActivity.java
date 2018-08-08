@@ -48,5 +48,10 @@ public class NewActivity extends AppCompatActivity {
     public void onclickCalendar(View v) {
         Intent intent = new Intent(this, Calendar.class);
         startActivityForResult(intent, 1);
+
+        /*String date = intent.getExtras().getString("date");
+        Button dbutton = (Button)findViewById(R.id.departingDate);
+        dbutton.setText(date);*/
+
     }
 }

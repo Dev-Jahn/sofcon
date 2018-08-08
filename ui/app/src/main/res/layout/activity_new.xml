@@ -47,11 +47,12 @@
             android:layout_height="wrap_content"
             android:layout_weight="2">
             <Button
+                android:id="@+id/departingDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:layout_weight="2"
-                android:text="일정 선택"
+                android:text="출발 일자"
                 android:onClick="onclickCalendar">
 
             </Button>
@@ -65,11 +66,12 @@
                 android:textAlignment="center" />
 
             <Button
+                android:id="@+id/arrivingDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:background="@android:color/transparent"
-                android:text="일정 선택"
+                android:text="종료 일자"
                 android:onClick="onclickCalendar">
 
             </Button>
