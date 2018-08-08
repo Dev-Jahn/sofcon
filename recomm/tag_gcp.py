@@ -7,14 +7,18 @@ from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.text import text_to_word_sequence
 
 #전처리
-df =pd.read_csv('hotel_review.csv',encoding='ms949')
-df = df.drop(df.columns[5:],axis=1)
-df = df.dropna()
-df['score'] = df['score']/10
-df['score'] = df['score'].apply(int)
-df['review'] = df['review'].apply(lambda x: re.sub('<br/>',' ',x))
-df.to_csv('hotel_review_modified.csv',mode='w')
-df = df.reset_index(drop=True)
+#preprocess
+df_raw = pd.read_csv('hotel_review.csv', names=['placeId','userId','score','title','review'],encoding='ms949')
+df_raw = df_raw.drop(df.columns[5:],axis=1)
+df_raw = df_raw.dropna()
+df_raw['score'] = df_raw['score']/10
+df_raw['score'] = df_raw['score'].apply(int)
+df_raw['review'] = df_raw['review'].apply(lambda x: re.sub('<br/>',' ',x))
+df_raw = df_raw.reset_index(drop=True)
+df_raw.to_csv('hotel_review_pp.csv',mode='w')
+df = df_raw
+del df_raw
+pd.DataFrame.head(df)
 pd.DataFrame.tail(df)
 
 #리뷰단위 분할
@@ -43,7 +47,18 @@ for place in tagged:
     taglist.append(tag)
 df_tags['tags'] = taglist
 df_tags['score'] = df['score'].astype('int64')
+print(df_tags['tags'][0])
 
 corpus = [mecab.morphs(sentence) for sentence in array]
-from gensim.models import Word3Vec
-model = Word2Vec(corpus, size=100, window=99999, min_count=10, workers=4, iter=100, sg=1)
+import logging
+logging.basicConfig(
+	format='%(asctime)s : %(levelname)s : %(message)s',
+	level=logging.INFO)
+from gensim.models import Word2Vec
+import time
+start = time.time()
+print("train start")
+model = Word2Vec(corpus, size=300, window=10, min_count=10, workers=8, iter=100, sg=1, sample=1e-3)
+model.save("hotel2.model")
+print("train end")
+print("Elapsed time: %s sec" % (time.time() - start))

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#eeeeee"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".Calendar">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="#DCE775"
+            android:gravity="center"
+            android:text="일정 선택"
+            android:textColor="#444"
+            android:textSize="18sp" />
+
+        <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:mcv_selectionColor="#8d8"
+            app:mcv_showOtherDates="defaults">
+
+        </com.prolificinteractive.materialcalendarview.MaterialCalendarView>
+
+        <Button
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:text="취소"
+            android:onClick="mOnClose">
+
+        </Button>
+    </LinearLayout>
+    <!-- //end 타이틀바 -->
+
+
+
+
+</LinearLayout>
