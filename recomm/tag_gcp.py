@@ -57,7 +57,7 @@ from gensim.models import Word2Vec
 import time
 start = time.time()
 print("train start")
-model = Word2Vec(corpus, size=300, window=50, min_count=10, workers=8, iter=10, sg=1)#, sample=1e-3)
+model = Word2Vec(corpus, size=300, window=10, min_count=10, workers=8, iter=10, sg=1)#, sample=1e-3)
 model.save("hotel2.model")
 print("train end")
 print("Elapsed time: %s sec" % (time.time() - start))
