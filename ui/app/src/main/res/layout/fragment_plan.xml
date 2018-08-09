@@ -60,7 +60,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="직접 짜기" />
+                android:text="추천 장소" />
 
             <Button
                 android:id="@+id/plan_auto"
@@ -74,7 +74,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="다른 여행 참고" />
+                android:text="직접 수정" />
 
         </LinearLayout>
 

@@ -17,25 +17,7 @@ public class ChoosePlacesActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_places);
         ImageButton test = (ImageButton) findViewById(R.id.closeButton);
-        RecyclerView recyclerView = findViewById(R.id.rec_view_places);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        recyclerView.setAdapter(new RecyclerView.Adapter() {
-            @NonNull
-            @Override
-            public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-                return null;
-            }
 
-            @Override
-            public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-
-            }
-
-            @Override
-            public int getItemCount() {
-                return 0;
-            }
-        });
         test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
