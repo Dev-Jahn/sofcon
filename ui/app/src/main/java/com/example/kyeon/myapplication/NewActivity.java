@@ -7,18 +7,19 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
 
 public class NewActivity extends AppCompatActivity {
-    TextView txtResult;
+    String travel_title;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new);
 
+
+        EditText eTitle = (EditText)findViewById(R.id.travelTitle);
         Spinner spinner = (Spinner)findViewById(R.id.countPerson);
         final ArrayAdapter sAdapter = ArrayAdapter.createFromResource(this, R.array.question, android.R.layout.simple_spinner_dropdown_item);
 
@@ -43,6 +44,10 @@ public class NewActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+
+        travel_title = eTitle.getText().toString();
+
     }
 
     public void onclickCalendar(View v) {
@@ -54,4 +59,11 @@ public class NewActivity extends AppCompatActivity {
         dbutton.setText(date);*/
 
     }
+
+    @Override
+    public void onBackPressed() {
+
+        this.finish();
+    }
 }
+
