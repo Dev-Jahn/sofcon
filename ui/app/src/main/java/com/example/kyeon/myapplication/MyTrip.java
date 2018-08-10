@@ -20,7 +20,7 @@ public class MyTrip extends AppCompatActivity {
         setContentView(R.layout.activity_my_trip);
 
 
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rec_view);
+        RecyclerView recyclerView =  findViewById(R.id.rec_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
 

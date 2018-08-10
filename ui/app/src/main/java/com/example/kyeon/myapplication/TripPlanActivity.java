@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,9 +18,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class TripPlanActivity extends Activity {
+public class TripPlanActivity extends AppCompatActivity {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -106,16 +110,52 @@ public class TripPlanActivity extends Activity {
                                  Bundle savedInstanceState) {
             final View rootView = inflater.inflate(R.layout.fragment_plan, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.dt);
-            Button test = (Button) rootView.findViewById(R.id.plan_self);
-            test.setOnClickListener(new View.OnClickListener() {
+            ImageView left = (ImageView) rootView.findViewById(R.id.left);
+            ImageView right = (ImageView) rootView.findViewById(R.id.right);
+            if(getArguments().getInt(ARG_SECTION_NUMBER) == 1)//get arrow distinguished
+                left.setVisibility(View.INVISIBLE);
+            else
+                left.setVisibility(View.VISIBLE);
+            if(getArguments().getInt(ARG_SECTION_NUMBER) == 3)//get arrow distinguished
+            {
+                right.setVisibility(View.INVISIBLE);
+                LinearLayout linearLayout = rootView.findViewById(R.id.linear_layout_fragment);
+                Button comp_button = new Button(getContext());
+                comp_button.setText("완료");
+                comp_button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        /*
+                            save to local~~~~
+                         */
+                        Toast.makeText(getContext(), "sibal", Toast.LENGTH_SHORT).show();
+                        getActivity().finish();
+                    }
+                });
+                linearLayout.addView(comp_button);
+            }
+            else
+                right.setVisibility(View.VISIBLE);
+            Button plan_self = (Button) rootView.findViewById(R.id.plan_self);
+            plan_self.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d("test", "onCreateView: "+ getArguments().getInt(ARG_SECTION_NUMBER));
                 Intent choose_places = new Intent(getActivity(), ChoosePlacesActivity.class);
-                startActivity(choose_places);
+                startActivityForResult(choose_places,getArguments().getInt(ARG_SECTION_NUMBER));
                 getActivity().overridePendingTransition(R.anim.sliding_up, R.anim.stay);
             }
-        });
+
+            });
+
+            Button plan_auto = (Button) rootView.findViewById(R.id.plan_auto);
+            plan_auto.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    BottomSheetDialog bottomSheetDialog = BottomSheetDialog.getInstance();
+                    bottomSheetDialog.show(((AppCompatActivity)getActivity()).getSupportFragmentManager(),"bottomsheet");
+                }
+            });
 
             textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;
