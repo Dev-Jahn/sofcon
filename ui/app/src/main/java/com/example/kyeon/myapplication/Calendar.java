@@ -27,6 +27,7 @@ public class Calendar extends Activity {
     int yy = 0, mm = 0, dd = 0;
     String date;
     private final OneDayDecorator oneDayDecorator = new OneDayDecorator();
+    private final int REQUEST_CODE_ALPHA = 100;
     MaterialCalendarView materialCalendarView;
 
     @Override
@@ -62,8 +63,15 @@ public class Calendar extends Activity {
             @Override
             public void onClick(View view) {
                 date = yy + "/" + mm + "/" + dd;
+                String year = String.valueOf(yy);
+                String month = String.valueOf(mm);
+                String day = String.valueOf(dd);
+
                 Intent intent = new Intent();
                 intent.putExtra("date", date);
+                intent.putExtra("year", year);
+                intent.putExtra("month", month);
+                intent.putExtra("day", day);
                 setResult(RESULT_OK, intent);
                 finish();
             }
@@ -74,9 +82,7 @@ public class Calendar extends Activity {
         //데이터 전달하기
         Intent intent = new Intent();
         intent.putExtra("result", "Close Popup");
-        setResult(RESULT_OK, intent);
-
-        //액티비티(팝업) 닫기
+        setResult(RESULT_CANCELED, intent);
         finish();
     }
 
@@ -94,5 +100,4 @@ public class Calendar extends Activity {
         //안드로이드 백버튼 막기
         return;
     }
-
 }
