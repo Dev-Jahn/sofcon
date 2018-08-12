@@ -1,7 +1,7 @@
 import pandas as pd
 import re
 
-df = pd.read_csv('data/hotel_review_pp.csv')
+df = pd.read_csv('data/kor/hotel_review_pp.csv')
 pd.DataFrame.head(df)
 pd.DataFrame.tail(df)
 
