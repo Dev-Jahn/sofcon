@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -13,12 +14,13 @@ import android.widget.Spinner;
 
 public class NewActivity extends AppCompatActivity {
     String travel_title;
+    private final int REQUEST_CODE_CALENDAR = 100;
+    int AorD = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new);
-
 
         EditText eTitle = (EditText)findViewById(R.id.travelTitle);
         Spinner spinner = (Spinner)findViewById(R.id.countPerson);
@@ -52,16 +54,50 @@ public class NewActivity extends AppCompatActivity {
 
     }
 
-    public void onclickCalendar(View v) {
+    public void onclickCalendarA(View v) {
         Intent intent = new Intent(this, Calendar.class);
-        startActivityForResult(intent, 1);
-
-        /*String date = intent.getExtras().getString("date");
-        Button dbutton = (Button)findViewById(R.id.departingDate);
-        dbutton.setText(date);*/
+        startActivityForResult(intent, REQUEST_CODE_CALENDAR);
+        AorD = 1;
 
     }
 
+    public void onclickCalendarB(View v) {
+        Intent intent = new Intent(this, Calendar.class);
+        startActivityForResult(intent, REQUEST_CODE_CALENDAR);
+        AorD = 2;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode != RESULT_OK)
+            return;
+
+        if(requestCode == REQUEST_CODE_CALENDAR) {
+            String date = data.getStringExtra("date");
+            String year = data.getStringExtra("year");
+            String month = data.getStringExtra("month");
+            String day = data.getStringExtra("day");
+
+            int yy = Integer.parseInt(year);
+            int mm = Integer.parseInt(month);
+            int dd = Integer.parseInt(day);
+
+            System.out.println(date);
+            System.out.println(yy);
+            System.out.println(mm);
+            System.out.println(dd);
+
+            if(AorD == 1) {
+                Button button = (Button)findViewById(R.id.departingDate);
+                button.setText(date);
+            }
+            if(AorD == 2) {
+                Button button = (Button)findViewById(R.id.arrivingDate);
+                button.setText(date);
+            }
+        }
+    }
     @Override
     public void onBackPressed() {
 
