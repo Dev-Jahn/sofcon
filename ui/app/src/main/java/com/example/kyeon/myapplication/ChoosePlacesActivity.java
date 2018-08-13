@@ -1,41 +1,28 @@
 package com.example.kyeon.myapplication;
 
+import android.location.Location;
 import android.os.Bundle;
-import android.app.Activity;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
-public class ChoosePlacesActivity extends Activity {
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+
+public class ChoosePlacesActivity extends AppCompatActivity implements OnMapReadyCallback {
+
+    private static final int PLACE_PICKER_REQUEST = 12;
+    private GoogleMap mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_places);
         ImageButton test = (ImageButton) findViewById(R.id.closeButton);
-        RecyclerView recyclerView = findViewById(R.id.rec_view_places);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        recyclerView.setAdapter(new RecyclerView.Adapter() {
-            @NonNull
-            @Override
-            public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-                return null;
-            }
-
-            @Override
-            public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-
-            }
-
-            @Override
-            public int getItemCount() {
-                return 0;
-            }
-        });
         test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -43,6 +30,58 @@ public class ChoosePlacesActivity extends Activity {
                 ChoosePlacesActivity.this.overridePendingTransition(R.anim.stay, R.anim.sliding_down);
             }
         });
+
+
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+
     }
 
+    /**
+     * First lifecycle of google map
+     * @param googleMap
+     * @author archslaveCW
+     */
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+
+        LatLng curLatLng;
+
+        Location curLocation = MapUtility.getCurrentLocation(this, this);
+        if(curLocation == null) {
+            // Base View Point
+            curLatLng = new LatLng(37.525007, 126.971547);
+            // Below code is just debug code, delete it if test is over
+            Toast.makeText(this, "location is not updated", Toast.LENGTH_LONG).show();
+            /**
+             * If needed, we can request to users to enable their GPS
+             * Reference codes at MapsActivity
+             */
+        } else {
+            curLatLng = new LatLng(curLocation.getLatitude(), curLocation.getLongitude());
+            // Below code is just debug code, delete it if test is over
+            Toast.makeText(this, "location is updated", Toast.LENGTH_LONG).show();
+        }
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(curLatLng));
+        // We must discuss about default camera zoom level
+        // I think level 16 is appropriate
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(16));
+
+        /**
+         * map click listener
+         */
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                /**
+                 * to do list
+                 * 1. choose place by place picker?
+                 * 2. get place
+                 */
+            }
+        });
+    }
 }
