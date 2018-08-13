@@ -1,63 +1,83 @@
 
-const http = require('http');
-const mongoose = require('mongoose');
-let url = require('url');
+const http = require("http");
+const u = require("url");
+const query = require("querystring");
+const mongo = require("mongodb").MongoClient;
+const fs = require("fs");
 
-mongoose.connect('mongodb://localhost:27017/softcon');
-let db = mongoose.connection;
+// Database Name
+const DbName = "softcon";
 
-db.on('error', function(){
-    console.log('Connection Failed!');
+// Collection Name
+const Col_Learning = "Learning";
+const Col_Trip = "Trip";
+const Col_Diary = "Diary";
+
+var server = http.createServer(function(req, res) {
+    
+	var url = req.url;
+	var strucedUrl = u.parse(url);
+	var path = strucedUrl.pathname;
+	var cmds = path.split("/");
+	var parsedQuery = query.parse(strucedUrl.query, '&', '=');
+
+	if(cmds[1] == Col_Learning) {
+		if(req.method == "GET") {
+			var test = {test: parsedQuery.test};
+			mongo.connect("mongodb://127.0.0.1:27017", function(err,db) {
+				if(err) 
+					res.end("db connect error");
+				var dbo = db.db(DbName);
+				dbo.collection("test").findOne(test).project({"_id":false}).toArray(function(err,result) {
+					if(err) throw err;
+					res.writeHead(200, {'Content-Type': 'text/plain;charset=utf-8'});
+					res.end(JSON.stringify(result));
+					db.close();
+				});
+			});
+		}
+	} else if(cmds[1] == "UI") {
+		if(req.method == "GET") {
+			var test = {test: "for test" };
+			var PlaceData = {place : "",
+				people_count : 0,
+				days : 0,
+				syy : 0, smm : 0, sdd : 0,
+				eyy : 0, emm : 0, edd : 0,
+			};
+			var UID = {UID : parsedQuery.UID};
+			if(cmds[2] == "finduid") {
+				mongo.connect("mongodb://127.0.0.1:27017",{useNewUrlParser : true} ,function(err,db) {
+					if (err) throw err;
+					var dbo = db.db(DbName);
+					dbo.collection(Col_Trip).find(UID).project({"_id":false}).toArray(function(err, result) {
+						if(err) throw err;
+						res.writeHead(200, {'Content-Type': 'text/html'});
+						res.end(JSON.stringify(result));
+						db.close();
+					});
+				});
+			} else if(cmds[2] == "insert") {
+			} else if(cmds[2] == "else") {
+				mongo.connect("mongodb://127.0.0.1:27017", function(err,db) {
+					if(err) 
+						res.end("db connect error");
+					var dbo = db.db(DbName);
+					dbo.collection("test").find(test).project({"_id":false}).toArray(function(err,result) {
+						if(err) throw err;
+						res.writeHead(200, {'Content-Type': 'application/json'});
+						res.end(JSON.stringify(result));
+						db.close();
+					});
+				});
+			}
+		} 
+	}else {
+		res.writeHead(404, {'Content-Type': 'text.plain'});
+		res.end("wrong Query");
+	}
 });
-// 5. 연결 성공
-db.once('open', function() {
-    console.log('Connected!');
+
+server.listen(3000, function() {
+	console.log("server running...");
 });
-
-let server = http.createServer((request, response) => {
-    return request
-        .on('error', (err) => {
-            console.error(err);
-        })
-        .on('data', (data) => {
-            console.log(data);
-        })
-        .on('end', () => {
-            response.on('error', (err) => {
-                console.error(err);
-            });
-            response.statusCode = 200;
-            response.setHeader('Content-Type', 'text/plain');
-        });
-
-    response.writeHead(200, {'Content-Type': 'text/html'});
-    response.end('Hello node.js!!');
-
-});
-
-server.listen(8080, function(){
-    console.log('Server is running...');
-});
-
-var student = mongoose.Schema({
-    name : 'string',
-    address : 'string',
-    age : 'number'
-});
-
-// 7. 정의된 스키마를 객체처럼 사용할 수 있도록 model() 함수로 컴파일
-var Student = mongoose.model('Schema', student);
-
-// 8. Student 객체를 new 로 생성해서 값을 입력
-var newStudent = new Student({name:'Hong Gil Dong', address:'서울시 강남구 논현동', age:'22'});
-
-// 9. 데이터 저장
-/*newStudent.save(function(error, data){
-    if(error){
-        console.log(error);
-    }else{
-        console.log('Saved!')
-    }
-});
-*/
-
