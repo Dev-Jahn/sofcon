@@ -35,9 +35,7 @@
         <activity
             android:name=".ChoosePlacesActivity"
             android:label="@string/title_activity_choose_places" />
-        <activity
-            android:name=".Calendar"
-            android:theme="@android:style/Theme.Dialog" />
+
         <activity android:name=".TravelActivity"></activity>
     </application>
 
