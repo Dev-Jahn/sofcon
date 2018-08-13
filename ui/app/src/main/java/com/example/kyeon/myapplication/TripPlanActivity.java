@@ -6,10 +6,15 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.TabLayout;
 import android.support.v13.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -18,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -34,6 +40,9 @@ public class TripPlanActivity extends AppCompatActivity {
      * {@link android.support.v13.app.FragmentStatePagerAdapter}.
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
+    String d_yy, d_mm, d_dd;
+    String a_yy, a_mm, a_dd;
+    String etitle, person_count;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -46,14 +55,43 @@ public class TripPlanActivity extends AppCompatActivity {
         setContentView(R.layout.activity_plan);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
+        Toolbar tb = findViewById(R.id.toolbar);
+        setSupportActionBar(tb);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("");
+
+        Intent intent = getIntent();
+        d_yy = intent.getStringExtra("departing_year");
+        d_mm = intent.getStringExtra("departing_month");
+        d_dd = intent.getStringExtra("departing_day");
+        a_yy = intent.getStringExtra("arriving_year");
+        a_mm = intent.getStringExtra("arriving_month");
+        a_dd = intent.getStringExtra("arriving_day");
+        etitle = intent.getStringExtra("title_text");
+        person_count = intent.getStringExtra("person_count");
 
 
+        //ImageButton comp = new ImageButton(getApplicationContext());
+        //comp.setImageDrawable(getDrawable(R.drawable.outline_done_black_24dp));
+
+        /*
+        android.support.v7.app.ActionBar ab = getSupportActionBar();
+        ab.setTitle("");
+        */
+
+        /*
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        tabLayout.addTab(tabLayout.newTab().setText("Tab 1"));
+        tabLayout.addTab(tabLayout.newTab().setText("Tab 2"));
+        tabLayout.addTab(tabLayout.newTab().setText("Tab 3"));
+
+        */
 
     }
 
@@ -61,8 +99,8 @@ public class TripPlanActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_test, menu);
-        return true;
+        getMenuInflater().inflate(R.menu.actionbar_plan, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -76,6 +114,13 @@ public class TripPlanActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
+        else if (id == R.id.action_complete)
+        {
+            //s a v e to local
+            Toast.makeText(getApplicationContext(), "Title : "+etitle+"\n"+"departing date : "+d_yy+'/'+d_mm+'/'+d_dd+"\n"+"arriving date : "
+                    +a_yy+'/'+a_mm+'/'+a_dd+"\n"+"Group Size : "+person_count, Toast.LENGTH_SHORT).show();
+            finish();
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -83,7 +128,7 @@ public class TripPlanActivity extends AppCompatActivity {
     /**
      * A placeholder fragment containing a simple view.
      */
-    public static class PlaceholderFragment extends Fragment {
+    public static class PlaceholderFragment extends android.support.v4.app.Fragment {
         /**
          * The fragment argument representing the section number for this
          * fragment.
@@ -120,19 +165,15 @@ public class TripPlanActivity extends AppCompatActivity {
             {
                 right.setVisibility(View.INVISIBLE);
                 LinearLayout linearLayout = rootView.findViewById(R.id.linear_layout_fragment);
-                Button comp_button = new Button(getContext());
-                comp_button.setText("완료");
+                /*
                 comp_button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        /*
-                            save to local~~~~
-                         */
-                        Toast.makeText(getContext(), "sibal", Toast.LENGTH_SHORT).show();
-                        getActivity().finish();
+                    //save to local
                     }
                 });
-                linearLayout.addView(comp_button);
+                */
+
             }
             else
                 right.setVisibility(View.VISIBLE);
@@ -166,14 +207,14 @@ public class TripPlanActivity extends AppCompatActivity {
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
-    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+    public class SectionsPagerAdapter extends FragmentStatePagerAdapter{
 
-        public SectionsPagerAdapter(FragmentManager fm) {
+        public SectionsPagerAdapter(android.support.v4.app.FragmentManager fm) {
             super(fm);
         }
 
         @Override
-        public Fragment getItem(int position) {
+        public android.support.v4.app.Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
             return PlaceholderFragment.newInstance(position + 1);

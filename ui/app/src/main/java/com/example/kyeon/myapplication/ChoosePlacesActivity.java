@@ -23,6 +23,10 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_places);
         ImageButton test = (ImageButton) findViewById(R.id.closeButton);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0d42699f5252927500346436547459b4202f8d61
         test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

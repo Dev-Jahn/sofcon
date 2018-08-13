@@ -8,6 +8,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +34,8 @@ public class TripCardAdapter extends RecyclerView.Adapter<TripCardAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_trip, null);
+        RecyclerView.LayoutParams lp = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        v.setLayoutParams(lp);
         return new ViewHolder(v);
     }
 
@@ -41,8 +44,10 @@ public class TripCardAdapter extends RecyclerView.Adapter<TripCardAdapter.ViewHo
         final Item item = items.get(position);
         Drawable drawable = ContextCompat.getDrawable(context, item.getImage());
         holder.image.setBackground(drawable);
+        Log.d("sibal", "onBindViewHolder: " + drawable.toString());
         holder.place.setText(item.getPlace());
         holder.day.setText(item.getDay());
+        holder.title.setText(item.getTitle());
         holder.cardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,6 +64,7 @@ public class TripCardAdapter extends RecyclerView.Adapter<TripCardAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         ImageView image;
+        TextView title;
         TextView place;
         TextView day;
         CardView cardview;
@@ -66,10 +72,11 @@ public class TripCardAdapter extends RecyclerView.Adapter<TripCardAdapter.ViewHo
         public ViewHolder(View itemView)
         {
             super(itemView);
-            image = (ImageView) itemView.findViewById(R.id.placeImg);
-            place = (TextView) itemView.findViewById(R.id.placeText);
-            day = (TextView) itemView.findViewById(R.id.dayText);
-            cardview = (CardView) itemView.findViewById(R.id.cardview);
+            image =  itemView.findViewById(R.id.placeImg);
+            title = itemView.findViewById(R.id.trip_title);
+            place =  itemView.findViewById(R.id.placeText);
+            day =  itemView.findViewById(R.id.dayText);
+            cardview =  itemView.findViewById(R.id.cardview);
         }
     }
 }

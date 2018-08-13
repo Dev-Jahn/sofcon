@@ -91,6 +91,16 @@
         android:orientation="vertical"
         android:layout_weight="1">
 
+        <de.hdodenhof.circleimageview.CircleImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/sample_image"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/sample_image"
+            app:civ_border_width="5dp"
+            app:civ_border_color="#9E9E9E"/>
+
     </LinearLayout>
 
 </LinearLayout>
