@@ -1,8 +1,10 @@
 package com.example.kyeon.myapplication;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -14,22 +16,29 @@ import android.widget.Spinner;
 
 public class NewActivity extends AppCompatActivity {
     String travel_title;
+
+    public static final String TAG = "Alert_Dialog";
+    AlertDialog.Builder alertDialogCalendar;
+
     private final int REQUEST_CODE_CALENDAR = 100;
     int AorD = 0;
-
     int yy = 0, mm = 0, dd = 0; // yy : defines year | mm : defines month | dd : defines day
     String date, year, month, day;
     String d_yy, d_mm, d_dd;
     String a_yy, a_mm, a_dd;
     int personCount = 0; // variable for spinner selection, for each selection, personCount gets selected item's data
 
+    int check_dyy = 0, check_dmm = 0, check_ddd = 0;
+    int check_ayy = 0, check_amm = 0, check_add = 0;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new);
 
-        final EditText eTitle = (EditText)findViewById(R.id.travelTitle);
-        Spinner spinner = (Spinner)findViewById(R.id.countPerson);
+        final EditText eTitle = (EditText) findViewById(R.id.travelTitle);
+        Spinner spinner = (Spinner) findViewById(R.id.countPerson);
         final ArrayAdapter sAdapter = ArrayAdapter.createFromResource(this, R.array.question, android.R.layout.simple_spinner_dropdown_item);
 
         spinner.setAdapter(sAdapter);
@@ -38,24 +47,24 @@ public class NewActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 //Toast.makeText(NewActivity.this, (CharSequence) sAdapter.getItem(i), Toast.LENGTH_SHORT).show();
                 /*********************************
-                   Spinner index starts from 0.
-                   index[0] = 선택;
-                   index[1] = 2명;
-                   index[2] = 3명;
-                   index[3] = 4명;
-                   index[4] = 단체;
+                 Spinner index starts from 0.
+                 index[0] = 선택;
+                 index[1] = 2명;
+                 index[2] = 3명;
+                 index[3] = 4명;
+                 index[4] = 단체;
                  *********************************/
 
-                if(i == 1) {
+                if (i == 1) {
                     personCount = 2;
                 }
-                if(i == 2) {
+                if (i == 2) {
                     personCount = 3;
                 }
-                if(i == 3) {
+                if (i == 3) {
                     personCount = 4;
                 }
-                if(i == 4) {
+                if (i == 4) {
                     personCount = 99; // group consist of more than 4 members is defined as group. (integer number 99 means group)
                 }
             }
@@ -104,10 +113,11 @@ public class NewActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode != RESULT_OK)
+
+        if (resultCode != RESULT_OK)
             return;
 
-        if(requestCode == REQUEST_CODE_CALENDAR) {
+        if (requestCode == REQUEST_CODE_CALENDAR) {
             date = data.getStringExtra("date");
             year = data.getStringExtra("year");
             month = data.getStringExtra("month");
@@ -117,20 +127,77 @@ public class NewActivity extends AppCompatActivity {
             mm = Integer.parseInt(month);
             dd = Integer.parseInt(day);
 
-            if(AorD == 1) {
+            if (AorD == 1) {
                 d_yy = year;
                 d_mm = month;
                 d_dd = day;
-                Button button = (Button)findViewById(R.id.departingDate);
-                button.setText(date);
+
+                check_dyy = Integer.parseInt(d_yy);
+                check_dmm = Integer.parseInt(d_mm);
+                check_ddd = Integer.parseInt(d_dd);
+
+
+                if(check_ayy != 0 && check_amm != 0 && check_add != 0) {
+                    if (check_ayy < check_dyy || check_amm < check_dmm || check_add < check_ddd) {
+                        alertDialogCalendar = new AlertDialog.Builder(NewActivity.this);
+                        alertDialogCalendar.setTitle("일정 선택 오류입니다!!");
+                        alertDialogCalendar.setMessage("출발일정은 도착일정보다 늦을 수 없습니다.");
+                        alertDialogCalendar.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int i) {
+                                Log.v(TAG, "확인");
+                                dialog.dismiss();
+                            }
+                        });
+                        alertDialogCalendar.show();
+                    } else {
+                        Button button = (Button) findViewById(R.id.departingDate);
+                        button.setText(date);
+                    }
+                }
+                else {
+                    Button button = (Button) findViewById(R.id.departingDate);
+                    button.setText(date);
+                }
+
             }
 
-            if(AorD == 2) {
+            if (AorD == 2) {
                 a_yy = year;
                 a_mm = month;
                 a_dd = day;
-                Button button = (Button)findViewById(R.id.arrivingDate);
-                button.setText(date);
+
+                check_ayy = Integer.parseInt(a_yy);
+                check_amm = Integer.parseInt(a_mm);
+                check_add = Integer.parseInt(a_dd);
+
+                System.out.println(check_add);
+                System.out.println(check_ddd);
+
+
+                if(check_dyy != 0 && check_dmm != 0 && check_ddd != 0) {
+                    if ((check_ayy < check_dyy) || (check_amm < check_dmm) || (check_add < check_ddd)) {
+                        System.out.println(1);
+                        alertDialogCalendar = new AlertDialog.Builder(NewActivity.this);
+                        alertDialogCalendar.setTitle("일정 선택 오류입니다!!");
+                        alertDialogCalendar.setMessage("도착일정은 출발 일정 보다 빠를 수 없습니다.");
+                        alertDialogCalendar.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int i) {
+                                Log.v(TAG, "확인");
+                                dialog.dismiss();
+                            }
+                        });
+                        alertDialogCalendar.show();
+                    } else {
+                        Button button = (Button) findViewById(R.id.arrivingDate);
+                        button.setText(date);
+                    }
+                }
+                else {
+                    Button button = (Button) findViewById(R.id.arrivingDate);
+                    button.setText(date);
+                }
             }
         }
     }
