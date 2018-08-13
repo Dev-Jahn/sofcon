@@ -93,7 +93,6 @@ public class TripPlanActivity extends AppCompatActivity {
 
         */
 
-
     }
 
 
@@ -118,7 +117,8 @@ public class TripPlanActivity extends AppCompatActivity {
         else if (id == R.id.action_complete)
         {
             //s a v e to local
-            Toast.makeText(getApplicationContext(), "sibal", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Title : "+etitle+"\n"+"departing date : "+d_yy+'/'+d_mm+'/'+d_dd+"\n"+"arriving date : "
+                    +a_yy+'/'+a_mm+'/'+a_dd+"\n"+"Group Size : "+person_count, Toast.LENGTH_SHORT).show();
             finish();
         }
 

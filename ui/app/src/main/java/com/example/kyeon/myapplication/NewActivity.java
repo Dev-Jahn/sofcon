@@ -93,7 +93,6 @@ public class NewActivity extends AppCompatActivity {
         Intent intent = new Intent(this, Calendar.class);
         startActivityForResult(intent, REQUEST_CODE_CALENDAR);
         AorD = 1;
-
     }
 
     public void onclickCalendarB(View v) {
@@ -125,6 +124,7 @@ public class NewActivity extends AppCompatActivity {
                 Button button = (Button)findViewById(R.id.departingDate);
                 button.setText(date);
             }
+
             if(AorD == 2) {
                 a_yy = year;
                 a_mm = month;
@@ -134,6 +134,7 @@ public class NewActivity extends AppCompatActivity {
             }
         }
     }
+
     @Override
     public void onBackPressed() {
         this.finish();
