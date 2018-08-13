@@ -5,7 +5,7 @@
 
         android:id="@+id/action_complete"
         android:title="Complete"
-        android:icon="@drawable/arrow_next"
+        android:icon="@drawable/outline_done_black_24dp"
         app:showAsAction="always"
 
         />

@@ -1,7 +1,6 @@
 package com.example.kyeon.myapplication;
 
 
-import android.app.ActionBar;
 import android.app.Activity;
 
 import android.app.Fragment;
@@ -12,8 +11,10 @@ import android.support.design.widget.TabLayout;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -22,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -55,11 +57,20 @@ public class TripPlanActivity extends AppCompatActivity {
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-        /*
 
+        Toolbar tb = findViewById(R.id.toolbar);
+        setSupportActionBar(tb);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("");
+        //ImageButton comp = new ImageButton(getApplicationContext());
+        //comp.setImageDrawable(getDrawable(R.drawable.outline_done_black_24dp));
+
+        /*
         android.support.v7.app.ActionBar ab = getSupportActionBar();
         ab.setTitle("");
+        */
 
+        /*
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Tab 1"));
         tabLayout.addTab(tabLayout.newTab().setText("Tab 2"));
@@ -75,7 +86,7 @@ public class TripPlanActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.actionbar_plan, menu);
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override

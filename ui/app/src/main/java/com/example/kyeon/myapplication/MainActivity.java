@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(
                         getApplicationContext(),
-                        MyTrip.class);
+                        TravelActivity.class);
                 startActivity(intent);
             }
         });
