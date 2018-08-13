@@ -6,13 +6,11 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-<<<<<<< HEAD
+
     <!-- added by archslaveCW for navigation option -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-=======
     <uses-permission android:name="android.permission.INTERNET"/>
->>>>>>> 0d42699f5252927500346436547459b4202f8d61
 
     <application
         android:allowBackup="true"
@@ -40,16 +38,13 @@
             android:theme="@android:style/Theme.Dialog" />
         <activity
             android:name=".ChoosePlacesActivity"
-<<<<<<< HEAD
             android:label="@string/title_activity_choose_places"></activity>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-=======
             android:label="@string/title_activity_choose_places" />
 
         <activity android:name=".TravelActivity"></activity>
->>>>>>> 0d42699f5252927500346436547459b4202f8d61
     </application>
 
 </manifest>
