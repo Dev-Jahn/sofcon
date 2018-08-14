@@ -34,9 +34,6 @@
             android:name=".TripPlanActivity"
             android:label="@string/title_activity_test" />
         <activity
-            android:name=".Calendar"
-            android:theme="@android:style/Theme.Dialog" />
-        <activity
             android:name=".ChoosePlacesActivity"
             android:label="@string/title_activity_choose_places"></activity>
         <meta-data
