@@ -1,13 +1,13 @@
 package com.example.kyeon.myapplication;
 
-import android.location.Location;
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -15,13 +15,13 @@ import com.google.android.gms.maps.model.LatLng;
 
 public class ChoosePlacesActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-    private static final int PLACE_PICKER_REQUEST = 12;
     private GoogleMap mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_places);
+
         ImageButton test = (ImageButton) findViewById(R.id.closeButton);
 
         test.setOnClickListener(new View.OnClickListener() {
@@ -29,6 +29,34 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             public void onClick(View view) {
                 finish();
                 ChoosePlacesActivity.this.overridePendingTransition(R.anim.stay, R.anim.sliding_down);
+            }
+        });
+
+        Button locationButton = (Button)findViewById(R.id.locationButton);
+        Button cancelButton = (Button)findViewById(R.id.cancelButton);
+        Button selectButton = (Button)findViewById(R.id.selectButton);
+
+        locationButton.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MapUtility.resetCameraLocation(mMap, getContext(), getActivity());
+            }
+        });
+
+        cancelButton.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mMap.clear();
+            }
+        });
+
+        selectButton.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /**
+                 * must write finish codes . . .
+                 * DO NOT forget about it
+                 */
             }
         });
 
@@ -48,28 +76,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        LatLng curLatLng;
-
-        Location curLocation = MapUtility.getCurrentLocation(this, this);
-        if(curLocation == null) {
-            // Base View Point
-            curLatLng = new LatLng(37.525007, 126.971547);
-            // Below code is just debug code, delete it if test is over
-            Toast.makeText(this, "location is not updated", Toast.LENGTH_LONG).show();
-            /**
-             * If needed, we can request to users to enable their GPS
-             * Reference codes at MapsActivity
-             */
-        } else {
-            curLatLng = new LatLng(curLocation.getLatitude(), curLocation.getLongitude());
-            // Below code is just debug code, delete it if test is over
-            Toast.makeText(this, "location is updated", Toast.LENGTH_LONG).show();
-        }
-
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(curLatLng));
-        // We must discuss about default camera zoom level
-        // I think level 16 is appropriate
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(16));
+        MapUtility.resetCameraLocation(mMap, getContext(), getActivity());
 
         /**
          * map click listener
@@ -85,4 +92,11 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             }
         });
     }
+
+    /**
+     * Ugly code... sorry
+     * @author archslaveCW
+     */
+    private Context getContext() { return this; }
+    private Activity getActivity() { return this; }
 }

@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -11,6 +12,11 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.widget.Toast;
+
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
 
 public class MapUtility {
 
@@ -22,6 +28,9 @@ public class MapUtility {
     private static final long MIN_TIME = 500;
     // unit : meter
     private static final long MIN_DISTANCE = 50;
+    // We must discuss about default camera zoom level
+    // I think level 16 is appropriate
+    private static final int ZOOM_LEVEL = 16;
 
     public static Location getCurrentLocation(final Context context, final Activity activity) {
 
@@ -90,4 +99,39 @@ public class MapUtility {
         }
         return null;
     }
+
+    public static void resetCameraLocation(GoogleMap mMap, Context context, Activity activity) {
+
+        Resources resources = Resources.getSystem();
+
+        if(mMap == null) {
+            String errorMsg = resources.getString(R.string.cameraResetErrorMessage);
+            Toast.makeText(context, errorMsg, Toast.LENGTH_LONG).show();
+        }
+        else {
+            LatLng curLatLng;
+
+            Location curLocation = getCurrentLocation(context, activity);
+            if (curLocation == null) {
+                // Base View Point - hard coded location will be replaced
+                curLatLng = new LatLng(37.525007, 126.971547);
+                // Below code is just debug code, delete it if test is over
+                String errorMsg = resources.getString(R.string.locUpdateErrorMessage);
+                Toast.makeText(context, errorMsg, Toast.LENGTH_LONG).show();
+                /**
+                 * If needed, we can request to users to enable their GPS
+                 * Reference codes at MapsActivity
+                 */
+            } else {
+                curLatLng = new LatLng(curLocation.getLatitude(), curLocation.getLongitude());
+                // Below code is just debug code, delete it if test is over
+                String msg = resources.getString(R.string.cameraResetMessage);
+                Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
+            }
+
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(curLatLng));
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(ZOOM_LEVEL));
+        }
+    }
+
 }
