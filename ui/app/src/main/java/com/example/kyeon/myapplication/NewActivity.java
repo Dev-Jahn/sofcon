@@ -20,7 +20,7 @@ public class NewActivity extends AppCompatActivity {
     public static final String TAG = "Alert_Dialog";
     AlertDialog.Builder alertDialogCalendar;
 
-    private final int REQUEST_CODE_CALENDAR = 100;
+    final int REQUEST_CODE_CALENDAR = 100;
     int AorD = 0;
     int yy = 0, mm = 0, dd = 0; // yy : defines year | mm : defines month | dd : defines day
     String date, year, month, day;
