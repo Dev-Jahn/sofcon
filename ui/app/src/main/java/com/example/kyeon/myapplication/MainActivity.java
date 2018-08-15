@@ -53,8 +53,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });*/
 
-        Button b = (Button)findViewById(R.id.newTrip);
-        b.setOnClickListener(new View.OnClickListener() {
+        Button bNewTrip = (Button)findViewById(R.id.newTrip);
+        bNewTrip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(
@@ -64,8 +64,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button c = (Button)findViewById(R.id.myTrip);
-        c.setOnClickListener(new View.OnClickListener() {
+        Button bMyTrip = (Button)findViewById(R.id.myTrip);
+        bMyTrip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(

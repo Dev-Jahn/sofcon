@@ -40,6 +40,9 @@ public class TripPlanActivity extends AppCompatActivity {
      * {@link android.support.v13.app.FragmentStatePagerAdapter}.
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
+    String d_yy, d_mm, d_dd;
+    String a_yy, a_mm, a_dd;
+    String etitle, person_count;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -62,6 +65,18 @@ public class TripPlanActivity extends AppCompatActivity {
         setSupportActionBar(tb);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("");
+
+        Intent intent = getIntent();
+        d_yy = intent.getStringExtra("departing_year");
+        d_mm = intent.getStringExtra("departing_month");
+        d_dd = intent.getStringExtra("departing_day");
+        a_yy = intent.getStringExtra("arriving_year");
+        a_mm = intent.getStringExtra("arriving_month");
+        a_dd = intent.getStringExtra("arriving_day");
+        etitle = intent.getStringExtra("title_text");
+        person_count = intent.getStringExtra("person_count");
+
+
         //ImageButton comp = new ImageButton(getApplicationContext());
         //comp.setImageDrawable(getDrawable(R.drawable.outline_done_black_24dp));
 
@@ -77,7 +92,6 @@ public class TripPlanActivity extends AppCompatActivity {
         tabLayout.addTab(tabLayout.newTab().setText("Tab 3"));
 
         */
-
 
     }
 
@@ -103,7 +117,8 @@ public class TripPlanActivity extends AppCompatActivity {
         else if (id == R.id.action_complete)
         {
             //s a v e to local
-            Toast.makeText(getApplicationContext(), "sibal", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Title : "+etitle+"\n"+"departing date : "+d_yy+'/'+d_mm+'/'+d_dd+"\n"+"arriving date : "
+                    +a_yy+'/'+a_mm+'/'+a_dd+"\n"+"Group Size : "+person_count, Toast.LENGTH_SHORT).show();
             finish();
         }
 
