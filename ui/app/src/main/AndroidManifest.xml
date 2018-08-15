@@ -22,6 +22,9 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".NewActivity"/>
         <activity android:name=".MyTrip" />
+        <activity
+            android:name=".Calendar"
+            android:theme="@android:style/Theme.Dialog" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
