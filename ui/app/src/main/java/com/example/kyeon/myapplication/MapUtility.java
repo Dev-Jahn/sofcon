@@ -30,7 +30,9 @@ public class MapUtility {
     private static final long MIN_DISTANCE = 50;
     // We must discuss about default camera zoom level
     // I think level 16 is appropriate
-    private static final int ZOOM_LEVEL = 16;
+    protected static final int ZOOM_LEVEL = 16;
+    // Current default location is soongsil univ.
+    protected static final LatLng DEFAULT_LOCATION = new LatLng(37.495999, 126.957050);
 
     public static Location getCurrentLocation(final Context context, final Activity activity) {
 
@@ -102,7 +104,7 @@ public class MapUtility {
 
     public static void resetCameraLocation(GoogleMap mMap, Context context, Activity activity) {
 
-        Resources resources = Resources.getSystem();
+        Resources resources = context.getResources();
 
         if(mMap == null) {
             String errorMsg = resources.getString(R.string.cameraResetErrorMessage);
@@ -114,7 +116,7 @@ public class MapUtility {
             Location curLocation = getCurrentLocation(context, activity);
             if (curLocation == null) {
                 // Base View Point - hard coded location will be replaced
-                curLatLng = new LatLng(37.525007, 126.971547);
+                curLatLng = DEFAULT_LOCATION;
                 // Below code is just debug code, delete it if test is over
                 String errorMsg = resources.getString(R.string.locUpdateErrorMessage);
                 Toast.makeText(context, errorMsg, Toast.LENGTH_LONG).show();

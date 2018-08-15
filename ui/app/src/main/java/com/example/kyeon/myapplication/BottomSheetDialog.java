@@ -1,5 +1,6 @@
 package com.example.kyeon.myapplication;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -25,17 +26,23 @@ public class BottomSheetDialog extends BottomSheetDialogFragment{
         recyclerView = view.findViewById(R.id.rec_view_recommend);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        /**
+         * refactored by archslaveCW
+         * reference : res/values/dialog_strings.xml
+         */
+        Resources resources = getResources();
+
         List<Rec_Item> rec_items = new ArrayList<>();
         Rec_Item[] rec_item = new Rec_Item[ITEM_SIZE];
-        rec_item[0] = new Rec_Item(R.drawable.arrow_next,"사용자 맞춤형","사용자의 기호에 맞게 분석해서 추천");
+        rec_item[0] = new Rec_Item(R.drawable.arrow_next, resources.getString(R.string.customized_tour), resources.getString(R.string.customized_explain));
         //init needed(tag or ...)
-        rec_item[1] = new Rec_Item(R.drawable.arrow_next,"아웃도어 라이프","액티비티를 좋아하는 당신을 위해서");
-        rec_item[2] = new Rec_Item(R.drawable.arrow_next,"힐링","여행은 편하게 쉬기위해 떠나는것");
-        rec_item[3] = new Rec_Item(R.drawable.arrow_next,"맛집 탐방","여행의 백미는 뭐니뭐니해도 식도락");
-        rec_item[4] = new Rec_Item(R.drawable.arrow_next,"야밤 투어","낮 보다는 야경이 더 예쁜 사람들에게");
-        rec_item[5] = new Rec_Item(R.drawable.arrow_next,"유명지 관광","여기를 왔으면 이거는 보고 가야지");
-        rec_item[5] = new Rec_Item(R.drawable.arrow_next,"사진","여기를 왔으면 이거는 보고 가야지");
-        rec_item[5] = new Rec_Item(R.drawable.arrow_next,"쇼핑","여기를 왔으면 이거는 보고 가야지");
+        rec_item[1] = new Rec_Item(R.drawable.arrow_next, resources.getString(R.string.outdoor_tour), resources.getString(R.string.outdoor_explain));
+        rec_item[2] = new Rec_Item(R.drawable.arrow_next, resources.getString(R.string.healing_tour), resources.getString(R.string.healing_explain));
+        rec_item[3] = new Rec_Item(R.drawable.arrow_next, resources.getString(R.string.gourmet_tour),resources.getString(R.string.gourmet_explain));
+        rec_item[4] = new Rec_Item(R.drawable.arrow_next, resources.getString(R.string.night_tour), resources.getString(R.string.night_explain));
+        rec_item[5] = new Rec_Item(R.drawable.arrow_next, resources.getString(R.string.landmark_tour), resources.getString(R.string.landmark_explain));
+        rec_item[5] = new Rec_Item(R.drawable.arrow_next, resources.getString(R.string.picture_tour), resources.getString(R.string.picture_explain));
+        rec_item[5] = new Rec_Item(R.drawable.arrow_next, resources.getString(R.string.shopping_tour), resources.getString(R.string.shopping_explain));
 
 
         for (int i = 0; i < ITEM_SIZE; i++) {

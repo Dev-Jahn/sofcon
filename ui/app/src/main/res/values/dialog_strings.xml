@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="customized_tour">사용자 맞춤형</string>
+    <string name="customized_explain">사용자의 기호에 맞게 분석해서 추천</string>
+    <string name="outdoor_tour">아웃도어 라이프</string>
+    <string name="outdoor_explain">액티비티를 좋아하는 당신을 위해서</string>
+    <string name="healing_tour">힐링</string>
+    <string name="healing_explain">여행은 편하게 쉬기 위해 떠나는 것</string>
+    <string name="gourmet_tour">맛집 탐방</string>
+    <string name="gourmet_explain">여행의 백미는 뭐니뭐니해도 식도락</string>
+    <string name="night_tour">야밤 투어</string>
+    <string name="night_explain">낮보다는 야경이 더 예쁜 사람들에게</string>
+    <string name="landmark_tour">유명지 관광</string>
+    <string name="landmark_explain">여기를 왔으면 이거는 보고 가야지</string>
+    <string name="picture_tour">사진</string>
+    <string name="picture_explain">인생 사진 남기기 좋은 여행 장소</string>
+    <string name="shopping_tour">쇼핑</string>
+    <string name="shopping_explain">쇼핑 설명 등록 필요</string>
+
+</resources>

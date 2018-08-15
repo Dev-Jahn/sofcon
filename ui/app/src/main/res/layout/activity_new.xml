@@ -41,19 +41,21 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="일정"
+            android:text="@string/schedule"
             android:gravity="center"/>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="2">
+
             <Button
                 android:id="@+id/departingDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:layout_weight="2"
-                android:text="출발 일자"
+                android:text="@string/departure_date"
                 android:onClick="onclickCalendarA">
 
             </Button>
@@ -72,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:background="@android:color/transparent"
-                android:text="종료 일자"
+                android:text="@string/end_date"
                 android:onClick="onclickCalendarB">
 
             </Button>
@@ -90,7 +92,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="제목"
+            android:text="@string/title"
             android:gravity="center"/>
 
         <EditText
@@ -100,6 +102,7 @@
             android:layout_weight="5"/>
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

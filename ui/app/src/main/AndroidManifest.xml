@@ -22,13 +22,15 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".NewActivity"/>
         <activity android:name=".MyTrip" />
+        <activity
+            android:name=".Calendar"
+            android:theme="@android:style/Theme.Dialog" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            android:label="@string/title_activity_login">
         </activity>
         <activity
             android:name=".TripPlanActivity"
@@ -38,7 +40,7 @@
             android:label="@string/title_activity_choose_places"></activity>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
+            android:value="@string/google_maps_key"
             android:label="@string/title_activity_choose_places" />
 
         <activity android:name=".TravelActivity"></activity>
