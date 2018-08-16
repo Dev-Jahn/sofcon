@@ -18,9 +18,6 @@ import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 
-//import com.example.kyeon.myapplication.decorator.EventDecorator;
-
-
 public class Calendar extends Activity {
 
     TextView txtText;

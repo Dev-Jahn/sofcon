@@ -4,8 +4,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -37,9 +39,19 @@ public class NewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new);
 
+        Toolbar newToolbar;
+
         final EditText eTitle = (EditText) findViewById(R.id.travelTitle);
+        final EditText ePlace = (EditText) findViewById(R.id.placeName);
         Spinner spinner = (Spinner) findViewById(R.id.countPerson);
         final ArrayAdapter sAdapter = ArrayAdapter.createFromResource(this, R.array.question, android.R.layout.simple_spinner_dropdown_item);
+
+        newToolbar = (Toolbar)findViewById(R.id.newActivitytoolbar);
+        newToolbar.setTitle("새 여행");
+        setSupportActionBar(newToolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setHomeAsUpIndicator(R.drawable.outline_list_black_18dp);
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         spinner.setAdapter(sAdapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -89,6 +101,7 @@ public class NewActivity extends AppCompatActivity {
                 i.putExtra("arriving_day", a_dd);
                 i.putExtra("person_count", String.valueOf(personCount));
                 i.putExtra("title_text", eTitle.getText().toString());
+                i.putExtra("place_name", ePlace.getText().toString());
                 startActivity(i);
                 finish();
             }

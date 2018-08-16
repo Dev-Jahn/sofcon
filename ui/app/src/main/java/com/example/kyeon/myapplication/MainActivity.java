@@ -24,10 +24,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mainToolbar = (Toolbar)findViewById(R.id.maintoolbar);
+        mainToolbar.setTitle("Hello World!!");
         setSupportActionBar(mainToolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setHomeAsUpIndicator(R.drawable.outline_list_black_18dp);
         actionBar.setDisplayHomeAsUpEnabled(true);
+
 
         Button bNewTrip = (Button)findViewById(R.id.newTrip);
         bNewTrip.setOnClickListener(new View.OnClickListener() {
