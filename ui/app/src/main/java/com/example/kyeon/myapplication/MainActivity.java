@@ -17,7 +17,6 @@ import android.view.Menu;
 public class MainActivity extends AppCompatActivity {
 
     Toolbar mainToolbar;
-    private DrawerLayout mDrawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,29 +28,6 @@ public class MainActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setHomeAsUpIndicator(R.drawable.outline_list_black_18dp);
         actionBar.setDisplayHomeAsUpEnabled(true);
-
-       /* mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view) ;
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                menuItem.setChecked(true);
-                mDrawerLayout.closeDrawers();
-
-                int id = menuItem.getItemId();
-                switch(id) {
-                    case R.id.navigation_newtrip:
-                        break;
-                    case R.id.navigation_mytrip:
-                        break;
-                    case R.id.navigation_diary:
-                        break;
-                    case R.id.navigation_etc:
-                        break;
-                }
-                return true;
-            }
-        });*/
 
         Button bNewTrip = (Button)findViewById(R.id.newTrip);
         bNewTrip.setOnClickListener(new View.OnClickListener() {
