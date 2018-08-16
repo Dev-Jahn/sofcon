@@ -16,15 +16,26 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class NewActivity extends AppCompatActivity {
     String travel_title;
+    String place_text;
 
     public static final String TAG = "Alert_Dialog";
     AlertDialog.Builder alertDialogCalendar;
+    AlertDialog.Builder personEmpty;
+    AlertDialog.Builder departingEmpty;
+    AlertDialog.Builder arrivingEmpty;
+    AlertDialog.Builder titleEmpty;
+    AlertDialog.Builder placeEmpty;
 
     final int REQUEST_CODE_CALENDAR = 100;
     int AorD = 0;
     int yy = 0, mm = 0, dd = 0; // yy : defines year | mm : defines month | dd : defines day
+    String today_yy, today_mm, today_dd;
     String date, year, month, day;
     String d_yy, d_mm, d_dd;
     String a_yy, a_mm, a_dd;
@@ -32,7 +43,6 @@ public class NewActivity extends AppCompatActivity {
 
     int check_dyy = 0, check_dmm = 0, check_ddd = 0;
     int check_ayy = 0, check_amm = 0, check_add = 0;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +55,23 @@ public class NewActivity extends AppCompatActivity {
         final EditText ePlace = (EditText) findViewById(R.id.placeName);
         Spinner spinner = (Spinner) findViewById(R.id.countPerson);
         final ArrayAdapter sAdapter = ArrayAdapter.createFromResource(this, R.array.question, android.R.layout.simple_spinner_dropdown_item);
+        Button departButton, arrivingButton;
+
+        departButton = (Button)findViewById(R.id.departingDate);
+        arrivingButton = (Button)findViewById(R.id.arrivingDate);
+
+        long todayTime = System.currentTimeMillis();
+        Date todayDate = new Date(todayTime);
+        SimpleDateFormat todayDateFormat = new SimpleDateFormat("/yyyy/MM/dd", Locale.KOREA);
+        String CurrentDate = todayDateFormat.format(todayDate);
+
+        today_yy = CurrentDate.substring(1, 5);
+        today_mm = CurrentDate.substring(6, 8);
+        today_dd = CurrentDate.substring(9, 11);
+
+        departButton.setText(today_yy+"/"+today_mm+"/"+today_dd);
+        arrivingButton.setText(today_yy+"/"+today_mm+"/"+today_dd);
+
 
         newToolbar = (Toolbar)findViewById(R.id.newActivitytoolbar);
         newToolbar.setTitle("새 여행");
@@ -67,6 +94,10 @@ public class NewActivity extends AppCompatActivity {
                  index[4] = 단체;
                  *********************************/
 
+                if(i == 0) {
+                    personCount = 1;
+                }
+
                 if (i == 1) {
                     personCount = 2;
                 }
@@ -87,12 +118,26 @@ public class NewActivity extends AppCompatActivity {
             }
         });
 
+        travel_title = eTitle.getText().toString();
+        place_text = ePlace.getText().toString();
+
         Button btn_comp = (Button) findViewById(R.id.btn_comp);
         btn_comp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(NewActivity.this, TripPlanActivity.class);
 
+                if(d_yy == null && d_mm == null && d_dd == null && a_yy == null && a_mm == null && a_dd == null) {
+                    d_yy = a_yy = today_yy;
+                    d_mm = a_mm = today_mm;
+                    d_dd = a_dd = today_dd;
+                }
+
+                if(travel_title.length() == 0)
+                    travel_title = "여행을 떠나요~!!";
+                if(place_text.length() == 0)
+                    place_text = "서울";
+                
                 i.putExtra("departing_year", d_yy);
                 i.putExtra("departing_month", d_mm);
                 i.putExtra("departing_day", d_dd);
@@ -100,14 +145,15 @@ public class NewActivity extends AppCompatActivity {
                 i.putExtra("arriving_month", a_mm);
                 i.putExtra("arriving_day", a_dd);
                 i.putExtra("person_count", String.valueOf(personCount));
-                i.putExtra("title_text", eTitle.getText().toString());
-                i.putExtra("place_name", ePlace.getText().toString());
+                i.putExtra("title_text", travel_title);
+                i.putExtra("place_name", place_text);
+
                 startActivity(i);
                 finish();
             }
         });
 
-        travel_title = eTitle.getText().toString();
+
 
     }
 
@@ -148,7 +194,6 @@ public class NewActivity extends AppCompatActivity {
                 check_dyy = Integer.parseInt(d_yy);
                 check_dmm = Integer.parseInt(d_mm);
                 check_ddd = Integer.parseInt(d_dd);
-
 
                 if(check_ayy != 0 && check_amm != 0 && check_add != 0) {
                     if (check_ayy < check_dyy || check_amm < check_dmm || check_add < check_ddd) {
