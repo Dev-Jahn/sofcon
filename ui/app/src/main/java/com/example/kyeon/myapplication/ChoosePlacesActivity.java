@@ -4,7 +4,9 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -21,8 +23,25 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+/**
+ * @author archslaveCW
+ */
 
 public class ChoosePlacesActivity extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -50,19 +69,11 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             }
         });
 
-        Button locationButton = (Button)findViewById(R.id.locationButton);
         Button cancelButton = (Button)findViewById(R.id.cancelButton);
         Button selectButton = (Button)findViewById(R.id.selectButton);
 
         // Construct a FusedLocationProviderClient.
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-
-        locationButton.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MapUtility.resetCameraLocation(mMap, getContext(), getActivity());
-            }
-        });
 
         cancelButton.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -126,6 +137,9 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             }
         });
 
+        /**
+         * Below code is deprecated.
+         */
         // MapUtility.resetCameraLocation(mMap, getContext(), getActivity());
 
         mLocationPermissionGranted = PermissionCodes.getPermission(getContext(), getActivity(),
@@ -225,10 +239,131 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         }
     }
 
-    /**
-     * Ugly code... sorry
-     * @author archslaveCW
-     */
     private Context getContext() { return this; }
     private Activity getActivity() { return this; }
+
+
+    /**
+     * Classes & methods for drawing a route
+     * DO NOT CHANGE
+     */
+
+    private class DownloadTask extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... url) {
+
+            String data = "";
+            try {
+                data = downloadUrl(url[0]);
+            } catch (Exception e) {
+                Log.d("DEBUG-Error", e.toString());
+            }
+            return data;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            ParserTask parserTask = new ParserTask();
+            parserTask.execute(result);
+        }
+    }
+
+    private class ParserTask extends AsyncTask<String, Integer, List<List<HashMap<String,String>>>> {
+
+        @Override
+        protected List<List<HashMap<String,String>>> doInBackground(String... jsonData) {
+            JSONObject jsonObject;
+            List<List<HashMap<String, String>>> routes = null;
+
+            try {
+                jsonObject = new JSONObject(jsonData[0]);
+                DirectionsJSONParser parser = new DirectionsJSONParser();
+                routes = parser.parse(jsonObject);
+            } catch(Exception e) {
+                Log.d("DEBUG-Error", e.toString());
+            }
+            return routes;
+        }
+
+        @Override
+        protected void onPostExecute(List<List<HashMap<String, String>>> result) {
+            ArrayList points = null;
+            PolylineOptions lineOptions = null;
+
+            Log.d(".java", "result.size = " + result.size());
+
+            for(int i = 0; i < result.size(); ++i) {
+                points = new ArrayList();
+                lineOptions = new PolylineOptions();
+
+                List<HashMap<String, String>> path = result.get(i);
+
+                for(int j = 0; j < path.size(); ++j) {
+                    HashMap<String, String> point = path.get(j);
+
+                    double lat = Double.parseDouble(point.get("lat"));
+                    double lng = Double.parseDouble(point.get("lng"));
+                    LatLng position = new LatLng(lat, lng);
+
+                    points.add(position);
+                }
+
+                /**
+                 * Route line options
+                 */
+                lineOptions.addAll(points);
+                lineOptions.width(12);
+                lineOptions.color(Color.RED);
+                lineOptions.geodesic(true);
+            }
+            /**
+             * This is the case of cannot drawing a route
+             */
+            if(result.size() == 0) {
+                Toast.makeText(getContext(), "Invalid travel routes", Toast.LENGTH_LONG).show();
+            }
+            else {
+                mMap.addPolyline(lineOptions);
+            }
+        }
+    }
+
+    private String downloadUrl(String strUrl) throws IOException {
+        String data = "";
+        InputStream is = null;
+        HttpURLConnection urlConnection = null;
+        try {
+            URL url = new URL(strUrl);
+
+            urlConnection = (HttpURLConnection) url.openConnection();
+
+            urlConnection.connect();
+
+            is = urlConnection.getInputStream();
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+
+            StringBuffer sb = new StringBuffer();
+
+            String line = "";
+            while ((line = br.readLine()) != null) {
+                sb.append(line);
+            }
+
+            data = sb.toString();
+
+            br.close();
+
+        } catch (Exception e) {
+            Log.d("Exception", e.toString());
+        } finally {
+            is.close();
+            urlConnection.disconnect();
+        }
+        return data;
+    }
+
 }

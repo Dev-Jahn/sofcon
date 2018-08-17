@@ -34,6 +34,7 @@ public class MapUtility {
     // Current default location is soongsil univ.
     protected static final LatLng DEFAULT_LOCATION = new LatLng(37.495999, 126.957050);
 
+    @Deprecated
     public static Location getCurrentLocation(final Context context, final Activity activity) {
 
         Criteria criteria = new Criteria();
@@ -101,7 +102,7 @@ public class MapUtility {
         }
         return null;
     }
-
+    @Deprecated
     public static void resetCameraLocation(GoogleMap mMap, Context context, Activity activity) {
 
         Resources resources = context.getResources();
@@ -135,5 +136,4 @@ public class MapUtility {
             mMap.animateCamera(CameraUpdateFactory.zoomTo(ZOOM_LEVEL));
         }
     }
-
 }
