@@ -22,7 +22,10 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -52,6 +55,10 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
     private Location mLastKnownLocation;
     // The entry point to the Fused Location Provider.
     private FusedLocationProviderClient mFusedLocationProviderClient;
+    // Locations to draw
+    private ArrayList<LatLng> listLocsToDraw = new ArrayList<>();
+    HashMap<Integer,Marker> hashMapMarker = new HashMap<>();
+    private static int markerCount = 0;
 
 
     @Override
@@ -79,6 +86,9 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             @Override
             public void onClick(View view) {
                 mMap.clear();
+                markerCount = 0;
+                listLocsToDraw.clear();
+                hashMapMarker.clear();
             }
         });
 
@@ -92,14 +102,10 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             }
         });
 
-
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
     }
-
-
 
     /**
      * First lifecycle of google map
@@ -109,6 +115,8 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        listLocsToDraw.clear();
+        hashMapMarker.clear();
 
         /**
          * map click listener
@@ -116,12 +124,41 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
+                listLocsToDraw.add(latLng);
+                // create a marker for starting location
+                MarkerOptions options = new MarkerOptions();
+                options.position(latLng);
+
                 /**
-                 * to do list
-                 * 1. choose place by place picker?
-                 * 2. get place
+                 * Set marker's color
                  */
+                if(listLocsToDraw.size() == 1)
+                    // origin marker is green
+                    options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+                else if(listLocsToDraw.size() == 2)
+                    // way point markers are red
+                    options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                else
+                    // dest marker is blue
+                    options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+
+                Marker marker = mMap.addMarker(options);
+                hashMapMarker.put(markerCount++, marker);
+
+                if(listLocsToDraw.size() >= 2)
+                    drawRoute();
             }
+        });
+
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+           @Override
+           public boolean onMarkerClick(final Marker marker) {
+               int position = (int)(marker.getTag());
+               listLocsToDraw.remove(position);
+               marker.remove();
+               drawRoute();
+               return false;
+           }
         });
 
         /**
@@ -151,6 +188,27 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
 
         // Get the current location of the device and set the position of the map.
         getDeviceLocation();
+    }
+
+    /**
+     * Deprecated.
+     * Because of korea's fucking map policy
+     * About 400 lines of code will be replaced to 10 lines of FUCKING straight line drawing code
+     * T_T
+     */
+    @Deprecated
+    private void drawRoute() {
+        if(listLocsToDraw.size() >= 2) {
+            LatLng origin = (LatLng) listLocsToDraw.get(listLocsToDraw.size()-2);
+            LatLng dest = (LatLng) listLocsToDraw.get(listLocsToDraw.size()-1);
+
+            /**
+             * requests draw a line for origin & dest
+             */
+            String url = getDirectionsUrl(origin, dest);
+            DownloadTask downloadTask = new DownloadTask();
+            downloadTask.execute(url);
+        }
     }
 
     /**
@@ -242,12 +300,10 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
     private Context getContext() { return this; }
     private Activity getActivity() { return this; }
 
-
     /**
      * Classes & methods for drawing a route
      * DO NOT CHANGE
      */
-
     private class DownloadTask extends AsyncTask<String, Void, String> {
 
         @Override
@@ -329,6 +385,33 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                 mMap.addPolyline(lineOptions);
             }
         }
+    }
+
+    /**
+     * This method requests a code for draw routes between origin & dest
+     * @param origin
+     * @param dest
+     * @return url
+     */
+    private String getDirectionsUrl(LatLng origin, LatLng dest) {
+
+        String originString = "origin=" + origin.latitude + "," + origin.longitude;
+        String destString = "destination=" + dest.latitude + "," + dest.longitude;
+
+        String sensor = "sensor=false";
+        /**
+         * DO NOT THINK ABOUT MODIFYING THIS CODE
+         * mode : driving / walking / bicycling / transit
+         * In korea, it only works if mode is transit
+         */
+        String mode = "mode=transit";
+
+        String parameters = originString + "&" + destString + "&" + sensor + "&" + mode;
+        String output = "json";
+
+        String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters;
+
+        return url;
     }
 
     private String downloadUrl(String strUrl) throws IOException {
