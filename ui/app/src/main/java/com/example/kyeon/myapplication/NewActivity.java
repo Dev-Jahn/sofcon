@@ -137,7 +137,7 @@ public class NewActivity extends AppCompatActivity {
                     travel_title = "여행을 떠나요~!!";
                 if(place_text.length() == 0)
                     place_text = "서울";
-                
+
                 i.putExtra("departing_year", d_yy);
                 i.putExtra("departing_month", d_mm);
                 i.putExtra("departing_day", d_dd);
