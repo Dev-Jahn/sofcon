@@ -1,5 +1,7 @@
 package ssu.cse.navigationcw;
 
+import android.util.Log;
+
 import com.google.android.gms.maps.model.LatLng;
 
 import org.json.JSONArray;
@@ -9,10 +11,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
-/**
- * Created by anupamchugh on 27/11/15.
- */
 
 public class DirectionsJSONParser {
 
@@ -55,8 +53,9 @@ public class DirectionsJSONParser {
             }
 
         } catch (JSONException e) {
-            e.printStackTrace();
-        }catch (Exception e){
+            Log.d("DEBUG-Error", e.toString());
+        } catch (Exception e){
+            Log.d("DEBUG-Error", e.toString());
         }
 
         return routes;
