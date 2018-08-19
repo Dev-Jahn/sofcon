@@ -24,58 +24,38 @@ list_corpus = ['corpus/user-score-based_attraction.list',
 list_user_model = ['model/attraction_user.model',
                    'model/hotel_user.model',
                    'model/restaurant_user.model']
-#              size window min  workers iter sg sample
-params_user = [{'size':300, 'window':99999, 'min_count':0,
+params_user = [{'size':300, 'window':99999, 'min_count':0,        # Attraction
                'workers':cores, 'iter':100, 'sg':1, 'sample':1},
-               {'size':300, 'window':99999, 'min_count':0,
+               {'size':300, 'window':99999, 'min_count':0,        # Hotel
                'workers':cores, 'iter':100, 'sg':1, 'sample':1},
-               {'size':300, 'window':99999, 'min_count':0,
+               {'size':300, 'window':99999, 'min_count':0,        # Restaurant
                'workers':cores, 'iter':100, 'sg':1, 'sample':1}]
 
 
-# In[ ]:
+# In[21]:
 
 
-# Attraction
-df_place = pd.read_csv(list_places[0], names=['placeId', 'name', 'location', 'class'], encoding='ms949')
-with open(list_corpus[0], 'rb') as f:
-    corpus = pickle.load(f)
-start = time.time()
-model = Word2Vec(corpus, **params_user[0])
-print("Elapsed time: %s sec" % (time.time() - start),' [',place,']')
-model.wv.save(list_user_model[0])
+spent = []
 
 
 # In[ ]:
 
 
-# Hotel
-df_place = pd.read_csv(list_places[1], names=['placeId', 'name', 'location', 'class'], encoding='ms949')
-with open(list_corpus[1], 'rb') as f:
-    corpus = pickle.load(f)
-start = time.time()
-model = Word2Vec(corpus, *(params_user[1]))
-print("Elapsed time: %s sec" % (time.time() - start),' [',place,']')
-model.wv.save(list_user_model[1])
+for i in range(3):
+    df_place = pd.read_csv(list_places[i],
+                           names=['placeId', 'name', 'location', 'class'],
+                           encoding='ms949')
+    with open(list_corpus[i], 'rb') as f:
+        corpus = pickle.load(f)
+    start = time.time()
+    model = Word2Vec(corpus, **params_user[i])
+    spent.append("Elapsed time: %s sec" % (time.time() - start),' [',list_user_model[i],']')
+    model.wv.save(list_user_model[i])
 
 
 # In[ ]:
 
 
-# Restaurant
-df_place = pd.read_csv(list_places[2], names=['placeId', 'name', 'location', 'class'], encoding='ms949')
-with open(list_corpus[2], 'rb') as f:
-    corpus = pickle.load(f)
-start = time.time()
-model = Word2Vec(corpus, *(params_user[2]))
-print("Elapsed time: %s sec" % (time.time() - start),' [',place,']')
-model.wv.save(list_user_model[2])
-
-
-# In[83]:
-
-
-top10 = model_attr.wv.most_similar(positive=['320359','324887'], negative=['1958940'])
-for place in top10:
-    print(df_places[df_places['placeId'] == int(place[0])].name)
+for string in spent:
+    print(string)
 
