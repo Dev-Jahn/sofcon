@@ -29,6 +29,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class TripPlanActivity extends AppCompatActivity {
 
     /**
@@ -43,7 +47,9 @@ public class TripPlanActivity extends AppCompatActivity {
     String d_yy, d_mm, d_dd;
     String a_yy, a_mm, a_dd;
     String etitle, person_count, eplace;
+    long diff_days;
 
+    int day_count;
     /**
      * The {@link ViewPager} that will host the section contents.
      */
@@ -66,16 +72,6 @@ public class TripPlanActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("");
 
-        Intent intent = getIntent();
-        d_yy = intent.getStringExtra("departing_year");
-        d_mm = intent.getStringExtra("departing_month");
-        d_dd = intent.getStringExtra("departing_day");
-        a_yy = intent.getStringExtra("arriving_year");
-        a_mm = intent.getStringExtra("arriving_month");
-        a_dd = intent.getStringExtra("arriving_day");
-        etitle = intent.getStringExtra("title_text");
-        eplace = intent.getStringExtra("place_name");
-        person_count = intent.getStringExtra("person_count");
 
 
         //ImageButton comp = new ImageButton(getApplicationContext());
@@ -119,7 +115,8 @@ public class TripPlanActivity extends AppCompatActivity {
         {
             //s a v e to local
             Toast.makeText(getApplicationContext(), "Title : "+etitle+"\n"+"departing date : "+d_yy+'/'+d_mm+'/'+d_dd+"\n"+"arriving date : "
-                    +a_yy+'/'+a_mm+'/'+a_dd+"\n"+"Group Size : "+person_count+"\n"+"Place Name : "+eplace+"\n", Toast.LENGTH_SHORT).show();
+                    +a_yy+'/'+a_mm+'/'+a_dd+"\n"+"Group Size : "+person_count+"\n"+"Place Name : "+eplace+"\n"
+                    +"Diff_days = " + diff_days+"\n", Toast.LENGTH_SHORT).show();
             finish();
         }
 
@@ -135,6 +132,7 @@ public class TripPlanActivity extends AppCompatActivity {
          * fragment.
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
+        private static final String ARG_SECTION_LAST = "last_number";
 
         public PlaceholderFragment() {
         }
@@ -151,6 +149,15 @@ public class TripPlanActivity extends AppCompatActivity {
             return fragment;
         }
 
+        public static PlaceholderFragment newInstance(int sectionNumber, int count) {
+            PlaceholderFragment fragment = new PlaceholderFragment();
+            Bundle args = new Bundle();
+            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+            args.putInt(ARG_SECTION_LAST, count);
+            fragment.setArguments(args);
+            return fragment;
+        }
+
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
@@ -162,7 +169,7 @@ public class TripPlanActivity extends AppCompatActivity {
                 left.setVisibility(View.INVISIBLE);
             else
                 left.setVisibility(View.VISIBLE);
-            if(getArguments().getInt(ARG_SECTION_NUMBER) == 3)//get arrow distinguished
+            if(getArguments().getInt(ARG_SECTION_NUMBER) == getArguments().getInt(ARG_SECTION_LAST))//get arrow distinguished
             {
                 right.setVisibility(View.INVISIBLE);
                 LinearLayout linearLayout = rootView.findViewById(R.id.linear_layout_fragment);
@@ -218,26 +225,68 @@ public class TripPlanActivity extends AppCompatActivity {
         public android.support.v4.app.Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            if(position == diff_days)
+                return PlaceholderFragment.newInstance(position + 1, day_count);
+            else
+                return PlaceholderFragment.newInstance(position+1);
         }
 
         @Override
         public int getCount() {
+
+            get_datas();
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+            Date beginDate;
+            Date endDate;
+            try
+            {
+                beginDate = formatter.parse(d_yy+d_mm+d_dd);
+                endDate = formatter.parse(a_yy+a_mm+a_dd);
+                long diff= endDate.getTime() - beginDate.getTime();
+                diff_days = diff / (24 * 60 * 60 * 1000);
+            }catch (ParseException e)
+            {
+                e.printStackTrace();
+                diff_days = -1;
+            }
+
+            day_count = (int) diff_days + 1;
             // Show 3 total pages.
-            return 3;
+            return day_count;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            switch (position) {
-                case 0:
-                    return "SECTION 1";
-                case 1:
-                    return "SECTION 2";
-                case 2:
-                    return "SECTION 3";
-            }
-            return null;
+            return "day" + (position+1);
         }
+    }
+
+    private String add_zero_to_string(String number)
+    {
+        if(Integer.parseInt(number) < 10)
+            if(number.charAt(0) == '0')
+                return number;
+            else
+                return "0"+number;
+        else
+            return number;
+    }
+
+    private void get_datas()
+    {
+        Intent intent = getIntent();
+        d_yy = intent.getStringExtra("departing_year");
+        d_mm = intent.getStringExtra("departing_month");
+        d_mm = add_zero_to_string(d_mm);
+        d_dd = intent.getStringExtra("departing_day");
+        d_dd = add_zero_to_string(d_dd);
+        a_yy = intent.getStringExtra("arriving_year");
+        a_mm = intent.getStringExtra("arriving_month");
+        a_mm = add_zero_to_string(a_mm);
+        a_dd = intent.getStringExtra("arriving_day");
+        a_dd = add_zero_to_string(a_dd);
+        etitle = intent.getStringExtra("title_text");
+        eplace = intent.getStringExtra("place_name");
+        person_count = intent.getStringExtra("person_count");
     }
 }
