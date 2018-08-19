@@ -173,10 +173,13 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
  * ---> It has a big problem
  *      1. How can I redraw by using listLocsToDraw?
  *      2. Is it safe to use markerCount?
- *
+ **/
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
            @Override
            public boolean onMarkerClick(final Marker marker) {
+               LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(LAYOUT_INFLATER_SERVICE);
+
+            // PopupMenu popupMenu = new PopupMenu(getApplicationContext(),
                int position = (int)(marker.getTag());
                listLocsToDraw.remove(position-1);
                hashMapMarker.remove(position);
@@ -186,7 +189,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                return false;
            }
         });
-*/
+
         /**
          * map move listener
          */
