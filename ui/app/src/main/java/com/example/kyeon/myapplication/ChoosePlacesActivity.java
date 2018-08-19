@@ -4,16 +4,22 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -59,6 +65,8 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
     private ArrayList<LatLng> listLocsToDraw = new ArrayList<>();
     HashMap<Integer,Marker> hashMapMarker = new HashMap<>();
     private static int markerCount = 0;
+    private View customMarkerRoot;
+    private TextView customMarker;
 
 
     @Override
@@ -102,6 +110,9 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             }
         });
 
+        customMarkerRoot = LayoutInflater.from(this).inflate(R.layout.marker_custom, null);
+        customMarker = (TextView)customMarkerRoot.findViewById(R.id.custom_marker);
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -130,8 +141,9 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                 options.position(latLng);
 
                 /**
-                 * Set marker's color
-                 */
+                 * Set marker's color - Deprecated
+
+
                 if(listLocsToDraw.size() == 1)
                     // origin marker is green
                     options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
@@ -142,25 +154,39 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                     // dest marker is blue
                     options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
 
+                 */
+
+                customMarker.setText(new Integer(markerCount+1).toString());
+                options.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getContext(), customMarkerRoot)));
+
+
                 Marker marker = mMap.addMarker(options);
                 hashMapMarker.put(markerCount++, marker);
+                marker.setTag(markerCount);
 
                 if(listLocsToDraw.size() >= 2)
                     drawRoute();
             }
         });
-
+/**
+ *
+ * ---> It has a big problem
+ *      1. How can I redraw by using listLocsToDraw?
+ *      2. Is it safe to use markerCount?
+ *
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
            @Override
            public boolean onMarkerClick(final Marker marker) {
                int position = (int)(marker.getTag());
-               listLocsToDraw.remove(position);
+               listLocsToDraw.remove(position-1);
+               hashMapMarker.remove(position);
+               --markerCount;
                marker.remove();
                drawRoute();
                return false;
            }
         });
-
+*/
         /**
          * map move listener
          */
@@ -209,6 +235,36 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             DownloadTask downloadTask = new DownloadTask();
             downloadTask.execute(url);
         }
+    }
+
+    /**
+     * Convert View to Bitmap
+     */
+    private Bitmap createDrawableFromView(Context context, View view) {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        //view.setLayoutParams(new ViewGroup.LayoutParams(200, 200));
+        view.measure(displayMetrics.widthPixels, displayMetrics.heightPixels);
+        view.layout(0, 0, displayMetrics.widthPixels, displayMetrics.heightPixels);
+        view.buildDrawingCache();
+        Bitmap bitmap = Bitmap.createBitmap(view.getMeasuredWidth(), view.getMeasuredHeight(), Bitmap.Config.ARGB_8888);
+        //Bitmap smallBitmap = Bitmap.createScaledBitmap(bitmap, 200, 200, true);
+
+        Canvas canvas = new Canvas(bitmap);
+        //Canvas canvas = new Canvas(smallBitmap);
+        view.draw(canvas);
+
+        return bitmap;
+        //return smallBitmap;
+        /**
+         * --->Deprecated Codes
+         *
+         * BitmapDrawable bitmapDrawable = (BitmapDrawable)getResources().getDrawable(R.drawable.map_makrer_icon_red);
+         * Bitmap bitmap = bitmapDrawable.getBitmap();
+         * Bitmap smallMarker = Bitmap.createScaledBitmap(bitmap, 200, 200, false);
+         * return smallMarker;
+         */
     }
 
     /**
