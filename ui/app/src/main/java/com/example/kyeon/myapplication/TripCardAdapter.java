@@ -44,7 +44,6 @@ public class TripCardAdapter extends RecyclerView.Adapter<TripCardAdapter.ViewHo
         final Item item = items.get(position);
         Drawable drawable = ContextCompat.getDrawable(context, item.getImage());
         holder.image.setBackground(drawable);
-        Log.d("sibal", "onBindViewHolder: " + drawable.toString());
         holder.place.setText(item.getPlace());
         holder.day.setText(item.getDay());
         holder.title.setText(item.getTitle());

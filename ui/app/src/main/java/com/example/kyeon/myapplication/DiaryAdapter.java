@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -46,6 +47,7 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.ViewHolder>{
     public void onBindViewHolder(@NonNull DiaryAdapter.ViewHolder holder, int position) {
         final String place_name = items.get(position);
         final LinearLayout linearLayout = holder.linearLayout;
+        final ImageView imageView = holder.expand_image;
 
 
         holder.place.setText(place_name);
@@ -53,9 +55,15 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.ViewHolder>{
             @Override
             public void onClick(View v) {
                 if(linearLayout.getVisibility() == View.GONE)
+                {
+                    imageView.setImageResource(R.drawable.baseline_arrow_drop_up_black_36dp);
                     linearLayout.setVisibility(View.VISIBLE);
+                }
                 else
+                {
+                    imageView.setImageResource(R.drawable.baseline_arrow_drop_down_black_36dp);
                     linearLayout.setVisibility(View.GONE);
+                }
             }
         });
 
@@ -72,7 +80,8 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.ViewHolder>{
         TextView place;
         EditText review;
         RatingBar rating;
-        ImageButton image;
+        ImageView expand_image;
+        ImageButton add_image;
         CardView cardview;
         LinearLayout linearLayout;
 
@@ -82,7 +91,8 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.ViewHolder>{
             place = itemView.findViewById(R.id.diary_place_name);
             rating = itemView.findViewById(R.id.ratingBar);
             review = itemView.findViewById(R.id.reviewtext);
-            image = itemView.findViewById(R.id.add_image);
+            expand_image = itemView.findViewById(R.id.expand_button);
+            add_image = itemView.findViewById(R.id.add_image);
             cardview = itemView.findViewById(R.id.review_cardview);
             linearLayout = itemView.findViewById(R.id.layout_hide);
         }

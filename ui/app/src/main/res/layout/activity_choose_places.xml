@@ -1,26 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MyTrip">
+    android:orientation="vertical"
+    tools:context=".ChoosePlacesActivity">
 
+    <ImageButton
+        android:id="@+id/closeButton"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:src="@android:drawable/ic_menu_close_clear_cancel" />
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_below="@id/closeButton"
+        android:layout_above="@id/lowerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <LinearLayout
+        android:id="@+id/lowerLayout"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="right">
 
-        <ImageButton
-            android:id="@+id/closeButton"
+        <Button
+            android:id="@+id/locationButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:src="@android:drawable/ic_menu_close_clear_cancel" />
+            android:layout_height="match_parent"
+            android:text="@string/to_base_location"/>
 
+        <Button
+            android:id="@+id/cancelButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/cancel"/>
+
+        <Button
+            android:id="@+id/selectButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/select"/>
 
     </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>
