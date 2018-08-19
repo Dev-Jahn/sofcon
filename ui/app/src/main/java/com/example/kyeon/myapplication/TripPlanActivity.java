@@ -42,7 +42,7 @@ public class TripPlanActivity extends AppCompatActivity {
     private SectionsPagerAdapter mSectionsPagerAdapter;
     String d_yy, d_mm, d_dd;
     String a_yy, a_mm, a_dd;
-    String etitle, person_count;
+    String etitle, person_count, eplace;
 
     /**
      * The {@link ViewPager} that will host the section contents.
@@ -74,6 +74,7 @@ public class TripPlanActivity extends AppCompatActivity {
         a_mm = intent.getStringExtra("arriving_month");
         a_dd = intent.getStringExtra("arriving_day");
         etitle = intent.getStringExtra("title_text");
+        eplace = intent.getStringExtra("place_name");
         person_count = intent.getStringExtra("person_count");
 
 
@@ -118,7 +119,7 @@ public class TripPlanActivity extends AppCompatActivity {
         {
             //s a v e to local
             Toast.makeText(getApplicationContext(), "Title : "+etitle+"\n"+"departing date : "+d_yy+'/'+d_mm+'/'+d_dd+"\n"+"arriving date : "
-                    +a_yy+'/'+a_mm+'/'+a_dd+"\n"+"Group Size : "+person_count, Toast.LENGTH_SHORT).show();
+                    +a_yy+'/'+a_mm+'/'+a_dd+"\n"+"Group Size : "+person_count+"\n"+"Place Name : "+eplace+"\n", Toast.LENGTH_SHORT).show();
             finish();
         }
 

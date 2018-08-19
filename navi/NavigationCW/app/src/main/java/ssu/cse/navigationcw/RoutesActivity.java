@@ -101,6 +101,7 @@ public class RoutesActivity extends AppCompatActivity implements OnMapReadyCallb
             Location location = locManager.getLastKnownLocation(bestProvider);
             // We should remove update listener (update only once)
             locManager.removeUpdates(mLocListener);
+            // Below code is just debug code, delete it if test is over
             Toast.makeText(this, "location is updating...", Toast.LENGTH_LONG).show();
             return location;
         }
@@ -192,6 +193,10 @@ public class RoutesActivity extends AppCompatActivity implements OnMapReadyCallb
         }
     };
 
+    /**
+     * First lifecycle of google map
+     * @param googleMap
+     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -250,9 +255,7 @@ public class RoutesActivity extends AppCompatActivity implements OnMapReadyCallb
                    String url = getDirectionsUrl(origin, dest);
                    DownloadTask downloadTask = new DownloadTask();
                    downloadTask.execute(url);
-
                }
-
            }
         });
     }
@@ -320,6 +323,9 @@ public class RoutesActivity extends AppCompatActivity implements OnMapReadyCallb
                     points.add(position);
                 }
 
+                /**
+                 * Route line options
+                 */
                 lineOptions.addAll(points);
                 lineOptions.width(12);
                 lineOptions.color(Color.RED);

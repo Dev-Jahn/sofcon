@@ -24,9 +24,9 @@ public class PlaceActivity extends AppCompatActivity {
         try {
             startActivityForResult(builder.build(this), PLACE_PICKER_REQUEST);
         } catch(GooglePlayServicesNotAvailableException e) {
-            Log.d("ERR_IN_NAVI", "GooglePlayServicesNotAvailable in PlacePicker");
+            Log.d("DEBUG-Error", "GooglePlayServicesNotAvailable in PlacePicker");
         } catch(GooglePlayServicesRepairableException e) {
-            Log.d("ERR_IN_NAVI", "GooglePlayServicesRepairable in PlacePicker");
+            Log.d("DEBUG-Error", "GooglePlayServicesRepairable in PlacePicker");
         }
     }
 

@@ -7,53 +7,102 @@
     android:orientation="vertical"
     tools:context=".NewActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/newActivitytoolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:text="여행 설정"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#bfbfbf"/>
+
     <LinearLayout
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/textView"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_weight="1"
-            android:text="@string/person" />
+            android:layout_gravity="center"
+            android:layout_weight="2.8">
 
-        <Spinner
-            android:id="@+id/countPerson"
-            android:layout_marginLeft="20dp"
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/person" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="5">
 
-        </Spinner>
+            <Spinner
+                android:id="@+id/countPerson"
+                android:spinnerMode="dialog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </Spinner>
+
+        </LinearLayout>
 
     </LinearLayout>
 
     <LinearLayout
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:text="일정"
-            android:gravity="center"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="2">
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_weight="2.8">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:text="      일정"
+                android:layout_weight="100"
+                android:gravity="center"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="5">
+
             <Button
                 android:id="@+id/departingDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:layout_weight="2"
-                android:text="출발 일자"
+                android:text="@string/departure_date"
                 android:onClick="onclickCalendarA">
 
             </Button>
@@ -70,17 +119,40 @@
                 android:id="@+id/arrivingDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
                 android:background="@android:color/transparent"
-                android:text="종료 일자"
+                android:layout_weight="2"
+                android:text="@string/end_date"
                 android:onClick="onclickCalendarB">
 
             </Button>
+
         </LinearLayout>
 
     </LinearLayout>
 
     <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="출발장소"
+            android:gravity="center"/>
+
+        <EditText
+            android:id="@+id/placeName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -90,7 +162,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="제목"
+            android:text="        제목"
             android:gravity="center"/>
 
         <EditText
@@ -100,7 +172,9 @@
             android:layout_weight="5"/>
 
     </LinearLayout>
+
     <LinearLayout
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -123,5 +197,7 @@
             android:layout_weight="2"/>
 
     </LinearLayout>
+
+
 
 </LinearLayout>
