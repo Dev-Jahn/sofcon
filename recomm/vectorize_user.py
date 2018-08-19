@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[6]:
+# In[11]:
 
 
 from gensim.models import Word2Vec
@@ -13,7 +13,7 @@ logging.basicConfig(
 	format='%(asctime)s : %(levelname)s : %(message)s',
 	level=logging.INFO)
 
-workers = 4
+cores = 4
 
 list_places = ['data/kor/attraction_places.csv',
                'data/kor/hotel_places.csv',
@@ -25,12 +25,15 @@ list_user_model = ['model/attraction_user.model',
                    'model/hotel_user.model',
                    'model/restaurant_user.model']
 #              size window min  workers iter sg sample
-params_user = [(300, 99999,  0, workers, 100, 1,     1),
-               (300, 99999,  0, workers, 100, 1,     1),
-               (300, 99999,  0, workers, 100, 1,     1)]
+params_user = [{'size':300, 'window':99999, 'min_count':0,
+               'workers':cores, 'iter':100, 'sg':1, 'sample':1},
+               {'size':300, 'window':99999, 'min_count':0,
+               'workers':cores, 'iter':100, 'sg':1, 'sample':1},
+               {'size':300, 'window':99999, 'min_count':0,
+               'workers':cores, 'iter':100, 'sg':1, 'sample':1}]
 
 
-# In[8]:
+# In[ ]:
 
 
 # Attraction
@@ -38,7 +41,7 @@ df_place = pd.read_csv(list_places[0], names=['placeId', 'name', 'location', 'cl
 with open(list_corpus[0], 'rb') as f:
     corpus = pickle.load(f)
 start = time.time()
-model = Word2Vec(corpus, *(params_users[i]))
+model = Word2Vec(corpus, **params_user[0])
 print("Elapsed time: %s sec" % (time.time() - start),' [',place,']')
 model.wv.save(list_user_model[0])
 
@@ -51,7 +54,7 @@ df_place = pd.read_csv(list_places[1], names=['placeId', 'name', 'location', 'cl
 with open(list_corpus[1], 'rb') as f:
     corpus = pickle.load(f)
 start = time.time()
-model = Word2Vec(corpus, *(params_users[i]))
+model = Word2Vec(corpus, *(params_user[1]))
 print("Elapsed time: %s sec" % (time.time() - start),' [',place,']')
 model.wv.save(list_user_model[1])
 
@@ -64,7 +67,7 @@ df_place = pd.read_csv(list_places[2], names=['placeId', 'name', 'location', 'cl
 with open(list_corpus[2], 'rb') as f:
     corpus = pickle.load(f)
 start = time.time()
-model = Word2Vec(corpus, *(params_users[i]))
+model = Word2Vec(corpus, *(params_user[2]))
 print("Elapsed time: %s sec" % (time.time() - start),' [',place,']')
 model.wv.save(list_user_model[2])
 
