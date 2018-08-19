@@ -39,7 +39,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="2dp"
                     android:layout_weight="1"
-                    android:background="#BDBDBD"
+                    android:background="@drawable/corners"
                     android:text="새 여행" />
 
 
@@ -49,7 +49,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="2dp"
                     android:layout_weight="1"
-                    android:background="#BDBDBD"
+                    android:background="@drawable/corners"
                     android:text="내 여행" />
 
             </LinearLayout>
@@ -67,7 +67,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="2dp"
                     android:layout_weight="1"
-                    android:background="#BDBDBD"
+                    android:background="@drawable/corners"
                     android:text="다른 여행" />
 
 
@@ -79,7 +79,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="2dp"
                     android:layout_weight="1"
-                    android:background="#BDBDBD"
+                    android:background="@drawable/corners"
                     android:text="추천 여행" />
 
             </LinearLayout>
