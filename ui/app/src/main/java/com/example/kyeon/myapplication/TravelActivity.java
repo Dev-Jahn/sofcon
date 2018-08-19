@@ -1,7 +1,14 @@
 package com.example.kyeon.myapplication;
 
 import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.media.ExifInterface;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -24,6 +31,7 @@ import android.widget.ImageButton;
 import android.widget.TableLayout;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -66,6 +74,8 @@ public class TravelActivity extends AppCompatActivity {
          * fragment.
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
+        RecyclerView recyclerView;
+        final int GALLERY_CODE = 1;
 
         public DiaryholderFragment() {
         }
@@ -86,7 +96,7 @@ public class TravelActivity extends AppCompatActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             final View rootView = inflater.inflate(R.layout.fragment_travel, container, false);
-            RecyclerView recyclerView = rootView.findViewById(R.id.diary_recview);
+            recyclerView = rootView.findViewById(R.id.diary_recview);
 
             int index = getArguments().getInt(ARG_SECTION_NUMBER);
 
@@ -120,13 +130,76 @@ public class TravelActivity extends AppCompatActivity {
             }
             place_names.add("씨발왜안되");
 
-            recyclerView.setAdapter(new DiaryAdapter(getContext(), place_names, R.layout.fragment_travel));
+            recyclerView.setAdapter(new DiaryAdapter(this, place_names, R.layout.fragment_travel));
             recyclerView.setItemAnimator(new DefaultItemAnimator());
             LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
             recyclerView.setLayoutManager(layoutManager);
             //textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;
         }
+        @Override
+        public void onActivityResult(int requestCode, int resultCode, Intent data) {
+            super.onActivityResult(requestCode,resultCode,data);
+            if (resultCode == RESULT_OK)
+            {
+                switch (requestCode)
+                {
+                    case 1:
+                    {
+                        Toast.makeText(getContext(), "sibal", Toast.LENGTH_SHORT).show();
+                        DiaryAdapter.ViewHolder vh;
+                        vh = (DiaryAdapter.ViewHolder)recyclerView.findViewHolderForAdapterPosition(((LinearLayoutManager)recyclerView.getLayoutManager()).findFirstVisibleItemPosition());
+                        sendPicture(vh.add_image, data.getData());
+                        break;
+                    }
+                }
+            }
+
+        }
+        private void sendPicture(ImageButton imageButton, Uri imguri)
+        {
+            Bitmap img;
+            String imagePath = getRealPathFromURI(imguri);
+            ExifInterface exif = null;
+            try {
+                exif = new ExifInterface(imagePath);
+            }catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+            int exifOrientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+            int exifDegree = exifOrientationToDegrees(exifOrientation);
+            BitmapFactory.Options options;
+            try{
+                img = BitmapFactory.decodeFile(imagePath);
+            }catch (OutOfMemoryError e)
+            {
+                options = new BitmapFactory.Options();
+                options.inSampleSize = 2;
+                img = BitmapFactory.decodeFile(imagePath, options);
+            }
+            imageButton.setImageBitmap(img);
+        }
+        private int exifOrientationToDegrees(int exifOrientation) {
+            if (exifOrientation == ExifInterface.ORIENTATION_ROTATE_90) {
+                return 90;
+            } else if (exifOrientation == ExifInterface.ORIENTATION_ROTATE_180) {
+                return 180;
+            } else if (exifOrientation == ExifInterface.ORIENTATION_ROTATE_270) {
+                return 270;
+            }
+            return 0;
+        }
+        private String getRealPathFromURI(Uri contentUri) {
+            int column_index=0;
+            String[] proj = {MediaStore.Images.Media.DATA};
+            Cursor cursor = getContext().getContentResolver().query(contentUri, proj, null, null, null);
+            if(cursor.moveToFirst()){
+                column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            }
+            return cursor.getString(column_index);
+        }
+
     }
 
 
@@ -225,6 +298,7 @@ public class TravelActivity extends AppCompatActivity {
             return this.place_count;
         }
     }
+
 
 
 }

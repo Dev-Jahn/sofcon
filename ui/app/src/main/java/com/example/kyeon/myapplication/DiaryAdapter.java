@@ -1,8 +1,19 @@
 package com.example.kyeon.myapplication;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.media.ExifInterface;
+import android.net.Uri;
+import android.preference.PreferenceManager;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -18,16 +29,19 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.List;
 
-public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.ViewHolder>{
-    Context context;
+public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.ViewHolder> implements View.OnClickListener{
+    Fragment fragment;
     List<String> items;
     int item_layout;
+    final int MY_PERMISSIONS_REQUEST_GALLERY = 108;
+    final int GALLERY_CODE = 1;
 
-    public DiaryAdapter(Context context, List<String> items, int item_layout)
+    public DiaryAdapter(Fragment fragment, List<String> items, int item_layout)
     {
-        this.context = context;
+        this.fragment = fragment;
         this.items = items;
         this.item_layout = item_layout;
     }
@@ -35,8 +49,6 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.ViewHolder>{
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        Toast.makeText(context, "sibal", Toast.LENGTH_SHORT).show();
-        Log.d("sibal", "onCreateViewHolder: sibal");
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_review, null);
         RecyclerView.LayoutParams lp = new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         v.setLayoutParams(lp);
@@ -67,6 +79,8 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.ViewHolder>{
             }
         });
 
+        holder.add_image.setOnClickListener(this);
+
     }
 
     @Override
@@ -95,6 +109,28 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.ViewHolder>{
             add_image = itemView.findViewById(R.id.add_image);
             cardview = itemView.findViewById(R.id.review_cardview);
             linearLayout = itemView.findViewById(R.id.layout_hide);
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        int permissionCheck = ContextCompat.checkSelfPermission(fragment.getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE);
+        if(permissionCheck != PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(fragment.getActivity(), new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, MY_PERMISSIONS_REQUEST_GALLERY);
+            //if(ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION))
+        }
+        else
+        {
+            if(permissionCheck == PackageManager.PERMISSION_GRANTED)
+            {
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                intent.setType("image/");
+                fragment.startActivityForResult(intent,GALLERY_CODE);
+            }
+            else
+                Toast.makeText(fragment.getActivity(), "저장소 권한이 없어 이미지를 불러올 수 없습니다.", Toast.LENGTH_SHORT).show();
         }
     }
 }
