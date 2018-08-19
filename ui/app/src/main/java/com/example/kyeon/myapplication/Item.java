@@ -2,6 +2,7 @@ package com.example.kyeon.myapplication;
 
 public class Item {
     int image;
+    String title;
     String place;
     String day;
 
@@ -13,11 +14,16 @@ public class Item {
         return this.day;
     }
 
+    public String getTitle() {
+        return this.title;
+    }
+
     public String getPlace() {
         return this.place;
     }
-    Item(int image, String place, String day)
+    Item(int image, String title, String place, String day)
     {
+        this.title = title;
         this.image = image;
         this.place = place;
         this.day = day;
