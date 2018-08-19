@@ -38,6 +38,12 @@ params_user = [{'size':300, 'window':99999, 'min_count':0,        # Attraction
 spent = []
 
 
+# In[23]:
+
+
+spent.append('a'+str(1)+'b')
+
+
 # In[ ]:
 
 
@@ -49,7 +55,7 @@ for i in range(3):
         corpus = pickle.load(f)
     start = time.time()
     model = Word2Vec(corpus, **params_user[i])
-    spent.append("Elapsed time: %s sec" % (time.time() - start),' [',list_user_model[i],']')
+    spent.append('Elapsed time: '+str(time.time() - start)+'sec'+' ['+list_user_model[i]+']')
     model.wv.save(list_user_model[i])
 
 
