@@ -1,5 +1,7 @@
 #jupyter notebook checkpoint
 .ipynb_checkpoints/
+# nltk dataset
+nltk_data/
 # Built application files
 *.apk
 *.ap_
