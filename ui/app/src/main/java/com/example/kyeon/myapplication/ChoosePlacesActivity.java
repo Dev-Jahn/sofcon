@@ -156,12 +156,12 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
 
                  */
 
-                customMarker.setText(new Integer(markerCount+1).toString());
+                customMarker.setText(new Integer(++markerCount).toString());
                 options.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getContext(), customMarkerRoot)));
 
 
                 Marker marker = mMap.addMarker(options);
-                hashMapMarker.put(markerCount++, marker);
+                hashMapMarker.put(markerCount, marker);
                 marker.setTag(markerCount);
 
                 if(listLocsToDraw.size() >= 2)
@@ -178,14 +178,17 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
            @Override
            public boolean onMarkerClick(final Marker marker) {
                LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(LAYOUT_INFLATER_SERVICE);
-
             // PopupMenu popupMenu = new PopupMenu(getApplicationContext(),
+
+               removeMarker(mMap, marker);
+               /**
                int position = (int)(marker.getTag());
                listLocsToDraw.remove(position-1);
                hashMapMarker.remove(position);
                --markerCount;
                marker.remove();
-               drawRoute();
+               redrawRoute();
+                **/
                return false;
            }
         });
@@ -238,6 +241,62 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             DownloadTask downloadTask = new DownloadTask();
             downloadTask.execute(url);
         }
+    }
+
+    /**
+     * Deprecated.
+     * Because of korea's fucking map policy
+     * About 400 lines of code will be replaced to 10 lines of FUCKING straight line drawing code
+     * T_T
+     */
+    @Deprecated
+    private void redrawRoute() {
+        if(listLocsToDraw.size() >= 2) {
+            LatLng origin;
+            LatLng dest;
+            for(int i = 0; i < listLocsToDraw.size() - 1; ++i) {
+                origin = (LatLng)listLocsToDraw.get(i);
+                dest = (LatLng)listLocsToDraw.get(i+1);
+                /**
+                 * requests draw a line for origin & dest
+                 */
+                String url = getDirectionsUrl(origin, dest);
+                DownloadTask downloadTask = new DownloadTask();
+                downloadTask.execute(url);
+            }
+        }
+    }
+
+    private void removeMarker(GoogleMap mMap, Marker marker) {
+        listLocsToDraw.clear();
+        int newMarkerCount = 0;
+        int removeIndex = (int)(marker.getTag());
+        marker.remove();
+        hashMapMarker.remove(removeIndex);
+        for(int i = 0; i <= markerCount; ++i) {
+            if(hashMapMarker.containsKey(i)) {
+                Marker currentMarker = hashMapMarker.remove(i);
+                LatLng currentPosition = currentMarker.getPosition();
+                listLocsToDraw.add(currentPosition);
+                newMarkerCount++;
+            }
+            else
+                continue;
+        }
+        mMap.clear();
+        hashMapMarker.clear();
+        for(int i = 0; i < listLocsToDraw.size(); ++i) {
+            // create a marker for starting location
+            MarkerOptions options = new MarkerOptions();
+            options.position(listLocsToDraw.get(i));
+            customMarker.setText(new Integer(i+1).toString());
+            options.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getContext(), customMarkerRoot)));
+            Marker currentMarker = mMap.addMarker(options);
+            hashMapMarker.put(i+1, currentMarker);
+            currentMarker.setTag(i+1);
+        }
+        markerCount = newMarkerCount;
+        redrawRoute();
     }
 
     /**
