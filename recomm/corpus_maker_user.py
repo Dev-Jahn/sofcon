@@ -21,12 +21,9 @@ list_csv = ['data/kor/attraction_review_user.csv',
             'data/eng/eng_attraction_review_user.csv',
             'data/eng/eng_hotel_review_user.csv',
             'data/eng/eng_restaurant_review_user.csv']
-list_corpus = ['corpus/kor_attraction_user.list',
-               'corpus/kor_hotel_user.list',
-               'corpus/kor_restaurant_user.list',
-               'corpus/eng_attraction_user.list',
-               'corpus/eng_hotel_user.list',
-               'corpus/eng_restaurant_user.list']
+list_corpus = ['corpus/attraction_user.list',
+               'corpus/hotel_user.list',
+               'corpus/restaurant_user.list']
 try:
     os.stat('corpus')
 except:
@@ -55,16 +52,16 @@ for i in range(3):
     userlist.sort()
     corpus = []
     for name in userlist:
-        for i in range(1, 6):
+        for j in range(1, 6):
             user_score = [str(place) for place in
                            df[(df['userId'] == name) &
-                                     (df['score'] == i)].placeId]
+                                     (df['score'] == j)].placeId]
             if len(user_score)!=0:
                 corpus.append(user_score)
 
-    with open(list_corpus[list_csv.index(csv)],'wb') as f:
+    with open(list_corpus[i],'wb') as f:
         pickle.dump(corpus, f)
-    print('corpus created for ', csv)
+    print('corpus created: ', list_corpus[i])
     count = 0
     for user in corpus:
         count = max(count,len(user))
