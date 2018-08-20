@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[1]:
+# In[70]:
 
 
 import numpy as np
@@ -12,34 +12,53 @@ import pickle
 import os
 
 
-# In[2]:
+# In[71]:
 
 
 list_csv = ['data/kor/attraction_review_user.csv',
             'data/kor/hotel_review_user.csv',
-            'data/kor/restaurant_review_user.csv']
-list_corpus = ['corpus/user-score-based_attraction.list',
-               'corpus/user-score-based_hotel.list',
-               'corpus/user-score-based_restaurant.list']
+            'data/kor/restaurant_review_user.csv',
+            'data/eng/eng_attraction_review_user.csv',
+            'data/eng/eng_hotel_review_user.csv',
+            'data/eng/eng_restaurant_review_user.csv']
+list_corpus = ['corpus/kor_attraction_user.list',
+               'corpus/kor_hotel_user.list',
+               'corpus/kor_restaurant_user.list',
+               'corpus/eng_attraction_user.list',
+               'corpus/eng_hotel_user.list',
+               'corpus/eng_restaurant_user.list']
 try:
     os.stat('corpus')
 except:
     os.mkdir('corpus')
 
 
-# In[3]:
+# In[65]:
 
 
-for csv in list_csv:
-    df_review = pd.read_csv(csv)
-    userlist = list(set(df_review.userId.tolist()))
+# user cooccurrence in kor-eng reviews
+for i in range(3):
+    df1 = pd.read_csv(list_csv[i])
+    df2 = pd.read_csv(list_csv[i+3])
+    print(len(set(df1.userId.tolist())
+              .intersection(df2.userId.tolist())))
+
+
+# In[ ]:
+
+
+for i in range(3):
+    df_kor = pd.read_csv(list_csv[i])
+    df_eng = pd.read_csv(list_csv[i+3])
+    df = df_kor.append(df_eng)
+    userlist = list(set(df.userId.tolist()))
     userlist.sort()
     corpus = []
     for name in userlist:
         for i in range(1, 6):
             user_score = [str(place) for place in
-                           df_review[(df_review['userId'] == name) &
-                                     (df_review['score'] == i)].placeId]
+                           df[(df['userId'] == name) &
+                                     (df['score'] == i)].placeId]
             if len(user_score)!=0:
                 corpus.append(user_score)
 
