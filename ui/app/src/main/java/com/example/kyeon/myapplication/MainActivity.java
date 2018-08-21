@@ -1,6 +1,7 @@
 package com.example.kyeon.myapplication;
 
 import android.drm.DrmStore;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -79,6 +80,8 @@ public class MainActivity extends AppCompatActivity{
         });
 
         Button bNewTrip = (Button)findViewById(R.id.newTrip);
+        final Drawable button_transparency_bNewTrip = bNewTrip.getBackground();
+        button_transparency_bNewTrip.setAlpha(160);
         bNewTrip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -90,6 +93,9 @@ public class MainActivity extends AppCompatActivity{
         });
 
         Button bMyTrip = (Button)findViewById(R.id.myTrip);
+        Drawable button_transparency_bMyTrip = bMyTrip.getBackground();
+        button_transparency_bMyTrip.setAlpha(160);
+
         bMyTrip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,6 +105,14 @@ public class MainActivity extends AppCompatActivity{
                 startActivity(intent);
             }
         });
+
+        Button bOtherTrip = (Button)findViewById(R.id.otherTrip);
+        Drawable button_transparency_bOtherTrip = bOtherTrip.getBackground();
+        button_transparency_bOtherTrip.setAlpha(160);
+
+        Button bRecommendTrip = (Button)findViewById(R.id.recommendTrip);
+        Drawable button_transparency_bRecommendTrip = bRecommendTrip.getBackground();
+        button_transparency_bRecommendTrip.setAlpha(160);
 
     }
 
