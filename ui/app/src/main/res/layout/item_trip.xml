@@ -72,7 +72,8 @@
                     android:textSize="48dp"
                     app:layout_constraintBottom_toBottomOf="@id/marginspacer"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent" />
+                    app:layout_constraintRight_toRightOf="parent"
+                    />
             </android.support.constraint.ConstraintLayout>
 
             <TextView

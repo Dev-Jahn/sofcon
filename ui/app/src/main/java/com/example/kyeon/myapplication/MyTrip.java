@@ -32,7 +32,7 @@ public class MyTrip extends AppCompatActivity {
         item[1] = new Item(R.drawable.city_fukuoka,"열심히 쇼핑하다오는 후쿠오카", "Fukuoka", "4.3 ~ 4.10");
         item[2] = new Item(R.drawable.city_beijing, "옛 중국의 향기를 맡으러","Beijing", "5.1 ~ 5.6");
         item[3] = new Item(R.drawable.city_busan,"여름에 가기좋은 부산여행", "Busan", "4.13 ~ 4.19");
-        item[4] = new Item(R.drawable.cont_tai,"태국의 정취를 맡으러", "Tai", "7.4 ~ 7.11");
+        item[4] = new Item(R.drawable.city_tai,"태국의 정취를 맡으러", "Tai", "7.4 ~ 7.11");
 
         for (int i = 0; i < ITEM_SIZE; i++) {
             items.add(item[i]);
