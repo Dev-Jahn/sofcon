@@ -65,8 +65,10 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
     private ArrayList<LatLng> listLocsToDraw = new ArrayList<>();
     HashMap<Integer,Marker> hashMapMarker = new HashMap<>();
     private static int markerCount = 0;
-    private View customMarkerRoot;
-    private TextView customMarker;
+    private View customMarkerOriginDestRoot;
+    private TextView tvCustomMarkerOriginDest;
+    private View customMarkerWayPointRoot;
+    private TextView tvCustomMarkerWayPoint;
 
 
     @Override
@@ -110,8 +112,10 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             }
         });
 
-        customMarkerRoot = LayoutInflater.from(this).inflate(R.layout.marker_custom, null);
-        customMarker = (TextView)customMarkerRoot.findViewById(R.id.custom_marker);
+        customMarkerOriginDestRoot = LayoutInflater.from(this).inflate(R.layout.marker_custom_origin_dest, null);
+        tvCustomMarkerOriginDest = (TextView) customMarkerOriginDestRoot.findViewById(R.id.custom_marker_text);
+        customMarkerWayPointRoot = LayoutInflater.from(this).inflate(R.layout.marker_custom_waypoint, null);
+        tvCustomMarkerWayPoint = (TextView) customMarkerWayPointRoot.findViewById(R.id.custom_marker_text);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -156,9 +160,8 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
 
                  */
 
-                customMarker.setText(new Integer(++markerCount).toString());
-                options.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getContext(), customMarkerRoot)));
-
+                tvCustomMarkerOriginDest.setText(new Integer(++markerCount).toString());
+                options.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getContext(), customMarkerOriginDestRoot)));
 
                 Marker marker = mMap.addMarker(options);
                 hashMapMarker.put(markerCount, marker);
@@ -171,24 +174,19 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
 /**
  *
  * ---> It has a big problem
- *      1. How can I redraw by using listLocsToDraw?
- *      2. Is it safe to use markerCount?
+ *      1. How can i use popup window smoothly?
  **/
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
            @Override
            public boolean onMarkerClick(final Marker marker) {
                LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(LAYOUT_INFLATER_SERVICE);
-            // PopupMenu popupMenu = new PopupMenu(getApplicationContext(),
-
-               removeMarker(mMap, marker);
+               // PopupMenu popupMenu = new PopupMenu(getApplicationContext(),
+               marker.setTitle("TITLE of MARKER");
+               marker.setSnippet("EXAMPLE SNIPPET");
+               // marker.showInfoWindow();
                /**
-               int position = (int)(marker.getTag());
-               listLocsToDraw.remove(position-1);
-               hashMapMarker.remove(position);
-               --markerCount;
-               marker.remove();
-               redrawRoute();
-                **/
+               removeMarker(mMap, marker);
+                */
                return false;
            }
         });
@@ -234,6 +232,11 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             LatLng origin = (LatLng) listLocsToDraw.get(listLocsToDraw.size()-2);
             LatLng dest = (LatLng) listLocsToDraw.get(listLocsToDraw.size()-1);
 
+            if(markerCount > 2) {
+                Marker wayPointMarker = hashMapMarker.get(markerCount-1);
+                tvCustomMarkerWayPoint.setText(new Integer(markerCount-1).toString());
+                wayPointMarker.setIcon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getContext(), customMarkerWayPointRoot)));
+            }
             /**
              * requests draw a line for origin & dest
              */
@@ -285,17 +288,23 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         }
         mMap.clear();
         hashMapMarker.clear();
+        markerCount = newMarkerCount;
         for(int i = 0; i < listLocsToDraw.size(); ++i) {
             // create a marker for starting location
             MarkerOptions options = new MarkerOptions();
             options.position(listLocsToDraw.get(i));
-            customMarker.setText(new Integer(i+1).toString());
-            options.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getContext(), customMarkerRoot)));
+            if(i == 0 || i == listLocsToDraw.size() - 1) {
+                tvCustomMarkerOriginDest.setText(new Integer(i + 1).toString());
+                options.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getContext(), customMarkerOriginDestRoot)));
+            }
+            else {
+                tvCustomMarkerWayPoint.setText(new Integer(i + 1).toString());
+                options.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getContext(), customMarkerWayPointRoot)));
+            }
             Marker currentMarker = mMap.addMarker(options);
             hashMapMarker.put(i+1, currentMarker);
             currentMarker.setTag(i+1);
         }
-        markerCount = newMarkerCount;
         redrawRoute();
     }
 
@@ -320,9 +329,9 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         return bitmap;
         //return smallBitmap;
         /**
-         * --->Deprecated Codes
+         * ---> Deprecated Codes
          *
-         * BitmapDrawable bitmapDrawable = (BitmapDrawable)getResources().getDrawable(R.drawable.map_makrer_icon_red);
+         * BitmapDrawable bitmapDrawable = (BitmapDrawable)getResources().getDrawable(R.drawable.map_marker_icon_red);
          * Bitmap bitmap = bitmapDrawable.getBitmap();
          * Bitmap smallMarker = Bitmap.createScaledBitmap(bitmap, 200, 200, false);
          * return smallMarker;

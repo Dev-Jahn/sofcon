@@ -4,11 +4,11 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/custom_marker"
+        android:id="@+id/custom_marker_text"
         android:layout_width="50dp"
         android:layout_height="50dp"
 
-        android:background="@drawable/map_makrer_icon_red"
+        android:background="@drawable/map_marker_icon_red"
         android:gravity="center"
         android:text="1"
         android:textSize="12sp"
