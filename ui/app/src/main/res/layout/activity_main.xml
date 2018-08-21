@@ -11,7 +11,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@drawable/background_image_main">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/maintoolbar"
@@ -27,7 +28,7 @@
             android:orientation="vertical"
             android:layout_marginLeft="2dp"
             android:layout_marginRight="2dp"
-            android:layout_weight="2">
+            android:layout_weight="1">
 
             <LinearLayout
                 android:layout_marginTop="2dp"
@@ -42,6 +43,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="2dp"
                     android:layout_weight="1"
+                    android:drawableTop="@drawable/travel_date"
                     android:background="@drawable/corners"
                     android:text="새 여행" />
 
@@ -52,11 +54,11 @@
                     android:layout_height="match_parent"
                     android:layout_margin="2dp"
                     android:layout_weight="1"
+                    android:drawableTop="@drawable/laptop"
                     android:background="@drawable/corners"
                     android:text="내 여행" />
 
             </LinearLayout>
-
 
 
             <LinearLayout
@@ -70,6 +72,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="2dp"
                     android:layout_weight="1"
+                    android:drawableTop="@drawable/signs"
                     android:background="@drawable/corners"
                     android:text="다른 여행" />
 
@@ -82,6 +85,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="2dp"
                     android:layout_weight="1"
+                    android:drawableTop="@drawable/tag"
                     android:background="@drawable/corners"
                     android:text="추천 여행" />
 
@@ -96,15 +100,7 @@
             android:orientation="vertical"
             android:layout_weight="1">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/sample_image"
-                android:layout_margin="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/sample_image"
-                app:civ_border_width="5dp"
-                app:civ_border_color="#9E9E9E"/>
+
 
         </LinearLayout>
 
@@ -159,6 +155,5 @@
             android:id="@+id/navigation_contents"/>
 
     </LinearLayout>
-
 
 </android.support.v4.widget.DrawerLayout>
