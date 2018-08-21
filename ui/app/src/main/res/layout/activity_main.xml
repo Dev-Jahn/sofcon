@@ -19,9 +19,54 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_weight="2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/constrain_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/sample_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/sample_image"
+                    app:civ_border_color="#9E9E9E"
+                    app:civ_border_width="5dp"
+                    />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:id="@+id/main_marginspacer"
+                    android:layout_marginBottom="135dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/sample_image"
+                    app:layout_constraintLeft_toLeftOf="@+id/sample_image"
+                    app:layout_constraintRight_toRightOf="@+id/sample_image"
+                    />
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/app_logo"
+                    app:layout_constraintBottom_toBottomOf="@id/main_marginspacer"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    />
+
+            </android.support.constraint.ConstraintLayout>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,7 +77,7 @@
             <Button
                 android:id="@+id/newTrip"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_margin="2dp"
                 android:layout_weight="1"
                 android:background="#BDBDBD"
@@ -44,7 +89,7 @@
             <Button
                 android:id="@+id/myTrip"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_margin="2dp"
                 android:layout_weight="1"
                 android:background="#BDBDBD"
@@ -62,7 +107,7 @@
             <Button
                 android:id="@+id/otherTrip"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_margin="2dp"
                 android:layout_weight="1"
                 android:background="#BDBDBD"
@@ -74,7 +119,7 @@
             <Button
                 android:id="@+id/recommendTrip"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_margin="2dp"
                 android:layout_weight="1"
                 android:background="#BDBDBD"
@@ -82,24 +127,6 @@
 
         </LinearLayout>
 
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_weight="1">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/sample_image"
-            android:layout_margin="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/sample_image"
-            app:civ_border_width="5dp"
-            app:civ_border_color="#9E9E9E"/>
 
     </LinearLayout>
 
