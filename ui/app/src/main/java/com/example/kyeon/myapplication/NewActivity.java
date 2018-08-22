@@ -4,16 +4,21 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.Spinner;
 
 import java.text.SimpleDateFormat;
@@ -23,6 +28,12 @@ import java.util.Locale;
 public class NewActivity extends AppCompatActivity {
     String travel_title;
     String place_text;
+    DrawerLayout drawerLayout;
+    LinearLayout navigation_new_background;
+    Intent intent;
+
+    private ListView navigationView;
+    private String[] navItems = {"메인 메뉴", "새 여행", "내 여행", "일지","기타"};
 
     public static final String TAG = "Alert_Dialog";
     AlertDialog.Builder alertDialogCalendar;
@@ -50,6 +61,8 @@ public class NewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new);
 
         Toolbar newToolbar;
+        drawerLayout = (DrawerLayout)findViewById(R.id.newActivity_drawer);
+        navigation_new_background = (LinearLayout)findViewById(R.id.navigation_new_background);
 
         final EditText eTitle = (EditText) findViewById(R.id.travelTitle);
         final EditText ePlace = (EditText) findViewById(R.id.placeName);
@@ -79,6 +92,38 @@ public class NewActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setHomeAsUpIndicator(R.drawable.outline_list_black_18dp);
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+        navigationView = (ListView)findViewById(R.id.navigation_contents_from_new);
+        navigationView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, navItems));
+        navigationView.setOnItemClickListener(new ListView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent;
+                switch (i) {
+                    case 0:
+                        finish();
+                        break;
+
+                    case 1:
+                        break;
+
+                    case 2:
+                        intent = new Intent(
+                                getApplicationContext(),
+                                TravelActivity.class);
+                        startActivity(intent);
+                        finish();
+                        break;
+                    case 3:
+                        System.out.println(2);
+                        break;
+                    case 4:
+                        System.out.println(3);
+                        break;
+                }
+                drawerLayout.closeDrawer(navigation_new_background);
+            }
+        });
 
         spinner.setAdapter(sAdapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -137,7 +182,7 @@ public class NewActivity extends AppCompatActivity {
                     travel_title = "여행을 떠나요~!!";
                 if(place_text.length() == 0)
                     place_text = "서울";
-                
+
                 i.putExtra("departing_year", d_yy);
                 i.putExtra("departing_month", d_mm);
                 i.putExtra("departing_day", d_dd);
@@ -263,6 +308,19 @@ public class NewActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         this.finish();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        switch(id) {
+            case android.R.id.home:
+                drawerLayout.openDrawer(GravityCompat.START);
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
 

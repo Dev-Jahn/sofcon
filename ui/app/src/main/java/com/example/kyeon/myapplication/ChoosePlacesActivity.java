@@ -4,16 +4,22 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -59,6 +65,10 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
     private ArrayList<LatLng> listLocsToDraw = new ArrayList<>();
     HashMap<Integer,Marker> hashMapMarker = new HashMap<>();
     private static int markerCount = 0;
+    private View customMarkerOriginDestRoot;
+    private TextView tvCustomMarkerOriginDest;
+    private View customMarkerWayPointRoot;
+    private TextView tvCustomMarkerWayPoint;
 
 
     @Override
@@ -102,6 +112,11 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             }
         });
 
+        customMarkerOriginDestRoot = LayoutInflater.from(this).inflate(R.layout.marker_custom_origin_dest, null);
+        tvCustomMarkerOriginDest = (TextView) customMarkerOriginDestRoot.findViewById(R.id.custom_marker_text);
+        customMarkerWayPointRoot = LayoutInflater.from(this).inflate(R.layout.marker_custom_waypoint, null);
+        tvCustomMarkerWayPoint = (TextView) customMarkerWayPointRoot.findViewById(R.id.custom_marker_text);
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -130,8 +145,9 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                 options.position(latLng);
 
                 /**
-                 * Set marker's color
-                 */
+                 * Set marker's color - Deprecated
+
+
                 if(listLocsToDraw.size() == 1)
                     // origin marker is green
                     options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
@@ -142,21 +158,35 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                     // dest marker is blue
                     options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
 
+                 */
+
+                tvCustomMarkerOriginDest.setText(new Integer(++markerCount).toString());
+                options.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getContext(), customMarkerOriginDestRoot)));
+
                 Marker marker = mMap.addMarker(options);
-                hashMapMarker.put(markerCount++, marker);
+                hashMapMarker.put(markerCount, marker);
+                marker.setTag(markerCount);
 
                 if(listLocsToDraw.size() >= 2)
                     drawRoute();
             }
         });
-
+/**
+ *
+ * ---> It has a big problem
+ *      1. How can i use popup window smoothly?
+ **/
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
            @Override
            public boolean onMarkerClick(final Marker marker) {
-               int position = (int)(marker.getTag());
-               listLocsToDraw.remove(position);
-               marker.remove();
-               drawRoute();
+               LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(LAYOUT_INFLATER_SERVICE);
+               // PopupMenu popupMenu = new PopupMenu(getApplicationContext(),
+               marker.setTitle("TITLE of MARKER");
+               marker.setSnippet("EXAMPLE SNIPPET");
+               // marker.showInfoWindow();
+               /**
+               removeMarker(mMap, marker);
+                */
                return false;
            }
         });
@@ -202,6 +232,11 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             LatLng origin = (LatLng) listLocsToDraw.get(listLocsToDraw.size()-2);
             LatLng dest = (LatLng) listLocsToDraw.get(listLocsToDraw.size()-1);
 
+            if(markerCount > 2) {
+                Marker wayPointMarker = hashMapMarker.get(markerCount-1);
+                tvCustomMarkerWayPoint.setText(new Integer(markerCount-1).toString());
+                wayPointMarker.setIcon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getContext(), customMarkerWayPointRoot)));
+            }
             /**
              * requests draw a line for origin & dest
              */
@@ -209,6 +244,98 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             DownloadTask downloadTask = new DownloadTask();
             downloadTask.execute(url);
         }
+    }
+
+    /**
+     * Deprecated.
+     * Because of korea's fucking map policy
+     * About 400 lines of code will be replaced to 10 lines of FUCKING straight line drawing code
+     * T_T
+     */
+    @Deprecated
+    private void redrawRoute() {
+        if(listLocsToDraw.size() >= 2) {
+            LatLng origin;
+            LatLng dest;
+            for(int i = 0; i < listLocsToDraw.size() - 1; ++i) {
+                origin = (LatLng)listLocsToDraw.get(i);
+                dest = (LatLng)listLocsToDraw.get(i+1);
+                /**
+                 * requests draw a line for origin & dest
+                 */
+                String url = getDirectionsUrl(origin, dest);
+                DownloadTask downloadTask = new DownloadTask();
+                downloadTask.execute(url);
+            }
+        }
+    }
+
+    private void removeMarker(GoogleMap mMap, Marker marker) {
+        listLocsToDraw.clear();
+        int newMarkerCount = 0;
+        int removeIndex = (int)(marker.getTag());
+        marker.remove();
+        hashMapMarker.remove(removeIndex);
+        for(int i = 0; i <= markerCount; ++i) {
+            if(hashMapMarker.containsKey(i)) {
+                Marker currentMarker = hashMapMarker.remove(i);
+                LatLng currentPosition = currentMarker.getPosition();
+                listLocsToDraw.add(currentPosition);
+                newMarkerCount++;
+            }
+            else
+                continue;
+        }
+        mMap.clear();
+        hashMapMarker.clear();
+        markerCount = newMarkerCount;
+        for(int i = 0; i < listLocsToDraw.size(); ++i) {
+            // create a marker for starting location
+            MarkerOptions options = new MarkerOptions();
+            options.position(listLocsToDraw.get(i));
+            if(i == 0 || i == listLocsToDraw.size() - 1) {
+                tvCustomMarkerOriginDest.setText(new Integer(i + 1).toString());
+                options.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getContext(), customMarkerOriginDestRoot)));
+            }
+            else {
+                tvCustomMarkerWayPoint.setText(new Integer(i + 1).toString());
+                options.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getContext(), customMarkerWayPointRoot)));
+            }
+            Marker currentMarker = mMap.addMarker(options);
+            hashMapMarker.put(i+1, currentMarker);
+            currentMarker.setTag(i+1);
+        }
+        redrawRoute();
+    }
+
+    /**
+     * Convert View to Bitmap
+     */
+    private Bitmap createDrawableFromView(Context context, View view) {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        //view.setLayoutParams(new ViewGroup.LayoutParams(200, 200));
+        view.measure(displayMetrics.widthPixels, displayMetrics.heightPixels);
+        view.layout(0, 0, displayMetrics.widthPixels, displayMetrics.heightPixels);
+        view.buildDrawingCache();
+        Bitmap bitmap = Bitmap.createBitmap(view.getMeasuredWidth(), view.getMeasuredHeight(), Bitmap.Config.ARGB_8888);
+        //Bitmap smallBitmap = Bitmap.createScaledBitmap(bitmap, 200, 200, true);
+
+        Canvas canvas = new Canvas(bitmap);
+        //Canvas canvas = new Canvas(smallBitmap);
+        view.draw(canvas);
+
+        return bitmap;
+        //return smallBitmap;
+        /**
+         * ---> Deprecated Codes
+         *
+         * BitmapDrawable bitmapDrawable = (BitmapDrawable)getResources().getDrawable(R.drawable.map_marker_icon_red);
+         * Bitmap bitmap = bitmapDrawable.getBitmap();
+         * Bitmap smallMarker = Bitmap.createScaledBitmap(bitmap, 200, 200, false);
+         * return smallMarker;
+         */
     }
 
     /**

@@ -27,4 +27,6 @@
     <string name="title">제목</string>
     <string name="schedule">일정</string>
 
+    <string name="remove_marker">여행 경로에서 제외</string>
+
 </resources>
