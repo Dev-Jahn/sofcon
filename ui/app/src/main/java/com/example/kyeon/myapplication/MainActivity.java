@@ -2,6 +2,12 @@ package com.example.kyeon.myapplication;
 
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.drm.DrmStore;
+import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;;
 import android.content.Intent;
@@ -23,18 +29,33 @@ import android.widget.Toast;
 import java.util.Random;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import android.widget.Adapter;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.os.Bundle;
+import android.view.Menu;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity{
 
     Toolbar mainToolbar;
-    int c1, c2;
-    final int BACKGROUND = 0;
-    final int FOREGROUND = 1;
+    int c1;
+    DrawerLayout drawerLayout;
+    LinearLayout navigation_main_background;
+    private ListView navigationView;
+    private String[] navItems = {"메인 메뉴", "새 여행", "내 여행", "일지","기타"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+        navigation_main_background = (LinearLayout)findViewById((R.id.navigation_main_background));
 
         mainToolbar = (Toolbar)findViewById(R.id.maintoolbar);
         mainToolbar.setTitle("Hello World!!");
@@ -124,8 +145,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         Button bNewTrip = (Button)findViewById(R.id.newTrip);
+        final Drawable button_transparency_bNewTrip = bNewTrip.getBackground();
+        button_transparency_bNewTrip.setAlpha(160);
         bNewTrip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -137,6 +159,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
         Button bMyTrip = (Button)findViewById(R.id.myTrip);
+        Drawable button_transparency_bMyTrip = bMyTrip.getBackground();
+        button_transparency_bMyTrip.setAlpha(160);
+
         bMyTrip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -147,7 +172,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button bOtherTrip = (Button)findViewById(R.id.otherTrip);
+        Drawable button_transparency_bOtherTrip = bOtherTrip.getBackground();
+        button_transparency_bOtherTrip.setAlpha(160);
+
+        Button bRecommendTrip = (Button)findViewById(R.id.recommendTrip);
+        Drawable button_transparency_bRecommendTrip = bRecommendTrip.getBackground();
+        button_transparency_bRecommendTrip.setAlpha(160);
+
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
@@ -160,8 +194,7 @@ public class MainActivity extends AppCompatActivity {
 
         switch(id) {
             case android.R.id.home:
-                return true;
-            case R.id.action_settings:
+                drawerLayout.openDrawer(GravityCompat.START);
                 return true;
         }
 
@@ -169,3 +202,5 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
+
+
