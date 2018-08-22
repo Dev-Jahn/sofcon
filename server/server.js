@@ -21,7 +21,7 @@ var server = http.createServer(function(req, res) {
 	var cmds = path.split("/");
 	var parsedQuery = query.parse(strucedUrl.query, '&', '=');
 
-	if(cmds[1] == Col_Learning) {
+	if(cmds[1] == "Learning") {
 		if(req.method == "GET") {
 			var test = {test: parsedQuery.test};
 			mongo.connect("mongodb://127.0.0.1:27017", function(err,db) {
@@ -35,6 +35,30 @@ var server = http.createServer(function(req, res) {
 					db.close();
 				});
 			});
+		}
+	} else if(cmds[1] == "navi") {
+		if(req.method == "GET") {
+			var searchData = {
+				cls : "",
+				placeid : 0,
+				name_kor : "",
+				name_eng : "",
+				loc : [0,0]
+			};
+			if(cmds[2] =="findPlace") {
+				var x = parseFloat(parsedQuery.x);
+				var y = parseFloat(parsedQuery.y);
+				mongo.connect("mongodb://127.0.0.1:27017",{useNewUrlParser : true} ,function(err,db) {
+					if(err) throw err;
+					var dbo = db.db(DbName);
+					dbo.collection("Places").find({}).project({"_id":false}).toArray(function(err, result) {
+					if(err) throw err;
+					res.writeHead(200, {'Content-Type': 'text/plain;charset=utf-8'});
+					res.end(JSON.stringify(result));
+					db.close();
+					});
+				});
+			}
 		}
 	} else if(cmds[1] == "UI") {
 		if(req.method == "GET") {

@@ -1,3 +1,10 @@
+<<<<<<< HEAD
+=======
+#jupyter notebook checkpoint
+.ipynb_checkpoints/
+# nltk dataset
+nltk_data/
+>>>>>>> 73aecae3528e01dd225286092e39a47632e4533e
 # Built application files
 *.apk
 *.ap_
