@@ -1,6 +1,8 @@
 package com.example.kyeon.myapplication;
 
+import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.drm.DrmStore;
 import android.graphics.drawable.Drawable;
@@ -9,6 +11,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;;
 import android.content.Intent;
 import android.support.v7.widget.Toolbar;
@@ -49,16 +52,19 @@ public class MainActivity extends AppCompatActivity{
     private ListView navigationView;
     private String[] navItems = {"메인 메뉴", "새 여행", "내 여행", "일지","기타"};
 
+    ImageView blnkImage;
+    LinearLayout nav_image_text;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
-        navigation_main_background = (LinearLayout)findViewById((R.id.navigation_main_background));
+        navigation_main_background = (LinearLayout)findViewById((R.id.navigation_main_));
 
         mainToolbar = (Toolbar)findViewById(R.id.maintoolbar);
-        mainToolbar.setTitle("Hello World!!");
+        mainToolbar.setTitle("메인 메뉴");
         setSupportActionBar(mainToolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setHomeAsUpIndicator(R.drawable.outline_list_black_18dp);
@@ -181,7 +187,7 @@ public class MainActivity extends AppCompatActivity{
 
         Button bNewTrip = (Button)findViewById(R.id.newTrip);
         final Drawable button_transparency_bNewTrip = bNewTrip.getBackground();
-        button_transparency_bNewTrip.setAlpha(160);
+        button_transparency_bNewTrip.setAlpha(255);
         bNewTrip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -194,7 +200,7 @@ public class MainActivity extends AppCompatActivity{
 
         Button bMyTrip = (Button)findViewById(R.id.myTrip);
         Drawable button_transparency_bMyTrip = bMyTrip.getBackground();
-        button_transparency_bMyTrip.setAlpha(160);
+        button_transparency_bMyTrip.setAlpha(255);
 
         bMyTrip.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -208,11 +214,11 @@ public class MainActivity extends AppCompatActivity{
 
         Button bOtherTrip = (Button)findViewById(R.id.otherTrip);
         Drawable button_transparency_bOtherTrip = bOtherTrip.getBackground();
-        button_transparency_bOtherTrip.setAlpha(160);
+        button_transparency_bOtherTrip.setAlpha(255);
 
         Button bRecommendTrip = (Button)findViewById(R.id.recommendTrip);
         Drawable button_transparency_bRecommendTrip = bRecommendTrip.getBackground();
-        button_transparency_bRecommendTrip.setAlpha(160);
+        button_transparency_bRecommendTrip.setAlpha(255);
 
     }
 
@@ -228,13 +234,36 @@ public class MainActivity extends AppCompatActivity{
 
         switch(id) {
             case android.R.id.home:
+                mainToolbar = (Toolbar)findViewById(R.id.maintoolbar);
                 drawerLayout.openDrawer(GravityCompat.START);
+
                 return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setTitle("종료 확인 대화 상자")
+                .setMessage("앱을 종료 하시겠습니까?")
+                .setCancelable(false)
+                .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        System.exit(0);
+                    }
+                })
+                .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+
+        AlertDialog dialog = alertDialog.create();
+        dialog.show();
+    }
 }
 
 
