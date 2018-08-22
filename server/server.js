@@ -51,7 +51,7 @@ var server = http.createServer(function(req, res) {
 				mongo.connect("mongodb://127.0.0.1:27017",{useNewUrlParser : true} ,function(err,db) {
 					if(err) throw err;
 					var dbo = db.db(DbName);
-					dbo.collection("Places").find({}).project({"_id":false}).toArray(function(err, result) {
+					dbo.collection("Places").find({}).project({"_id":false, "placeId":false}).toArray(function(err, result) {
 					if(err) throw err;
 					res.writeHead(200, {'Content-Type': 'text/plain;charset=utf-8'});
 					res.end(JSON.stringify(result));
