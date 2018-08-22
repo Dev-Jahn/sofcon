@@ -158,13 +158,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="출발장소"
+                android:text="여행장소"
                 android:gravity="center"/>
 
-            <EditText
+            <Button
                 android:id="@+id/placeName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="장소 정하기"
+                android:textSize="18sp"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:layout_weight="5"/>
 
         </LinearLayout>
@@ -174,6 +177,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
+
+
 
             <TextView
                 android:layout_width="wrap_content"
@@ -188,6 +193,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="5"/>
+
 
         </LinearLayout>
 

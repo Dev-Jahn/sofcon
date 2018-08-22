@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.v7.widget.CardView
+<android.support.design.card.MaterialCardView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/rec_cardview"
     android:background="#FFFFFF"
+    app:strokeColor="@color/colorAccent"
+    app:strokeWidth="1dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <LinearLayout
@@ -45,4 +47,4 @@
 
     </LinearLayout>
 
-</android.support.v7.widget.CardView>
+</android.support.design.card.MaterialCardView>
