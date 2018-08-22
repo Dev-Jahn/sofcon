@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<android.support.v7.widget.CardView
+<android.support.design.card.MaterialCardView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/review_cardview"
     android:background="@drawable/card_border"
+    app:strokeColor="@color/colorAccent"
+    app:strokeWidth="1dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -25,6 +27,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:layout_weight="8"
+                android:textColor="@color/colorPrimaryDark"
                 android:text="경유지 이름" />
 
             <ImageView
@@ -34,6 +37,7 @@
                 android:layout_weight="1"
                 android:layout_gravity="end"
                 android:src="@drawable/baseline_arrow_drop_down_black_36dp"
+                android:tint="@color/colorAccent"
                 />
 
         </LinearLayout>
@@ -64,6 +68,8 @@
                 android:id="@+id/add_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:tint="@color/colorPrimary"
                 app:srcCompat="@drawable/baseline_add_photo_alternate_black_48dp" />
 
             <EditText
@@ -81,4 +87,4 @@
 
         </LinearLayout>
     </LinearLayout>
-</android.support.v7.widget.CardView>
+</android.support.design.card.MaterialCardView>

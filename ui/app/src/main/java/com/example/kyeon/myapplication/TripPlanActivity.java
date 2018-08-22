@@ -115,7 +115,7 @@ public class TripPlanActivity extends AppCompatActivity {
         {
             //s a v e to local
             Toast.makeText(getApplicationContext(), "Title : "+etitle+"\n"+"departing date : "+d_yy+'/'+d_mm+'/'+d_dd+"\n"+"arriving date : "
-                    +a_yy+'/'+a_mm+'/'+a_dd+"\n"+"Group Size : "+person_count+"\n"+"Place Name : "+eplace+"\n"
+                    +a_yy+'/'+a_mm+'/'+a_dd+"\n"+"Group Size : "+person_count+"\n"+"Place Name : "+"\n"
                     +"Diff_days = " + diff_days+"\n", Toast.LENGTH_SHORT).show();
             finish();
         }
@@ -286,7 +286,7 @@ public class TripPlanActivity extends AppCompatActivity {
         a_dd = intent.getStringExtra("arriving_day");
         a_dd = add_zero_to_string(a_dd);
         etitle = intent.getStringExtra("title_text");
-        eplace = intent.getStringExtra("place_name");
+        //eplace = intent.getStringExtra("place_name");
         person_count = intent.getStringExtra("person_count");
     }
 }

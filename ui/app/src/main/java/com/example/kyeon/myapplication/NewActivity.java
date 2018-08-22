@@ -65,7 +65,6 @@ public class NewActivity extends AppCompatActivity {
         navigation_new_background = (LinearLayout)findViewById(R.id.navigation_new_background);
 
         final EditText eTitle = (EditText) findViewById(R.id.travelTitle);
-        final EditText ePlace = (EditText) findViewById(R.id.placeName);
         Spinner spinner = (Spinner) findViewById(R.id.countPerson);
         final ArrayAdapter sAdapter = ArrayAdapter.createFromResource(this, R.array.question, android.R.layout.simple_spinner_dropdown_item);
         Button departButton, arrivingButton;
@@ -164,7 +163,7 @@ public class NewActivity extends AppCompatActivity {
         });
 
         travel_title = eTitle.getText().toString();
-        place_text = ePlace.getText().toString();
+        //place_text = ePlace.getText().toString();
 
         Button btn_comp = (Button) findViewById(R.id.btn_comp);
         btn_comp.setOnClickListener(new View.OnClickListener() {
@@ -180,8 +179,10 @@ public class NewActivity extends AppCompatActivity {
 
                 if(travel_title.length() == 0)
                     travel_title = "여행을 떠나요~!!";
+                /*
                 if(place_text.length() == 0)
                     place_text = "서울";
+                */
 
                 i.putExtra("departing_year", d_yy);
                 i.putExtra("departing_month", d_mm);

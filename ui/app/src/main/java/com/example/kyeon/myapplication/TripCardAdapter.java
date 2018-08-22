@@ -2,6 +2,7 @@ package com.example.kyeon.myapplication;
 
 import android.content.ClipData;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
@@ -50,7 +51,8 @@ public class TripCardAdapter extends RecyclerView.Adapter<TripCardAdapter.ViewHo
         holder.cardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, item.getPlace(), Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(context, TravelActivity.class);
+                context.startActivity(i);
             }
         });
 
