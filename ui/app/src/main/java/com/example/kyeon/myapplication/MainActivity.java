@@ -64,6 +64,40 @@ public class MainActivity extends AppCompatActivity{
         actionBar.setHomeAsUpIndicator(R.drawable.outline_list_black_18dp);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+        navigationView = (ListView)findViewById(R.id.navigation_contents_from_main);
+        navigationView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, navItems));
+        navigationView.setOnItemClickListener(new ListView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent;
+                switch (i) {
+                    case 0:
+                        break;
+
+                    case 1:
+                        intent = new Intent(
+                                getApplicationContext(),
+                                NewActivity.class);
+                        startActivity(intent);
+                        break;
+
+                    case 2:
+                        intent = new Intent(
+                                getApplicationContext(),
+                                TravelActivity.class);
+                        startActivity(intent);
+                        break;
+                    case 3:
+                        System.out.println(2);
+                        break;
+                    case 4:
+                        System.out.println(3);
+                        break;
+                }
+                drawerLayout.closeDrawer(navigation_main_background);
+            }
+        });
+
         AnimationSet animationSet = new AnimationSet(true);
 
         Animation alpha = new AlphaAnimation(0.2f, 1.0f);
