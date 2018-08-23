@@ -48,6 +48,7 @@ elif platform.system() == 'Windows':
 
 # corpus 생성함수
 def mkcorpus(ws):
+    corpus = []
     for word in ws :
         places = []
         for i in range(len(df_morpheme)):
@@ -55,6 +56,9 @@ def mkcorpus(ws):
                 if not df_morpheme['placeId'][i] in places:
                     places.append(df_morpheme['placeId'][i])
         corpus.append(places)
+# save
+    with open(list_corpus[csv],'wb') as f:
+        pickle.dump(corpus, f)
         #print('['+word+']: ',len(places),' places appended to the corpus')
         #sys.stdout.flush()
 
@@ -65,7 +69,7 @@ def mkcorpus(ws):
 import multiprocessing as mp
 from multiprocessing import Pool
 
-for csv in range(1):
+for csv in range(3):
     df = pd.read_csv(list_csv[csv])
     # filter charset exception
     df['review'] = df['review'].apply(lambda x: re.sub(r'[^ 가-힣0-9.!?\n]',' ',x))
@@ -105,12 +109,8 @@ for csv in range(1):
     if __name__ == '__main__':
         start = time.time()
 
-        corpus = []
         pool = Pool(core_count)
         pool.map(mkcorpus, wordsubset)
         pool.close()
         pool.join()
         print('Elapsed time: ', str(time.time() - start))
-        # save
-        with open(list_corpus[csv],'wb') as f:
-            pickle.dump(corpus, f)
