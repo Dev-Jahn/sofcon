@@ -48,17 +48,21 @@ var server = http.createServer(function(req, res) {
 			if(cmds[2] =="findPlace") {
 				var x = parseFloat(parsedQuery.x);
 				var y = parseFloat(parsedQuery.y);
+				var sTime = new Date().getTime();
 				mongo.connect("mongodb://127.0.0.1:27017",{useNewUrlParser : true} ,function(err,db) {
 					if(err) throw err;
 					var dbo = db.db("test");
 					var resarr = new Array();
-					dbo.collection("test2").find({}).project({"_id":false, "placeId":false}).toArray(function(err, result) {
+					dbo.collection("test").find({}).project({"_id":false, "placeId":false}).toArray(function(err, result) {
 					if(err) throw err;
 					result.forEach(function(item, index, array) {
-						if(dis(x, y, parseFloat(array[index]["x"]), parseFloat(array[index]["y"])) < 100) {
+						if(dis(x, y, array[index]["latitude"], array[index]["longitude"]) < 10) {
 							resarr.push(array[index]);
 						}
 					});
+					var eTime = new Date().getTime();
+					console.log(eTime - sTime);
+					console.log(resarr.length);
 					res.writeHead(200, {'Content-Type': 'text/plain;charset=utf-8'});
 					res.end(JSON.stringify(resarr));
 					db.close();
