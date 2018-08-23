@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="#DCE775"
+            android:background="@color/colorPrimary"
             android:gravity="center"
             android:text="일정 선택"
             android:textColor="#444"
@@ -27,7 +27,7 @@
             android:id="@+id/calendarView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:mcv_selectionColor="#8d8"
+            app:mcv_selectionColor="#8dd"
             app:mcv_showOtherDates="defaults">
 
         </com.prolificinteractive.materialcalendarview.MaterialCalendarView>
@@ -57,8 +57,4 @@
 
     </LinearLayout>
     <!-- //end 타이틀바 -->
-
-
-
-
 </LinearLayout>
