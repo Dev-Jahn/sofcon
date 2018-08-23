@@ -9,7 +9,7 @@
 # # word2vec으로 모든 단어를 임베딩한 후,
 # # k-means clustering으로 군집화하여 군집별로 장소 임베딩
 
-# In[3]:
+# In[2]:
 
 
 import numpy as np
@@ -25,8 +25,6 @@ from nltk.stem import PorterStemmer
 from nltk.stem import WordNetLemmatizer
 import konlpy
 from konlpy.tag import Mecab
-
-logging = True
 
 nltk.data.path.append('F:\\소공전프로젝트\\sofcon\\recomm\\nltk_data')
 list_csv = ['data/kor/attraction_review_tag.csv',
@@ -50,7 +48,7 @@ def orderset(seq):
 
 # # 한글
 
-# In[4]:
+# In[3]:
 
 
 if platform.system() == 'Linux':
@@ -59,57 +57,8 @@ elif platform.system() == 'Windows':
     mecab = Mecab(dicpath="C:\\mecab\\mecab-ko-dic")
 
 
-# In[5]:
+# In[ ]:
 
-
-# attraction, hotel, or restaurant
-test = 0
-
-
-# In[6]:
-
-
-df = pd.read_csv(list_csv[test])
-# filter charset exception
-df['review'] = df['review'].apply(lambda x: re.sub(r'[^ 가-힣0-9.!?\n]',' ',x))
-# make sentence list
-array = df['review'].tolist()
-# 한글형태소 분리
-list_pos = [mecab.pos(sentence) for sentence in array]
-# 형태소 리스트화
-morpheme = [mecab.morphs(sentence) for sentence in array]
-
-# 의미를 가지는 형태소만 추출
-pattern = re.compile('MM|NNG|VA[+].*|VV[+].*|XR')
-df_morpheme = pd.DataFrame(columns = ['placeId','tags'], dtype = 'int64')
-taglist = []
-for i in range(len(list_pos)):
-    pairs = np.array(list_pos[i])
-    tags = np.array(morpheme[i])
-    npbool = []
-    for pair in pairs:
-        npbool.append(re.fullmatch(pattern,pair[1])!=None)
-    tags = tags[npbool]
-    taglist.append(tags.tolist())
-df_morpheme['tags'] = taglist
-df_morpheme['placeId'] = df['placeId'].astype('int64')
-
-wordlist = []
-for l in df_morpheme['tags']:
-    wordlist += l
-wordset = orderset(wordlist)
-print('전체', len(wordlist))
-print('집합', len(wordset))
-
-
-# In[12]:
-
-
-# 병렬처리를 위한 데이터 분할 
-import multiprocessing as mp
-from multiprocessing import Pool
-core_count = mp.cpu_count()
-wordsubset = np.array_split(wordset, core_count)
 
 # corpus 생성함수
 def mkcorpus(ws):
@@ -119,23 +68,98 @@ def mkcorpus(ws):
             if word in df_morpheme['tags'][i]:
                 places.append(df_morpheme['placeId'][i])
         corpus.append(places)
-        if logging == True:
-            print('['+word+']: ',len(places),' places appended to the corpus')
-        sys.stdout.flush()
+        #print('['+word+']: ',len(places),' places appended to the corpus')
+        #sys.stdout.flush()
+
+
+# In[5]:
+
+
+import multiprocessing as mp
+from multiprocessing import Pool
+
+for csv in list_csv:
+    df = pd.read_csv(csv)
+    # filter charset exception
+    df['review'] = df['review'].apply(lambda x: re.sub(r'[^ 가-힣0-9.!?\n]',' ',x))
+    # make sentence list
+    array = df['review'].tolist()
+    # 한글형태소 분리
+    list_pos = [mecab.pos(sentence) for sentence in array]
+    # 형태소 리스트화
+    morpheme = [mecab.morphs(sentence) for sentence in array]
+
+    # 의미를 가지는 형태소만 추출
+    pattern = re.compile('MM|NNG|VA[+].*|VV[+].*|XR')
+    df_morpheme = pd.DataFrame(columns = ['placeId','tags'], dtype = 'int64')
+    taglist = []
+    for i in range(len(list_pos)):
+        pairs = np.array(list_pos[i])
+        tags = np.array(morpheme[i])
+        npbool = []
+        for pair in pairs:
+            npbool.append(re.fullmatch(pattern,pair[1])!=None)
+        tags = tags[npbool]
+        taglist.append(tags.tolist())
+    df_morpheme['tags'] = taglist
+    df_morpheme['placeId'] = df['placeId'].astype('int64')
+
+    wordlist = []
+    for l in df_morpheme['tags']:
+        wordlist += l
+    wordset = orderset(wordlist)
+    print('In ',list_csv[csv])
+    print('단어전체', len(wordlist))
+    print('단어집합', len(wordset))
+    # 병렬처리를 위한 데이터 분할 
+    core_count = mp.cpu_count()
+    wordsubset = np.array_split(wordset, core_count)
+    # 멀티프로세스 연산
+    if __name__ == '__main__':
+        start = time.time()
+
+        corpus = []
+        pool = Pool(core_count)
+        pool.map(mkcorpus, wordsubset)
+        pool.close()
+        pool.join()
+        print('Elapsed time: ', str(time.time() - start))
+        # save
+        with open(list_corpus[list_csv.index(csv)],'wb') as f:
+            pickle.dump(corpus, f)
+
+
+# # 영문
+
+# In[ ]:
+
+
+# pos태깅은 문장이 문맥을 구성해야 정확한 결과가 나옴
+s = 'the quick brown fox jumps over the lazy dog'
+token = nltk.word_tokenize(s)
 
 
 # In[ ]:
 
 
-start = time.time()
+st = PorterStemmer()
+lm = WordNetLemmatizer()
+l = ['eat', 'ate', 'eating', 'eaten']
+l2 = [st.stem(w) for w in l]
+print(l2)
+l3 = [lm.lemmatize(w, pos='v') for w in l2]
+print(l3)
+l4 = ['i', 'ate', 'a', 'grass','eating', 'chicken']
+nltk.pos_tag(l4)
 
-corpus = []
-pool = Pool(core_count)
-pool.map(mkcorpus, wordsubset)
-pool.close()
-pool.join()
 
-print('Elapsed time: ', str(time.time() - start))
-# save
-with open(list_corpus[test],'wb') as f:
-    pickle.dump(corpus, f)
+# In[ ]:
+
+
+df = pd.read_csv(list_csv[3])
+# filter charset exception
+df['review'] = df['review'].apply(lambda x: re.sub(r'[^ a-zA-Z0-9.!?\n]',' ',x))
+# make sentence list
+array = df['review'].tolist()
+array
+
