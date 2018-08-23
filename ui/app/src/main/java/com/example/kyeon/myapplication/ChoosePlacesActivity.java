@@ -71,8 +71,9 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
     private View customMarkerWayPointRoot;
     private TextView tvCustomMarkerWayPoint;
 
-    private static final int markerHeight = 50;
+    private static final int markerHeight = 0;
     private static final int bottomOffset = 36;
+    private MapWrapperLayout wrapperLayout;
     private ViewGroup infoWindow;
     private TextView infoTitle;
     private TextView infoSnippet;
@@ -128,8 +129,21 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+    }
 
-        final MapWrapperLayout wrapperLayout = (MapWrapperLayout) findViewById(R.id.wrapperLayout);
+    /**
+     * First lifecycle of google map
+     *
+     * @param googleMap
+     * @author archslaveCW
+     */
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+        listLocsToDraw.clear();
+        hashMapMarker.clear();
+
+        wrapperLayout = (MapWrapperLayout) findViewById(R.id.wrapperLayout);
         wrapperLayout.init(mMap, MapWrapperLayout.getPixelsFromDp(getContext(), markerHeight + bottomOffset));
 
         infoWindow = (ViewGroup) getLayoutInflater().inflate(R.layout.marker_window, null);
@@ -144,7 +158,6 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             }
         };
         infoButton.setOnTouchListener(infoWindowTouchListener);
-
         mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
             @Override
             public View getInfoWindow(Marker marker) {
@@ -165,19 +178,6 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                 return infoWindow;
             }
         });
-    }
-
-    /**
-     * First lifecycle of google map
-     *
-     * @param googleMap
-     * @author archslaveCW
-     */
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-        listLocsToDraw.clear();
-        hashMapMarker.clear();
 
         /**
          * map click listener
