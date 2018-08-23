@@ -50,11 +50,17 @@ var server = http.createServer(function(req, res) {
 				var y = parseFloat(parsedQuery.y);
 				mongo.connect("mongodb://127.0.0.1:27017",{useNewUrlParser : true} ,function(err,db) {
 					if(err) throw err;
-					var dbo = db.db(DbName);
-					dbo.collection("Places").find({}).project({"_id":false, "placeId":false}).toArray(function(err, result) {
+					var dbo = db.db("test");
+					var resarr = new Array();
+					dbo.collection("test2").find({}).project({"_id":false, "placeId":false}).toArray(function(err, result) {
 					if(err) throw err;
+					result.forEach(function(item, index, array) {
+						if(dis(x, y, parseFloat(array[index]["x"]), parseFloat(array[index]["y"])) < 100) {
+							resarr.push(array[index]);
+						}
+					});
 					res.writeHead(200, {'Content-Type': 'text/plain;charset=utf-8'});
-					res.end(JSON.stringify(result));
+					res.end(JSON.stringify(resarr));
 					db.close();
 					});
 				});
@@ -101,6 +107,22 @@ var server = http.createServer(function(req, res) {
 		res.end("wrong Query");
 	}
 });
+
+function toRad(Value){
+	return Value* (Math.PI / 180)
+}
+
+function dis(lat1, lon1, lat2, lon2) {
+	var R = 6371;
+	var dLat = toRad(lat2 - lat1);
+	var dLon = toRad(lon2 - lon1);;
+	var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+			Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) *
+			Math.sin(dLon / 2) * Math.sin(dLon / 2);
+	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+	var d = R * c;
+	return d;
+}
 
 server.listen(3000, function() {
 	console.log("server running...");
