@@ -48,8 +48,8 @@ elif platform.system() == 'Windows':
 
 # corpus 생성함수
 def mkcorpus(ws):
-	subcorpus = []
-    for word in ws :
+    subcorpus = []
+    for word in ws:
         places = []
         for i in range(len(df_morpheme)):
             if word in df_morpheme['tags'][i]:
@@ -65,7 +65,7 @@ def mkcorpus(ws):
 import multiprocessing as mp
 from multiprocessing import Pool
 
-for csv in range(3):
+for csv in range(1,3):
     df = pd.read_csv(list_csv[csv])
     # filter charset exception
     df['review'] = df['review'].apply(lambda x: re.sub(r'[^ 가-힣0-9.!?\n]',' ',x))
@@ -116,3 +116,4 @@ for csv in range(3):
         #print('['+word+']: ',len(places),' places appended to the corpus')
         #sys.stdout.flush()
     print('Elapsed time: ', str(time.time() - start))
+    print('corpus length:',len(corpus))
