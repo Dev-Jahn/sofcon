@@ -1,17 +1,3 @@
-
-# coding: utf-8
-
-# # # 1안
-# # 영문: 토큰화, 모든 단어를 기본형으로 변환, 유의미 품사 추출
-# # 한글: 형태소 분석, 유의미 형태소 추출
-# # 각 단어별로 장소 임베딩
-# # # 2안
-# # word2vec으로 모든 단어를 임베딩한 후,
-# # k-means clustering으로 군집화하여 군집별로 장소 임베딩
-
-# In[2]:
-
-
 import numpy as np
 import pandas as pd
 import re
@@ -66,7 +52,8 @@ def mkcorpus(ws):
         places = []
         for i in range(len(df_morpheme)):
             if word in df_morpheme['tags'][i]:
-                places.append(df_morpheme['placeId'][i])
+                if not df_morpheme['placeId'][i] in places:
+                    places.append(df_morpheme['placeId'][i])
         corpus.append(places)
         #print('['+word+']: ',len(places),' places appended to the corpus')
         #sys.stdout.flush()
@@ -78,8 +65,8 @@ def mkcorpus(ws):
 import multiprocessing as mp
 from multiprocessing import Pool
 
-for csv in list_csv:
-    df = pd.read_csv(csv)
+for csv in range(1):
+    df = pd.read_csv(list_csv[csv])
     # filter charset exception
     df['review'] = df['review'].apply(lambda x: re.sub(r'[^ 가-힣0-9.!?\n]',' ',x))
     # make sentence list
@@ -108,7 +95,7 @@ for csv in list_csv:
     for l in df_morpheme['tags']:
         wordlist += l
     wordset = orderset(wordlist)
-    print('In ',csv)
+    print('In ',list_csv[csv])
     print('단어전체', len(wordlist))
     print('단어집합', len(wordset))
     # 병렬처리를 위한 데이터 분할 
@@ -125,5 +112,5 @@ for csv in list_csv:
         pool.join()
         print('Elapsed time: ', str(time.time() - start))
         # save
-        with open(list_corpus[list_csv.index(csv)],'wb') as f:
+        with open(list_corpus[csv],'wb') as f:
             pickle.dump(corpus, f)
