@@ -26,8 +26,6 @@ from nltk.stem import WordNetLemmatizer
 import konlpy
 from konlpy.tag import Mecab
 
-logging = True
-
 nltk.data.path.append('F:\\소공전프로젝트\\sofcon\\recomm\\nltk_data')
 list_csv = ['data/kor/attraction_review_tag.csv',
             'data/kor/hotel_review_tag.csv',
@@ -119,9 +117,6 @@ def mkcorpus(ws):
             if word in df_morpheme['tags'][i]:
                 places.append(df_morpheme['placeId'][i])
         corpus.append(places)
-        if logging == True:
-            print('['+word+']: ',len(places),' places appended to the corpus')
-        sys.stdout.flush()
 
 
 # In[ ]:
