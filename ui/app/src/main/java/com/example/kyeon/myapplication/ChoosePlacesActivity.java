@@ -1,6 +1,7 @@
 package com.example.kyeon.myapplication;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -63,13 +64,20 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
     private FusedLocationProviderClient mFusedLocationProviderClient;
     // Locations to draw
     private ArrayList<LatLng> listLocsToDraw = new ArrayList<>();
-    HashMap<Integer,Marker> hashMapMarker = new HashMap<>();
+    HashMap<Integer, Marker> hashMapMarker = new HashMap<>();
     private static int markerCount = 0;
     private View customMarkerOriginDestRoot;
     private TextView tvCustomMarkerOriginDest;
     private View customMarkerWayPointRoot;
     private TextView tvCustomMarkerWayPoint;
 
+    private static final int markerHeight = 50;
+    private static final int bottomOffset = 36;
+    private ViewGroup infoWindow;
+    private TextView infoTitle;
+    private TextView infoSnippet;
+    private ImageButton infoButton;
+    private InfoWindowTouchListener infoWindowTouchListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,8 +94,8 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             }
         });
 
-        Button cancelButton = (Button)findViewById(R.id.cancelButton);
-        Button selectButton = (Button)findViewById(R.id.selectButton);
+        Button cancelButton = (Button) findViewById(R.id.cancelButton);
+        Button selectButton = (Button) findViewById(R.id.selectButton);
 
         // Construct a FusedLocationProviderClient.
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
@@ -120,10 +128,48 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        final MapWrapperLayout wrapperLayout = (MapWrapperLayout) findViewById(R.id.wrapperLayout);
+        wrapperLayout.init(mMap, MapWrapperLayout.getPixelsFromDp(getContext(), markerHeight + bottomOffset));
+
+        infoWindow = (ViewGroup) getLayoutInflater().inflate(R.layout.marker_window, null);
+        this.infoTitle = (TextView) infoWindow.findViewById(R.id.tvTitle);
+        this.infoSnippet = (TextView) infoWindow.findViewById(R.id.tvSnippet);
+        this.infoButton = (ImageButton) infoWindow.findViewById(R.id.ibDelete);
+
+        infoWindowTouchListener = new InfoWindowTouchListener(infoButton) {
+            @Override
+            protected void onClickConfirmed(View v, Marker marker) {
+                Toast.makeText(getContext(), "테스트 결과 이상 없음, 잘 눌림", Toast.LENGTH_SHORT).show();
+            }
+        };
+        infoButton.setOnTouchListener(infoWindowTouchListener);
+
+        mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+            @Override
+            public View getInfoWindow(Marker marker) {
+                return null;
+            }
+
+            @Override
+            @SuppressLint("ClickableViewAccessibility")
+            public View getInfoContents(Marker marker) {
+                // Setting up the infoWindow with current's marker info
+                infoTitle.setText(marker.getTitle());
+                infoSnippet.setText(marker.getSnippet());
+                infoWindowTouchListener.setMarker(marker);
+
+                // We must call this to set the current marker and infoWindow references
+                // to the MapWrapperLayout
+                wrapperLayout.setMarkerWithInfoWindow(marker, infoWindow);
+                return infoWindow;
+            }
+        });
     }
 
     /**
      * First lifecycle of google map
+     *
      * @param googleMap
      * @author archslaveCW
      */
@@ -148,15 +194,15 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                  * Set marker's color - Deprecated
 
 
-                if(listLocsToDraw.size() == 1)
-                    // origin marker is green
-                    options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-                else if(listLocsToDraw.size() == 2)
-                    // way point markers are red
-                    options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-                else
-                    // dest marker is blue
-                    options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+                 if(listLocsToDraw.size() == 1)
+                 // origin marker is green
+                 options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+                 else if(listLocsToDraw.size() == 2)
+                 // way point markers are red
+                 options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                 else
+                 // dest marker is blue
+                 options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
 
                  */
 
@@ -165,9 +211,17 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
 
                 Marker marker = mMap.addMarker(options);
                 hashMapMarker.put(markerCount, marker);
-                marker.setTag(markerCount);
 
-                if(listLocsToDraw.size() >= 2)
+                InfoWindowData infoWindowData = new InfoWindowData();
+                infoWindowData.setTitle(marker.getTitle());
+                infoWindowData.setSnippet(marker.getSnippet());
+                infoWindowData.setOrder(markerCount);
+                // it will be replaced to real score
+                infoWindowData.setScore(new Integer(markerCount).toString());
+
+                marker.setTag(infoWindowData);
+
+                if (listLocsToDraw.size() >= 2)
                     drawRoute();
             }
         });
@@ -177,18 +231,21 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
  *      1. How can i use popup window smoothly?
  **/
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-           @Override
-           public boolean onMarkerClick(final Marker marker) {
-               LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(LAYOUT_INFLATER_SERVICE);
-               // PopupMenu popupMenu = new PopupMenu(getApplicationContext(),
-               marker.setTitle("TITLE of MARKER");
-               marker.setSnippet("EXAMPLE SNIPPET");
-               // marker.showInfoWindow();
-               /**
-               removeMarker(mMap, marker);
-                */
-               return false;
-           }
+            @Override
+            public boolean onMarkerClick(final Marker marker) {
+                // LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(LAYOUT_INFLATER_SERVICE);
+                // PopupMenu popupMenu = new PopupMenu(getApplicationContext(),
+                marker.setTitle("TITLE of MARKER");
+                marker.setSnippet("EXAMPLE SNIPPET");
+
+                if (marker.isInfoWindowShown())
+                    marker.showInfoWindow();
+
+                /**
+                 removeMarker(mMap, marker);
+                 */
+                return false;
+            }
         });
 
         /**
@@ -228,13 +285,13 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
      */
     @Deprecated
     private void drawRoute() {
-        if(listLocsToDraw.size() >= 2) {
-            LatLng origin = (LatLng) listLocsToDraw.get(listLocsToDraw.size()-2);
-            LatLng dest = (LatLng) listLocsToDraw.get(listLocsToDraw.size()-1);
+        if (listLocsToDraw.size() >= 2) {
+            LatLng origin = (LatLng) listLocsToDraw.get(listLocsToDraw.size() - 2);
+            LatLng dest = (LatLng) listLocsToDraw.get(listLocsToDraw.size() - 1);
 
-            if(markerCount > 2) {
-                Marker wayPointMarker = hashMapMarker.get(markerCount-1);
-                tvCustomMarkerWayPoint.setText(new Integer(markerCount-1).toString());
+            if (markerCount > 2) {
+                Marker wayPointMarker = hashMapMarker.get(markerCount - 1);
+                tvCustomMarkerWayPoint.setText(new Integer(markerCount - 1).toString());
                 wayPointMarker.setIcon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getContext(), customMarkerWayPointRoot)));
             }
             /**
@@ -254,12 +311,12 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
      */
     @Deprecated
     private void redrawRoute() {
-        if(listLocsToDraw.size() >= 2) {
+        if (listLocsToDraw.size() >= 2) {
             LatLng origin;
             LatLng dest;
-            for(int i = 0; i < listLocsToDraw.size() - 1; ++i) {
-                origin = (LatLng)listLocsToDraw.get(i);
-                dest = (LatLng)listLocsToDraw.get(i+1);
+            for (int i = 0; i < listLocsToDraw.size() - 1; ++i) {
+                origin = (LatLng) listLocsToDraw.get(i);
+                dest = (LatLng) listLocsToDraw.get(i + 1);
                 /**
                  * requests draw a line for origin & dest
                  */
@@ -273,37 +330,44 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
     private void removeMarker(GoogleMap mMap, Marker marker) {
         listLocsToDraw.clear();
         int newMarkerCount = 0;
-        int removeIndex = (int)(marker.getTag());
+        InfoWindowData infoWindowData = (InfoWindowData) marker.getTag();
+        int removeIndex = infoWindowData.getOrder();
         marker.remove();
         hashMapMarker.remove(removeIndex);
-        for(int i = 0; i <= markerCount; ++i) {
-            if(hashMapMarker.containsKey(i)) {
+        for (int i = 0; i <= markerCount; ++i) {
+            if (hashMapMarker.containsKey(i)) {
                 Marker currentMarker = hashMapMarker.remove(i);
                 LatLng currentPosition = currentMarker.getPosition();
                 listLocsToDraw.add(currentPosition);
                 newMarkerCount++;
-            }
-            else
+            } else
                 continue;
         }
         mMap.clear();
         hashMapMarker.clear();
         markerCount = newMarkerCount;
-        for(int i = 0; i < listLocsToDraw.size(); ++i) {
+        for (int i = 0; i < listLocsToDraw.size(); ++i) {
             // create a marker for starting location
             MarkerOptions options = new MarkerOptions();
             options.position(listLocsToDraw.get(i));
-            if(i == 0 || i == listLocsToDraw.size() - 1) {
+            if (i == 0 || i == listLocsToDraw.size() - 1) {
                 tvCustomMarkerOriginDest.setText(new Integer(i + 1).toString());
                 options.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getContext(), customMarkerOriginDestRoot)));
-            }
-            else {
+            } else {
                 tvCustomMarkerWayPoint.setText(new Integer(i + 1).toString());
                 options.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getContext(), customMarkerWayPointRoot)));
             }
             Marker currentMarker = mMap.addMarker(options);
-            hashMapMarker.put(i+1, currentMarker);
-            currentMarker.setTag(i+1);
+            hashMapMarker.put(i + 1, currentMarker);
+
+            InfoWindowData info = new InfoWindowData();
+            info.setTitle(currentMarker.getTitle());
+            info.setSnippet(currentMarker.getSnippet());
+            info.setOrder(i + 1);
+            // it will be replaced to real score
+            info.setScore(new Integer(i + 1).toString());
+
+            currentMarker.setTag(info);
         }
         redrawRoute();
     }
@@ -378,7 +442,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                 PermissionCodes.getPermission(getContext(), getActivity(),
                         Manifest.permission.ACCESS_COARSE_LOCATION, PermissionCodes.REQUEST_CODE_COARSE_LOCATION);
             }
-        } catch (SecurityException e)  {
+        } catch (SecurityException e) {
             Log.e("Error-Exception", e.getMessage());
         }
     }
@@ -400,7 +464,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                         if (task.isSuccessful()) {
                             // Set the map's camera position to the current location of the device.
                             mLastKnownLocation = task.getResult();
-                            if(mLastKnownLocation == null) {
+                            if (mLastKnownLocation == null) {
                                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
                                         MapUtility.DEFAULT_LOCATION, MapUtility.ZOOM_LEVEL));
                             } else {
@@ -419,13 +483,18 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                     }
                 });
             }
-        } catch (SecurityException e)  {
+        } catch (SecurityException e) {
             Log.e("Exception: %s", e.getMessage());
         }
     }
 
-    private Context getContext() { return this; }
-    private Activity getActivity() { return this; }
+    private Context getContext() {
+        return this;
+    }
+
+    private Activity getActivity() {
+        return this;
+    }
 
     /**
      * Classes & methods for drawing a route
@@ -454,10 +523,10 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         }
     }
 
-    private class ParserTask extends AsyncTask<String, Integer, List<List<HashMap<String,String>>>> {
+    private class ParserTask extends AsyncTask<String, Integer, List<List<HashMap<String, String>>>> {
 
         @Override
-        protected List<List<HashMap<String,String>>> doInBackground(String... jsonData) {
+        protected List<List<HashMap<String, String>>> doInBackground(String... jsonData) {
             JSONObject jsonObject;
             List<List<HashMap<String, String>>> routes = null;
 
@@ -465,7 +534,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                 jsonObject = new JSONObject(jsonData[0]);
                 DirectionsJSONParser parser = new DirectionsJSONParser();
                 routes = parser.parse(jsonObject);
-            } catch(Exception e) {
+            } catch (Exception e) {
                 Log.d("DEBUG-Error", e.toString());
             }
             return routes;
@@ -478,13 +547,13 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
 
             Log.d(".java", "result.size = " + result.size());
 
-            for(int i = 0; i < result.size(); ++i) {
+            for (int i = 0; i < result.size(); ++i) {
                 points = new ArrayList();
                 lineOptions = new PolylineOptions();
 
                 List<HashMap<String, String>> path = result.get(i);
 
-                for(int j = 0; j < path.size(); ++j) {
+                for (int j = 0; j < path.size(); ++j) {
                     HashMap<String, String> point = path.get(j);
 
                     double lat = Double.parseDouble(point.get("lat"));
@@ -505,10 +574,9 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             /**
              * This is the case of cannot drawing a route
              */
-            if(result.size() == 0) {
+            if (result.size() == 0) {
                 Toast.makeText(getContext(), "Invalid travel routes", Toast.LENGTH_LONG).show();
-            }
-            else {
+            } else {
                 mMap.addPolyline(lineOptions);
             }
         }
@@ -516,6 +584,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
 
     /**
      * This method requests a code for draw routes between origin & dest
+     *
      * @param origin
      * @param dest
      * @return url

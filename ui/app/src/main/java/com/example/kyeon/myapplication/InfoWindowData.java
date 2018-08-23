@@ -3,6 +3,7 @@ package com.example.kyeon.myapplication;
 public class InfoWindowData {
     private String title;
     private String snippet;
+    // deprecated
     private String score;
     private int order;
 
@@ -22,10 +23,12 @@ public class InfoWindowData {
         this.snippet = snippet;
     }
 
+    @Deprecated
     public String getScore() {
         return score;
     }
 
+    @Deprecated
     public void setScore(String score) {
         this.score = score;
     }

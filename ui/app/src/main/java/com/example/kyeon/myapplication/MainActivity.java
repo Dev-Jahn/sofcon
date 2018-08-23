@@ -1,21 +1,17 @@
 package com.example.kyeon.myapplication;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.FragmentStatePagerAdapter;
-import android.drm.DrmStore;
-import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
+import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;;
-import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -23,25 +19,18 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.os.Bundle;
-import android.view.Menu;
 import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 
 import java.util.Random;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import android.widget.Adapter;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.os.Bundle;
-import android.view.Menu;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 
-import java.util.List;
+;
 
 public class MainActivity extends AppCompatActivity{
 

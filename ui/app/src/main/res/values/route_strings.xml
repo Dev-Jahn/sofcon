@@ -7,4 +7,9 @@
     <string name="cameraResetMessage">처음 위치로 이동합니다.</string>
     <string name="locUpdateErrorMessage">현재 위치를 받아올 수 없습니다.</string>
     <string name="locUpdateMessage">현재 위치로 이동이 성공하였습니다.</string>
+
+    <string name="logStringOfCW">Error-Debug</string>
+    <string name="default_title">여행장소 XX</string>
+    <string name="default_snippet">분위기가 좋은 곳</string>
+    <string name="default_score">평점</string>
 </resources>

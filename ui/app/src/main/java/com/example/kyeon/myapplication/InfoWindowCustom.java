@@ -3,7 +3,6 @@ package com.example.kyeon.myapplication;
 import android.app.Activity;
 import android.content.Context;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.GoogleMap;
@@ -28,25 +27,15 @@ public class InfoWindowCustom implements GoogleMap.InfoWindowAdapter {
 
         TextView tvTitle = (TextView)view.findViewById(R.id.tvTitle);
         TextView tvSnippet = (TextView)view.findViewById(R.id.tvSnippet);
-        TextView tvScore = (TextView)view.findViewById(R.id.tvScore);
-        ImageButton ibDelete = (ImageButton)view.findViewById(R.id.deleteImageButton);
+        //TextView tvScore = (TextView)view.findViewById(R.id.tvScore);
+        //ImageButton ibDelete = (ImageButton)view.findViewById(R.id.ibDelete);
 
         tvTitle.setText(marker.getTitle());
         tvSnippet.setText(marker.getSnippet());
 
-        InfoWindowData infoWindowData = (InfoWindowData)marker.getTag();
-        tvScore.setText(infoWindowData.getScore());
+        //InfoWindowData infoWindowData = (InfoWindowData)marker.getTag();
 
-        ibDelete.setOnClickListener(new ImageButton.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                /**
-                 * delete marker . . . How?
-                 * reference :
-                 * http://www.zoftino.com/google-maps-android-custom-info-window-example
-                 */
-            }
-        });
+        //tvScore.setText(infoWindowData.getScore());
 
         return view;
     }
