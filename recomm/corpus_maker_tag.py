@@ -48,19 +48,15 @@ elif platform.system() == 'Windows':
 
 # corpus 생성함수
 def mkcorpus(ws):
-    corpus = []
+	subcorpus = []
     for word in ws :
         places = []
         for i in range(len(df_morpheme)):
             if word in df_morpheme['tags'][i]:
                 if not df_morpheme['placeId'][i] in places:
                     places.append(df_morpheme['placeId'][i])
-        corpus.append(places)
-# save
-    with open(list_corpus[csv],'wb') as f:
-        pickle.dump(corpus, f)
-        #print('['+word+']: ',len(places),' places appended to the corpus')
-        #sys.stdout.flush()
+        subcorpus.append(places)
+    return subcorpus
 
 
 # In[5]:
@@ -105,12 +101,18 @@ for csv in range(3):
     # 병렬처리를 위한 데이터 분할 
     core_count = mp.cpu_count()
     wordsubset = np.array_split(wordset, core_count)
+    corpus = []
     # 멀티프로세스 연산
     if __name__ == '__main__':
         start = time.time()
-
         pool = Pool(core_count)
-        pool.map(mkcorpus, wordsubset)
+        for result in pool.map(mkcorpus, wordsubset):
+        	corpus = corpus+result
         pool.close()
         pool.join()
-        print('Elapsed time: ', str(time.time() - start))
+# save
+    with open(list_corpus[csv],'wb') as f:
+        pickle.dump(corpus, f)
+        #print('['+word+']: ',len(places),' places appended to the corpus')
+        #sys.stdout.flush()
+    print('Elapsed time: ', str(time.time() - start))
