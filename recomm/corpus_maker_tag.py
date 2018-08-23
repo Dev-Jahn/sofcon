@@ -9,13 +9,15 @@
 # # word2vec으로 모든 단어를 임베딩한 후,
 # # k-means clustering으로 군집화하여 군집별로 장소 임베딩
 
-# In[106]:
+# In[3]:
 
 
 import numpy as np
 import pandas as pd
 import re
 import os
+import platform
+import sys
 import time
 import pickle
 import nltk
@@ -24,8 +26,9 @@ from nltk.stem import WordNetLemmatizer
 import konlpy
 from konlpy.tag import Mecab
 
-nltk.data.path.append('F:\\소공전프로젝트\\sofcon\\recomm\\nltk_data')
+logging = True
 
+nltk.data.path.append('F:\\소공전프로젝트\\sofcon\\recomm\\nltk_data')
 list_csv = ['data/kor/attraction_review_tag.csv',
             'data/kor/hotel_review_tag.csv',
             'data/kor/restaurant_review_tag.csv',
@@ -39,11 +42,6 @@ try:
     os.stat('corpus')
 except:
     os.mkdir('corpus')
-
-
-# In[79]:
-
-
 def orderset(seq):
     seen = set()
     seen_add = seen.add
@@ -52,23 +50,34 @@ def orderset(seq):
 
 # # 한글
 
-# In[40]:
+# In[4]:
 
 
-df = pd.read_csv(list_csv[0])
+if platform.system() == 'Linux':
+    mecab = Mecab()
+elif platform.system() == 'Windows':
+    mecab = Mecab(dicpath="C:\\mecab\\mecab-ko-dic")
+
+
+# In[5]:
+
+
+# attraction, hotel, or restaurant
+test = 0
+
+
+# In[6]:
+
+
+df = pd.read_csv(list_csv[test])
 # filter charset exception
 df['review'] = df['review'].apply(lambda x: re.sub(r'[^ 가-힣0-9.!?\n]',' ',x))
 # make sentence list
 array = df['review'].tolist()
 # 한글형태소 분리
-mecab = Mecab()
 list_pos = [mecab.pos(sentence) for sentence in array]
 # 형태소 리스트화
 morpheme = [mecab.morphs(sentence) for sentence in array]
-
-
-# In[57]:
-
 
 # 의미를 가지는 형태소만 추출
 pattern = re.compile('MM|NNG|VA[+].*|VV[+].*|XR')
@@ -85,10 +94,6 @@ for i in range(len(list_pos)):
 df_morpheme['tags'] = taglist
 df_morpheme['placeId'] = df['placeId'].astype('int64')
 
-
-# In[94]:
-
-
 wordlist = []
 for l in df_morpheme['tags']:
     wordlist += l
@@ -97,16 +102,40 @@ print('전체', len(wordlist))
 print('집합', len(wordset))
 
 
-# In[104]:
+# In[12]:
+
+
+# 병렬처리를 위한 데이터 분할 
+import multiprocessing as mp
+from multiprocessing import Pool
+core_count = mp.cpu_count()
+wordsubset = np.array_split(wordset, core_count)
+
+# corpus 생성함수
+def mkcorpus(ws):
+    for word in ws :
+        places = []
+        for i in range(len(df_morpheme)):
+            if word in df_morpheme['tags'][i]:
+                places.append(df_morpheme['placeId'][i])
+        corpus.append(places)
+        if logging == True:
+            print('['+word+']: ',len(places),' places appended to the corpus')
+        sys.stdout.flush()
+
+
+# In[ ]:
 
 
 start = time.time()
+
 corpus = []
-for word in wordset:
-    places = []
-    for i in range(len(df_morpheme)):
-        if word in df_morpheme['tags'][i]:
-           places.append(df_morpheme['placeId'][i])
-    corpus.append(places)
-print(corpus[1])
+pool = Pool(core_count)
+pool.map(mkcorpus, wordsubset)
+pool.close()
+pool.join()
+
 print('Elapsed time: ', str(time.time() - start))
+# save
+with open(list_corpus[test],'wb') as f:
+    pickle.dump(corpus, f)
