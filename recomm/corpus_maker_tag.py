@@ -108,7 +108,7 @@ for csv in list_csv:
     for l in df_morpheme['tags']:
         wordlist += l
     wordset = orderset(wordlist)
-    print('In ',list_csv[csv])
+    print('In ',csv)
     print('단어전체', len(wordlist))
     print('단어집합', len(wordset))
     # 병렬처리를 위한 데이터 분할 
@@ -127,39 +127,3 @@ for csv in list_csv:
         # save
         with open(list_corpus[list_csv.index(csv)],'wb') as f:
             pickle.dump(corpus, f)
-
-
-# # 영문
-
-# In[ ]:
-
-
-# pos태깅은 문장이 문맥을 구성해야 정확한 결과가 나옴
-s = 'the quick brown fox jumps over the lazy dog'
-token = nltk.word_tokenize(s)
-
-
-# In[ ]:
-
-
-st = PorterStemmer()
-lm = WordNetLemmatizer()
-l = ['eat', 'ate', 'eating', 'eaten']
-l2 = [st.stem(w) for w in l]
-print(l2)
-l3 = [lm.lemmatize(w, pos='v') for w in l2]
-print(l3)
-l4 = ['i', 'ate', 'a', 'grass','eating', 'chicken']
-nltk.pos_tag(l4)
-
-
-# In[ ]:
-
-
-df = pd.read_csv(list_csv[3])
-# filter charset exception
-df['review'] = df['review'].apply(lambda x: re.sub(r'[^ a-zA-Z0-9.!?\n]',' ',x))
-# make sentence list
-array = df['review'].tolist()
-array
-
