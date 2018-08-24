@@ -1,15 +1,18 @@
 package com.example.kyeon.myapplication;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,7 +43,8 @@ public class RecommendItemAdapter extends RecyclerView.Adapter<RecommendItemAdap
     public void onBindViewHolder(@NonNull RecommendItemAdapter.ViewHolder holder, int position) {
         final Rec_Item rec_item = items.get(position);
         Drawable drawable = ContextCompat.getDrawable(context, rec_item.getImage());
-        holder.image.setBackground(drawable);
+        holder.image.setImageDrawable(drawable);
+        holder.image.setColorFilter(Color.parseColor(rec_item.getColor()));
         holder.title.setText(rec_item.getTitle());
         holder.content.setText(rec_item.getContent());
 

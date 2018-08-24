@@ -4,6 +4,7 @@ public class Rec_Item {
     int image;
     String title;
     String content;
+    String color;
 
     public int getImage() {
         return this.image;
@@ -19,10 +20,13 @@ public class Rec_Item {
         return this.content;
     }
 
-    Rec_Item(int image, String title, String content)
+    public String getColor() { return  this.color;}
+
+    Rec_Item(int image, String title, String content, String color)
     {
         this.image = image;
         this.title = title;
         this.content = content;
+        this.color = color;
     }
 }
