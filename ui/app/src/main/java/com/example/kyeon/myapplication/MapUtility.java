@@ -9,14 +9,29 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
 
 public class MapUtility {
 
@@ -35,7 +50,7 @@ public class MapUtility {
     protected static final LatLng DEFAULT_LOCATION = new LatLng(37.495999, 126.957050);
 
     @Deprecated
-    public static Location getCurrentLocation(final Context context, final Activity activity) {
+    protected static Location getCurrentLocation(final Context context, final Activity activity) {
 
         Criteria criteria = new Criteria();
         // Accuracy of Current location
@@ -103,7 +118,7 @@ public class MapUtility {
         return null;
     }
     @Deprecated
-    public static void resetCameraLocation(GoogleMap mMap, Context context, Activity activity) {
+    protected static void resetCameraLocation(GoogleMap mMap, Context context, Activity activity) {
 
         Resources resources = context.getResources();
 
@@ -134,6 +149,110 @@ public class MapUtility {
 
             mMap.moveCamera(CameraUpdateFactory.newLatLng(curLatLng));
             mMap.animateCamera(CameraUpdateFactory.zoomTo(ZOOM_LEVEL));
+        }
+    }
+
+    /**
+     * Below codes will be coded soon...
+     * ASAP...
+     */
+
+    protected static void saveMapInstance(Context context, GoogleMap mMap, ArrayList<Marker> markers) {
+        /**
+         * It should be called in onPause
+         */
+        try {
+            // Modes: MODE_PRIVATE, MODE_WORLD_READABLE, MODE_WORLD_WRITABLE
+            FileOutputStream fos = context.openFileOutput("latlngpoints.txt", Context.MODE_PRIVATE);
+            DataOutputStream dos = new DataOutputStream(fos);
+            dos.writeInt(markers.size()); // Save line count
+            /**
+            for (LatLng point : markers) {
+                dos.writeUTF(point.latitude + "," + point.longitude);
+                Log.v("write", point.latitude + "," + point.longitude);
+            }
+             */
+            dos.flush(); // Flush stream ...
+            dos.close(); // ... and close.
+        } catch (IOException exc) {
+            exc.printStackTrace();
+        }
+    }
+
+    protected static void loadMapInstance(Context context, GoogleMap mMap) {
+        /**
+         * It should be called in onResume
+         */
+        try {
+            FileInputStream input = context.openFileInput("latlngpoints.txt");
+            DataInputStream din = new DataInputStream(input);
+            int sz = din.readInt(); // Read line count
+            for (int i = 0; i < sz; i++) {
+                String str = din.readUTF();
+                Log.v("read", str);
+                String[] stringArray = str.split(",");
+                double latitude = Double.parseDouble(stringArray[0]);
+                double longitude = Double.parseDouble(stringArray[1]);
+                //listOfPoints.add(new LatLng(latitude, longitude));
+            }
+            din.close();
+            //loadMarkers(listOfPoints);
+        } catch (IOException exc) {
+            exc.printStackTrace();
+        }
+    }
+
+    protected static class FindPlacesTask extends AsyncTask<String, Void, String> {
+        String result;
+        String url, lat, lon;
+        float len;
+
+        public FindPlacesTask(String lat, String lon, float len) {
+            this.lon = lon;
+            this.lat = lat;
+            this.len = len;
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+                // long start = System.currentTimeMillis();
+                url = "http://35.189.138.177:8080/navi/findPlace?lat=" + lat + "&lon=" + lon + "&len=" + len;
+                URL obj = new URL(url);
+                HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
+
+                conn.setReadTimeout(10000);
+                conn.setConnectTimeout(15000);
+                conn.setRequestMethod("GET");
+                conn.setDoInput(true);
+
+                int retCode = conn.getResponseCode();
+
+                InputStream is = conn.getInputStream();
+                BufferedReader br = new BufferedReader(new InputStreamReader(is));
+                String line;
+                StringBuilder response = new StringBuilder();
+                while ((line = br.readLine()) != null) {
+                    response.append(line);
+                    response.append('\r');
+                }
+                br.close();
+
+                String result = response.toString();
+                long end = System.currentTimeMillis();
+                // Log.d(String.valueOf((end - start) / 1000.0), "Mylog");
+                return result;
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return result;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
         }
     }
 }

@@ -82,11 +82,12 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
     private ImageButton infoButton;
     private InfoWindowTouchListener infoWindowTouchListener;
 
+    private String adjacencyPlaces;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_places);
-
         ImageButton closeImgButton = (ImageButton) findViewById(R.id.closeButton);
 
         closeImgButton.setOnClickListener(new View.OnClickListener() {
@@ -106,10 +107,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         cancelButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mMap.clear();
-                markerCount = 0;
-                listLocsToDraw.clear();
-                hashMapMarker.clear();
+                resetMap();
             }
         });
 
@@ -208,39 +206,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
-                listLocsToDraw.add(latLng);
-                // create a marker for starting location
-                MarkerOptions options = new MarkerOptions();
-                options.position(latLng);
-
-                /**
-                 * Set marker's color - Deprecated
-                 if(listLocsToDraw.size() == 1)
-                 // origin marker is green
-                 options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-                 else if(listLocsToDraw.size() == 2)
-                 // way point markers are red
-                 options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-                 else
-                 // dest marker is blue
-                 options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
-                 */
-
-                tvCustomMarkerOriginDest.setText(new Integer(++markerCount).toString());
-                options.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getContext(), customMarkerOriginDestRoot)));
-
-                Marker marker = mMap.addMarker(options);
-                hashMapMarker.put(markerCount, marker);
-
-                InfoWindowData infoWindowData = new InfoWindowData();
-                infoWindowData.setTitle(marker.getTitle());
-                infoWindowData.setSnippet(marker.getSnippet());
-                infoWindowData.setOrder(markerCount);
-                // it will be replaced to real score
-                infoWindowData.setScore(new Integer(markerCount).toString());
-
-                marker.setTag(infoWindowData);
-
+                addMarker(latLng);
                 if (listLocsToDraw.size() >= 2)
                     drawRoute();
             }
@@ -278,6 +244,12 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                  * to do list
                  * - request adjacency places to server
                  */
+                String currentLat = new Double(mMap.getCameraPosition().target.latitude).toString();
+                String currentLng = new Double(mMap.getCameraPosition().target.longitude).toString();
+                float len = 2.5f;
+                MapUtility.FindPlacesTask findPlacesTask = new MapUtility.FindPlacesTask(currentLat, currentLng, len);
+                findPlacesTask.execute(adjacencyPlaces);
+                Log.d("DEBUG-TEST", adjacencyPlaces);
             }
         });
 
@@ -345,6 +317,35 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                 downloadTask.execute(url);
             }
         }
+    }
+
+    private void resetMap() {
+        mMap.clear();
+        markerCount = 0;
+        listLocsToDraw.clear();
+        hashMapMarker.clear();
+    }
+
+    private void addMarker(LatLng latLng) {
+        listLocsToDraw.add(latLng);
+        // create a marker for starting location
+        MarkerOptions options = new MarkerOptions();
+        options.position(latLng);
+
+        tvCustomMarkerOriginDest.setText(new Integer(++markerCount).toString());
+        options.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getContext(), customMarkerOriginDestRoot)));
+
+        Marker marker = mMap.addMarker(options);
+        hashMapMarker.put(markerCount, marker);
+
+        InfoWindowData infoWindowData = new InfoWindowData();
+        infoWindowData.setTitle(marker.getTitle());
+        infoWindowData.setSnippet(marker.getSnippet());
+        infoWindowData.setOrder(markerCount);
+        // it will be replaced to real score
+        infoWindowData.setScore(new Integer(markerCount).toString());
+
+        marker.setTag(infoWindowData);
     }
 
     private void removeMarker(GoogleMap mMap, Marker marker) {
@@ -664,5 +665,4 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         }
         return data;
     }
-
 }
