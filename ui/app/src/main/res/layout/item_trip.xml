@@ -10,8 +10,6 @@
         android:id="@+id/cardview"
         app:cardCornerRadius="5dp"
         app:cardElevation="4dp"
-        app:strokeWidth="2dp"
-        app:strokeColor="@color/colorAccent"
         android:background="@drawable/selector"
         android:layout_margin="10dp"
         xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -23,6 +21,7 @@
             android:orientation="vertical">
 
             <android.support.constraint.ConstraintLayout
+                android:background="@color/colorAccent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -42,7 +41,6 @@
                     android:id="@+id/imageButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/Base.Widget.AppCompat.Button.Colored"
                     app:layout_constraintRight_toRightOf="parent"
                     app:srcCompat="@android:drawable/ic_menu_share"
                     />

@@ -70,7 +70,7 @@ public class TripPlanActivity extends AppCompatActivity {
         Toolbar tb = findViewById(R.id.toolbar);
         setSupportActionBar(tb);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("");
+        actionBar.setTitle("여행 계획");
 
 
 
