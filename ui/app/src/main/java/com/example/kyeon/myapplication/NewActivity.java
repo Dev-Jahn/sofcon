@@ -3,7 +3,6 @@ package com.example.kyeon.myapplication;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -20,6 +19,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -31,6 +31,8 @@ public class NewActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     LinearLayout navigation_new_background;
     Intent intent;
+
+    private Button btnPlaceName;
 
     private ListView navigationView;
     private String[] navItems = {"메인 메뉴", "새 여행", "내 여행", "일지","기타"};
@@ -68,6 +70,28 @@ public class NewActivity extends AppCompatActivity {
         Spinner spinner = (Spinner) findViewById(R.id.countPerson);
         final ArrayAdapter sAdapter = ArrayAdapter.createFromResource(this, R.array.question, android.R.layout.simple_spinner_dropdown_item);
         Button departButton, arrivingButton;
+
+        /**
+         * @arthor archslaveCW
+         *
+         * "select place button"(style:text button)'s event
+         */
+        btnPlaceName = (Button)findViewById(R.id.btnPlaceName);
+        btnPlaceName.setOnClickListener(new Button.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               /**
+                * - TO DO LIST -
+                * 1. Set intent to get a place
+                * 2. How about using place picker? --> well... it's not good.
+                * 3. I should show some information about places using what?
+                *    --> 1. Google place picker
+                *    --> 2. Request to server.
+                */
+               // Intent intent = new Intent();
+               Toast.makeText(getApplicationContext(), "기능 곧 추가할 예정", Toast.LENGTH_SHORT).show();
+           }
+        });
 
         departButton = (Button)findViewById(R.id.departingDate);
         arrivingButton = (Button)findViewById(R.id.arrivingDate);

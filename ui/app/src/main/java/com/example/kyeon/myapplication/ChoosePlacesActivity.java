@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -12,6 +13,7 @@ import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -153,8 +155,29 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
 
         infoWindowTouchListener = new InfoWindowTouchListener(infoButton) {
             @Override
-            protected void onClickConfirmed(View v, Marker marker) {
-                Toast.makeText(getContext(), "테스트 결과 이상 없음, 잘 눌림", Toast.LENGTH_SHORT).show();
+            protected void onClickConfirmed(View v, final Marker marker) {
+                //Toast.makeText(getContext(), "테스트 결과 이상 없음, 잘 눌림", Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+                alertDialog.setTitle(getResources().getString(R.string.remove_marker_title))
+                        .setMessage(getResources().getString(R.string.remove_marker_description))
+                        .setCancelable(true)
+                        .setPositiveButton(getResources().getString(R.string.remove_marker_ok),
+                                new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                removeMarker(mMap, marker);
+                            }
+                        })
+                        .setNegativeButton(getResources().getString(R.string.remove_marker_no),
+                                new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.cancel();
+                            }
+                        });
+
+                AlertDialog dialog = alertDialog.create();
+                dialog.show();
             }
         };
         infoButton.setOnTouchListener(infoWindowTouchListener);
@@ -192,8 +215,6 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
 
                 /**
                  * Set marker's color - Deprecated
-
-
                  if(listLocsToDraw.size() == 1)
                  // origin marker is green
                  options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
@@ -203,7 +224,6 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                  else
                  // dest marker is blue
                  options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
-
                  */
 
                 tvCustomMarkerOriginDest.setText(new Integer(++markerCount).toString());

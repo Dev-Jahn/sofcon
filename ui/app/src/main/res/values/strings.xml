@@ -26,6 +26,7 @@
     <string name="end_date">종료 일자</string>
     <string name="title">제목</string>
     <string name="schedule">일정</string>
+    <string name="select_place">장소 정하기</string>
 
     <string name="remove_marker">여행 경로에서 제외</string>
 
