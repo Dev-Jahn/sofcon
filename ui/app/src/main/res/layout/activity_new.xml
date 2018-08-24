@@ -11,6 +11,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/new_activity_background"
         android:orientation="vertical">
 
         <android.support.v7.widget.Toolbar
@@ -21,12 +22,16 @@
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
+
         <TextView
+            android:id="@+id/travel_setup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="10dp"
             android:textStyle="bold"
+            android:background="#ffffff"
+            android:textColor="#000000"
             android:gravity="center"
             android:text="여행 설정"/>
 
@@ -39,6 +44,7 @@
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#ffffff"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -52,6 +58,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:textColor="#000000"
                     android:gravity="center"
                     android:text="@string/person" />
 
@@ -60,6 +67,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="#ffffff"
                 android:layout_weight="4">
 
                 <ImageView
@@ -73,6 +81,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="#ffffff"
                 android:layout_weight="1">
 
                 <Spinner
@@ -91,6 +100,7 @@
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#ffffff"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -103,6 +113,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|center_horizontal"
+                    android:textColor="#000000"
                     android:text="      일정"
                     android:layout_weight="100"
                     android:gravity="center"/>
@@ -152,12 +163,14 @@
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#ffffff"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="#000000"
                 android:text="여행장소"
                 android:gravity="center"/>
 
@@ -176,6 +189,7 @@
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#ffffff"
             android:orientation="horizontal">
 
 
@@ -185,6 +199,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
+                android:textColor="#000000"
                 android:text="        제목"
                 android:gravity="center"/>
 
@@ -193,7 +208,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="5"/>
-
 
         </LinearLayout>
 
