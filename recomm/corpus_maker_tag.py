@@ -88,6 +88,8 @@ testnum = 3
 # In[5]:
 
 
+start = time.time()
+
 df = pd.read_csv(list_csv[testnum])
 # filter charset exception
 df['review'] = df['review'].apply(lambda x: re.sub(r'[^ a-zA-Z0-9.!?\'\n]',' ',x))
@@ -97,9 +99,12 @@ tokens = [nltk.word_tokenize(sentence) for sentence in array]
 pos_tagged = [nltk.pos_tag(sentence) for sentence in tokens]
 tagpat = r'(JJ[RS]*)|(NN[P]*[S]*)|(RB[RS]*)|(VB[DGNPZ]*)'
 
+print('Elapsed time(tokenize): ', str(time.time() - start), ' secs')
+
 
 # In[6]:
 
+start = time.time()
 
 lengths = pd.DataFrame([len(sent) for sent in pos_tagged]).sum()
 print('before: ',lengths[0])
@@ -110,6 +115,7 @@ for sentence in pos_tagged:
 lengths = pd.DataFrame([len(sent) for sent in sub_pos_tagged]).sum()
 print('after: ',lengths[0])
 
+print('Elapsed time(filter): ', str(time.time() - start), ' secs')
 
 # In[17]:
 
@@ -117,7 +123,6 @@ print('after: ',lengths[0])
 df_morpheme = pd.DataFrame(columns = ['placeId', 'tags'], dtype='int64')
 df_morpheme['placeId'] = df['placeId'].astype('int64')
 df_morpheme['tags'] = sub_pos_tagged
-
 
 # In[ ]:
 
@@ -141,7 +146,7 @@ if __name__ == '__main__':
     pool.map(mkcorpus, wordsubset)
     pool.close()
     pool.join()
-    print('Elapsed time: ', str(time.time() - start))
+    print('Elapsed time(corpus): ', str(time.time() - start), ' secs')
     # save
     with open(list_corpus[testnum],'wb') as f:
         pickle.dump(corpus, f)
