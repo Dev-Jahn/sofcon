@@ -32,6 +32,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -50,6 +51,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 /**
  * @author archslaveCW
@@ -66,7 +68,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
     private FusedLocationProviderClient mFusedLocationProviderClient;
     // Locations to draw
     private ArrayList<LatLng> listLocsToDraw = new ArrayList<>();
-    HashMap<Integer, Marker> hashMapMarker = new HashMap<>();
+    private HashMap<Integer, Marker> hashMapMarker = new HashMap<>();
     private static int markerCount = 0;
     private View customMarkerOriginDestRoot;
     private TextView tvCustomMarkerOriginDest;
@@ -235,20 +237,28 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         });
 
         /**
-         * map move listener
+         * camera move listener
          */
-        mMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
+        mMap.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
             @Override
-            public void onCameraMove() {
+            public void onCameraChange(CameraPosition cameraPosition) {
                 /**
                  * to do list
                  * - request adjacency places to server
                  */
-                String currentLat = new Double(mMap.getCameraPosition().target.latitude).toString();
-                String currentLng = new Double(mMap.getCameraPosition().target.longitude).toString();
+                String currentLat = new Double(cameraPosition.target.latitude).toString();
+                String currentLng = new Double(cameraPosition.target.longitude).toString();
                 float len = 2.5f;
                 MapUtility.FindPlacesTask findPlacesTask = new MapUtility.FindPlacesTask(currentLat, currentLng, len);
-                findPlacesTask.execute(adjacencyPlaces);
+                findPlacesTask.execute();
+                try {
+                    adjacencyPlaces = findPlacesTask.get();
+                    Log.d("TESTTEST", adjacencyPlaces+" ");
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
@@ -338,6 +348,21 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         hashMapMarker.put(markerCount, marker);
 
         saveMarkerTag(marker, markerCount);
+    }
+
+    protected void addMarker(LatLng latLng, InfoWindowData infoWindowData) {
+        listLocsToDraw.add(latLng);
+        // create a marker for starting location
+        MarkerOptions options = new MarkerOptions();
+        options.position(latLng);
+
+        tvCustomMarkerOriginDest.setText(new Integer(infoWindowData.getOrder()).toString());
+        options.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getContext(), customMarkerOriginDestRoot)));
+
+        Marker marker = mMap.addMarker(options);
+        hashMapMarker.put(infoWindowData.getOrder(), marker);
+
+        saveMarkerTag(marker, infoWindowData.getOrder());
     }
 
     private void saveMarkerTag(Marker marker, int markerCount) {
