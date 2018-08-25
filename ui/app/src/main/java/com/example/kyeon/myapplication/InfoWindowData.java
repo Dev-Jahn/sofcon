@@ -6,6 +6,7 @@ public class InfoWindowData {
     // deprecated
     private String score;
     private int order;
+    private String placeID;
 
     public String getTitle() {
         return title;
@@ -39,5 +40,14 @@ public class InfoWindowData {
 
     public void setOrder(int order) {
         this.order = order;
+    }
+
+    @Deprecated
+    public String getPlaceID() {
+        return placeID;
+    }
+    @Deprecated
+    public void setPlaceID(String placeID) {
+        this.placeID = placeID;
     }
 }
