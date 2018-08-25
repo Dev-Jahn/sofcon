@@ -46,9 +46,10 @@ var server = http.createServer(function(req, res) {
 				loc : [0,0]
 			};
 			if(cmds[2] =="findPlace") {
-				var x = parseFloat(parsedQuery.x);
-				var y = parseFloat(parsedQuery.y);
-				var sTime = new Date().getTime();
+				var lat = parseFloat(parsedQuery.lat);
+				var lon = parseFloat(parsedQuery.lon);
+				var len = parseFloat(parsedQuery.len);
+
 				mongo.connect("mongodb://127.0.0.1:27017",{useNewUrlParser : true} ,function(err,db) {
 					if(err) throw err;
 					var dbo = db.db("test");
@@ -56,14 +57,12 @@ var server = http.createServer(function(req, res) {
 					dbo.collection("test").find({}).project({"_id":false, "placeId":false}).toArray(function(err, result) {
 					if(err) throw err;
 					result.forEach(function(item, index, array) {
-						if(dis(x, y, array[index]["latitude"], array[index]["longitude"]) < 10) {
+						if(dis(lat, lon, array[index]["latitude"], array[index]["longitude"]) < len) {
 							resarr.push(array[index]);
 						}
 					});
-					var eTime = new Date().getTime();
-					console.log(eTime - sTime);
-					console.log(resarr.length);
-					res.writeHead(200, {'Content-Type': 'text/plain;charset=utf-8'});
+
+					res.writeHead(200, {'Content-Type': 'application/json;charset=utf-8'});
 					res.end(JSON.stringify(resarr));
 					db.close();
 					});
@@ -128,6 +127,6 @@ function dis(lat1, lon1, lat2, lon2) {
 	return d;
 }
 
-server.listen(3000, function() {
+server.listen(8080, '10.146.0.3', function() {
 	console.log("server running...");
 });
