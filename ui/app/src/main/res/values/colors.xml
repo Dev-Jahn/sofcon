@@ -11,4 +11,5 @@
     <color name="colorSecondaryText">#757575</color>
     <color name="colorDivider">#BDBDBD</color>
     <color name="colorApp">#FFFFFF</color>
+    <color name="colorTextAccent">#000000</color>
 </resources>
