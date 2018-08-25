@@ -249,7 +249,6 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                 float len = 2.5f;
                 MapUtility.FindPlacesTask findPlacesTask = new MapUtility.FindPlacesTask(currentLat, currentLng, len);
                 findPlacesTask.execute(adjacencyPlaces);
-                Log.d("DEBUG-TEST", adjacencyPlaces);
             }
         });
 
@@ -338,12 +337,18 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         Marker marker = mMap.addMarker(options);
         hashMapMarker.put(markerCount, marker);
 
+        saveMarkerTag(marker, markerCount);
+    }
+
+    private void saveMarkerTag(Marker marker, int markerCount) {
         InfoWindowData infoWindowData = new InfoWindowData();
         infoWindowData.setTitle(marker.getTitle());
         infoWindowData.setSnippet(marker.getSnippet());
         infoWindowData.setOrder(markerCount);
         // it will be replaced to real score
-        infoWindowData.setScore(new Integer(markerCount).toString());
+        infoWindowData.setScore(Integer.toString(markerCount));
+        // it will be replaced to real placeID
+        infoWindowData.setPlaceID(Integer.toString(markerCount));
 
         marker.setTag(infoWindowData);
     }
@@ -381,14 +386,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             Marker currentMarker = mMap.addMarker(options);
             hashMapMarker.put(i + 1, currentMarker);
 
-            InfoWindowData info = new InfoWindowData();
-            info.setTitle(currentMarker.getTitle());
-            info.setSnippet(currentMarker.getSnippet());
-            info.setOrder(i + 1);
-            // it will be replaced to real score
-            info.setScore(new Integer(i + 1).toString());
-
-            currentMarker.setTag(info);
+            saveMarkerTag(currentMarker, i+1);
         }
         redrawRoute();
     }

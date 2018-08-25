@@ -157,13 +157,14 @@ public class MapUtility {
      * ASAP...
      */
 
-    protected static void saveMapInstance(Context context, GoogleMap mMap, ArrayList<Marker> markers) {
+    protected static void saveMapInstance(Context context, GoogleMap mMap, ArrayList<Marker> markers, String tripTitle, int day) {
         /**
          * It should be called in onPause
          */
         try {
+            String fileName = tripTitle + Integer.toString(day) + ".dat";
             // Modes: MODE_PRIVATE, MODE_WORLD_READABLE, MODE_WORLD_WRITABLE
-            FileOutputStream fos = context.openFileOutput("latlngpoints.txt", Context.MODE_PRIVATE);
+            FileOutputStream fos = context.openFileOutput(fileName, Context.MODE_PRIVATE);
             DataOutputStream dos = new DataOutputStream(fos);
             dos.writeInt(markers.size()); // Save line count
             /**
@@ -172,6 +173,17 @@ public class MapUtility {
                 Log.v("write", point.latitude + "," + point.longitude);
             }
              */
+            for (Marker marker : markers) {
+                LatLng position = marker.getPosition();
+                /**
+                 * File content format
+                 * --
+                 * lat,lng,title,snippet,
+                 */
+                String content = position.latitude + "," + position.longitude;
+                dos.writeUTF(content);
+                Log.v("DEBUG-FILEIO", content);
+            }
             dos.flush(); // Flush stream ...
             dos.close(); // ... and close.
         } catch (IOException exc) {
@@ -179,12 +191,12 @@ public class MapUtility {
         }
     }
 
-    protected static void loadMapInstance(Context context, GoogleMap mMap) {
+    protected static void loadMapInstance(Context context, GoogleMap mMap, String fileName) {
         /**
          * It should be called in onResume
          */
         try {
-            FileInputStream input = context.openFileInput("latlngpoints.txt");
+            FileInputStream input = context.openFileInput(fileName);
             DataInputStream din = new DataInputStream(input);
             int sz = din.readInt(); // Read line count
             for (int i = 0; i < sz; i++) {
@@ -253,6 +265,7 @@ public class MapUtility {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            Log.d("DEBUG-TEST", s.toString());
         }
     }
 }
