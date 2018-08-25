@@ -82,7 +82,7 @@ nltk.data.path.append('F:\\소공전프로젝트\\sofcon\\recomm\\nltk_data')
 # In[4]:
 
 
-testnum = 3
+testnum = 5
 
 
 # In[5]:
