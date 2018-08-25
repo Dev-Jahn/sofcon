@@ -62,6 +62,73 @@ def mkcorpus(ws):
         corpus.append(places)
         #print('['+word+']: ',len(places),' places appended to the corpus')
         #sys.stdout.flush()
+
+
+# # 한글
+
+# In[8]:
+
+
+if platform.system() == 'Linux':
+    mecab = Mecab()
+elif platform.system() == 'Windows':
+    mecab = Mecab(dicpath="C:\\mecab\\mecab-ko-dic")
+
+
+# In[5]:
+
+
+for csv in range(3):
+    df = pd.read_csv(list_csv[csv])
+    # filter charset exception
+    df['review'] = df['review'].apply(lambda x: re.sub(r'[^ 가-힣0-9.!?\n]',' ',x))
+    # make sentence list
+    array = df['review'].tolist()
+    # 한글형태소 분리
+    list_pos = [mecab.pos(sentence) for sentence in array]
+    # 형태소 리스트화
+    morpheme = [mecab.morphs(sentence) for sentence in array]
+
+    # 의미를 가지는 형태소만 추출
+    pattern = re.compile('MM|NNG|VA[+].*|VV[+].*|XR')
+    df_morpheme = pd.DataFrame(columns = ['placeId','tags'], dtype = 'int64')
+    taglist = []
+    for i in range(len(list_pos)):
+        pairs = np.array(list_pos[i])
+        tags = np.array(morpheme[i])
+        npbool = []
+        for pair in pairs:
+            npbool.append(re.fullmatch(pattern,pair[1])!=None)
+        tags = tags[npbool]
+        taglist.append(tags.tolist())
+    df_morpheme['tags'] = taglist
+    df_morpheme['placeId'] = df['placeId'].astype('int64')
+
+    wordlist = []
+    for l in df_morpheme['tags']:
+        wordlist += l
+    wordset = orderset(wordlist)
+    print('In ',list_csv[csv])
+    print('단어전체', len(wordlist))
+    print('단어집합', len(wordset))
+    # 병렬처리를 위한 데이터 분할 
+    core_count = mp.cpu_count()
+    wordsubset = np.array_split(wordset, core_count)
+    # 멀티프로세스 연산
+    if __name__ == '__main__':
+        start = time.time()
+
+        corpus = []
+        pool = Pool(core_count)
+        pool.map(mkcorpus, wordsubset)
+        pool.close()
+        pool.join()
+        print('Elapsed time: ', str(time.time() - start))
+        # save
+        with open(list_corpus[csv],'wb') as f:
+            pickle.dump(corpus, f)
+
+
 # # 영문
 
 # In[ ]:
@@ -78,76 +145,56 @@ import nltk
 from nltk.stem import PorterStemmer
 from nltk.stem import WordNetLemmatizer
 nltk.data.path.append('F:\\소공전프로젝트\\sofcon\\recomm\\nltk_data')
-
-# In[4]:
-
-
-testnum = 5
+nltk.data.path.append('')
 
 
 # In[5]:
 
 
-start = time.time()
-
-df = pd.read_csv(list_csv[testnum])
-# filter charset exception
-df['review'] = df['review'].apply(lambda x: re.sub(r'[^ a-zA-Z0-9.!?\'\n]',' ',x))
-# make sentence list
-array = df['review'].tolist()
-tokens = [nltk.word_tokenize(sentence) for sentence in array]
-pos_tagged = [nltk.pos_tag(sentence) for sentence in tokens]
-tagpat = r'(JJ[RS]*)|(NN[P]*[S]*)|(RB[RS]*)|(VB[DGNPZ]*)'
-
-print('Elapsed time(tokenize): ', str(time.time() - start), ' secs')
-
-
-# In[6]:
-
-start = time.time()
-
-lengths = pd.DataFrame([len(sent) for sent in pos_tagged]).sum()
-print('before: ',lengths[0])
-sub_pos_tagged = []
-for sentence in pos_tagged:
-    subsentence = [word[0] for word in sentence if not re.fullmatch(tagpat, word[1]) == None]
-    sub_pos_tagged.append(subsentence)
-lengths = pd.DataFrame([len(sent) for sent in sub_pos_tagged]).sum()
-print('after: ',lengths[0])
-
-print('Elapsed time(filter): ', str(time.time() - start), ' secs')
-
-# In[17]:
-
-
-df_morpheme = pd.DataFrame(columns = ['placeId', 'tags'], dtype='int64')
-df_morpheme['placeId'] = df['placeId'].astype('int64')
-df_morpheme['tags'] = sub_pos_tagged
-
-# In[ ]:
-
-
-wordlist = []
-for l in df_morpheme['tags']:
-    wordlist += l
-wordset = orderset(wordlist)
-print('In ',list_csv[testnum])
-print('단어전체', len(wordlist))
-print('단어집합', len(wordset))
-# 병렬처리를 위한 데이터 분할 
-core_count = mp.cpu_count()
-wordsubset = np.array_split(wordset, core_count)
-# 멀티프로세스 연산
-if __name__ == '__main__':
+for csv in range(3,6)
     start = time.time()
+    df = pd.read_csv(list_csv[csv])
+    # filter charset exception
+    df['review'] = df['review'].apply(lambda x: re.sub(r'[^ a-zA-Z0-9.!?\'\n]',' ',x))
+    # make sentence list
+    array = df['review'].tolist()
+    tokens = [nltk.word_tokenize(sentence) for sentence in array]
+    pos_tagged = [nltk.pos_tag(sentence) for sentence in tokens]
+    tagpat = r'(JJ[RS]*)|(NN[P]*[S]*)|(RB[RS]*)|(VB[DGNPZ]*)'
+    print('Elapsed time(tokenize): ', str(time.time() - start), ' secs'
 
-    corpus = []
-    pool = Pool(core_count)
-    pool.map(mkcorpus, wordsubset)
-    pool.close()
-    pool.join()
-    print('Elapsed time(corpus): ', str(time.time() - start), ' secs')
-    # save
-    with open(list_corpus[testnum],'wb') as f:
-        pickle.dump(corpus, f)
+    start = time.time()
+    sub_pos_tagged = []
+    for sentence in pos_tagged:
+        subsentence = [word[0] for word in sentence if not re.fullmatch(tagpat, word[1]) == None]
+        sub_pos_tagged.append(subsentence)
+    print('Elapsed time(filter): ', str(time.time() - start), ' secs')
+
+    df_morpheme = pd.DataFrame(columns = ['placeId', 'tags'], dtype='int64')
+    df_morpheme['placeId'] = df['placeId'].astype('int64')
+    df_morpheme['tags'] = sub_pos_tagged
+
+    wordlist = []
+    for l in df_morpheme['tags']:
+        wordlist += l
+    wordset = orderset(wordlist)
+    print('In ',list_csv[csv])
+    print('단어전체', len(wordlist))
+    print('단어집합', len(wordset))
+    # 병렬처리를 위한 데이터 분할 
+    core_count = mp.cpu_count()
+    wordsubset = np.array_split(wordset, core_count)
+    # 멀티프로세스 연산
+    if __name__ == '__main__':
+        start = time.time()
+
+        corpus = []
+        pool = Pool(core_count)
+        pool.map(mkcorpus, wordsubset)
+        pool.close()
+        pool.join()
+        print('Elapsed time(corpus): ', str(time.time() - start), ' secs')
+        # save
+        with open(list_corpus[csv],'wb') as f:
+            pickle.dump(corpus, f)
 
