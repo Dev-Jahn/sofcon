@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity{
     DrawerLayout drawerLayout;
     LinearLayout navigation_main_background;
     private ListView navigationView;
-    private String[] navItems = {"메인 메뉴", "새 여행", "내 여행", "일지","기타"};
+    private String[] navItems = {"메인 메뉴", "새 여행", "내 여행", "다른 여행","추천 여행"};
 
     ImageView blnkImage;
     LinearLayout nav_image_text;
@@ -79,14 +79,20 @@ public class MainActivity extends AppCompatActivity{
                     case 2:
                         intent = new Intent(
                                 getApplicationContext(),
-                                TravelActivity.class);
+                                MyTrip.class);
                         startActivity(intent);
                         break;
                     case 3:
-                        System.out.println(2);
+                        intent = new Intent(
+                                getApplicationContext(),
+                                OthersTravel.class);
+                        startActivity(intent);
                         break;
                     case 4:
-                        System.out.println(3);
+                        intent = new Intent(
+                                getApplicationContext(),
+                                RecommendTravel.class);
+                        startActivity(intent);
                         break;
                 }
                 drawerLayout.closeDrawer(navigation_main_background);
@@ -205,9 +211,29 @@ public class MainActivity extends AppCompatActivity{
         Drawable button_transparency_bOtherTrip = bOtherTrip.getBackground();
         button_transparency_bOtherTrip.setAlpha(255);
 
+        bOtherTrip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(
+                        getApplicationContext(),
+                        OthersTravel.class);
+                startActivity(intent);
+            }
+        });
+
         Button bRecommendTrip = (Button)findViewById(R.id.recommendTrip);
         Drawable button_transparency_bRecommendTrip = bRecommendTrip.getBackground();
         button_transparency_bRecommendTrip.setAlpha(255);
+
+        bRecommendTrip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(
+                        getApplicationContext(),
+                        RecommendTravel.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
