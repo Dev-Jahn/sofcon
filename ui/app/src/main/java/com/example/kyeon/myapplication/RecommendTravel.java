@@ -6,66 +6,38 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
-import android.view.animation.LayoutAnimationController;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class MyTrip extends AppCompatActivity {
+public class RecommendTravel extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
-    LinearLayout navigation_MyTrip_background;
+    LinearLayout navigation_RCT_background;
     private ListView navigationView;
     private String[] navItems = {"메인 메뉴", "새 여행", "내 여행", "다른 여행","추천 여행"};
-    final int ITEM_SIZE = 5;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_trip);
+        setContentView(R.layout.activity_recommend_travel);
 
-        Toolbar MyToolbar;
+        Toolbar RCTToolbar;
 
-        RecyclerView recyclerView =  findViewById(R.id.rec_view);
-        recyclerView.setHasFixedSize(true);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(layoutManager);
-
-        List<Item> items = new ArrayList<>();
-        Item[] item = new Item[ITEM_SIZE];
-        item[0] = new Item(R.drawable.city_seoul,"신나게 떠나는 서울여행", "Seoul", "1.1 ~ 1.10");
-        item[1] = new Item(R.drawable.city_fukuoka,"열심히 쇼핑하다오는 후쿠오카", "Fukuoka", "4.3 ~ 4.10");
-        item[2] = new Item(R.drawable.city_beijing, "옛 중국의 향기를 맡으러","Beijing", "5.1 ~ 5.6");
-        item[3] = new Item(R.drawable.city_busan,"여름에 가기좋은 부산여행", "Busan", "4.13 ~ 4.19");
-        item[4] = new Item(R.drawable.city_tai,"태국의 정취를 맡으러", "Tai", "7.4 ~ 7.11");
-
-        for (int i = 0; i < ITEM_SIZE; i++) {
-            items.add(item[i]);
-        }
-
-        recyclerView.setAdapter(new TripCardAdapter(getApplicationContext(), items, R.layout.activity_my_trip));
-
-        drawerLayout = (DrawerLayout)findViewById(R.id.MyTrip_drawer);
-        navigation_MyTrip_background = (LinearLayout)findViewById(R.id.navigation_MyTrip_background);
-        MyToolbar = (android.support.v7.widget.Toolbar)findViewById(R.id.MyTripToolbar);
-        MyToolbar.setTitle("내 여행");
-        setSupportActionBar(MyToolbar);
+        drawerLayout = (DrawerLayout)findViewById(R.id.RCT_drawer);
+        navigation_RCT_background = (LinearLayout)findViewById(R.id.navigation_RCT_background);
+        RCTToolbar = (Toolbar)findViewById(R.id.RCTToolbar);
+        RCTToolbar.setTitle("추천 여행");
+        setSupportActionBar(RCTToolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setHomeAsUpIndicator(R.drawable.outline_list_black_18dp);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        navigationView = (ListView)findViewById(R.id.navigation_contents_from_MT);
+        navigationView = (ListView)findViewById(R.id.navigation_contents_from_RCT);
         navigationView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, navItems));
         navigationView.setOnItemClickListener(new ListView.OnItemClickListener() {
             @Override
@@ -85,6 +57,11 @@ public class MyTrip extends AppCompatActivity {
                         break;
 
                     case 2:
+                        intent = new Intent(
+                                getApplicationContext(),
+                                TravelActivity.class);
+                        startActivity(intent);
+                        finish();
                         break;
                     case 3:
                         intent = new Intent(
@@ -94,14 +71,9 @@ public class MyTrip extends AppCompatActivity {
                         finish();
                         break;
                     case 4:
-                        intent = new Intent(
-                                getApplicationContext(),
-                                RecommendTravel.class);
-                        startActivity(intent);
-                        finish();
                         break;
                 }
-                drawerLayout.closeDrawer(navigation_MyTrip_background);
+                drawerLayout.closeDrawer(navigation_RCT_background);
             }
         });
     }

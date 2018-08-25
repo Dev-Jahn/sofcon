@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/colorPrimary"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/MyTrip_drawer"
-    tools:context=".MyTrip">
+    android:id="@+id/RCT_drawer"
+    tools:context=".RecommendTravel">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,28 +13,22 @@
         android:orientation="vertical">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/MyTripToolbar"
+            android:id="@+id/RCTToolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary"
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rec_view"
-            android:layoutAnimation="@anim/layoutanimation"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
-        </android.support.v7.widget.RecyclerView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="in progress"/>
 
     </LinearLayout>
 
-
-
-
     <LinearLayout
-        android:id="@+id/navigation_MyTrip_background"
+        android:id="@+id/navigation_RCT_background"
         android:layout_width="300dp"
         android:layout_height="match_parent"
         app:headerLayout="@layout/drawer_header"
@@ -75,12 +67,14 @@
 
         </LinearLayout>
 
+
         <ListView
             android:choiceMode="singleChoice"
             android:background="#EdEdEd"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/navigation_contents_from_MT"/>
+            android:id="@+id/navigation_contents_from_RCT"/>
 
     </LinearLayout>
+
 </android.support.v4.widget.DrawerLayout>
