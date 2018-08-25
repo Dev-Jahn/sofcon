@@ -4,9 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/review_cardview"
-    android:background="@drawable/card_border"
     app:strokeColor="@color/colorAccent"
-    app:strokeWidth="1dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -14,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:focusableInTouchMode="true"
+        android:background="@drawable/corners_light"
         android:orientation="vertical">
 
         <LinearLayout
@@ -27,7 +26,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:layout_weight="8"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/colorPrimaryText"
                 android:text="경유지 이름" />
 
             <ImageView
@@ -37,7 +36,7 @@
                 android:layout_weight="1"
                 android:layout_gravity="end"
                 android:src="@drawable/baseline_arrow_drop_down_black_36dp"
-                android:tint="@color/colorAccent"
+                android:tint="@color/colorPrimary"
                 />
 
         </LinearLayout>
@@ -83,6 +82,7 @@
                 android:id="@+id/rating_comp_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                style="@style/Base.Widget.AppCompat.Button.Colored"
                 android:text="완료" />
 
         </LinearLayout>

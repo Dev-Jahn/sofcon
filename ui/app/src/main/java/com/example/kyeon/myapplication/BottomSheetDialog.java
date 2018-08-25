@@ -47,9 +47,6 @@ public class BottomSheetDialog extends BottomSheetDialogFragment{
         for (int i = 0; i < ITEM_SIZE; i++) {
             rec_items.add(rec_item[i]);
         }
-        for (int i = 0; i < 20; i++) {
-            rec_items.add(rec_item[2]);
-        }
 
         recyclerView.setAdapter(new RecommendItemAdapter(getContext(), rec_items, R.layout.bottom_sheet_dialog));
 
