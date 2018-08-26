@@ -21,6 +21,10 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -157,6 +161,14 @@ public class MapUtility {
      * ASAP...
      */
 
+    /**
+     * Big Problem!!!
+     * -----------------
+     * 1. How can I save these things?
+     * 2. How can I name file?
+     * 3. How can I load map instance using filename?
+     *    --> In loadMapInstance, argument fileName is hard to receive from other methods
+     */
     protected static void saveMapInstance(Context context, GoogleMap mMap, ArrayList<Marker> markers, String tripTitle, int day) {
         /**
          * It should be called in onPause
@@ -178,11 +190,15 @@ public class MapUtility {
                 /**
                  * File content format
                  * --
-                 * lat,lng,title,snippet,
+                 * lat,lng,title,snippet,score,order,placeID
+                 * --
+                 * If needed, I can add more information
                  */
-                String content = position.latitude + "," + position.longitude;
+                String content = position.latitude + "," + position.longitude + ","
+                        + ((InfoWindowData)marker.getTag()).toString();
                 dos.writeUTF(content);
-                Log.v("DEBUG-FILEIO", content);
+                Log.v("DEBUG-FILEIO-WRITE", content);
+                Log.v("DEBUG-FILEIO-WRITE", ((InfoWindowData)marker.getTag()).toString());
             }
             dos.flush(); // Flush stream ...
             dos.close(); // ... and close.
@@ -201,10 +217,17 @@ public class MapUtility {
             int sz = din.readInt(); // Read line count
             for (int i = 0; i < sz; i++) {
                 String str = din.readUTF();
-                Log.v("read", str);
+                Log.v("DEBUG-FILEIO-READ", str);
                 String[] stringArray = str.split(",");
                 double latitude = Double.parseDouble(stringArray[0]);
                 double longitude = Double.parseDouble(stringArray[1]);
+                LatLng latLng = new LatLng(latitude, longitude);
+                InfoWindowData infoWindowData = new InfoWindowData();
+                infoWindowData.setTitle(stringArray[2]);
+                infoWindowData.setSnippet(stringArray[3]);
+                infoWindowData.setScore(stringArray[4]);
+                infoWindowData.setOrder(Integer.parseInt(stringArray[5]));
+                infoWindowData.setPlaceID(stringArray[6]);
                 //listOfPoints.add(new LatLng(latitude, longitude));
             }
             din.close();
@@ -250,7 +273,7 @@ public class MapUtility {
                 }
                 br.close();
 
-                String result = response.toString();
+                result = response.toString();
                 long end = System.currentTimeMillis();
                 // Log.d(String.valueOf((end - start) / 1000.0), "Mylog");
                 return result;
@@ -265,7 +288,27 @@ public class MapUtility {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            Log.d("DEBUG-TEST", s.toString());
+            //Log.d("DEBUG-TEST", s.toString());
         }
+    }
+
+    protected static ArrayList<PlaceData> placeParsing(String jsonPlaces) {
+        try {
+            JSONArray jsonArray = new JSONArray(jsonPlaces);
+            ArrayList<PlaceData> arrayList = new ArrayList<>();
+            for(int i = 0; i < jsonArray.length(); ++i) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                PlaceData placeData = new PlaceData();
+                placeData.setType(jsonObject.getString(PlaceData.jsonType));
+                placeData.setName(jsonObject.getString(PlaceData.jsonName));
+                placeData.setLat(jsonObject.getString(PlaceData.jsonLat));
+                placeData.setLng(jsonObject.getString(PlaceData.jsonLng));
+                arrayList.add(placeData);
+            }
+            return arrayList;
+        } catch(JSONException e) {
+            Log.d("DEBUG-ERROR", e.getMessage());
+        }
+        return null;
     }
 }

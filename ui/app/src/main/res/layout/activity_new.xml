@@ -37,51 +37,42 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:background="@color/colorAccentShade"/>
+            android:background="@color/colorApp"/>
 
+        <!-- 인원수 설정 시작 -->
         <LinearLayout
-            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="2.8">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2.5">
 
                 <TextView
                     android:id="@+id/textView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_height="match_parent"
                     android:textColor="@color/colorTextAccent"
-                    android:gravity="center"
+                    android:gravity="right|center_vertical"
                     android:text="@string/person" />
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="4">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"/>
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"/>
 
                 <Spinner
                     android:id="@+id/countPerson"
+                    android:layout_weight="2"
                     android:spinnerMode="dialog"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -91,34 +82,32 @@
             </LinearLayout>
 
         </LinearLayout>
+        <!--인원수 설정 끝-->
 
+        <!--일정 설정 시작-->
         <LinearLayout
-            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|center_horizontal"
-                android:layout_weight="2.8">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2.5">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:textColor="@color/colorTextAccent"
-                    android:text="      일정"
-                    android:layout_weight="100"
-                    android:gravity="center"/>
+                    android:text="일정"
+                    android:gravity="right|center_vertical"/>
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="5">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
 
                 <Button
                     android:id="@+id/departingDate"
@@ -153,58 +142,85 @@
             </LinearLayout>
 
         </LinearLayout>
+        <!--일정 설정 끝-->
 
+        <!--여행 장소 설정 시작-->
         <LinearLayout
-            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textColor="@color/colorTextAccent"
-                android:text="여행장소"
-                android:gravity="center"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2.5">
 
-            <Button
-                android:id="@+id/btnPlaceName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/select_place"
-                android:textSize="18sp"
-                android:background="@android:color/transparent"
-                android:textColor="@android:color/black"
-                android:layout_weight="5"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/colorTextAccent"
+                    android:text=" 여행장소"
+                    android:gravity="right|center_vertical"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/btnPlaceName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/select_place"
+                    android:textSize="18sp"
+                    android:background="@android:color/transparent"
+                    android:textColor="@android:color/black"
+                    android:layout_weight="5"/>
+
+            </LinearLayout>
 
         </LinearLayout>
+        <!--여행 장소 설정 끝-->
 
+        <!--여행 제목 설정 시작-->
         <LinearLayout
-            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2.5">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/colorTextAccent"
+                    android:text="제목"
+                    android:gravity="right|center_vertical"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:textColor="@color/colorTextAccent"
-                android:text="        제목"
-                android:gravity="center"/>
+            </LinearLayout>
 
-            <EditText
-                android:id="@+id/travelTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="5"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <EditText
+                    android:id="@+id/travelTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"/>
+
+            </LinearLayout>
 
         </LinearLayout>
+        <!--여행 제목 설정 끝-->
 
+        <!--입력 끝 이후 체크 -->
         <LinearLayout
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
@@ -229,9 +245,11 @@
                 android:layout_weight="2"/>
 
         </LinearLayout>
+        <!--입력 끝 이후 체크/-->
 
     </LinearLayout>
 
+    <!--네비게이션 드로어 설정-->
     <LinearLayout
         android:id="@+id/navigation_new_background"
         android:layout_width="300dp"
@@ -281,5 +299,6 @@
             android:id="@+id/navigation_contents_from_new"/>
 
     </LinearLayout>
+    <!--네비게이션 드로어 설정끝-->
 
 </android.support.v4.widget.DrawerLayout>

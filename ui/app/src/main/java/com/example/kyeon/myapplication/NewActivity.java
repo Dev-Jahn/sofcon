@@ -35,7 +35,7 @@ public class NewActivity extends AppCompatActivity {
     private Button btnPlaceName;
 
     private ListView navigationView;
-    private String[] navItems = {"메인 메뉴", "새 여행", "내 여행", "일지","기타"};
+    private String[] navItems = {"메인 메뉴", "새 여행", "내 여행", "다른 여행","추천 여행"};
 
     public static final String TAG = "Alert_Dialog";
     AlertDialog.Builder alertDialogCalendar;
@@ -133,15 +133,23 @@ public class NewActivity extends AppCompatActivity {
                     case 2:
                         intent = new Intent(
                                 getApplicationContext(),
-                                TravelActivity.class);
+                                MyTrip.class);
                         startActivity(intent);
                         finish();
                         break;
                     case 3:
-                        System.out.println(2);
+                        intent = new Intent(
+                                getApplicationContext(),
+                                OthersTravel.class);
+                        startActivity(intent);
+                        finish();
                         break;
                     case 4:
-                        System.out.println(3);
+                        intent = new Intent(
+                                getApplicationContext(),
+                                RecommendTravel.class);
+                        startActivity(intent);
+                        finish();
                         break;
                 }
                 drawerLayout.closeDrawer(navigation_new_background);

@@ -50,4 +50,10 @@ public class InfoWindowData {
     public void setPlaceID(String placeID) {
         this.placeID = placeID;
     }
+
+    @Override
+    public String toString() {
+        String string = title + "," + snippet + "," + score + "," + order + "," + placeID;
+        return string;
+    }
 }
