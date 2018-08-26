@@ -68,8 +68,11 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
     private FusedLocationProviderClient mFusedLocationProviderClient;
     // Locations to draw
     private ArrayList<LatLng> listLocsToDraw = new ArrayList<>();
-    private HashMap<Integer, Marker> hashMapMarker = new HashMap<>();
-    private static int markerCount = 0;
+    private ArrayList<LatLng> listLocsOfPlaces = new ArrayList<>();
+    private HashMap<Integer, Marker> hashMapUserMarker = new HashMap<>();
+    private HashMap<Integer, Marker> hashMapPlaceMarker = new HashMap<>();
+    private static int userMarkerCount = 0;
+    private static int placeMarkerCount = 0;
     private View customMarkerOriginDestRoot;
     private TextView tvCustomMarkerOriginDest;
     private View customMarkerWayPointRoot;
@@ -77,6 +80,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
 
     private static final int markerHeight = 0;
     private static final int bottomOffset = 36;
+
     private MapWrapperLayout wrapperLayout;
     private ViewGroup infoWindow;
     private TextView infoTitle;
@@ -143,7 +147,8 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         listLocsToDraw.clear();
-        hashMapMarker.clear();
+        hashMapUserMarker.clear();
+        hashMapPlaceMarker.clear();
 
         wrapperLayout = (MapWrapperLayout) findViewById(R.id.wrapperLayout);
         wrapperLayout.init(mMap, MapWrapperLayout.getPixelsFromDp(getContext(), markerHeight + bottomOffset));
@@ -165,7 +170,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                                 new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                removeMarker(mMap, marker);
+                                removeUserMarker(marker);
                             }
                         })
                         .setNegativeButton(getResources().getString(R.string.remove_marker_no),
@@ -208,7 +213,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
-                addMarker(latLng);
+                addUserMarker(latLng);
                 if (listLocsToDraw.size() >= 2)
                     drawRoute();
             }
@@ -230,7 +235,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                     marker.showInfoWindow();
 
                 /**
-                 removeMarker(mMap, marker);
+                 removeUserMarker(mMap, marker);
                  */
                 return false;
             }
@@ -242,18 +247,44 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         mMap.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
             @Override
             public void onCameraChange(CameraPosition cameraPosition) {
+;               removePlaceMarker();
                 /**
                  * to do list
                  * - request adjacency places to server
                  */
                 String currentLat = new Double(cameraPosition.target.latitude).toString();
                 String currentLng = new Double(cameraPosition.target.longitude).toString();
-                float len = 2.5f;
+                float len = 1.5f;
                 MapUtility.FindPlacesTask findPlacesTask = new MapUtility.FindPlacesTask(currentLat, currentLng, len);
                 findPlacesTask.execute();
                 try {
                     adjacencyPlaces = findPlacesTask.get();
                     Log.d("TESTTEST", adjacencyPlaces+" ");
+                    if(adjacencyPlaces != null) {
+                        ArrayList<PlaceData> placeDataArrayList = MapUtility.placeParsing(adjacencyPlaces);
+                        if(placeDataArrayList != null) {
+                            for(PlaceData placeData : placeDataArrayList) {
+                                /**
+                                boolean canAdd = true;
+                                for(LatLng latLng : listLocsOfPlaces) {
+                                    if(Double.parseDouble(placeData.getLat()) == latLng.latitude
+                                        && Double.parseDouble(placeData.getLng()) == latLng.longitude) {
+                                        continue;
+                                    }
+                                    else {
+                                        canAdd = false;
+                                        break;
+                                    }
+                                }
+                                if(canAdd == true) {
+                                    addPlaceMarker(placeData);
+                                    listLocsOfPlaces.add(placeData.getLat())
+                                }
+                                 */
+                                addPlaceMarker(placeData);
+                            }
+                        }
+                    }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {
@@ -290,9 +321,9 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             LatLng origin = (LatLng) listLocsToDraw.get(listLocsToDraw.size() - 2);
             LatLng dest = (LatLng) listLocsToDraw.get(listLocsToDraw.size() - 1);
 
-            if (markerCount > 2) {
-                Marker wayPointMarker = hashMapMarker.get(markerCount - 1);
-                tvCustomMarkerWayPoint.setText(new Integer(markerCount - 1).toString());
+            if (userMarkerCount > 2) {
+                Marker wayPointMarker = hashMapUserMarker.get(userMarkerCount - 1);
+                tvCustomMarkerWayPoint.setText(new Integer(userMarkerCount - 1).toString());
                 wayPointMarker.setIcon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getContext(), customMarkerWayPointRoot)));
             }
             /**
@@ -330,27 +361,27 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
 
     private void resetMap() {
         mMap.clear();
-        markerCount = 0;
         listLocsToDraw.clear();
-        hashMapMarker.clear();
+        userMarkerCount = 0;
+        hashMapUserMarker.clear();
     }
 
-    private void addMarker(LatLng latLng) {
+    private void addUserMarker(LatLng latLng) {
         listLocsToDraw.add(latLng);
         // create a marker for starting location
         MarkerOptions options = new MarkerOptions();
         options.position(latLng);
 
-        tvCustomMarkerOriginDest.setText(new Integer(++markerCount).toString());
+        tvCustomMarkerOriginDest.setText(new Integer(++userMarkerCount).toString());
         options.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getContext(), customMarkerOriginDestRoot)));
 
         Marker marker = mMap.addMarker(options);
-        hashMapMarker.put(markerCount, marker);
+        hashMapUserMarker.put(userMarkerCount, marker);
 
-        saveMarkerTag(marker, markerCount);
+        saveMarkerTag(marker, userMarkerCount);
     }
 
-    protected void addMarker(LatLng latLng, InfoWindowData infoWindowData) {
+    protected void addUserMarker(LatLng latLng, InfoWindowData infoWindowData) {
         listLocsToDraw.add(latLng);
         // create a marker for starting location
         MarkerOptions options = new MarkerOptions();
@@ -360,9 +391,22 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         options.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getContext(), customMarkerOriginDestRoot)));
 
         Marker marker = mMap.addMarker(options);
-        hashMapMarker.put(infoWindowData.getOrder(), marker);
+        hashMapUserMarker.put(infoWindowData.getOrder(), marker);
 
         saveMarkerTag(marker, infoWindowData.getOrder());
+    }
+
+    private void addPlaceMarker(PlaceData placeData) {
+        MarkerOptions options = new MarkerOptions();
+        LatLng position = new LatLng(Double.parseDouble(placeData.getLat()),
+                                     Double.parseDouble(placeData.getLng()));
+        options.position(position);
+        options.title(placeData.getName());
+        options.snippet(placeData.getType());
+
+        Marker marker = mMap.addMarker(options);
+        listLocsOfPlaces.add(position);
+        hashMapPlaceMarker.put(placeMarkerCount++, marker);
     }
 
     private void saveMarkerTag(Marker marker, int markerCount) {
@@ -378,16 +422,16 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         marker.setTag(infoWindowData);
     }
 
-    private void removeMarker(GoogleMap mMap, Marker marker) {
+    private void removeUserMarker(Marker marker) {
         listLocsToDraw.clear();
         int newMarkerCount = 0;
         InfoWindowData infoWindowData = (InfoWindowData) marker.getTag();
         int removeIndex = infoWindowData.getOrder();
         marker.remove();
-        hashMapMarker.remove(removeIndex);
-        for (int i = 0; i <= markerCount; ++i) {
-            if (hashMapMarker.containsKey(i)) {
-                Marker currentMarker = hashMapMarker.remove(i);
+        hashMapUserMarker.remove(removeIndex);
+        for (int i = 0; i <= userMarkerCount; ++i) {
+            if (hashMapUserMarker.containsKey(i)) {
+                Marker currentMarker = hashMapUserMarker.remove(i);
                 LatLng currentPosition = currentMarker.getPosition();
                 listLocsToDraw.add(currentPosition);
                 newMarkerCount++;
@@ -395,8 +439,8 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                 continue;
         }
         mMap.clear();
-        hashMapMarker.clear();
-        markerCount = newMarkerCount;
+        hashMapUserMarker.clear();
+        userMarkerCount = newMarkerCount;
         for (int i = 0; i < listLocsToDraw.size(); ++i) {
             // create a marker for starting location
             MarkerOptions options = new MarkerOptions();
@@ -409,13 +453,21 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                 options.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getContext(), customMarkerWayPointRoot)));
             }
             Marker currentMarker = mMap.addMarker(options);
-            hashMapMarker.put(i + 1, currentMarker);
+            hashMapUserMarker.put(i + 1, currentMarker);
 
             saveMarkerTag(currentMarker, i+1);
         }
         redrawRoute();
     }
 
+    private void removePlaceMarker() {
+        for(int i = 0; i < placeMarkerCount; ++i) {
+            Marker marker = hashMapPlaceMarker.remove(i);
+            marker.remove();
+        }
+        placeMarkerCount = 0;
+        listLocsOfPlaces.clear();
+    }
     /**
      * Convert View to Bitmap
      */
