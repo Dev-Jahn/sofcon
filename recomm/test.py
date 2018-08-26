@@ -1,17 +1,3 @@
-
-# coding: utf-8
-
-# # # 1안
-# # 영문: 토큰화, 모든 단어를 기본형으로 변환, 유의미 품사 추출
-# # 한글: 형태소 분석, 유의미 형태소 추출
-# # 각 단어별로 장소 임베딩
-# # # 2안
-# # word2vec으로 모든 단어를 임베딩한 후,
-# # k-means clustering으로 군집화하여 군집별로 장소 임베딩
-
-# In[1]:
-
-
 import numpy as np
 import pandas as pd
 import re
@@ -41,11 +27,6 @@ try:
     os.stat('corpus')
 except:
     os.mkdir('corpus')
-
-
-# In[28]:
-
-
 # 순서유지 집합리스트화
 def orderset(seq):
     seen = set()
@@ -60,31 +41,13 @@ def mkcorpus(ws):
                 #태그문장 내 동일 장소 중복 방지
                 #if not df_morpheme['placeId'][i] in places:
                     places.append(df_morpheme['placeId'][i])
-    return places
-
-
-# # 영문
-
-# In[ ]:
-
-
-# 현재는 의미있는 품사만 고른후 그대로 corpus 구성
-# stem, lemmatize후 구성하도록 수정하고 성능 비교해보기
-
-
-# In[3]:
-
-
+        corpus.append(places)
 import nltk
 from nltk.stem import PorterStemmer
 from nltk.stem import WordNetLemmatizer
 nltk.data.path.append('F:\\소공전프로젝트\\sofcon\\recomm\\nltk_data')
 
-
-# In[7]:
-
-
-for csv in range(3,6):
+for csv in range(4,5):
     start = time.time()
     df = pd.read_csv(list_csv[csv])
     # filter charset exception
@@ -117,15 +80,17 @@ for csv in range(3,6):
     # 병렬처리를 위한 데이터 분할 
     core_count = mp.cpu_count()
     wordsubset = np.array_split(wordset, core_count)
-    # 멀티프로세스 연산
-    if __name__ == '__main__':
-        start = time.time()
-        pool = Pool(core_count)
-        corpus = pool.map(mkcorpus, wordsubset)
-        pool.close()
-        pool.join()
-        print('Elapsed time(corpus): ', str(time.time() - start), ' secs')
-        # save
-        with open(list_corpus[csv],'wb') as f:
-            pickle.dump(corpus, f)
-
+    
+smallset = wordset[0:4]
+smallsub = np.array_split(smallset, 4)
+if __name__ == '__main__':
+    corpus = []
+    pool = Pool(4)
+    pool.map(mkcorpus, smallsub)
+    pool.close()
+    pool.join()
+    print('Elapsed time(corpus): ', str(time.time() - start), ' secs')
+    # save
+    with open('test.corpus','wb') as f:
+        pickle.dump(corpus, f)
+print(corpus)
