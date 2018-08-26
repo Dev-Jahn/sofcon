@@ -1,18 +1,12 @@
 package com.example.kyeon.myapplication;
 
 
-import android.app.Activity;
-
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.design.widget.TabLayout;
+import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -21,9 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -133,6 +125,7 @@ public class TripPlanActivity extends AppCompatActivity {
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
         private static final String ARG_SECTION_LAST = "last_number";
+        private static final String ARG_SECTION_TITLE = "title_text";
 
         public PlaceholderFragment() {
         }
@@ -141,27 +134,30 @@ public class TripPlanActivity extends AppCompatActivity {
          * Returns a new instance of this fragment for the given section
          * number.
          */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
+        public static PlaceholderFragment newInstance(int sectionNumber, String title) {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+            args.putString(ARG_SECTION_TITLE, title);
             fragment.setArguments(args);
             return fragment;
         }
 
-        public static PlaceholderFragment newInstance(int sectionNumber, int count) {
+
+        public static PlaceholderFragment newInstance(int sectionNumber, int count, String title) {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
             args.putInt(ARG_SECTION_LAST, count);
+            args.putString(ARG_SECTION_TITLE, title);
             fragment.setArguments(args);
             return fragment;
         }
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+        public View onCreateView(LayoutInflater choose_places, ViewGroup container,
                                  Bundle savedInstanceState) {
-            final View rootView = inflater.inflate(R.layout.fragment_plan, container, false);
+            final View rootView = choose_places.inflate(R.layout.fragment_plan, container, false);
             TextView textView = (TextView) rootView.findViewById(R.id.dt);
             ImageView left = (ImageView) rootView.findViewById(R.id.left);
             ImageView right = (ImageView) rootView.findViewById(R.id.right);
@@ -191,6 +187,7 @@ public class TripPlanActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Log.d("test", "onCreateView: "+ getArguments().getInt(ARG_SECTION_NUMBER));
                 Intent choose_places = new Intent(getActivity(), ChoosePlacesActivity.class);
+                choose_places.putExtra(ARG_SECTION_TITLE, getArguments().getString(ARG_SECTION_TITLE));
                 startActivityForResult(choose_places,getArguments().getInt(ARG_SECTION_NUMBER));
                 getActivity().overridePendingTransition(R.anim.sliding_up, R.anim.stay);
             }
@@ -226,9 +223,9 @@ public class TripPlanActivity extends AppCompatActivity {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
             if(position == diff_days)
-                return PlaceholderFragment.newInstance(position + 1, day_count);
+                return PlaceholderFragment.newInstance(position + 1, day_count, etitle);
             else
-                return PlaceholderFragment.newInstance(position+1);
+                return PlaceholderFragment.newInstance(position+1, etitle);
         }
 
         @Override

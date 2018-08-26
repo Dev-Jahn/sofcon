@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -66,9 +67,12 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
     private Location mLastKnownLocation;
     // The entry point to the Fused Location Provider.
     private FusedLocationProviderClient mFusedLocationProviderClient;
+    // Received intent data
+    private IntentData intentData;
     // Locations to draw
     private ArrayList<LatLng> listLocsToDraw = new ArrayList<>();
     private ArrayList<LatLng> listLocsOfPlaces = new ArrayList<>();
+    private ArrayList<Marker> listMarkersToSave = new ArrayList<>();
     private HashMap<Integer, Marker> hashMapUserMarker = new HashMap<>();
     private HashMap<Integer, Marker> hashMapPlaceMarker = new HashMap<>();
     private static int userMarkerCount = 0;
@@ -94,6 +98,8 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_places);
+        getIntentDatas();
+
         ImageButton closeImgButton = (ImageButton) findViewById(R.id.closeButton);
 
         closeImgButton.setOnClickListener(new View.OnClickListener() {
@@ -120,10 +126,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         selectButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /**
-                 * must write finish codes . . .
-                 * DO NOT forget about it
-                 */
+                MapUtility.saveMapUserMarkers(getContext(), mMap, listMarkersToSave, intentData.getTitle(), 1);
             }
         });
 
@@ -135,6 +138,15 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        /**
+         *
+         */
+    }
+
+    private void getIntentDatas() {
+        Intent intent = getIntent();
+        intentData = new IntentData(intent);
     }
 
     /**
@@ -377,8 +389,8 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
 
         Marker marker = mMap.addMarker(options);
         hashMapUserMarker.put(userMarkerCount, marker);
-
         saveMarkerTag(marker, userMarkerCount);
+        listMarkersToSave.add(marker);
     }
 
     protected void addUserMarker(LatLng latLng, InfoWindowData infoWindowData) {
@@ -424,6 +436,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
 
     private void removeUserMarker(Marker marker) {
         listLocsToDraw.clear();
+        listMarkersToSave.clear();
         int newMarkerCount = 0;
         InfoWindowData infoWindowData = (InfoWindowData) marker.getTag();
         int removeIndex = infoWindowData.getOrder();
@@ -454,8 +467,8 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             }
             Marker currentMarker = mMap.addMarker(options);
             hashMapUserMarker.put(i + 1, currentMarker);
-
             saveMarkerTag(currentMarker, i+1);
+            listMarkersToSave.add(currentMarker);
         }
         redrawRoute();
     }
