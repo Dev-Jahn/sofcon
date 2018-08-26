@@ -11,7 +11,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimaryLight"
+        android:background="@color/colorApp"
         android:orientation="vertical">
 
         <android.support.v7.widget.Toolbar
@@ -27,12 +27,12 @@
             android:id="@+id/travel_setup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginTop="20dp"
             android:textStyle="bold"
             android:textColor="@color/colorTextAccent"
             android:gravity="center"
-            android:text="여행 설정"/>
+            android:textSize="15dp"
+            android:text="여행을 떠나기 위한 세부 설정을 시작합니다▼"/>
 
         <ImageView
             android:layout_width="match_parent"
@@ -43,32 +43,37 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@color/colorBlue"
                 android:layout_weight="2.5">
 
                 <TextView
                     android:id="@+id/textView"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textColor="@color/colorTextAccent"
-                    android:gravity="right|center_vertical"
-                    android:text="@string/person" />
+                    android:textColor="@color/colorApp"
+                    android:gravity="center"
+                    android:text="몇명과 함께 여행을 떠나나요?" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@color/colorPrimaryLight"
                 android:layout_weight="1">
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="3"/>
+                    android:layout_weight="2.5"/>
 
                 <Spinner
                     android:id="@+id/countPerson"
@@ -88,26 +93,36 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
 
             <LinearLayout
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@color/colorBlue"
                 android:layout_weight="2.5">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textColor="@color/colorTextAccent"
-                    android:text="일정"
-                    android:gravity="right|center_vertical"/>
+                    android:textColor="@color/colorApp"
+                    android:text="언제부터 언제까지 여행을 떠나나요?"
+                    android:gravity="center"/>
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@color/colorPrimaryLight"
                 android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
 
                 <Button
                     android:id="@+id/departingDate"
@@ -139,6 +154,11 @@
 
                 </Button>
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
             </LinearLayout>
 
         </LinearLayout>
@@ -148,25 +168,30 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
 
             <LinearLayout
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@color/colorBlue"
                 android:layout_weight="2.5">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textColor="@color/colorTextAccent"
-                    android:text=" 여행장소"
-                    android:gravity="right|center_vertical"/>
+                    android:textColor="@color/colorApp"
+                    android:text="어디로 떠나나요?"
+                    android:gravity="center"/>
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@color/colorPrimaryLight"
                 android:layout_weight="1">
 
                 <Button
@@ -188,31 +213,38 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
 
             <LinearLayout
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@color/colorBlue"
                 android:layout_weight="2.5">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textColor="@color/colorTextAccent"
-                    android:text="제목"
-                    android:gravity="right|center_vertical"/>
+                    android:textColor="@color/colorApp"
+                    android:text="여행의 제목을 정해주세요!!"
+                    android:gravity="center"/>
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@color/colorPrimaryLight"
                 android:layout_weight="1">
 
                 <EditText
                     android:id="@+id/travelTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:layout_weight="5"/>
 
             </LinearLayout>
@@ -222,9 +254,9 @@
 
         <!--입력 끝 이후 체크 -->
         <LinearLayout
-            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
             android:orientation="horizontal">
 
             <TextView
