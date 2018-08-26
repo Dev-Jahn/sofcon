@@ -34,6 +34,49 @@
             android:textSize="15dp"
             android:text="여행을 떠나기 위한 세부 설정을 시작합니다▼"/>
 
+        <!--여행 제목 설정 시작-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorBlue"
+                android:layout_weight="2.5">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/colorApp"
+                    android:text="여행의 제목을 정해주세요!!"
+                    android:gravity="center"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimaryLight"
+                android:layout_weight="1">
+
+                <EditText
+                    android:id="@+id/travelTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="5"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <!--여행 제목 설정 끝-->
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="2dp"
@@ -209,48 +252,7 @@
         </LinearLayout>
         <!--여행 장소 설정 끝-->
 
-        <!--여행 제목 설정 시작-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:orientation="vertical">
 
-            <LinearLayout
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/colorBlue"
-                android:layout_weight="2.5">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textColor="@color/colorApp"
-                    android:text="여행의 제목을 정해주세요!!"
-                    android:gravity="center"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/colorPrimaryLight"
-                android:layout_weight="1">
-
-                <EditText
-                    android:id="@+id/travelTitle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="5"/>
-
-            </LinearLayout>
-
-        </LinearLayout>
-        <!--여행 제목 설정 끝-->
 
         <!--입력 끝 이후 체크 -->
         <LinearLayout
