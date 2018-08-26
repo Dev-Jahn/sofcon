@@ -34,14 +34,14 @@ public class BottomSheetDialog extends BottomSheetDialogFragment{
 
         List<Rec_Item> rec_items = new ArrayList<>();
         Rec_Item[] rec_item = new Rec_Item[ITEM_SIZE];
-        rec_item[0] = new Rec_Item(R.drawable.recommend_client, resources.getString(R.string.customized_tour), resources.getString(R.string.customized_explain), "#1565C0");
-        rec_item[1] = new Rec_Item(R.drawable.recommend_activity, resources.getString(R.string.outdoor_tour), resources.getString(R.string.outdoor_explain), "#00695C");
-        rec_item[2] = new Rec_Item(R.drawable.recommend_rest, resources.getString(R.string.healing_tour), resources.getString(R.string.healing_explain), "#8BC34A");
-        rec_item[3] = new Rec_Item(R.drawable.recommend_food, resources.getString(R.string.gourmet_tour),resources.getString(R.string.gourmet_explain), "#F44336");
-        rec_item[4] = new Rec_Item(R.drawable.recommend_night, resources.getString(R.string.night_tour), resources.getString(R.string.night_explain), "#AA00FF");
-        rec_item[5] = new Rec_Item(R.drawable.recommend_monument, resources.getString(R.string.landmark_tour), resources.getString(R.string.landmark_explain),"#F4511E");
-        rec_item[6] = new Rec_Item(R.drawable.recommend_camera, resources.getString(R.string.picture_tour), resources.getString(R.string.picture_explain),"#37474F");
-        rec_item[7] = new Rec_Item(R.drawable.recommend_shopping, resources.getString(R.string.shopping_tour), resources.getString(R.string.shopping_explain),"#FF6D00");
+        rec_item[0] = new Rec_Item(R.drawable.customized, resources.getString(R.string.customized_tour), resources.getString(R.string.customized_explain), resources.getColor(R.color.customized_color));
+        rec_item[1] = new Rec_Item(R.drawable.outdoor, resources.getString(R.string.outdoor_tour), resources.getString(R.string.outdoor_explain), resources.getColor(R.color.outdoor_color));
+        rec_item[2] = new Rec_Item(R.drawable.healing, resources.getString(R.string.healing_tour), resources.getString(R.string.healing_explain), resources.getColor(R.color.healing_color));
+        rec_item[3] = new Rec_Item(R.drawable.gourmet, resources.getString(R.string.gourmet_tour),resources.getString(R.string.gourmet_explain), resources.getColor(R.color.gourmet_color));
+        rec_item[4] = new Rec_Item(R.drawable.night, resources.getString(R.string.night_tour), resources.getString(R.string.night_explain), resources.getColor(R.color.night_color));
+        rec_item[5] = new Rec_Item(R.drawable.landmark, resources.getString(R.string.landmark_tour), resources.getString(R.string.landmark_explain),resources.getColor(R.color.landmark_color));
+        rec_item[6] = new Rec_Item(R.drawable.picture, resources.getString(R.string.picture_tour), resources.getString(R.string.picture_explain),resources.getColor(R.color.picture_color));
+        rec_item[7] = new Rec_Item(R.drawable.shopping, resources.getString(R.string.shopping_tour), resources.getString(R.string.shopping_explain),resources.getColor(R.color.shopping_color));
 
 
         for (int i = 0; i < ITEM_SIZE; i++) {

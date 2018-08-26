@@ -73,6 +73,7 @@
                     android:layout_height="wrap_content"
                     android:text="Place"
                     android:textColor="#FFFFFF"
+                    android:fontFamily="@font/font_amatic"
                     android:textSize="48dp"
                     app:layout_constraintBottom_toBottomOf="@id/marginspacer"
                     app:layout_constraintLeft_toLeftOf="parent"

@@ -12,4 +12,14 @@
     <color name="colorDivider">#BDBDBD</color>
     <color name="colorApp">#FFFFFF</color>
     <color name="colorTextAccent">#000000</color>
+
+    <color name="customized_color">#1565C0</color>
+    <color name="outdoor_color">#00695C</color>
+    <color name="healing_color">#8BC34A</color>
+    <color name="gourmet_color">#F44336</color>
+    <color name="night_color">#AA00FF</color>
+    <color name="landmark_color">#F4511E</color>
+    <color name="picture_color">#37474F</color>
+    <color name="shopping_color">#FF6D00</color>
+
 </resources>
