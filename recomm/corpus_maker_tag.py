@@ -34,9 +34,9 @@ list_csv = ['data/kor/attraction_review_tag.csv',
 list_corpus = ['corpus/attraction_tag.list',
                'corpus/hotel_tag.list',
                'corpus/restaurant_tag.list',
-               'corpus/eng_attraction_tag.list',
-               'corpus/eng_hotel_tag.list',
-               'corpus/eng_restaurant_tag.list']
+               'corpus/eng_attraction_tag(nodup).list',
+               'corpus/eng_hotel_tag(nodup).list',
+               'corpus/eng_restaurant_tag(nodup).list']
 try:
     os.stat('corpus')
 except:
@@ -63,7 +63,7 @@ def mkcorpus(ws):
         for i in range(len(df_morpheme)):
             if word in df_morpheme['tags'][i]:
                 #태그문장 내 동일 장소 중복 방지
-                #if not df_morpheme['placeId'][i] in places:
+                if not df_morpheme['placeId'][i] in places:
                     places.append(df_morpheme['placeId'][i])
         subcorpus.append(places)
     return subcorpus 
@@ -93,7 +93,7 @@ list_tokens = ['corpus/token/eng_attraction.token',
 # In[7]:
 
 
-for csv in range(5,6):
+for csv in range(3,6):
     df = pd.read_csv(list_csv[csv])
     # filter charset exception
     df['review'] = df['review'].apply(lambda x: re.sub(r'[^ a-zA-Z0-9.!?\'\n]',' ',x))
@@ -103,7 +103,7 @@ for csv in range(5,6):
     try:
         os.stat(list_tokens[csv-3])
         with open(list_tokens[csv-3],'rb') as f:
-            pickle.load(f)
+            tokens = pickle.load(f)
         print('Token loaded from ', list_tokens[csv-3])
     except:
         start = time.time()
