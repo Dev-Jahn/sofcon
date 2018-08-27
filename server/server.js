@@ -9,9 +9,10 @@ const fs = require("fs");
 const DbName = "softcon";
 
 // Collection Name
-const Col_Learning = "Learning";
-const Col_Trip = "Trip";
-const Col_Diary = "Diary";
+const ColLearning = "Learning";
+const ColTrip = "Trip";
+const ColUser = "User";
+const ColPlaces = "Places";
 
 var server = http.createServer(function(req, res) {
     
@@ -38,13 +39,6 @@ var server = http.createServer(function(req, res) {
 		}
 	} else if(cmds[1] == "navi") {
 		if(req.method == "GET") {
-			var searchData = {
-				cls : "",
-				placeid : 0,
-				name_kor : "",
-				name_eng : "",
-				loc : [0,0]
-			};
 			if(cmds[2] =="findPlace") {
 				var lat = parseFloat(parsedQuery.lat);
 				var lon = parseFloat(parsedQuery.lon);
@@ -52,9 +46,9 @@ var server = http.createServer(function(req, res) {
 
 				mongo.connect("mongodb://127.0.0.1:27017",{useNewUrlParser : true} ,function(err,db) {
 					if(err) throw err;
-					var dbo = db.db("test");
+					var dbo = db.db(DbName);
 					var resarr = new Array();
-					dbo.collection("test").find({}).project({"_id":false, "placeId":false}).toArray(function(err, result) {
+					dbo.collection(ColPlaces).find({}).project({"_id":false, "placeId":false, "name_eng":false}).toArray(function(err, result) {
 					if(err) throw err;
 					result.forEach(function(item, index, array) {
 						if(dis(lat, lon, array[index]["latitude"], array[index]["longitude"]) < len) {
@@ -71,26 +65,30 @@ var server = http.createServer(function(req, res) {
 		}
 	} else if(cmds[1] == "UI") {
 		if(req.method == "GET") {
-			var test = {test: "for test" };
-			var PlaceData = {place : "",
+			var PlaceData = {
+				UID : "",
+				place : "",
 				people_count : 0,
 				days : 0,
 				syy : 0, smm : 0, sdd : 0,
 				eyy : 0, emm : 0, edd : 0,
 			};
 			var UID = {UID : parsedQuery.UID};
-			if(cmds[2] == "finduid") {
-				mongo.connect("mongodb://127.0.0.1:27017",{useNewUrlParser : true} ,function(err,db) {
-					if (err) throw err;
-					var dbo = db.db(DbName);
-					dbo.collection(Col_Trip).find(UID).project({"_id":false}).toArray(function(err, result) {
+			if(cmds[2] == "insert") {
+				if(req.method == "GET") {
+					mongo.connect("mongodb://127.0.0.1:27017", {useNewUrlParser : true}, function(err, db) {
 						if(err) throw err;
-						res.writeHead(200, {'Content-Type': 'text/html'});
-						res.end(JSON.stringify(result));
-						db.close();
+						var dbo = db.db(DbName);
+						dbo.collection(ColTrip).find(UID).project({"_id":false}).toArray(function(err, result) {
+							if(err) throw err;
+							if(result.length == 1){
+								dbo.collection(ColTrip).updateOne();
+							} else {
+								dbo.collection(ColTrip).insertOnde();
+							}
+						});
 					});
-				});
-			} else if(cmds[2] == "insert") {
+				}
 			} else if(cmds[2] == "else") {
 				mongo.connect("mongodb://127.0.0.1:27017", function(err,db) {
 					if(err) 
@@ -105,6 +103,49 @@ var server = http.createServer(function(req, res) {
 				});
 			}
 		} 
+	}else if(cmds[1] == "Sign") {
+		var UID = parsedQuery.UID;
+		var pwd = parsedQuery.pwd;
+		var User = {UID : UID,
+					PWD : pwd}
+		if(cmds[2] == "Up"){
+			if(req.method == "GET") {
+				mongo.connect("mongodb://127.0.0.1:27017", {useNewUrlParser : true}, function(err, db) {
+					if(err) throw err;
+					var dbo = db.db(DbName);
+					dbo.collection(ColUser).findOne(User , function(err, result) {
+						if(err) throw err;
+						if(result == null) {
+							dbo.collection(ColUser).insertOne(User, function(err, result) {
+								if(err) throw err;
+								res.writeHead(200, {'Contect-Type':'application/json;cherset=utf-8'});
+								res.end(JSON.stringify({"result":true}));
+							});
+						} else {
+							res.writeHead(200, {'Conetent-Type': 'application/json;charset=utf-8'});
+							res.end(JSON.stringify({'result' : false}));
+						}
+					});
+				});
+			}
+		} else if(cmds[2] == "In") {
+			if(req.method == "GET") {
+				mongo.connect("mongodb://127.0.0.1:27017", {useNewUrlParser : true}, function(err, db) {
+					if(err) throw err;
+					var dbo = db.db(DbName);
+					dbo.collection(ColUser).findOne(User , function(err, result) {
+						if(err) throw err;
+						if(result == null) {
+							res.writeHead(200, {'Conetent-Type': 'application/json;charset=utf-8'});
+							res.end(JSON.stringify({'result' : false}));
+						} else {
+							res.writeHead(200, {'Conetent-Type': 'application/json;charset=utf-8'});
+							res.end(JSON.stringify({'result' : result}));
+						}
+					});
+				});
+			}
+		}
 	}else {
 		res.writeHead(404, {'Content-Type': 'text.plain'});
 		res.end("wrong Query");
