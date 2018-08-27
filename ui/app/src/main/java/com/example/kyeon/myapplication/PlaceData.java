@@ -1,5 +1,7 @@
 package com.example.kyeon.myapplication;
 
+import com.google.android.gms.maps.model.LatLng;
+
 public class PlaceData {
     private String type;
     private String name;
@@ -10,6 +12,17 @@ public class PlaceData {
     protected static final String jsonName = "name_kor";
     protected static final String jsonLat = "latitude";
     protected static final String jsonLng = "longitude";
+
+    public PlaceData() {
+
+    }
+
+    public PlaceData(String title, String snippet, LatLng latLng) {
+        this.name = title;
+        this.type = snippet;
+        this.lat = String.valueOf(latLng.latitude);
+        this.lng = String.valueOf(latLng.longitude);
+    }
 
     public String getType() {
         return type;

@@ -229,6 +229,7 @@ public class MapUtility {
                 infoWindowData.setScore(stringArray[4]);
                 infoWindowData.setOrder(Integer.parseInt(stringArray[5]));
                 infoWindowData.setPlaceID(stringArray[6]);
+                infoWindowData.setLatLng(new LatLng(latitude, longitude));
 
                 arrayList.add(infoWindowData);
                 //listOfPoints.add(new LatLng(latitude, longitude));

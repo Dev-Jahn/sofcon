@@ -86,11 +86,17 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
     private static final int bottomOffset = 36;
 
     private MapWrapperLayout wrapperLayout;
-    private ViewGroup infoWindow;
-    private TextView infoTitle;
-    private TextView infoSnippet;
-    private ImageButton infoButton;
-    private InfoWindowTouchListener infoWindowTouchListener;
+    private ViewGroup userInfoWindow;
+    private TextView userInfoTitle;
+    private TextView userInfoSnippet;
+    private ImageButton userInfoButton;
+    private InfoWindowTouchListener infoWindowDeleteListener;
+
+    private ViewGroup placeInfoWindow;
+    private TextView placeInfoTitle;
+    private TextView placeInfoSnippet;
+    private ImageButton placeInfoButton;
+    private InfoWindowTouchListener infoWindowAddListener;
 
     private String adjacencyPlaces;
 
@@ -126,10 +132,33 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         selectButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MapUtility.saveMapUserMarkers(getContext(), mMap, listMarkersToSave, intentData.getTitle(), 1);
+                placesUpdate();
             }
         });
 
+        /**
+         * Below codes are test code
+         */
+/**
+        Button saveButton = (Button)findViewById(R.id.testSaveButton);
+        saveButton.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View view) {
+                MapUtility.saveMapUserMarkers(getContext(), mMap, listMarkersToSave, intentData.getTitle(), 1);
+            }
+        });
+        Button loadButton = (Button)findViewById(R.id.testLoadButton);
+        loadButton.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View view) {
+                listMarkersToSave.clear();
+                ArrayList<InfoWindowData> arrayList = MapUtility.loadMapUserMarkers(getContext(), intentData.getTitle() + "1.dat");
+                for(InfoWindowData info : arrayList) {
+                    addUserMarker(info);
+                }
+                userMarkerCount = arrayList.size();
+            }
+        });
+*/
+        // test code end
         customMarkerOriginDestRoot = LayoutInflater.from(this).inflate(R.layout.marker_custom_origin_dest, null);
         tvCustomMarkerOriginDest = (TextView) customMarkerOriginDestRoot.findViewById(R.id.custom_marker_text);
         customMarkerWayPointRoot = LayoutInflater.from(this).inflate(R.layout.marker_custom_waypoint, null);
@@ -165,12 +194,12 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         wrapperLayout = (MapWrapperLayout) findViewById(R.id.wrapperLayout);
         wrapperLayout.init(mMap, MapWrapperLayout.getPixelsFromDp(getContext(), markerHeight + bottomOffset));
 
-        infoWindow = (ViewGroup) getLayoutInflater().inflate(R.layout.marker_window, null);
-        this.infoTitle = (TextView) infoWindow.findViewById(R.id.tvTitle);
-        this.infoSnippet = (TextView) infoWindow.findViewById(R.id.tvSnippet);
-        this.infoButton = (ImageButton) infoWindow.findViewById(R.id.ibDelete);
+        userInfoWindow = (ViewGroup) getLayoutInflater().inflate(R.layout.window_user_marker, null);
+        userInfoTitle = (TextView) userInfoWindow.findViewById(R.id.tvTitle);
+        userInfoSnippet = (TextView) userInfoWindow.findViewById(R.id.tvSnippet);
+        userInfoButton = (ImageButton) userInfoWindow.findViewById(R.id.ibDelete);
 
-        infoWindowTouchListener = new InfoWindowTouchListener(infoButton) {
+        infoWindowDeleteListener = new InfoWindowTouchListener(userInfoButton) {
             @Override
             protected void onClickConfirmed(View v, final Marker marker) {
                 //Toast.makeText(getContext(), "테스트 결과 이상 없음, 잘 눌림", Toast.LENGTH_SHORT).show();
@@ -180,24 +209,64 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                         .setCancelable(true)
                         .setPositiveButton(getResources().getString(R.string.remove_marker_ok),
                                 new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                removeUserMarker(marker);
-                            }
-                        })
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        PlaceData placeData = new PlaceData(marker.getTitle(), marker.getSnippet(), marker.getPosition());
+                                        addPlaceMarker(placeData);
+                                        removeUserMarker(marker);
+                                    }
+                                })
                         .setNegativeButton(getResources().getString(R.string.remove_marker_no),
                                 new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.cancel();
-                            }
-                        });
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        dialogInterface.cancel();
+                                    }
+                                });
 
                 AlertDialog dialog = alertDialog.create();
                 dialog.show();
             }
         };
-        infoButton.setOnTouchListener(infoWindowTouchListener);
+        userInfoButton.setOnTouchListener(infoWindowDeleteListener);
+
+        placeInfoWindow = (ViewGroup) getLayoutInflater().inflate(R.layout.window_place_marker, null);
+        placeInfoTitle = (TextView) placeInfoWindow.findViewById(R.id.tvTitle);
+        placeInfoSnippet = (TextView) placeInfoWindow.findViewById(R.id.tvSnippet);
+        placeInfoButton = (ImageButton) placeInfoWindow.findViewById(R.id.ibAdd);
+
+        infoWindowAddListener = new InfoWindowTouchListener(placeInfoButton) {
+            @Override
+            protected void onClickConfirmed(View v, final Marker marker) {
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+                alertDialog.setTitle(getResources().getString(R.string.add_marker_title))
+                        .setMessage(getResources().getString(R.string.add_marker_description))
+                        .setCancelable(true)
+                        .setPositiveButton(getResources().getString(R.string.add_marker_ok),
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        InfoWindowData infoWindowData = (InfoWindowData) marker.getTag();
+                                        infoWindowData.setOrder(userMarkerCount);
+                                        infoWindowData.setWindowType(InfoWindowData.TYPE_USER);
+                                        addUserMarker(infoWindowData);
+                                        removePlaceMarker(marker);
+                                    }
+                                })
+                        .setNegativeButton(getResources().getString(R.string.add_marker_no),
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        dialogInterface.cancel();
+                                    }
+                                });
+
+                AlertDialog dialog = alertDialog.create();
+                dialog.show();
+            }
+        };
+        placeInfoButton.setOnTouchListener(infoWindowAddListener);
+
         mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
             @Override
             public View getInfoWindow(Marker marker) {
@@ -207,15 +276,28 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             @Override
             @SuppressLint("ClickableViewAccessibility")
             public View getInfoContents(Marker marker) {
-                // Setting up the infoWindow with current's marker info
-                infoTitle.setText(marker.getTitle());
-                infoSnippet.setText(marker.getSnippet());
-                infoWindowTouchListener.setMarker(marker);
-
-                // We must call this to set the current marker and infoWindow references
-                // to the MapWrapperLayout
-                wrapperLayout.setMarkerWithInfoWindow(marker, infoWindow);
-                return infoWindow;
+                InfoWindowData infoWindowData = (InfoWindowData)marker.getTag();
+                if(infoWindowData.getWindowType() == InfoWindowData.TYPE_USER) {
+                    // Setting up the userInfoWindow with current's marker info
+                    userInfoTitle.setText(marker.getTitle());
+                    userInfoSnippet.setText(marker.getSnippet());
+                    infoWindowDeleteListener.setMarker(marker);
+                    // We must call this to set the current marker and userInfoWindow references
+                    // to the MapWrapperLayout
+                    wrapperLayout.setMarkerWithInfoWindow(marker, userInfoWindow);
+                    return userInfoWindow;
+                }
+                else if(infoWindowData.getWindowType() == InfoWindowData.TYPE_PLACE) {
+                    // Setting up the userInfoWindow with current's marker info
+                    placeInfoTitle.setText(marker.getTitle());
+                    placeInfoSnippet.setText(marker.getSnippet());
+                    infoWindowAddListener.setMarker(marker);
+                    // We must call this to set the current marker and userInfoWindow references
+                    // to the MapWrapperLayout
+                    wrapperLayout.setMarkerWithInfoWindow(marker, placeInfoWindow);
+                    return placeInfoWindow;
+                }
+                return null;
             }
         });
 
@@ -226,8 +308,6 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             @Override
             public void onMapClick(LatLng latLng) {
                 addUserMarker(latLng);
-                if (listLocsToDraw.size() >= 2)
-                    drawRoute();
             }
         });
 /**
@@ -238,14 +318,8 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(final Marker marker) {
-                // LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(LAYOUT_INFLATER_SERVICE);
-                // PopupMenu popupMenu = new PopupMenu(getApplicationContext(),
-                marker.setTitle("TITLE of MARKER");
-                marker.setSnippet("EXAMPLE SNIPPET");
-
                 if (marker.isInfoWindowShown())
                     marker.showInfoWindow();
-
                 /**
                  removeUserMarker(mMap, marker);
                  */
@@ -259,49 +333,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         mMap.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
             @Override
             public void onCameraChange(CameraPosition cameraPosition) {
-;               removePlaceMarker();
-                /**
-                 * to do list
-                 * - request adjacency places to server
-                 */
-                String currentLat = new Double(cameraPosition.target.latitude).toString();
-                String currentLng = new Double(cameraPosition.target.longitude).toString();
-                float len = 1.5f;
-                MapUtility.FindPlacesTask findPlacesTask = new MapUtility.FindPlacesTask(currentLat, currentLng, len);
-                findPlacesTask.execute();
-                try {
-                    adjacencyPlaces = findPlacesTask.get();
-                    Log.d("TESTTEST", adjacencyPlaces+" ");
-                    if(adjacencyPlaces != null) {
-                        ArrayList<PlaceData> placeDataArrayList = MapUtility.placeParsing(adjacencyPlaces);
-                        if(placeDataArrayList != null) {
-                            for(PlaceData placeData : placeDataArrayList) {
-                                /**
-                                boolean canAdd = true;
-                                for(LatLng latLng : listLocsOfPlaces) {
-                                    if(Double.parseDouble(placeData.getLat()) == latLng.latitude
-                                        && Double.parseDouble(placeData.getLng()) == latLng.longitude) {
-                                        continue;
-                                    }
-                                    else {
-                                        canAdd = false;
-                                        break;
-                                    }
-                                }
-                                if(canAdd == true) {
-                                    addPlaceMarker(placeData);
-                                    listLocsOfPlaces.add(placeData.getLat())
-                                }
-                                 */
-                                addPlaceMarker(placeData);
-                            }
-                        }
-                    }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                }
+//;               placesUpdate();
             }
         });
 
@@ -321,13 +353,53 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         getDeviceLocation();
     }
 
-    /**
-     * Deprecated.
-     * Because of korea's fucking map policy
-     * About 400 lines of code will be replaced to 10 lines of FUCKING straight line drawing code
-     * T_T
-     */
-    @Deprecated
+    private void placesUpdate() {
+        removeAllPlaceMarker();
+        CameraPosition cameraPosition = mMap.getCameraPosition();
+        /**
+         * to do list
+         * - request adjacency places to server
+         */
+        String currentLat = new Double(cameraPosition.target.latitude).toString();
+        String currentLng = new Double(cameraPosition.target.longitude).toString();
+        float len = 1.5f;
+        MapUtility.FindPlacesTask findPlacesTask = new MapUtility.FindPlacesTask(currentLat, currentLng, len);
+        findPlacesTask.execute();
+        try {
+            adjacencyPlaces = findPlacesTask.get();
+            Log.d("TESTTEST", adjacencyPlaces+" ");
+            if(adjacencyPlaces != null) {
+                ArrayList<PlaceData> placeDataArrayList = MapUtility.placeParsing(adjacencyPlaces);
+                if(placeDataArrayList != null) {
+                    for(PlaceData placeData : placeDataArrayList) {
+                        /**
+                         boolean canAdd = true;
+                         for(LatLng latLng : listLocsOfPlaces) {
+                         if(Double.parseDouble(placeData.getLat()) == latLng.latitude
+                         && Double.parseDouble(placeData.getLng()) == latLng.longitude) {
+                         continue;
+                         }
+                         else {
+                         canAdd = false;
+                         break;
+                         }
+                         }
+                         if(canAdd == true) {
+                         addPlaceMarker(placeData);
+                         listLocsOfPlaces.add(placeData.getLat())
+                         }
+                         */
+                        addPlaceMarker(placeData);
+                    }
+                }
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void drawRoute() {
         if (listLocsToDraw.size() >= 2) {
             LatLng origin = (LatLng) listLocsToDraw.get(listLocsToDraw.size() - 2);
@@ -347,12 +419,6 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         }
     }
 
-    /**
-     * Deprecated.
-     * Because of korea's fucking map policy
-     * About 400 lines of code will be replaced to 10 lines of FUCKING straight line drawing code
-     * T_T
-     */
     @Deprecated
     private void redrawRoute() {
         if (listLocsToDraw.size() >= 2) {
@@ -376,6 +442,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         listLocsToDraw.clear();
         userMarkerCount = 0;
         hashMapUserMarker.clear();
+        listMarkersToSave.clear();
     }
 
     private void addUserMarker(LatLng latLng) {
@@ -389,23 +456,37 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
 
         Marker marker = mMap.addMarker(options);
         hashMapUserMarker.put(userMarkerCount, marker);
-        saveMarkerTag(marker, userMarkerCount);
+        saveMarkerTag(marker, userMarkerCount, InfoWindowData.TYPE_USER);
         listMarkersToSave.add(marker);
+        drawRoute();
     }
 
-    protected void addUserMarker(LatLng latLng, InfoWindowData infoWindowData) {
-        listLocsToDraw.add(latLng);
+    protected void addUserMarker(InfoWindowData infoWindowData) {
+        listLocsToDraw.add(infoWindowData.getLatLng());
         // create a marker for starting location
         MarkerOptions options = new MarkerOptions();
-        options.position(latLng);
+        options.position(infoWindowData.getLatLng());
 
-        tvCustomMarkerOriginDest.setText(new Integer(infoWindowData.getOrder()).toString());
+        /**
+        if(infoWindowData.getOrder() != 1 && infoWindowData.getOrder() != userMarkerCount) {
+            tvCustomMarkerWayPoint.setText(new Integer(infoWindowData.getOrder()).toString());
+            options.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getContext(), customMarkerWayPointRoot)));
+        } else {
+            tvCustomMarkerOriginDest.setText(new Integer(infoWindowData.getOrder()).toString());
+            options.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getContext(), customMarkerOriginDestRoot)));
+        }
+         */
+        tvCustomMarkerOriginDest.setText(new Integer(++userMarkerCount).toString());
         options.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getContext(), customMarkerOriginDestRoot)));
 
         Marker marker = mMap.addMarker(options);
-        hashMapUserMarker.put(infoWindowData.getOrder(), marker);
+        //hashMapUserMarker.put(infoWindowData.getOrder(), marker);
+        hashMapUserMarker.put(userMarkerCount, marker);
 
-        saveMarkerTag(marker, infoWindowData.getOrder());
+        //saveMarkerTag(marker, infoWindowData.getOrder(), InfoWindowData.TYPE_USER);
+        saveMarkerTag(marker, userMarkerCount, InfoWindowData.TYPE_USER);
+        listMarkersToSave.add(marker);
+        drawRoute();
     }
 
     private void addPlaceMarker(PlaceData placeData) {
@@ -419,9 +500,10 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         Marker marker = mMap.addMarker(options);
         listLocsOfPlaces.add(position);
         hashMapPlaceMarker.put(placeMarkerCount++, marker);
+        saveMarkerTag(marker, placeMarkerCount, InfoWindowData.TYPE_PLACE);
     }
 
-    private void saveMarkerTag(Marker marker, int markerCount) {
+    private void saveMarkerTag(Marker marker, int markerCount, int windowType) {
         InfoWindowData infoWindowData = new InfoWindowData();
         infoWindowData.setTitle(marker.getTitle());
         infoWindowData.setSnippet(marker.getSnippet());
@@ -430,6 +512,8 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         infoWindowData.setScore(Integer.toString(markerCount));
         // it will be replaced to real placeID
         infoWindowData.setPlaceID(Integer.toString(markerCount));
+        infoWindowData.setLatLng(marker.getPosition());
+        infoWindowData.setWindowType(windowType);
 
         marker.setTag(infoWindowData);
     }
@@ -467,19 +551,37 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             }
             Marker currentMarker = mMap.addMarker(options);
             hashMapUserMarker.put(i + 1, currentMarker);
-            saveMarkerTag(currentMarker, i+1);
+            saveMarkerTag(currentMarker, i+1, InfoWindowData.TYPE_USER);
             listMarkersToSave.add(currentMarker);
         }
         redrawRoute();
     }
 
-    private void removePlaceMarker() {
+    private void removeAllPlaceMarker() {
         for(int i = 0; i < placeMarkerCount; ++i) {
             Marker marker = hashMapPlaceMarker.remove(i);
             marker.remove();
         }
         placeMarkerCount = 0;
         listLocsOfPlaces.clear();
+    }
+
+    private void removePlaceMarker(Marker marker) {
+        int newMarkerCount = 0;
+        InfoWindowData infoWindowData = (InfoWindowData) marker.getTag();
+        int removeIndex = infoWindowData.getOrder();
+        marker.remove();
+        HashMap<Integer, Marker> newHashMap = new HashMap<>();
+        hashMapPlaceMarker.remove(removeIndex);
+        for (int i = 0; i <= placeMarkerCount; ++i) {
+            if (hashMapPlaceMarker.containsKey(i)) {
+                Marker currentMarker = hashMapPlaceMarker.remove(i);
+                newHashMap.put(newMarkerCount++, currentMarker);
+            } else
+                continue;
+        }
+        hashMapPlaceMarker = newHashMap;
+        placeMarkerCount = newMarkerCount;
     }
     /**
      * Convert View to Bitmap

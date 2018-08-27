@@ -1,5 +1,7 @@
 package com.example.kyeon.myapplication;
 
+import com.google.android.gms.maps.model.LatLng;
+
 public class InfoWindowData {
     private String title;
     private String snippet;
@@ -7,6 +9,11 @@ public class InfoWindowData {
     private String score;
     private int order;
     private String placeID;
+    private LatLng latLng;
+    private int windowType;
+
+    public static final int TYPE_USER = 0x1234;
+    public static final int TYPE_PLACE = 0x4321;
 
     public String getTitle() {
         return title;
@@ -49,6 +56,22 @@ public class InfoWindowData {
     @Deprecated
     public void setPlaceID(String placeID) {
         this.placeID = placeID;
+    }
+
+    public LatLng getLatLng() {
+        return latLng;
+    }
+
+    public void setLatLng(LatLng latLng) {
+        this.latLng = latLng;
+    }
+
+    public int getWindowType() {
+        return windowType;
+    }
+
+    public void setWindowType(int windowType) {
+        this.windowType = windowType;
     }
 
     @Override
