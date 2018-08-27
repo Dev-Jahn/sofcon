@@ -93,7 +93,7 @@ list_tokens = ['corpus/token/eng_attraction.token',
 # In[7]:
 
 
-for csv in range(3,6):
+for csv in range(5,6):
     df = pd.read_csv(list_csv[csv])
     # filter charset exception
     df['review'] = df['review'].apply(lambda x: re.sub(r'[^ a-zA-Z0-9.!?\'\n]',' ',x))
@@ -103,11 +103,14 @@ for csv in range(3,6):
     try:
         os.stat(list_tokens[csv-3])
         with open(list_tokens[csv-3],'rb') as f:
-            pickle.dump(tokens, f)
+            pickle.load(f)
         print('Token loaded from ', list_tokens[csv-3])
     except:
         start = time.time()
         tokens = [nltk.word_tokenize(sentence) for sentence in array]
+        with open(list_tokens[csv-3],'wb') as f:
+            pickle.dump(tokens, f)
+        print('Token dumped to ', list_tokens[csv-3])
         print('Elapsed time(tokenize): ', str(time.time() - start), ' secs')
     
     pos_tagged = [nltk.pos_tag(sentence) for sentence in tokens]
