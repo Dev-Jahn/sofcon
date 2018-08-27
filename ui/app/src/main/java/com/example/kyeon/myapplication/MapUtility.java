@@ -167,9 +167,9 @@ public class MapUtility {
      * 1. How can I save these things?
      * 2. How can I name file?
      * 3. How can I load map instance using filename?
-     *    --> In loadMapInstance, argument fileName is hard to receive from other methods
+     *    --> In loadMapUserMarkers, argument fileName is hard to receive from other methods
      */
-    protected static void saveMapInstance(Context context, GoogleMap mMap, ArrayList<Marker> markers, String tripTitle, int day) {
+    protected static void saveMapUserMarkers(Context context, GoogleMap mMap, ArrayList<Marker> markers, String tripTitle, int day) {
         /**
          * It should be called in onPause
          */
@@ -207,13 +207,14 @@ public class MapUtility {
         }
     }
 
-    protected static void loadMapInstance(Context context, GoogleMap mMap, String fileName) {
+    protected static ArrayList<InfoWindowData> loadMapUserMarkers(Context context, String fileName) {
         /**
          * It should be called in onResume
          */
         try {
             FileInputStream input = context.openFileInput(fileName);
             DataInputStream din = new DataInputStream(input);
+            ArrayList<InfoWindowData> arrayList = new ArrayList<>();
             int sz = din.readInt(); // Read line count
             for (int i = 0; i < sz; i++) {
                 String str = din.readUTF();
@@ -228,13 +229,17 @@ public class MapUtility {
                 infoWindowData.setScore(stringArray[4]);
                 infoWindowData.setOrder(Integer.parseInt(stringArray[5]));
                 infoWindowData.setPlaceID(stringArray[6]);
+
+                arrayList.add(infoWindowData);
                 //listOfPoints.add(new LatLng(latitude, longitude));
             }
             din.close();
+            return arrayList;
             //loadMarkers(listOfPoints);
         } catch (IOException exc) {
             exc.printStackTrace();
         }
+        return null;
     }
 
     protected static class FindPlacesTask extends AsyncTask<String, Void, String> {
