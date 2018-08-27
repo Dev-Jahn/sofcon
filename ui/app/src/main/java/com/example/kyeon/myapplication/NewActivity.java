@@ -269,6 +269,10 @@ public class NewActivity extends AppCompatActivity {
                 d_mm = month;
                 d_dd = day;
 
+                a_yy = year;
+                a_mm = month;
+                a_dd = day;
+
                 check_dyy = Integer.parseInt(d_yy);
                 check_dmm = Integer.parseInt(d_mm);
                 check_ddd = Integer.parseInt(d_dd);
@@ -294,6 +298,9 @@ public class NewActivity extends AppCompatActivity {
                 else {
                     Button button = (Button) findViewById(R.id.departingDate);
                     button.setText(date);
+
+                    Button Abutton = (Button) findViewById(R.id.arrivingDate);
+                    Abutton.setText(date);
                 }
 
             }
