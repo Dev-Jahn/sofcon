@@ -21,6 +21,11 @@
     <string name="large_text">
 
     </string>
+    <string name="travel_setup">여행을 떠나기 위한 세부 설정을 시작합니다▼</string>
+    <string name="travel_title_setup">여행의 제목을 정해주세요!!</string>
+    <string name="how_many_people">몇 명과 함께 여행을 떠나나요?</string>
+    <string name="travel_date">언제부터 언제까지 여행을 떠나나요?</string>
+    <string name="travel_place">어디로 떠나나요?</string>
     <string name="person">인원 수</string>
     <string name="departure_date">출발 일자</string>
     <string name="end_date">종료 일자</string>

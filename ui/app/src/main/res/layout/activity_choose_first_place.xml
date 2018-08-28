@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.example.kyeon.myapplication.MapWrapperLayout
+    android:id="@+id/wrapperLayout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -22,28 +23,6 @@
         android:layout_above="@id/lowerLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
-    <LinearLayout
-        android:id="@+id/lowerLayout"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:gravity="right">
-
-        <Button
-            android:id="@+id/cancelButton"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/reset_trip"/>
-
-        <Button
-            android:id="@+id/selectButton"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/select"/>
-
-    </LinearLayout>
 
 
 </com.example.kyeon.myapplication.MapWrapperLayout>

@@ -22,4 +22,9 @@
     <string name="add_marker_description">선택한 경유지를 여행 경로에 포함하시겠습니까?</string>
     <string name="add_marker_ok">네</string>
     <string name="add_marker_no">아니오</string>
+
+    <string name="set_place_title">여행 시작장소 결정</string>
+    <string name="set_place_description">선택한 장소를 여행의 시작장소로 하시겠습니까?</string>
+    <string name="set_place_ok">네</string>
+    <string name="set_place_no">아니오</string>
 </resources>

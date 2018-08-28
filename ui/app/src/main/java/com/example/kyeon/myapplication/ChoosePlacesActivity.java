@@ -705,7 +705,6 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                                 Toast.makeText(getContext(), getResources().getString(R.string.locUpdateMessage), Toast.LENGTH_LONG).show();
                             }
                         } else {
-                            Toast.makeText(getContext(), "Current location is null. Using defaults.", Toast.LENGTH_LONG).show();
                             // default location is soongsil univ.
                             mMap.moveCamera(CameraUpdateFactory
                                     .newLatLngZoom(MapUtility.DEFAULT_LOCATION, MapUtility.ZOOM_LEVEL));
