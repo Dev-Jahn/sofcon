@@ -132,7 +132,15 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         selectButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
+                /**
+                 * places update is just test code.
+                 * In release, this function will be replaced to another.
+                 */
                 placesUpdate();
+                /**
+                 * day 1 will be replaced to appropirate numbers (by using intent data)
+                 */
+                MapUtility.saveMapUserMarkers(getContext(), mMap, listMarkersToSave, intentData.getTitle(), 1);
             }
         });
 
@@ -445,6 +453,12 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         listMarkersToSave.clear();
     }
 
+    /**
+     * Deprecated method
+     * --> Just Test code for map click
+     * --> In release, below codes are forbidden
+     */
+    @Deprecated
     private void addUserMarker(LatLng latLng) {
         listLocsToDraw.add(latLng);
         // create a marker for starting location
@@ -480,6 +494,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         options.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getContext(), customMarkerOriginDestRoot)));
 
         Marker marker = mMap.addMarker(options);
+        loadMarkerTag(marker, infoWindowData);
         //hashMapUserMarker.put(infoWindowData.getOrder(), marker);
         hashMapUserMarker.put(userMarkerCount, marker);
 
@@ -516,6 +531,11 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         infoWindowData.setWindowType(windowType);
 
         marker.setTag(infoWindowData);
+    }
+
+    private void loadMarkerTag(Marker marker, InfoWindowData infoWindowData) {
+        marker.setTitle(infoWindowData.getTitle());
+        marker.setSnippet(infoWindowData.getSnippet());
     }
 
     private void removeUserMarker(Marker marker) {
