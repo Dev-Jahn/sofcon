@@ -1,5 +1,7 @@
 #jupyter notebook checkpoint
 .ipynb_checkpoints/
+#directory to ignore
+.ignore/
 # nltk dataset
 nltk_data/
 # Built application files
