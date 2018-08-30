@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -55,6 +56,8 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
     private HashMap<Integer, Marker> hashMapPlaceMarker = new HashMap<>();
     private static int placeMarkerCount = 0;
 
+    private static final float DEFAULT_LEN = 2.5f;
+
     private String adjacencyPlaces;
 
     private static final int markerHeight = 0;
@@ -81,6 +84,14 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
                 finish();
                 ChooseFirstPlaceActivity.this.overridePendingTransition(R.anim.stay, R.anim.sliding_down);
             }
+        });
+
+        Button scanButton = (Button)findViewById(R.id.scanButton);
+        scanButton.setOnClickListener(new Button.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               placesUpdate(DEFAULT_LEN);
+           }
         });
 
         // Construct a FusedLocationProviderClient.
@@ -119,30 +130,7 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
         infoWindowAddListener = new InfoWindowTouchListener(placeInfoButton) {
             @Override
             protected void onClickConfirmed(View v, final Marker marker) {
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
-                alertDialog.setTitle(getResources().getString(R.string.set_place_title))
-                        .setMessage(getResources().getString(R.string.set_place_description))
-                        .setCancelable(true)
-                        .setPositiveButton(getResources().getString(R.string.set_place_ok),
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        /**
-                                         * end code of choose first place . . .
-                                         * I will do it ASAP
-                                         */
-                                    }
-                                })
-                        .setNegativeButton(getResources().getString(R.string.set_place_no),
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        dialogInterface.cancel();
-                                    }
-                                });
-
-                AlertDialog dialog = alertDialog.create();
-                dialog.show();
+                showSelectDialog(marker.getPosition());
             }
         };
         placeInfoButton.setOnTouchListener(infoWindowAddListener);
@@ -168,7 +156,15 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
             }
         });
 
-
+        /**
+         * map click listener
+         */
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                showSelectDialog(latLng);
+            }
+        });
     }
 
     /**
@@ -263,7 +259,7 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
         return this;
     }
 
-    private void placesUpdate() {
+    private void placesUpdate(float len) {
         removeAllPlaceMarker();
         CameraPosition cameraPosition = mMap.getCameraPosition();
         /**
@@ -272,33 +268,17 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
          */
         String currentLat = new Double(cameraPosition.target.latitude).toString();
         String currentLng = new Double(cameraPosition.target.longitude).toString();
-        float len = 1.5f;
+        if(len == 0) {
+            len = 2.5f;
+        }
         MapUtility.FindPlacesTask findPlacesTask = new MapUtility.FindPlacesTask(currentLat, currentLng, len);
         findPlacesTask.execute();
         try {
             adjacencyPlaces = findPlacesTask.get();
-            Log.d("TESTTEST", adjacencyPlaces+" ");
             if(adjacencyPlaces != null) {
                 ArrayList<PlaceData> placeDataArrayList = MapUtility.placeParsing(adjacencyPlaces);
                 if(placeDataArrayList != null) {
                     for(PlaceData placeData : placeDataArrayList) {
-                        /**
-                         boolean canAdd = true;
-                         for(LatLng latLng : listLocsOfPlaces) {
-                         if(Double.parseDouble(placeData.getLat()) == latLng.latitude
-                         && Double.parseDouble(placeData.getLng()) == latLng.longitude) {
-                         continue;
-                         }
-                         else {
-                         canAdd = false;
-                         break;
-                         }
-                         }
-                         if(canAdd == true) {
-                         addPlaceMarker(placeData);
-                         listLocsOfPlaces.add(placeData.getLat())
-                         }
-                         */
                         addPlaceMarker(placeData);
                     }
                 }
@@ -346,5 +326,32 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
         infoWindowData.setWindowType(windowType);
 
         marker.setTag(infoWindowData);
+    }
+
+    private void showSelectDialog(LatLng latLng) {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+        alertDialog.setTitle(getResources().getString(R.string.set_place_title))
+                .setMessage(getResources().getString(R.string.set_place_description))
+                .setCancelable(true)
+                .setPositiveButton(getResources().getString(R.string.set_place_ok),
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                /**
+                                 * end code of choose first place . . .
+                                 * I will do it ASAP
+                                 */
+                            }
+                        })
+                .setNegativeButton(getResources().getString(R.string.set_place_no),
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.cancel();
+                            }
+                        });
+
+        AlertDialog dialog = alertDialog.create();
+        dialog.show();
     }
 }

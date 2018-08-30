@@ -3,6 +3,7 @@
     <string name="to_base_location">현재 위치로</string>
     <string name="reset_trip">초기화</string>
     <string name="select">여행 확정</string>
+    <string name="scan_places">주변 장소 확인</string>
     <string name="cameraResetErrorMessage">카메라 위치 조정이 불가능합니다.</string>
     <string name="cameraResetMessage">처음 위치로 이동합니다.</string>
     <string name="locUpdateErrorMessage">현재 위치를 받아올 수 없습니다.</string>
