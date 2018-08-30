@@ -328,7 +328,7 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
         marker.setTag(infoWindowData);
     }
 
-    private void showSelectDialog(LatLng latLng) {
+    private void showSelectDialog(final LatLng latLng) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
         alertDialog.setTitle(getResources().getString(R.string.set_place_title))
                 .setMessage(getResources().getString(R.string.set_place_description))
@@ -341,6 +341,9 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
                                  * end code of choose first place . . .
                                  * I will do it ASAP
                                  */
+                                Intent intent = new Intent();
+                                intent.putExtra("FirstPlaceLatLng", latLng);
+                                setResult(RESULT_OK, intent);
                             }
                         })
                 .setNegativeButton(getResources().getString(R.string.set_place_no),

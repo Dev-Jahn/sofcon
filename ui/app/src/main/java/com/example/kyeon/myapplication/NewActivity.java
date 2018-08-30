@@ -46,6 +46,7 @@ public class NewActivity extends AppCompatActivity {
     AlertDialog.Builder placeEmpty;
 
     final int REQUEST_CODE_CALENDAR = 100;
+    final int REQUEST_CODE_CHOOSE_PLACE = 0x11;
     int AorD = 0;
     int yy = 0, mm = 0, dd = 0; // yy : defines year | mm : defines month | dd : defines day
     String today_yy, today_mm, today_dd;
@@ -56,6 +57,8 @@ public class NewActivity extends AppCompatActivity {
 
     int check_dyy = 0, check_dmm = 0, check_ddd = 0;
     int check_ayy = 0, check_amm = 0, check_add = 0;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +92,7 @@ public class NewActivity extends AppCompatActivity {
                 *    --> 2. Request to server.
                 */
                // Intent intent = new Intent();
+               // startActivityForResult();
                Toast.makeText(getApplicationContext(), "기능 곧 추가할 예정", Toast.LENGTH_SHORT).show();
            }
         });
@@ -235,6 +239,7 @@ public class NewActivity extends AppCompatActivity {
 
     }
 
+
     public void onclickCalendarA(View v) {
         Intent intent = new Intent(this, Calendar.class);
         startActivityForResult(intent, REQUEST_CODE_CALENDAR);
@@ -342,6 +347,12 @@ public class NewActivity extends AppCompatActivity {
                     button.setText(date);
                 }
             }
+        } else if(requestCode == REQUEST_CODE_CHOOSE_PLACE) {
+            /**
+             * Do things...
+             * I will write codes as soon as possible.
+             * - archslaveCW
+             */
         }
     }
 
