@@ -212,7 +212,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                 alertDialog.setTitle(getResources().getString(R.string.remove_marker_title))
                         .setMessage(getResources().getString(R.string.remove_marker_description))
                         .setCancelable(true)
-                        .setPositiveButton(getResources().getString(R.string.remove_marker_ok),
+                        .setPositiveButton(getResources().getString(R.string.dialog_ok),
                                 new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -221,7 +221,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                                         removeUserMarker(marker);
                                     }
                                 })
-                        .setNegativeButton(getResources().getString(R.string.remove_marker_no),
+                        .setNegativeButton(getResources().getString(R.string.dialog_no),
                                 new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -247,7 +247,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                 alertDialog.setTitle(getResources().getString(R.string.add_marker_title))
                         .setMessage(getResources().getString(R.string.add_marker_description))
                         .setCancelable(true)
-                        .setPositiveButton(getResources().getString(R.string.add_marker_ok),
+                        .setPositiveButton(getResources().getString(R.string.dialog_ok),
                                 new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -258,7 +258,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                                         removePlaceMarker(marker);
                                     }
                                 })
-                        .setNegativeButton(getResources().getString(R.string.add_marker_no),
+                        .setNegativeButton(getResources().getString(R.string.dialog_no),
                                 new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {

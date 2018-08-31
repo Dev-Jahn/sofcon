@@ -19,7 +19,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -38,6 +37,7 @@ public class NewActivity extends AppCompatActivity {
     private String[] navItems = {"메인 메뉴", "새 여행", "내 여행", "다른 여행","추천 여행"};
 
     public static final String TAG = "Alert_Dialog";
+    private boolean isFirstPlaceSet = false;
     AlertDialog.Builder alertDialogCalendar;
     AlertDialog.Builder personEmpty;
     AlertDialog.Builder departingEmpty;
@@ -58,8 +58,6 @@ public class NewActivity extends AppCompatActivity {
     int check_dyy = 0, check_dmm = 0, check_ddd = 0;
     int check_ayy = 0, check_amm = 0, check_add = 0;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,26 +72,37 @@ public class NewActivity extends AppCompatActivity {
         final ArrayAdapter sAdapter = ArrayAdapter.createFromResource(this, R.array.question, android.R.layout.simple_spinner_dropdown_item);
         Button departButton, arrivingButton;
 
-        /**
-         * @arthor archslaveCW
-         *
-         * "select place button"(style:text button)'s event
-         */
         btnPlaceName = (Button)findViewById(R.id.btnPlaceName);
         btnPlaceName.setOnClickListener(new Button.OnClickListener() {
            @Override
            public void onClick(View v) {
-               /**
-                * - TO DO LIST -
-                * 1. Set intent to get a place
-                * 2. How about using place picker? --> well... it's not good.
-                * 3. I should show some information about places using what?
-                *    --> 1. Google place picker
-                *    --> 2. Request to server.
-                */
-               // Intent intent = new Intent();
-               // startActivityForResult();
-               Toast.makeText(getApplicationContext(), "기능 곧 추가할 예정", Toast.LENGTH_SHORT).show();
+               if(isFirstPlaceSet) {
+                   AlertDialog.Builder alertDialog = new AlertDialog.Builder(getApplicationContext());
+                   alertDialog.setTitle(getResources().getString(R.string.replace_place_title))
+                           .setMessage(getResources().getString(R.string.replace_place_description))
+                           .setCancelable(true)
+                           .setPositiveButton(getResources().getString(R.string.dialog_ok),
+                                   new DialogInterface.OnClickListener() {
+                                       @Override
+                                       public void onClick(DialogInterface dialogInterface, int i) {
+                                           Intent intent = new Intent(NewActivity.this, ChooseFirstPlaceActivity.class);
+                                           startActivityForResult(intent, REQUEST_CODE_CHOOSE_PLACE);
+                                       }
+                                   })
+                           .setNegativeButton(getResources().getString(R.string.dialog_no),
+                                   new DialogInterface.OnClickListener() {
+                                       @Override
+                                       public void onClick(DialogInterface dialogInterface, int i) {
+                                           dialogInterface.cancel();
+                                       }
+                                   });
+
+                   AlertDialog dialog = alertDialog.create();
+                   dialog.show();
+               } else {
+                   Intent intent = new Intent(NewActivity.this, ChooseFirstPlaceActivity.class);
+                   startActivityForResult(intent, REQUEST_CODE_CHOOSE_PLACE);
+               }
            }
         });
 
@@ -348,12 +357,13 @@ public class NewActivity extends AppCompatActivity {
                 }
             }
         } else if(requestCode == REQUEST_CODE_CHOOSE_PLACE) {
-            /**
-             * Do things...
-             * I will write codes as soon as possible.
-             * - archslaveCW
-             */
+            String placeName = data.getStringExtra(ChooseFirstPlaceActivity.PLACE_NAME);
+            if(placeName == null)
+                placeName = getResources().getString(R.string.default_placename);
+            btnPlaceName.setText(placeName);
+            isFirstPlaceSet = true;
         }
+
     }
 
     @Override

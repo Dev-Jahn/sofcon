@@ -57,6 +57,8 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
     private static int placeMarkerCount = 0;
 
     private static final float DEFAULT_LEN = 2.5f;
+    protected static final String PLACE_LATLNG = "FirstPlaceLatLng";
+    protected static final String PLACE_NAME = "FirstPlaceName";
 
     private String adjacencyPlaces;
 
@@ -130,7 +132,7 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
         infoWindowAddListener = new InfoWindowTouchListener(placeInfoButton) {
             @Override
             protected void onClickConfirmed(View v, final Marker marker) {
-                showSelectDialog(marker.getPosition());
+                showSelectDialog(marker);
             }
         };
         placeInfoButton.setOnTouchListener(infoWindowAddListener);
@@ -328,25 +330,26 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
         marker.setTag(infoWindowData);
     }
 
+    /**
+     * This overloading codes need refactoring
+     * --> combine using call a method
+     */
     private void showSelectDialog(final LatLng latLng) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
         alertDialog.setTitle(getResources().getString(R.string.set_place_title))
                 .setMessage(getResources().getString(R.string.set_place_description))
                 .setCancelable(true)
-                .setPositiveButton(getResources().getString(R.string.set_place_ok),
+                .setPositiveButton(getResources().getString(R.string.dialog_ok),
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                /**
-                                 * end code of choose first place . . .
-                                 * I will do it ASAP
-                                 */
                                 Intent intent = new Intent();
-                                intent.putExtra("FirstPlaceLatLng", latLng);
+                                intent.putExtra(PLACE_LATLNG, latLng);
                                 setResult(RESULT_OK, intent);
+                                finish();
                             }
                         })
-                .setNegativeButton(getResources().getString(R.string.set_place_no),
+                .setNegativeButton(getResources().getString(R.string.dialog_no),
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
@@ -357,4 +360,33 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
         AlertDialog dialog = alertDialog.create();
         dialog.show();
     }
+
+    private void showSelectDialog(final Marker marker) {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+        alertDialog.setTitle(getResources().getString(R.string.set_place_title))
+                .setMessage(getResources().getString(R.string.set_place_description))
+                .setCancelable(true)
+                .setPositiveButton(getResources().getString(R.string.dialog_ok),
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Intent intent = new Intent();
+                                intent.putExtra(PLACE_LATLNG, marker.getPosition());
+                                intent.putExtra(PLACE_NAME, marker.getTitle());
+                                setResult(RESULT_OK, intent);
+                                finish();
+                            }
+                        })
+                .setNegativeButton(getResources().getString(R.string.dialog_no),
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.cancel();
+                            }
+                        });
+
+        AlertDialog dialog = alertDialog.create();
+        dialog.show();
+    }
+
 }
