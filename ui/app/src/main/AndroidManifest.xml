@@ -38,6 +38,7 @@
         <activity
             android:name=".TripPlanActivity"
             android:label="@string/title_activity_test" />
+        <activity android:name=".ChooseFirstPlaceActivity" />
         <activity
             android:name=".ChoosePlacesActivity"
             android:label="@string/title_activity_choose_places" />

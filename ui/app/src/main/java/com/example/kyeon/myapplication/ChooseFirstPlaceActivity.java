@@ -57,7 +57,8 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
     private static int placeMarkerCount = 0;
 
     private static final float DEFAULT_LEN = 2.5f;
-    protected static final String PLACE_LATLNG = "FirstPlaceLatLng";
+    protected static final String PLACE_LAT = "FirstPlaceLat";
+    protected static final String PLACE_LNG = "FirstPlaceLng";
     protected static final String PLACE_NAME = "FirstPlaceName";
 
     private String adjacencyPlaces;
@@ -167,6 +168,16 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
                 showSelectDialog(latLng);
             }
         });
+
+        mLocationPermissionGranted = PermissionCodes.getPermission(getContext(), getActivity(),
+                Manifest.permission.ACCESS_FINE_LOCATION, PermissionCodes.REQUEST_CODE_FINE_LOCATION);
+        PermissionCodes.getPermission(getContext(), getActivity(),
+                Manifest.permission.ACCESS_COARSE_LOCATION, PermissionCodes.REQUEST_CODE_COARSE_LOCATION);
+
+        // Turn on the My Location layer and the related control on the map.
+        updateLocationUI();
+        // Get the current location of the device and set the position of the map.
+        getDeviceLocation();
     }
 
     /**
@@ -295,7 +306,8 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
     private void removeAllPlaceMarker() {
         for(int i = 0; i < placeMarkerCount; ++i) {
             Marker marker = hashMapPlaceMarker.remove(i);
-            marker.remove();
+            if(marker != null)
+                marker.remove();
         }
         placeMarkerCount = 0;
         listLocsOfPlaces.clear();
@@ -344,7 +356,8 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 Intent intent = new Intent();
-                                intent.putExtra(PLACE_LATLNG, latLng);
+                                intent.putExtra(PLACE_LAT, latLng.latitude);
+                                intent.putExtra(PLACE_LNG, latLng.longitude);
                                 setResult(RESULT_OK, intent);
                                 finish();
                             }
@@ -371,7 +384,8 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 Intent intent = new Intent();
-                                intent.putExtra(PLACE_LATLNG, marker.getPosition());
+                                intent.putExtra(PLACE_LAT, marker.getPosition().latitude);
+                                intent.putExtra(PLACE_LNG, marker.getPosition().longitude);
                                 intent.putExtra(PLACE_NAME, marker.getTitle());
                                 setResult(RESULT_OK, intent);
                                 finish();
