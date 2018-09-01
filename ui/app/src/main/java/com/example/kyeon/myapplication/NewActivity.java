@@ -363,7 +363,7 @@ public class NewActivity extends AppCompatActivity {
         } else if(requestCode == REQUEST_CODE_CHOOSE_PLACE) {
             String placeName = data.getStringExtra(ChooseFirstPlaceActivity.PLACE_NAME);
             if(placeName == null)
-                placeName = getResources().getString(R.string.default_placename);
+                placeName = getResources().getString(R.string.default_place_name);
             btnPlaceName.setText(placeName);
             // placeLatLng = data.getStringExtra
             isFirstPlaceSet = true;

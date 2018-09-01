@@ -9,7 +9,7 @@
     <string name="locUpdateErrorMessage">현재 위치를 받아올 수 없습니다.</string>
     <string name="locUpdateMessage">현재 위치로 이동이 성공하였습니다.</string>
 
-    <string name="default_placename">사용자 지정장소</string>
+    <string name="default_place_name">사용자 지정장소</string>
 
     <string name="logStringOfCW">Error-Debug</string>
     <string name="default_title">여행장소 XX</string>

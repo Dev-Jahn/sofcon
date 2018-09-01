@@ -80,7 +80,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
     private TextView tvCustomMarkerWayPoint;
 
     private static final int markerHeight = 0;
-    private static final int bottomOffset = 36;
+    private static final int bottomOffset = 18;
 
     private MapWrapperLayout wrapperLayout;
     private ViewGroup userInfoWindow;
@@ -315,19 +315,12 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                 addUserMarker(latLng);
             }
         });
-/**
- *
- * ---> It has a big problem
- *      1. How can i use popup window smoothly?
- **/
+
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(final Marker marker) {
                 if (marker.isInfoWindowShown())
                     marker.showInfoWindow();
-                /**
-                 removeUserMarker(mMap, marker);
-                 */
                 return false;
             }
         });
@@ -357,23 +350,6 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                 ArrayList<PlaceData> placeDataArrayList = MapUtility.placeParsing(adjacencyPlaces);
                 if(placeDataArrayList != null) {
                     for(PlaceData placeData : placeDataArrayList) {
-                        /**
-                         boolean canAdd = true;
-                         for(LatLng latLng : listLocsOfPlaces) {
-                         if(Double.parseDouble(placeData.getLat()) == latLng.latitude
-                         && Double.parseDouble(placeData.getLng()) == latLng.longitude) {
-                         continue;
-                         }
-                         else {
-                         canAdd = false;
-                         break;
-                         }
-                         }
-                         if(canAdd == true) {
-                         addPlaceMarker(placeData);
-                         listLocsOfPlaces.add(placeData.getLat())
-                         }
-                         */
                         addPlaceMarker(placeData);
                     }
                 }
@@ -458,24 +434,13 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         MarkerOptions options = new MarkerOptions();
         options.position(infoWindowData.getLatLng());
 
-        /**
-        if(infoWindowData.getOrder() != 1 && infoWindowData.getOrder() != userMarkerCount) {
-            tvCustomMarkerWayPoint.setText(new Integer(infoWindowData.getOrder()).toString());
-            options.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getContext(), customMarkerWayPointRoot)));
-        } else {
-            tvCustomMarkerOriginDest.setText(new Integer(infoWindowData.getOrder()).toString());
-            options.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getContext(), customMarkerOriginDestRoot)));
-        }
-         */
         tvCustomMarkerOriginDest.setText(new Integer(++userMarkerCount).toString());
         options.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getContext(), customMarkerOriginDestRoot)));
 
         Marker marker = mMap.addMarker(options);
         loadMarkerTag(marker, infoWindowData);
-        //hashMapUserMarker.put(infoWindowData.getOrder(), marker);
         hashMapUserMarker.put(userMarkerCount, marker);
 
-        //saveMarkerTag(marker, infoWindowData.getOrder(), InfoWindowData.TYPE_USER);
         saveMarkerTag(marker, userMarkerCount, InfoWindowData.TYPE_USER);
         listMarkersToSave.add(marker);
         drawRoute();
@@ -587,27 +552,15 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         DisplayMetrics displayMetrics = new DisplayMetrics();
         ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        //view.setLayoutParams(new ViewGroup.LayoutParams(200, 200));
         view.measure(displayMetrics.widthPixels, displayMetrics.heightPixels);
         view.layout(0, 0, displayMetrics.widthPixels, displayMetrics.heightPixels);
         view.buildDrawingCache();
         Bitmap bitmap = Bitmap.createBitmap(view.getMeasuredWidth(), view.getMeasuredHeight(), Bitmap.Config.ARGB_8888);
-        //Bitmap smallBitmap = Bitmap.createScaledBitmap(bitmap, 200, 200, true);
 
         Canvas canvas = new Canvas(bitmap);
-        //Canvas canvas = new Canvas(smallBitmap);
         view.draw(canvas);
 
         return bitmap;
-        //return smallBitmap;
-        /**
-         * ---> Deprecated Codes
-         *
-         * BitmapDrawable bitmapDrawable = (BitmapDrawable)getResources().getDrawable(R.drawable.map_marker_icon_red);
-         * Bitmap bitmap = bitmapDrawable.getBitmap();
-         * Bitmap smallMarker = Bitmap.createScaledBitmap(bitmap, 200, 200, false);
-         * return smallMarker;
-         */
     }
 
     /**
@@ -725,10 +678,6 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
 
     /**
      * This method requests a code for draw routes between origin & dest
-     *
-     * @param origin
-     * @param dest
-     * @return url
      */
     private String getDirectionsUrl(LatLng origin, LatLng dest) {
 
