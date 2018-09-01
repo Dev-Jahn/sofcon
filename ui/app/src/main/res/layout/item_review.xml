@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:focusableInTouchMode="true"
+        android:animateLayoutChanges="true"
         android:background="@drawable/corners_light"
         android:orientation="vertical">
 
@@ -68,13 +69,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:tint="@color/colorPrimary"
                 app:srcCompat="@drawable/baseline_add_photo_alternate_black_48dp" />
 
-            <EditText
+            <com.example.kyeon.myapplication.LinedEditText
                 android:id="@+id/reviewtext"
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
+                android:gravity="top"
+                android:background="@color/colorAccentLight"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
                 android:ems="10"
                 android:inputType="textMultiLine" />
 

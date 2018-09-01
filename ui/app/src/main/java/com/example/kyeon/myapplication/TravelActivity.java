@@ -128,7 +128,7 @@ public class TravelActivity extends AppCompatActivity {
             {
                 place_names.add("아몰랑");
             }
-            place_names.add("씨발왜안되");
+            place_names.add("asdaccxx");
 
             recyclerView.setAdapter(new DiaryAdapter(this, place_names, R.layout.fragment_travel));
             recyclerView.setItemAnimator(new DefaultItemAnimator());

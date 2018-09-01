@@ -24,7 +24,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity" />
         <activity android:name=".NewActivity" />
-        <activity android:name=".MyTrip" />
+        <activity android:name=".MyTripActivity" />
         <activity
             android:name=".Calendar"
             android:theme="@android:style/Theme.Dialog" />
@@ -50,7 +50,8 @@
 
         <activity android:name=".TravelActivity" />
         <activity android:name=".OthersTravel" />
-        <activity android:name=".RecommendTravel"></activity>
+        <activity android:name=".RecommendTravel" />
+        <activity android:name=".TagActivity"></activity>
     </application>
 
 </manifest>

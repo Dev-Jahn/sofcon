@@ -4,7 +4,7 @@ public class Rec_Item {
     int image;
     String title;
     String content;
-    String color;
+    int color;
 
     public int getImage() {
         return this.image;
@@ -20,9 +20,9 @@ public class Rec_Item {
         return this.content;
     }
 
-    public String getColor() { return  this.color;}
+    public int getColor() { return  this.color;}
 
-    Rec_Item(int image, String title, String content, String color)
+    Rec_Item(int image, String title, String content, int color)
     {
         this.image = image;
         this.title = title;
