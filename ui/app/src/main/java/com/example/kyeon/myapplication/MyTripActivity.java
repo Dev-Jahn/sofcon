@@ -23,7 +23,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyTrip extends AppCompatActivity {
+public class MyTripActivity extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
     LinearLayout navigation_MyTrip_background;

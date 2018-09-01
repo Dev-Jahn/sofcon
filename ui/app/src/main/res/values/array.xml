@@ -7,4 +7,58 @@
         <item>4명</item>
         <item>단체(4인 이상)</item>
     </string-array>
+
+    <string-array name="tags">
+        <item>일식</item>
+        <item>중식</item>
+        <item>분위기 좋은</item>
+        <item>저렴한</item>
+        <item>가족과 함께</item>
+        <item>인기 많은</item>
+        <item>24시간</item>
+        <item>치킨</item>
+        <item>포장가능</item>
+        <item>카페</item>
+        <item>빵집</item>
+        <item>인기맛집</item>
+        <item>TV에 나온</item>
+        <item>태그</item>
+        <item>태그</item>
+        <item>태그</item>
+        <item>태태그그</item>
+        <item>태태그태그그태그태그그</item>
+        <item>태그</item>
+        <item>태그</item>
+        <item>태태그태그그태그그</item>
+        <item>태태그태태그태그그</item>
+        <item>태그</item>
+        <item>태그</item>
+        <item>태그</item>
+        <item>태그</item>
+        <item>태태그태그그태그그</item>
+        <item>태태그태그태그</item>
+        <item>태그</item>
+        <item>태그</item>
+        <item>태태그태태그태그그</item>
+        <item>태태그태태그그</item>
+        <item>태그</item>
+        <item>태그</item>
+        <item>태그</item>
+        <item>태태그태그태태그그</item>
+        <item>태태그태그그</item>
+        <item>태태그태그태그태그그</item>
+        <item>태태태그태그그</item>
+        <item>태그</item>
+        <item>태그</item>
+        <item>태그</item>
+        <item>태그</item>
+        <item>태그</item>
+        <item>태태그태그태그태그그</item>
+        <item>태태그태그태그태그그</item>
+        <item>태태그그태그태그그</item>
+        <item>태태그그태태그그</item>
+        <item>태태그태그그태그태그태그그</item>
+        <item>태태그태그태그그</item>
+        <item>태태그태그태태그태그태그태그그</item>
+    </string-array>
 </resources>

@@ -1,6 +1,7 @@
 package com.example.kyeon.myapplication;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
@@ -37,7 +38,7 @@ public class RecommendItemAdapter extends RecyclerView.Adapter<RecommendItemAdap
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecommendItemAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final RecommendItemAdapter.ViewHolder holder, int position) {
         final Rec_Item rec_item = items.get(position);
         Drawable drawable = ContextCompat.getDrawable(context, rec_item.getImage());
         holder.image.setImageDrawable(drawable);
@@ -48,6 +49,11 @@ public class RecommendItemAdapter extends RecyclerView.Adapter<RecommendItemAdap
         holder.cardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(holder.title.getText().equals(context.getResources().getString(R.string.customized_tour)))
+                {
+                    Intent i = new Intent(context, TagActivity.class);
+                    context.startActivity(i);
+                }
                 Toast.makeText(context, rec_item.getTitle(), Toast.LENGTH_SHORT).show();
             }
         });

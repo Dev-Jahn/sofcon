@@ -59,7 +59,7 @@ public class OthersTravel extends AppCompatActivity {
                     case 2:
                         intent = new Intent(
                                 getApplicationContext(),
-                                MyTrip.class);
+                                MyTripActivity.class);
                         startActivity(intent);
                         finish();
                         break;

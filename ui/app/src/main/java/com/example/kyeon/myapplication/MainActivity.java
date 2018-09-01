@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity{
                     case 2:
                         intent = new Intent(
                                 getApplicationContext(),
-                                MyTrip.class);
+                                MyTripActivity.class);
                         startActivity(intent);
                         break;
                     case 3:
@@ -202,7 +202,7 @@ public class MainActivity extends AppCompatActivity{
             public void onClick(View view) {
                 Intent intent = new Intent(
                         getApplicationContext(),
-                        MyTrip.class);
+                        MyTripActivity.class);
                 startActivity(intent);
             }
         });
