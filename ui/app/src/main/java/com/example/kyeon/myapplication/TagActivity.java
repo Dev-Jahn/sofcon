@@ -1,8 +1,5 @@
 package com.example.kyeon.myapplication;
 
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.TransitionDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
