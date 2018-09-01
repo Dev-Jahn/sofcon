@@ -19,7 +19,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -38,6 +37,7 @@ public class NewActivity extends AppCompatActivity {
     private String[] navItems = {"메인 메뉴", "새 여행", "내 여행", "다른 여행","추천 여행"};
 
     public static final String TAG = "Alert_Dialog";
+    private boolean isFirstPlaceSet = false;
     AlertDialog.Builder alertDialogCalendar;
     AlertDialog.Builder personEmpty;
     AlertDialog.Builder departingEmpty;
@@ -46,6 +46,7 @@ public class NewActivity extends AppCompatActivity {
     AlertDialog.Builder placeEmpty;
 
     final int REQUEST_CODE_CALENDAR = 100;
+    final int REQUEST_CODE_CHOOSE_PLACE = 0x11;
     int AorD = 0;
     int yy = 0, mm = 0, dd = 0; // yy : defines year | mm : defines month | dd : defines day
     String today_yy, today_mm, today_dd;
@@ -71,25 +72,37 @@ public class NewActivity extends AppCompatActivity {
         final ArrayAdapter sAdapter = ArrayAdapter.createFromResource(this, R.array.question, android.R.layout.simple_spinner_dropdown_item);
         Button departButton, arrivingButton;
 
-        /**
-         * @arthor archslaveCW
-         *
-         * "select place button"(style:text button)'s event
-         */
         btnPlaceName = (Button)findViewById(R.id.btnPlaceName);
         btnPlaceName.setOnClickListener(new Button.OnClickListener() {
            @Override
            public void onClick(View v) {
-               /**
-                * - TO DO LIST -
-                * 1. Set intent to get a place
-                * 2. How about using place picker? --> well... it's not good.
-                * 3. I should show some information about places using what?
-                *    --> 1. Google place picker
-                *    --> 2. Request to server.
-                */
-               // Intent intent = new Intent();
-               Toast.makeText(getApplicationContext(), "기능 곧 추가할 예정", Toast.LENGTH_SHORT).show();
+               if(isFirstPlaceSet) {
+                   AlertDialog.Builder alertDialog = new AlertDialog.Builder(getApplicationContext());
+                   alertDialog.setTitle(getResources().getString(R.string.replace_place_title))
+                           .setMessage(getResources().getString(R.string.replace_place_description))
+                           .setCancelable(true)
+                           .setPositiveButton(getResources().getString(R.string.dialog_ok),
+                                   new DialogInterface.OnClickListener() {
+                                       @Override
+                                       public void onClick(DialogInterface dialogInterface, int i) {
+                                           Intent intent = new Intent(NewActivity.this, ChooseFirstPlaceActivity.class);
+                                           startActivityForResult(intent, REQUEST_CODE_CHOOSE_PLACE);
+                                       }
+                                   })
+                           .setNegativeButton(getResources().getString(R.string.dialog_no),
+                                   new DialogInterface.OnClickListener() {
+                                       @Override
+                                       public void onClick(DialogInterface dialogInterface, int i) {
+                                           dialogInterface.cancel();
+                                       }
+                                   });
+
+                   AlertDialog dialog = alertDialog.create();
+                   dialog.show();
+               } else {
+                   Intent intent = new Intent(NewActivity.this, ChooseFirstPlaceActivity.class);
+                   startActivityForResult(intent, REQUEST_CODE_CHOOSE_PLACE);
+               }
            }
         });
 
@@ -235,6 +248,7 @@ public class NewActivity extends AppCompatActivity {
 
     }
 
+
     public void onclickCalendarA(View v) {
         Intent intent = new Intent(this, Calendar.class);
         startActivityForResult(intent, REQUEST_CODE_CALENDAR);
@@ -269,6 +283,10 @@ public class NewActivity extends AppCompatActivity {
                 d_mm = month;
                 d_dd = day;
 
+                a_yy = year;
+                a_mm = month;
+                a_dd = day;
+
                 check_dyy = Integer.parseInt(d_yy);
                 check_dmm = Integer.parseInt(d_mm);
                 check_ddd = Integer.parseInt(d_dd);
@@ -294,6 +312,9 @@ public class NewActivity extends AppCompatActivity {
                 else {
                     Button button = (Button) findViewById(R.id.departingDate);
                     button.setText(date);
+
+                    Button Abutton = (Button) findViewById(R.id.arrivingDate);
+                    Abutton.setText(date);
                 }
 
             }
@@ -335,7 +356,14 @@ public class NewActivity extends AppCompatActivity {
                     button.setText(date);
                 }
             }
+        } else if(requestCode == REQUEST_CODE_CHOOSE_PLACE) {
+            String placeName = data.getStringExtra(ChooseFirstPlaceActivity.PLACE_NAME);
+            if(placeName == null)
+                placeName = getResources().getString(R.string.default_placename);
+            btnPlaceName.setText(placeName);
+            isFirstPlaceSet = true;
         }
+
     }
 
     @Override

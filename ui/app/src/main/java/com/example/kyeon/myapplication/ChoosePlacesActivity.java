@@ -28,7 +28,6 @@ import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -38,8 +37,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 
 import org.json.JSONObject;
 
@@ -86,11 +83,17 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
     private static final int bottomOffset = 36;
 
     private MapWrapperLayout wrapperLayout;
-    private ViewGroup infoWindow;
-    private TextView infoTitle;
-    private TextView infoSnippet;
-    private ImageButton infoButton;
-    private InfoWindowTouchListener infoWindowTouchListener;
+    private ViewGroup userInfoWindow;
+    private TextView userInfoTitle;
+    private TextView userInfoSnippet;
+    private ImageButton userInfoButton;
+    private InfoWindowTouchListener infoWindowDeleteListener;
+
+    private ViewGroup placeInfoWindow;
+    private TextView placeInfoTitle;
+    private TextView placeInfoSnippet;
+    private ImageButton placeInfoButton;
+    private InfoWindowTouchListener infoWindowAddListener;
 
     private String adjacencyPlaces;
 
@@ -126,10 +129,41 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         selectButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
+                /**
+                 * places update is just test code.
+                 * In release, this function will be replaced to another.
+                 */
+                placesUpdate();
+                /**
+                 * day 1 will be replaced to appropirate numbers (by using intent data)
+                 */
                 MapUtility.saveMapUserMarkers(getContext(), mMap, listMarkersToSave, intentData.getTitle(), 1);
             }
         });
 
+        /**
+         * Below codes are test code
+         */
+/**
+        Button saveButton = (Button)findViewById(R.id.testSaveButton);
+        saveButton.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View view) {
+                MapUtility.saveMapUserMarkers(getContext(), mMap, listMarkersToSave, intentData.getTitle(), 1);
+            }
+        });
+        Button loadButton = (Button)findViewById(R.id.testLoadButton);
+        loadButton.setOnClickListener(new Button.OnClickListener() {
+            public void onClick(View view) {
+                listMarkersToSave.clear();
+                ArrayList<InfoWindowData> arrayList = MapUtility.loadMapUserMarkers(getContext(), intentData.getTitle() + "1.dat");
+                for(InfoWindowData info : arrayList) {
+                    addUserMarker(info);
+                }
+                userMarkerCount = arrayList.size();
+            }
+        });
+*/
+        // test code end
         customMarkerOriginDestRoot = LayoutInflater.from(this).inflate(R.layout.marker_custom_origin_dest, null);
         tvCustomMarkerOriginDest = (TextView) customMarkerOriginDestRoot.findViewById(R.id.custom_marker_text);
         customMarkerWayPointRoot = LayoutInflater.from(this).inflate(R.layout.marker_custom_waypoint, null);
@@ -165,12 +199,12 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         wrapperLayout = (MapWrapperLayout) findViewById(R.id.wrapperLayout);
         wrapperLayout.init(mMap, MapWrapperLayout.getPixelsFromDp(getContext(), markerHeight + bottomOffset));
 
-        infoWindow = (ViewGroup) getLayoutInflater().inflate(R.layout.marker_window, null);
-        this.infoTitle = (TextView) infoWindow.findViewById(R.id.tvTitle);
-        this.infoSnippet = (TextView) infoWindow.findViewById(R.id.tvSnippet);
-        this.infoButton = (ImageButton) infoWindow.findViewById(R.id.ibDelete);
+        userInfoWindow = (ViewGroup) getLayoutInflater().inflate(R.layout.window_user_marker, null);
+        userInfoTitle = (TextView) userInfoWindow.findViewById(R.id.tvTitle);
+        userInfoSnippet = (TextView) userInfoWindow.findViewById(R.id.tvSnippet);
+        userInfoButton = (ImageButton) userInfoWindow.findViewById(R.id.ibDelete);
 
-        infoWindowTouchListener = new InfoWindowTouchListener(infoButton) {
+        infoWindowDeleteListener = new InfoWindowTouchListener(userInfoButton) {
             @Override
             protected void onClickConfirmed(View v, final Marker marker) {
                 //Toast.makeText(getContext(), "테스트 결과 이상 없음, 잘 눌림", Toast.LENGTH_SHORT).show();
@@ -178,26 +212,66 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                 alertDialog.setTitle(getResources().getString(R.string.remove_marker_title))
                         .setMessage(getResources().getString(R.string.remove_marker_description))
                         .setCancelable(true)
-                        .setPositiveButton(getResources().getString(R.string.remove_marker_ok),
+                        .setPositiveButton(getResources().getString(R.string.dialog_ok),
                                 new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                removeUserMarker(marker);
-                            }
-                        })
-                        .setNegativeButton(getResources().getString(R.string.remove_marker_no),
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        PlaceData placeData = new PlaceData(marker.getTitle(), marker.getSnippet(), marker.getPosition());
+                                        addPlaceMarker(placeData);
+                                        removeUserMarker(marker);
+                                    }
+                                })
+                        .setNegativeButton(getResources().getString(R.string.dialog_no),
                                 new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.cancel();
-                            }
-                        });
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        dialogInterface.cancel();
+                                    }
+                                });
 
                 AlertDialog dialog = alertDialog.create();
                 dialog.show();
             }
         };
-        infoButton.setOnTouchListener(infoWindowTouchListener);
+        userInfoButton.setOnTouchListener(infoWindowDeleteListener);
+
+        placeInfoWindow = (ViewGroup) getLayoutInflater().inflate(R.layout.window_place_marker, null);
+        placeInfoTitle = (TextView) placeInfoWindow.findViewById(R.id.tvTitle);
+        placeInfoSnippet = (TextView) placeInfoWindow.findViewById(R.id.tvSnippet);
+        placeInfoButton = (ImageButton) placeInfoWindow.findViewById(R.id.ibAdd);
+
+        infoWindowAddListener = new InfoWindowTouchListener(placeInfoButton) {
+            @Override
+            protected void onClickConfirmed(View v, final Marker marker) {
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+                alertDialog.setTitle(getResources().getString(R.string.add_marker_title))
+                        .setMessage(getResources().getString(R.string.add_marker_description))
+                        .setCancelable(true)
+                        .setPositiveButton(getResources().getString(R.string.dialog_ok),
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        InfoWindowData infoWindowData = (InfoWindowData) marker.getTag();
+                                        infoWindowData.setOrder(userMarkerCount);
+                                        infoWindowData.setWindowType(InfoWindowData.TYPE_USER);
+                                        addUserMarker(infoWindowData);
+                                        removePlaceMarker(marker);
+                                    }
+                                })
+                        .setNegativeButton(getResources().getString(R.string.dialog_no),
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        dialogInterface.cancel();
+                                    }
+                                });
+
+                AlertDialog dialog = alertDialog.create();
+                dialog.show();
+            }
+        };
+        placeInfoButton.setOnTouchListener(infoWindowAddListener);
+
         mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
             @Override
             public View getInfoWindow(Marker marker) {
@@ -207,15 +281,28 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             @Override
             @SuppressLint("ClickableViewAccessibility")
             public View getInfoContents(Marker marker) {
-                // Setting up the infoWindow with current's marker info
-                infoTitle.setText(marker.getTitle());
-                infoSnippet.setText(marker.getSnippet());
-                infoWindowTouchListener.setMarker(marker);
-
-                // We must call this to set the current marker and infoWindow references
-                // to the MapWrapperLayout
-                wrapperLayout.setMarkerWithInfoWindow(marker, infoWindow);
-                return infoWindow;
+                InfoWindowData infoWindowData = (InfoWindowData)marker.getTag();
+                if(infoWindowData.getWindowType() == InfoWindowData.TYPE_USER) {
+                    // Setting up the userInfoWindow with current's marker info
+                    userInfoTitle.setText(marker.getTitle());
+                    userInfoSnippet.setText(marker.getSnippet());
+                    infoWindowDeleteListener.setMarker(marker);
+                    // We must call this to set the current marker and userInfoWindow references
+                    // to the MapWrapperLayout
+                    wrapperLayout.setMarkerWithInfoWindow(marker, userInfoWindow);
+                    return userInfoWindow;
+                }
+                else if(infoWindowData.getWindowType() == InfoWindowData.TYPE_PLACE) {
+                    // Setting up the userInfoWindow with current's marker info
+                    placeInfoTitle.setText(marker.getTitle());
+                    placeInfoSnippet.setText(marker.getSnippet());
+                    infoWindowAddListener.setMarker(marker);
+                    // We must call this to set the current marker and userInfoWindow references
+                    // to the MapWrapperLayout
+                    wrapperLayout.setMarkerWithInfoWindow(marker, placeInfoWindow);
+                    return placeInfoWindow;
+                }
+                return null;
             }
         });
 
@@ -226,8 +313,6 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             @Override
             public void onMapClick(LatLng latLng) {
                 addUserMarker(latLng);
-                if (listLocsToDraw.size() >= 2)
-                    drawRoute();
             }
         });
 /**
@@ -238,14 +323,8 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(final Marker marker) {
-                // LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(LAYOUT_INFLATER_SERVICE);
-                // PopupMenu popupMenu = new PopupMenu(getApplicationContext(),
-                marker.setTitle("TITLE of MARKER");
-                marker.setSnippet("EXAMPLE SNIPPET");
-
                 if (marker.isInfoWindowShown())
                     marker.showInfoWindow();
-
                 /**
                  removeUserMarker(mMap, marker);
                  */
@@ -253,81 +332,59 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             }
         });
 
-        /**
-         * camera move listener
-         */
-        mMap.setOnCameraChangeListener(new GoogleMap.OnCameraChangeListener() {
-            @Override
-            public void onCameraChange(CameraPosition cameraPosition) {
-;               removePlaceMarker();
-                /**
-                 * to do list
-                 * - request adjacency places to server
-                 */
-                String currentLat = new Double(cameraPosition.target.latitude).toString();
-                String currentLng = new Double(cameraPosition.target.longitude).toString();
-                float len = 1.5f;
-                MapUtility.FindPlacesTask findPlacesTask = new MapUtility.FindPlacesTask(currentLat, currentLng, len);
-                findPlacesTask.execute();
-                try {
-                    adjacencyPlaces = findPlacesTask.get();
-                    Log.d("TESTTEST", adjacencyPlaces+" ");
-                    if(adjacencyPlaces != null) {
-                        ArrayList<PlaceData> placeDataArrayList = MapUtility.placeParsing(adjacencyPlaces);
-                        if(placeDataArrayList != null) {
-                            for(PlaceData placeData : placeDataArrayList) {
-                                /**
-                                boolean canAdd = true;
-                                for(LatLng latLng : listLocsOfPlaces) {
-                                    if(Double.parseDouble(placeData.getLat()) == latLng.latitude
-                                        && Double.parseDouble(placeData.getLng()) == latLng.longitude) {
-                                        continue;
-                                    }
-                                    else {
-                                        canAdd = false;
-                                        break;
-                                    }
-                                }
-                                if(canAdd == true) {
-                                    addPlaceMarker(placeData);
-                                    listLocsOfPlaces.add(placeData.getLat())
-                                }
-                                 */
-                                addPlaceMarker(placeData);
-                            }
-                        }
-                    }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        /**
-         * Below code is deprecated.
-         */
-        // MapUtility.resetCameraLocation(mMap, getContext(), getActivity());
-
         mLocationPermissionGranted = PermissionCodes.getPermission(getContext(), getActivity(),
                 Manifest.permission.ACCESS_FINE_LOCATION, PermissionCodes.REQUEST_CODE_FINE_LOCATION);
         PermissionCodes.getPermission(getContext(), getActivity(),
                 Manifest.permission.ACCESS_COARSE_LOCATION, PermissionCodes.REQUEST_CODE_COARSE_LOCATION);
-        // Turn on the My Location layer and the related control on the map.
-        updateLocationUI();
-
-        // Get the current location of the device and set the position of the map.
-        getDeviceLocation();
     }
 
-    /**
-     * Deprecated.
-     * Because of korea's fucking map policy
-     * About 400 lines of code will be replaced to 10 lines of FUCKING straight line drawing code
-     * T_T
-     */
-    @Deprecated
+    private void placesUpdate() {
+        removeAllPlaceMarker();
+        CameraPosition cameraPosition = mMap.getCameraPosition();
+        /**
+         * to do list
+         * - request adjacency places to server
+         */
+        String currentLat = new Double(cameraPosition.target.latitude).toString();
+        String currentLng = new Double(cameraPosition.target.longitude).toString();
+        float len = 1.5f;
+        MapUtility.FindPlacesTask findPlacesTask = new MapUtility.FindPlacesTask(currentLat, currentLng, len);
+        findPlacesTask.execute();
+        try {
+            adjacencyPlaces = findPlacesTask.get();
+            Log.d("TESTTEST", adjacencyPlaces+" ");
+            if(adjacencyPlaces != null) {
+                ArrayList<PlaceData> placeDataArrayList = MapUtility.placeParsing(adjacencyPlaces);
+                if(placeDataArrayList != null) {
+                    for(PlaceData placeData : placeDataArrayList) {
+                        /**
+                         boolean canAdd = true;
+                         for(LatLng latLng : listLocsOfPlaces) {
+                         if(Double.parseDouble(placeData.getLat()) == latLng.latitude
+                         && Double.parseDouble(placeData.getLng()) == latLng.longitude) {
+                         continue;
+                         }
+                         else {
+                         canAdd = false;
+                         break;
+                         }
+                         }
+                         if(canAdd == true) {
+                         addPlaceMarker(placeData);
+                         listLocsOfPlaces.add(placeData.getLat())
+                         }
+                         */
+                        addPlaceMarker(placeData);
+                    }
+                }
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void drawRoute() {
         if (listLocsToDraw.size() >= 2) {
             LatLng origin = (LatLng) listLocsToDraw.get(listLocsToDraw.size() - 2);
@@ -347,12 +404,6 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         }
     }
 
-    /**
-     * Deprecated.
-     * Because of korea's fucking map policy
-     * About 400 lines of code will be replaced to 10 lines of FUCKING straight line drawing code
-     * T_T
-     */
     @Deprecated
     private void redrawRoute() {
         if (listLocsToDraw.size() >= 2) {
@@ -376,8 +427,15 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         listLocsToDraw.clear();
         userMarkerCount = 0;
         hashMapUserMarker.clear();
+        listMarkersToSave.clear();
     }
 
+    /**
+     * Deprecated method
+     * --> Just Test code for map click
+     * --> In release, below codes are forbidden
+     */
+    @Deprecated
     private void addUserMarker(LatLng latLng) {
         listLocsToDraw.add(latLng);
         // create a marker for starting location
@@ -389,23 +447,38 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
 
         Marker marker = mMap.addMarker(options);
         hashMapUserMarker.put(userMarkerCount, marker);
-        saveMarkerTag(marker, userMarkerCount);
+        saveMarkerTag(marker, userMarkerCount, InfoWindowData.TYPE_USER);
         listMarkersToSave.add(marker);
+        drawRoute();
     }
 
-    protected void addUserMarker(LatLng latLng, InfoWindowData infoWindowData) {
-        listLocsToDraw.add(latLng);
+    protected void addUserMarker(InfoWindowData infoWindowData) {
+        listLocsToDraw.add(infoWindowData.getLatLng());
         // create a marker for starting location
         MarkerOptions options = new MarkerOptions();
-        options.position(latLng);
+        options.position(infoWindowData.getLatLng());
 
-        tvCustomMarkerOriginDest.setText(new Integer(infoWindowData.getOrder()).toString());
+        /**
+        if(infoWindowData.getOrder() != 1 && infoWindowData.getOrder() != userMarkerCount) {
+            tvCustomMarkerWayPoint.setText(new Integer(infoWindowData.getOrder()).toString());
+            options.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getContext(), customMarkerWayPointRoot)));
+        } else {
+            tvCustomMarkerOriginDest.setText(new Integer(infoWindowData.getOrder()).toString());
+            options.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getContext(), customMarkerOriginDestRoot)));
+        }
+         */
+        tvCustomMarkerOriginDest.setText(new Integer(++userMarkerCount).toString());
         options.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getContext(), customMarkerOriginDestRoot)));
 
         Marker marker = mMap.addMarker(options);
-        hashMapUserMarker.put(infoWindowData.getOrder(), marker);
+        loadMarkerTag(marker, infoWindowData);
+        //hashMapUserMarker.put(infoWindowData.getOrder(), marker);
+        hashMapUserMarker.put(userMarkerCount, marker);
 
-        saveMarkerTag(marker, infoWindowData.getOrder());
+        //saveMarkerTag(marker, infoWindowData.getOrder(), InfoWindowData.TYPE_USER);
+        saveMarkerTag(marker, userMarkerCount, InfoWindowData.TYPE_USER);
+        listMarkersToSave.add(marker);
+        drawRoute();
     }
 
     private void addPlaceMarker(PlaceData placeData) {
@@ -419,9 +492,10 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         Marker marker = mMap.addMarker(options);
         listLocsOfPlaces.add(position);
         hashMapPlaceMarker.put(placeMarkerCount++, marker);
+        saveMarkerTag(marker, placeMarkerCount, InfoWindowData.TYPE_PLACE);
     }
 
-    private void saveMarkerTag(Marker marker, int markerCount) {
+    private void saveMarkerTag(Marker marker, int markerCount, int windowType) {
         InfoWindowData infoWindowData = new InfoWindowData();
         infoWindowData.setTitle(marker.getTitle());
         infoWindowData.setSnippet(marker.getSnippet());
@@ -430,8 +504,15 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         infoWindowData.setScore(Integer.toString(markerCount));
         // it will be replaced to real placeID
         infoWindowData.setPlaceID(Integer.toString(markerCount));
+        infoWindowData.setLatLng(marker.getPosition());
+        infoWindowData.setWindowType(windowType);
 
         marker.setTag(infoWindowData);
+    }
+
+    private void loadMarkerTag(Marker marker, InfoWindowData infoWindowData) {
+        marker.setTitle(infoWindowData.getTitle());
+        marker.setSnippet(infoWindowData.getSnippet());
     }
 
     private void removeUserMarker(Marker marker) {
@@ -467,19 +548,37 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             }
             Marker currentMarker = mMap.addMarker(options);
             hashMapUserMarker.put(i + 1, currentMarker);
-            saveMarkerTag(currentMarker, i+1);
+            saveMarkerTag(currentMarker, i+1, InfoWindowData.TYPE_USER);
             listMarkersToSave.add(currentMarker);
         }
         redrawRoute();
     }
 
-    private void removePlaceMarker() {
+    private void removeAllPlaceMarker() {
         for(int i = 0; i < placeMarkerCount; ++i) {
             Marker marker = hashMapPlaceMarker.remove(i);
             marker.remove();
         }
         placeMarkerCount = 0;
         listLocsOfPlaces.clear();
+    }
+
+    private void removePlaceMarker(Marker marker) {
+        int newMarkerCount = 0;
+        InfoWindowData infoWindowData = (InfoWindowData) marker.getTag();
+        int removeIndex = infoWindowData.getOrder();
+        marker.remove();
+        HashMap<Integer, Marker> newHashMap = new HashMap<>();
+        hashMapPlaceMarker.remove(removeIndex);
+        for (int i = 0; i <= placeMarkerCount; ++i) {
+            if (hashMapPlaceMarker.containsKey(i)) {
+                Marker currentMarker = hashMapPlaceMarker.remove(i);
+                newHashMap.put(newMarkerCount++, currentMarker);
+            } else
+                continue;
+        }
+        hashMapPlaceMarker = newHashMap;
+        placeMarkerCount = newMarkerCount;
     }
     /**
      * Convert View to Bitmap
@@ -527,73 +626,6 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                     mLocationPermissionGranted = true;
                 }
             }
-        }
-        updateLocationUI();
-    }
-
-    /**
-     * Updates the map's UI settings based on whether the user has granted location permission.
-     */
-    private void updateLocationUI() {
-        if (mMap == null) {
-            return;
-        }
-        try {
-            if (mLocationPermissionGranted) {
-                mMap.setMyLocationEnabled(true);
-                mMap.getUiSettings().setMyLocationButtonEnabled(true);
-            } else {
-                mMap.setMyLocationEnabled(false);
-                mMap.getUiSettings().setMyLocationButtonEnabled(false);
-                mLastKnownLocation = null;
-                PermissionCodes.getPermission(getContext(), getActivity(),
-                        Manifest.permission.ACCESS_FINE_LOCATION, PermissionCodes.REQUEST_CODE_FINE_LOCATION);
-                PermissionCodes.getPermission(getContext(), getActivity(),
-                        Manifest.permission.ACCESS_COARSE_LOCATION, PermissionCodes.REQUEST_CODE_COARSE_LOCATION);
-            }
-        } catch (SecurityException e) {
-            Log.e("Error-Exception", e.getMessage());
-        }
-    }
-
-    /**
-     * Gets the current location of the device, and positions the map's camera.
-     */
-    private void getDeviceLocation() {
-        /*
-         * Get the best and most recent location of the device, which may be null in rare
-         * cases when a location is not available.
-         */
-        try {
-            if (mLocationPermissionGranted) {
-                Task<Location> locationResult = mFusedLocationProviderClient.getLastLocation();
-                locationResult.addOnCompleteListener(this, new OnCompleteListener<Location>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Location> task) {
-                        if (task.isSuccessful()) {
-                            // Set the map's camera position to the current location of the device.
-                            mLastKnownLocation = task.getResult();
-                            if (mLastKnownLocation == null) {
-                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                                        MapUtility.DEFAULT_LOCATION, MapUtility.ZOOM_LEVEL));
-                            } else {
-                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                                        new LatLng(mLastKnownLocation.getLatitude(),
-                                                mLastKnownLocation.getLongitude()), MapUtility.ZOOM_LEVEL));
-                                Toast.makeText(getContext(), getResources().getString(R.string.locUpdateMessage), Toast.LENGTH_LONG).show();
-                            }
-                        } else {
-                            Toast.makeText(getContext(), "Current location is null. Using defaults.", Toast.LENGTH_LONG).show();
-                            // default location is soongsil univ.
-                            mMap.moveCamera(CameraUpdateFactory
-                                    .newLatLngZoom(MapUtility.DEFAULT_LOCATION, MapUtility.ZOOM_LEVEL));
-                            mMap.getUiSettings().setMyLocationButtonEnabled(false);
-                        }
-                    }
-                });
-            }
-        } catch (SecurityException e) {
-            Log.e("Exception: %s", e.getMessage());
         }
     }
 

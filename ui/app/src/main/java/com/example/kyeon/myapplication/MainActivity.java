@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity{
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                Log.d("sibal", "onAnimationEnd: c : " + c1);
+                Log.d("image", "onAnimationEnd: c : " + c1);
 
                 if(c1 % 2 == 0)
                 {

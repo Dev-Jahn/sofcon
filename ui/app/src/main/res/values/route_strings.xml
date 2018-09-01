@@ -3,10 +3,13 @@
     <string name="to_base_location">현재 위치로</string>
     <string name="reset_trip">초기화</string>
     <string name="select">여행 확정</string>
+    <string name="scan_places">주변 장소 확인</string>
     <string name="cameraResetErrorMessage">카메라 위치 조정이 불가능합니다.</string>
     <string name="cameraResetMessage">처음 위치로 이동합니다.</string>
     <string name="locUpdateErrorMessage">현재 위치를 받아올 수 없습니다.</string>
     <string name="locUpdateMessage">현재 위치로 이동이 성공하였습니다.</string>
+
+    <string name="default_placename">사용자 지정장소</string>
 
     <string name="logStringOfCW">Error-Debug</string>
     <string name="default_title">여행장소 XX</string>
@@ -15,6 +18,16 @@
 
     <string name="remove_marker_title">경유지 제거</string>
     <string name="remove_marker_description">선택한 경유지를 여행 경로에서 제외하시겠습니까?</string>
-    <string name="remove_marker_ok">네</string>
-    <string name="remove_marker_no">아니오</string>
+
+    <string name="add_marker_title">경유지 추가</string>
+    <string name="add_marker_description">선택한 경유지를 여행 경로에 포함하시겠습니까?</string>
+
+    <string name="set_place_title">여행 시작장소 결정</string>
+    <string name="set_place_description">선택한 장소를 여행의 시작장소로 하시겠습니까?</string>
+
+    <string name="replace_place_title">여행 시작장소 변경</string>
+    <string name="replace_place_description">현재 여행 시작장소를 대신할 새로운 시작장소를 고르시겠습니까?</string>
+
+    <string name="dialog_ok">네</string>
+    <string name="dialog_no">아니오</string>
 </resources>
