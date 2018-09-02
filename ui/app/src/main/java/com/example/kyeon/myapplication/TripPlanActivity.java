@@ -39,6 +39,9 @@ public class TripPlanActivity extends AppCompatActivity {
     String d_yy, d_mm, d_dd;
     String a_yy, a_mm, a_dd;
     String etitle, person_count, eplace;
+    private String eFirstPlace;
+    private String ePlaceLat;
+    private String ePlaceLng;
     long diff_days;
 
     int day_count;
@@ -126,6 +129,9 @@ public class TripPlanActivity extends AppCompatActivity {
         private static final String ARG_SECTION_NUMBER = "section_number";
         private static final String ARG_SECTION_LAST = "last_number";
         private static final String ARG_SECTION_TITLE = "title_text";
+        private static final String ARG_SECTION_FIRST_PLACE = ChooseFirstPlaceActivity.PLACE_NAME;
+        private static final String ARG_SECTION_PLACE_LAT = ChooseFirstPlaceActivity.PLACE_LAT;
+        private static final String ARG_SECTION_PLACE_LNG = ChooseFirstPlaceActivity.PLACE_LNG;
 
         public PlaceholderFragment() {
         }
@@ -134,22 +140,30 @@ public class TripPlanActivity extends AppCompatActivity {
          * Returns a new instance of this fragment for the given section
          * number.
          */
-        public static PlaceholderFragment newInstance(int sectionNumber, String title) {
+        public static PlaceholderFragment newInstance(int sectionNumber, String title, String firstPlace,
+                                                      String placeLat, String placeLng) {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
             args.putString(ARG_SECTION_TITLE, title);
+            args.putString(ARG_SECTION_FIRST_PLACE, firstPlace);
+            args.putString(ARG_SECTION_PLACE_LAT, placeLat);
+            args.putString(ARG_SECTION_PLACE_LAT, placeLng);
             fragment.setArguments(args);
             return fragment;
         }
 
 
-        public static PlaceholderFragment newInstance(int sectionNumber, int count, String title) {
+        public static PlaceholderFragment newInstance(int sectionNumber, int count, String title, String firstPlace,
+                                                      String placeLat, String placeLng) {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
             args.putInt(ARG_SECTION_LAST, count);
             args.putString(ARG_SECTION_TITLE, title);
+            args.putString(ARG_SECTION_FIRST_PLACE, firstPlace);
+            args.putString(ARG_SECTION_PLACE_LAT, placeLat);
+            args.putString(ARG_SECTION_PLACE_LAT, placeLng);
             fragment.setArguments(args);
             return fragment;
         }
@@ -188,7 +202,10 @@ public class TripPlanActivity extends AppCompatActivity {
                 Log.d("test", "onCreateView: "+ getArguments().getInt(ARG_SECTION_NUMBER));
                 Intent choose_places = new Intent(getActivity(), ChoosePlacesActivity.class);
                 choose_places.putExtra(ARG_SECTION_TITLE, getArguments().getString(ARG_SECTION_TITLE));
-                startActivityForResult(choose_places,getArguments().getInt(ARG_SECTION_NUMBER));
+                choose_places.putExtra(ARG_SECTION_FIRST_PLACE, getArguments().getString(ARG_SECTION_FIRST_PLACE));
+                choose_places.putExtra(ARG_SECTION_PLACE_LAT, getArguments().getString(ARG_SECTION_PLACE_LAT));
+                choose_places.putExtra(ARG_SECTION_PLACE_LNG, getArguments().getString(ARG_SECTION_PLACE_LNG));
+                startActivityForResult(choose_places, getArguments().getInt(ARG_SECTION_NUMBER));
                 getActivity().overridePendingTransition(R.anim.sliding_up, R.anim.stay);
             }
 
@@ -223,9 +240,9 @@ public class TripPlanActivity extends AppCompatActivity {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
             if(position == diff_days)
-                return PlaceholderFragment.newInstance(position + 1, day_count, etitle);
+                return PlaceholderFragment.newInstance(position + 1, day_count, etitle, eFirstPlace, ePlaceLat, ePlaceLng);
             else
-                return PlaceholderFragment.newInstance(position+1, etitle);
+                return PlaceholderFragment.newInstance(position+1, etitle, eFirstPlace, ePlaceLat, ePlaceLng);
         }
 
         @Override
@@ -285,5 +302,8 @@ public class TripPlanActivity extends AppCompatActivity {
         etitle = intent.getStringExtra("title_text");
         //eplace = intent.getStringExtra("place_name");
         person_count = intent.getStringExtra("person_count");
+        eFirstPlace = intent.getStringExtra(ChooseFirstPlaceActivity.PLACE_NAME);
+        ePlaceLat = intent.getStringExtra(ChooseFirstPlaceActivity.PLACE_LAT);
+        ePlaceLng = intent.getStringExtra(ChooseFirstPlaceActivity.PLACE_LNG);
     }
 }

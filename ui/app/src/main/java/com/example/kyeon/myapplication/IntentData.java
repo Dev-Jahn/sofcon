@@ -2,6 +2,8 @@ package com.example.kyeon.myapplication;
 
 import android.content.Intent;
 
+import com.google.android.gms.maps.model.LatLng;
+
 public class IntentData {
 
     private String dYY;
@@ -20,6 +22,13 @@ public class IntentData {
     public static final String titleTag = "title_text";
     private String personCount;
     public static final String countTag = "person_count";
+    private String firstPlace;
+    public static final String firstPlaceTag = ChooseFirstPlaceActivity.PLACE_NAME;
+    private String placeLat;
+    public static final String placeLatTag = ChooseFirstPlaceActivity.PLACE_LAT;
+    private String placeLng;
+    public static final String placeLngTag = ChooseFirstPlaceActivity.PLACE_LNG;
+    private LatLng placeLatLng;
 
     public IntentData(Intent intent) {
         dYY = intent.getStringExtra(dYYTag);
@@ -30,6 +39,12 @@ public class IntentData {
         aDD = intent.getStringExtra(aDDTag);
         title = intent.getStringExtra(titleTag);
         personCount = intent.getStringExtra(countTag);
+        firstPlace = intent.getStringExtra(firstPlaceTag);
+        placeLat = intent.getStringExtra(placeLatTag);
+        placeLng = intent.getStringExtra(placeLngTag);
+        if(placeLat != null && placeLng != null) {
+            placeLatLng = new LatLng(Double.parseDouble(placeLat), Double.parseDouble(placeLng));
+        }
     }
 
     public String getdYY() {
@@ -94,5 +109,37 @@ public class IntentData {
 
     public void setPersonCount(String personCount) {
         this.personCount = personCount;
+    }
+
+    public String getFirstPlace() {
+        return firstPlace;
+    }
+
+    public void setFirstPlace(String firstPlace) {
+        this.firstPlace = firstPlace;
+    }
+
+    public String getPlaceLat() {
+        return placeLat;
+    }
+
+    public void setPlaceLat(String placeLat) {
+        this.placeLat = placeLat;
+    }
+
+    public String getPlaceLng() {
+        return placeLng;
+    }
+
+    public void setPlaceLng(String placeLng) {
+        this.placeLng = placeLng;
+    }
+
+    public LatLng getPlaceLatLng() {
+        return placeLatLng;
+    }
+
+    public void setPlaceLatLng(LatLng placeLatLng) {
+        this.placeLatLng = placeLatLng;
     }
 }

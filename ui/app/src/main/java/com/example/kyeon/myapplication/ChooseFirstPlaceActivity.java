@@ -7,12 +7,18 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -26,6 +32,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -33,8 +40,11 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -51,19 +61,24 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
     private FusedLocationProviderClient mFusedLocationProviderClient;
     // Received intent data
     private IntentData intentData;
+    private Marker selectedMarker;
 
     private ArrayList<LatLng> listLocsOfPlaces = new ArrayList<>();
     private HashMap<Integer, Marker> hashMapPlaceMarker = new HashMap<>();
     private static int placeMarkerCount = 0;
 
     private static final float DEFAULT_LEN = 2.5f;
-    protected static final String PLACE_LATLNG = "FirstPlaceLatLng";
+    protected static final String PLACE_LAT = "FirstPlaceLat";
+    protected static final String PLACE_LNG = "FirstPlaceLng";
     protected static final String PLACE_NAME = "FirstPlaceName";
+    private static final int WIDTH = 50;
+    private static final int HEIGHT = 50;
 
     private String adjacencyPlaces;
 
+    private View customMarkerRoot;
     private static final int markerHeight = 0;
-    private static final int bottomOffset = 36;
+    private static final int bottomOffset = 18;
 
     private MapWrapperLayout wrapperLayout;
     private ViewGroup placeInfoWindow;
@@ -98,6 +113,8 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
 
         // Construct a FusedLocationProviderClient.
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+
+        customMarkerRoot = LayoutInflater.from(this).inflate(R.layout.marker_custom_origin_dest, null);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -164,9 +181,55 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
-                showSelectDialog(latLng);
+                Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
+                MarkerOptions options = new MarkerOptions();
+                options.position(latLng);
+                options.snippet(getResources().getString(R.string.default_place_name));
+                try {
+                    List<Address> addressList = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 10);
+                    if(addressList == null || addressList.size() == 0) {
+                        options.title(getResources().getString(R.string.default_place_name));
+                    } else {
+                        Address address = addressList.get(0);
+                        options.title(address.getAddressLine(0).toString());
+                    }
+                } catch(IOException e) {
+                    Log.d("DEBUG-EXCEPTION", e.getMessage());
+                    options.title(getResources().getString(R.string.default_place_name));
+                }
+
+                options.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getContext(), customMarkerRoot)));
+
+                selectedMarker = mMap.addMarker(options);
+                listLocsOfPlaces.add(latLng);
+                // showSelectDialog(latLng);
             }
         });
+
+        mLocationPermissionGranted = PermissionCodes.getPermission(getContext(), getActivity(),
+                Manifest.permission.ACCESS_FINE_LOCATION, PermissionCodes.REQUEST_CODE_FINE_LOCATION);
+        PermissionCodes.getPermission(getContext(), getActivity(),
+                Manifest.permission.ACCESS_COARSE_LOCATION, PermissionCodes.REQUEST_CODE_COARSE_LOCATION);
+
+        // Turn on the My Location layer and the related control on the map.
+        updateLocationUI();
+        // Get the current location of the device and set the position of the map.
+        getDeviceLocation();
+    }
+
+    private Bitmap createDrawableFromView(Context context, View view) {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        view.measure(displayMetrics.widthPixels, displayMetrics.heightPixels);
+        view.layout(0, 0, displayMetrics.widthPixels, displayMetrics.heightPixels);
+        view.buildDrawingCache();
+        Bitmap bitmap = Bitmap.createBitmap(view.getMeasuredWidth(), view.getMeasuredHeight(), Bitmap.Config.ARGB_8888);
+
+        Canvas canvas = new Canvas(bitmap);
+        view.draw(canvas);
+
+        return bitmap;
     }
 
     /**
@@ -295,7 +358,8 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
     private void removeAllPlaceMarker() {
         for(int i = 0; i < placeMarkerCount; ++i) {
             Marker marker = hashMapPlaceMarker.remove(i);
-            marker.remove();
+            if(marker != null)
+                marker.remove();
         }
         placeMarkerCount = 0;
         listLocsOfPlaces.clear();
@@ -344,7 +408,8 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 Intent intent = new Intent();
-                                intent.putExtra(PLACE_LATLNG, latLng);
+                                intent.putExtra(PLACE_LAT, latLng.latitude);
+                                intent.putExtra(PLACE_LNG, latLng.longitude);
                                 setResult(RESULT_OK, intent);
                                 finish();
                             }
@@ -371,7 +436,8 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 Intent intent = new Intent();
-                                intent.putExtra(PLACE_LATLNG, marker.getPosition());
+                                intent.putExtra(PLACE_LAT, marker.getPosition().latitude);
+                                intent.putExtra(PLACE_LNG, marker.getPosition().longitude);
                                 intent.putExtra(PLACE_NAME, marker.getTitle());
                                 setResult(RESULT_OK, intent);
                                 finish();

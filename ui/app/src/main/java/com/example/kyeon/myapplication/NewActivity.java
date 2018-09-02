@@ -32,6 +32,8 @@ public class NewActivity extends AppCompatActivity {
     Intent intent;
 
     private Button btnPlaceName;
+    private String placeLat;
+    private String placeLng;
 
     private ListView navigationView;
     private String[] navItems = {"메인 메뉴", "새 여행", "내 여행", "다른 여행","추천 여행"};
@@ -77,7 +79,7 @@ public class NewActivity extends AppCompatActivity {
            @Override
            public void onClick(View v) {
                if(isFirstPlaceSet) {
-                   AlertDialog.Builder alertDialog = new AlertDialog.Builder(getApplicationContext());
+                   AlertDialog.Builder alertDialog = new AlertDialog.Builder(NewActivity.this);
                    alertDialog.setTitle(getResources().getString(R.string.replace_place_title))
                            .setMessage(getResources().getString(R.string.replace_place_description))
                            .setCancelable(true)
@@ -238,6 +240,8 @@ public class NewActivity extends AppCompatActivity {
                 i.putExtra("person_count", String.valueOf(personCount));
                 i.putExtra("title_text", travel_title);
                 i.putExtra("place_name", place_text);
+                i.putExtra(ChooseFirstPlaceActivity.PLACE_NAME, btnPlaceName.getText());
+                // i.putExtra(ChooseFirstPlaceActivity.PLACE_LATLNG, )
 
                 startActivity(i);
                 finish();
@@ -359,9 +363,12 @@ public class NewActivity extends AppCompatActivity {
         } else if(requestCode == REQUEST_CODE_CHOOSE_PLACE) {
             String placeName = data.getStringExtra(ChooseFirstPlaceActivity.PLACE_NAME);
             if(placeName == null)
-                placeName = getResources().getString(R.string.default_placename);
+                placeName = getResources().getString(R.string.default_place_name);
             btnPlaceName.setText(placeName);
+            // placeLatLng = data.getStringExtra
             isFirstPlaceSet = true;
+            placeLat = data.getStringExtra(ChooseFirstPlaceActivity.PLACE_LAT);
+            placeLng = data.getStringExtra(ChooseFirstPlaceActivity.PLACE_LNG);
         }
 
     }
