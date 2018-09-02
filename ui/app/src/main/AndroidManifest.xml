@@ -24,7 +24,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity" />
         <activity android:name=".NewActivity" />
-        <activity android:name=".MyTripActivity" />
+        <activity android:name=".MyTripFragment" />
         <activity
             android:name=".Calendar"
             android:theme="@android:style/Theme.Dialog" />

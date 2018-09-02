@@ -148,7 +148,7 @@ public class NewActivity extends AppCompatActivity {
                     case 2:
                         intent = new Intent(
                                 getApplicationContext(),
-                                MyTripActivity.class);
+                                MyTripFragment.class);
                         startActivity(intent);
                         finish();
                         break;

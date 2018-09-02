@@ -2,40 +2,32 @@ package com.example.kyeon.myapplication;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
-import android.view.animation.AnimationUtils;
-import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-
-import java.util.Random;
-
-import de.hdodenhof.circleimageview.CircleImageView;
+import android.widget.Toast;
 
 ;
 
 public class MainActivity extends AppCompatActivity{
 
     Toolbar mainToolbar;
-    int c1;
     DrawerLayout drawerLayout;
     LinearLayout navigation_main_background;
     private ListView navigationView;
@@ -79,7 +71,7 @@ public class MainActivity extends AppCompatActivity{
                     case 2:
                         intent = new Intent(
                                 getApplicationContext(),
-                                MyTripActivity.class);
+                                MyTripFragment.class);
                         startActivity(intent);
                         break;
                     case 3:
@@ -98,87 +90,45 @@ public class MainActivity extends AppCompatActivity{
                 drawerLayout.closeDrawer(navigation_main_background);
             }
         });
+        /*
 
-        AnimationSet animationSet = new AnimationSet(true);
 
-        Animation alpha = new AlphaAnimation(0.2f, 1.0f);
-        alpha.setDuration(1500);
 
-        Animation slide_up = new TranslateAnimation(0,0,100,0);
-        slide_up.setDuration(1500);
 
-        animationSet.addAnimation(alpha);
-        animationSet.addAnimation(slide_up);
-        final ImageView imageView = findViewById(R.id.imageView);
-        imageView.startAnimation(animationSet);
+*/
 
-        final CircleImageView circleImageView = findViewById(R.id.main_image);
-        final CircleImageView circleImageView_background = findViewById(R.id.main_image_background);
-        final Drawable backgrounds[] = new Drawable[5];
-        backgrounds[0] = getDrawable(R.drawable.city_busan);
-        backgrounds[1] = getDrawable(R.drawable.city_seoul);
-        backgrounds[2] = getDrawable(R.drawable.city_fukuoka);
-        backgrounds[3] = getDrawable(R.drawable.city_beijing);
-        backgrounds[4] = getDrawable(R.drawable.city_tai);
-
-        final Animation fade_out = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_out);
-        final Animation fade_in = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in);
-
-        circleImageView.setAnimation(fade_out);// 한번 부름
-        circleImageView_background.setAnimation(fade_in);
-        c1 = 1;
-
-        fade_out.setAnimationListener(new Animation.AnimationListener() {
+        //places that bottomnavigation behavior appears
+        BottomNavigationView btm_navigation = findViewById(R.id.btm_navigation);
+        btm_navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onAnimationStart(Animation animation) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                Log.d("image", "onAnimationEnd: c : " + c1);
-
-                if(c1 % 2 == 0)
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                Fragment selectedFragment = null;
+                switch (menuItem.getItemId())
                 {
-                    Random rand = new Random();
-                    int index = rand.nextInt(backgrounds.length);
-                    circleImageView_background.setImageDrawable(backgrounds[index]);
-                    circleImageView_background.startAnimation(fade_in);
-                    animation = new TranslateAnimation(0.0f, 0.0f, 0.0f, 0.0f);
-                    animation.setDuration(1);
-                    circleImageView.startAnimation(animation);
-                    circleImageView.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            circleImageView.startAnimation(fade_out);
-                        }
-                    });
-                    c1++;
+                    case R.id.action_my:
+                        selectedFragment = MyTripFragment.newInstance();
+                        break;
+                    case R.id.action_home:
+                        selectedFragment = HomeFragment.newInstance();
+                        break;
+                    case R.id.action_others:
+                        Toast.makeText(MainActivity.this, "구현중.", Toast.LENGTH_SHORT).show();;
+                        selectedFragment = HomeFragment.newInstance();
+                        break;
                 }
-                else
-                {
-                    animation = new TranslateAnimation(0.0f, 0.0f, 0.0f, 0.0f);
-                    animation.setDuration(1);
-                    circleImageView_background.startAnimation(animation);
-                    circleImageView_background.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            circleImageView_background.startAnimation(fade_out);
-                        }
-                    });
-                    Random rand = new Random();
-                    int index = rand.nextInt(backgrounds.length);
-                    circleImageView.setImageDrawable(backgrounds[index]);
-                    circleImageView.startAnimation(fade_in);
-                    c1++;
-                }
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.main_frame_layout, selectedFragment);
+                transaction.commit();
+                return true;
             }
         });
+        
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.main_frame_layout, HomeFragment.newInstance());
+        transaction.commit();
+
+
+        /*
 
         Button bNewTrip = (Button)findViewById(R.id.newTrip);
         final Drawable button_transparency_bNewTrip = bNewTrip.getBackground();
@@ -202,7 +152,7 @@ public class MainActivity extends AppCompatActivity{
             public void onClick(View view) {
                 Intent intent = new Intent(
                         getApplicationContext(),
-                        MyTripActivity.class);
+                        MyTripFragment.class);
                 startActivity(intent);
             }
         });
@@ -234,6 +184,7 @@ public class MainActivity extends AppCompatActivity{
                 startActivity(intent);
             }
         });
+        */
 
     }
 
@@ -256,6 +207,7 @@ public class MainActivity extends AppCompatActivity{
         }
         return super.onOptionsItemSelected(item);
     }
+
 
     @Override
     public void onBackPressed() {

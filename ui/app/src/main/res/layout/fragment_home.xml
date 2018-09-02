@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/main_background_aurora"
+        android:layout_weight="10"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="227dp"
+            android:layout_height="101dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/app_logo_origin" />
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/main_image_background"
+                android:layout_width="match_parent"
+                android:layout_height="320dp"
+                android:src="@drawable/city_tai"
+                app:civ_border_color="#dedede"
+                app:civ_border_width="2.4dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
+
+            <Space
+                android:id="@+id/margin_spacer_main"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/main_image"
+                app:layout_constraintLeft_toLeftOf="@+id/main_image"
+                app:layout_constraintRight_toRightOf="@+id/main_image" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/main_image"
+                android:layout_width="320dp"
+                android:layout_height="320dp"
+                android:src="@drawable/city_seoul"
+                app:civ_border_color="#dedede"
+                app:civ_border_width="2.4dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>
