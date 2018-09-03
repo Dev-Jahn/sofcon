@@ -14,6 +14,7 @@ public class InfoWindowData {
 
     public static final int TYPE_USER = 0x1234;
     public static final int TYPE_PLACE = 0x4321;
+    public static final int TYPE_FIRST_PLACE = 0x1111;
 
     public String getTitle() {
         return title;

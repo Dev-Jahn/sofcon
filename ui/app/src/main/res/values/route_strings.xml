@@ -10,24 +10,12 @@
     <string name="locUpdateMessage">현재 위치로 이동이 성공하였습니다.</string>
 
     <string name="default_place_name">사용자 지정장소</string>
+    <string name="scan_fail_message">근처에 추천할만한 장소가 없습니다.</string>
 
     <string name="logStringOfCW">Error-Debug</string>
     <string name="default_title">여행장소 XX</string>
     <string name="default_snippet">분위기가 좋은 곳</string>
     <string name="default_score">평점</string>
 
-    <string name="remove_marker_title">경유지 제거</string>
-    <string name="remove_marker_description">선택한 경유지를 여행 경로에서 제외하시겠습니까?</string>
 
-    <string name="add_marker_title">경유지 추가</string>
-    <string name="add_marker_description">선택한 경유지를 여행 경로에 포함하시겠습니까?</string>
-
-    <string name="set_place_title">여행 시작장소 결정</string>
-    <string name="set_place_description">선택한 장소를 여행의 시작장소로 하시겠습니까?</string>
-
-    <string name="replace_place_title">여행 시작장소 변경</string>
-    <string name="replace_place_description">현재 여행 시작장소를 대신할 새로운 시작장소를 고르시겠습니까?</string>
-
-    <string name="dialog_ok">네</string>
-    <string name="dialog_no">아니오</string>
 </resources>

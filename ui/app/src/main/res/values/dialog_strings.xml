@@ -17,5 +17,22 @@
     <string name="shopping_tour">쇼핑</string>
     <string name="shopping_explain">쇼퍼 홀릭들을 위한 장소들이 가득</string>
 
+    <string name="remove_marker_title">경유지 제거</string>
+    <string name="remove_marker_description">선택한 경유지를 여행 경로에서 제외하시겠습니까?</string>
+
+    <string name="add_marker_title">경유지 추가</string>
+    <string name="add_marker_description">선택한 경유지를 여행 경로에 포함하시겠습니까?</string>
+
+    <string name="set_place_title">여행 시작장소 결정</string>
+    <string name="set_place_description">선택한 장소를 여행의 시작장소로 하시겠습니까?</string>
+
+    <string name="replace_place_title">여행 시작장소 변경</string>
+    <string name="replace_place_description">현재 여행 시작장소를 대신할 새로운 시작장소를 고르시겠습니까?</string>
+
+    <string name="warning_title">세부장소 설정</string>
+    <string name="warning_description">여행 계획을 세우기 위해서 여행 제목과 첫 여행 시작지를 선택하셔야 합니다</string>
+
+    <string name="dialog_ok">네</string>
+    <string name="dialog_no">아니오</string>
 
 </resources>

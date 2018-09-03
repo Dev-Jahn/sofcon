@@ -42,6 +42,7 @@ public class TripPlanActivity extends AppCompatActivity {
     private String eFirstPlace;
     private String ePlaceLat;
     private String ePlaceLng;
+    private String ePlaceType;
     long diff_days;
 
     int day_count;
@@ -132,6 +133,7 @@ public class TripPlanActivity extends AppCompatActivity {
         private static final String ARG_SECTION_FIRST_PLACE = ChooseFirstPlaceActivity.PLACE_NAME;
         private static final String ARG_SECTION_PLACE_LAT = ChooseFirstPlaceActivity.PLACE_LAT;
         private static final String ARG_SECTION_PLACE_LNG = ChooseFirstPlaceActivity.PLACE_LNG;
+        private static final String ARG_SECTION_PLACE_TYPE = ChooseFirstPlaceActivity.PLACE_TYPE;
 
         public PlaceholderFragment() {
         }
@@ -141,7 +143,7 @@ public class TripPlanActivity extends AppCompatActivity {
          * number.
          */
         public static PlaceholderFragment newInstance(int sectionNumber, String title, String firstPlace,
-                                                      String placeLat, String placeLng) {
+                                                      String placeLat, String placeLng, String placeType) {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
@@ -149,13 +151,14 @@ public class TripPlanActivity extends AppCompatActivity {
             args.putString(ARG_SECTION_FIRST_PLACE, firstPlace);
             args.putString(ARG_SECTION_PLACE_LAT, placeLat);
             args.putString(ARG_SECTION_PLACE_LAT, placeLng);
+            args.putString(ARG_SECTION_PLACE_TYPE, placeType);
             fragment.setArguments(args);
             return fragment;
         }
 
 
         public static PlaceholderFragment newInstance(int sectionNumber, int count, String title, String firstPlace,
-                                                      String placeLat, String placeLng) {
+                                                      String placeLat, String placeLng, String placeType) {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
@@ -164,6 +167,7 @@ public class TripPlanActivity extends AppCompatActivity {
             args.putString(ARG_SECTION_FIRST_PLACE, firstPlace);
             args.putString(ARG_SECTION_PLACE_LAT, placeLat);
             args.putString(ARG_SECTION_PLACE_LAT, placeLng);
+            args.putString(ARG_SECTION_PLACE_TYPE, placeType);
             fragment.setArguments(args);
             return fragment;
         }
@@ -240,9 +244,9 @@ public class TripPlanActivity extends AppCompatActivity {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
             if(position == diff_days)
-                return PlaceholderFragment.newInstance(position + 1, day_count, etitle, eFirstPlace, ePlaceLat, ePlaceLng);
+                return PlaceholderFragment.newInstance(position + 1, day_count, etitle, eFirstPlace, ePlaceLat, ePlaceLng, ePlaceType);
             else
-                return PlaceholderFragment.newInstance(position+1, etitle, eFirstPlace, ePlaceLat, ePlaceLng);
+                return PlaceholderFragment.newInstance(position+1, etitle, eFirstPlace, ePlaceLat, ePlaceLng, ePlaceType);
         }
 
         @Override
@@ -305,5 +309,6 @@ public class TripPlanActivity extends AppCompatActivity {
         eFirstPlace = intent.getStringExtra(ChooseFirstPlaceActivity.PLACE_NAME);
         ePlaceLat = intent.getStringExtra(ChooseFirstPlaceActivity.PLACE_LAT);
         ePlaceLng = intent.getStringExtra(ChooseFirstPlaceActivity.PLACE_LNG);
+        ePlaceType = intent.getStringExtra(ChooseFirstPlaceActivity.PLACE_TYPE);
     }
 }

@@ -28,6 +28,8 @@ public class IntentData {
     public static final String placeLatTag = ChooseFirstPlaceActivity.PLACE_LAT;
     private String placeLng;
     public static final String placeLngTag = ChooseFirstPlaceActivity.PLACE_LNG;
+    private String placeType;
+    public static final String placeTypeTag = ChooseFirstPlaceActivity.PLACE_TYPE;
     private LatLng placeLatLng;
 
     public IntentData(Intent intent) {
@@ -45,6 +47,7 @@ public class IntentData {
         if(placeLat != null && placeLng != null) {
             placeLatLng = new LatLng(Double.parseDouble(placeLat), Double.parseDouble(placeLng));
         }
+        placeType = intent.getStringExtra(placeTypeTag);
     }
 
     public String getdYY() {
@@ -141,5 +144,13 @@ public class IntentData {
 
     public void setPlaceLatLng(LatLng placeLatLng) {
         this.placeLatLng = placeLatLng;
+    }
+
+    public String getPlaceType() {
+        return placeType;
+    }
+
+    public void setPlaceType(String placeType) {
+        this.placeType = placeType;
     }
 }

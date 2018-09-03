@@ -34,6 +34,7 @@ public class NewActivity extends AppCompatActivity {
     private Button btnPlaceName;
     private String placeLat;
     private String placeLng;
+    private String placeType;
 
     private ListView navigationView;
     private String[] navItems = {"메인 메뉴", "새 여행", "내 여행", "다른 여행","추천 여행"};
@@ -216,42 +217,60 @@ public class NewActivity extends AppCompatActivity {
         btn_comp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(NewActivity.this, TripPlanActivity.class);
+                if(isFirstPlaceSet == false || travel_title == null) {
+                    showWarningDialog();
+                } else {
+                    Intent i = new Intent(NewActivity.this, TripPlanActivity.class);
 
-                if(d_yy == null && d_mm == null && d_dd == null && a_yy == null && a_mm == null && a_dd == null) {
-                    d_yy = a_yy = today_yy;
-                    d_mm = a_mm = today_mm;
-                    d_dd = a_dd = today_dd;
-                }
+                    if (d_yy == null && d_mm == null && d_dd == null && a_yy == null && a_mm == null && a_dd == null) {
+                        d_yy = a_yy = today_yy;
+                        d_mm = a_mm = today_mm;
+                        d_dd = a_dd = today_dd;
+                    }
 
-                if(travel_title.length() == 0)
-                    travel_title = "여행을 떠나요~!!";
+                    if (travel_title.length() == 0)
+                        travel_title = "여행을 떠나요~!!";
                 /*
                 if(place_text.length() == 0)
                     place_text = "서울";
                 */
 
-                i.putExtra("departing_year", d_yy);
-                i.putExtra("departing_month", d_mm);
-                i.putExtra("departing_day", d_dd);
-                i.putExtra("arriving_year", a_yy);
-                i.putExtra("arriving_month", a_mm);
-                i.putExtra("arriving_day", a_dd);
-                i.putExtra("person_count", String.valueOf(personCount));
-                i.putExtra("title_text", travel_title);
-                i.putExtra("place_name", place_text);
-                i.putExtra(ChooseFirstPlaceActivity.PLACE_NAME, btnPlaceName.getText());
-                // i.putExtra(ChooseFirstPlaceActivity.PLACE_LATLNG, )
+                    i.putExtra("departing_year", d_yy);
+                    i.putExtra("departing_month", d_mm);
+                    i.putExtra("departing_day", d_dd);
+                    i.putExtra("arriving_year", a_yy);
+                    i.putExtra("arriving_month", a_mm);
+                    i.putExtra("arriving_day", a_dd);
+                    i.putExtra("person_count", String.valueOf(personCount));
+                    i.putExtra("title_text", travel_title);
+                    i.putExtra("place_name", place_text);
+                    i.putExtra(ChooseFirstPlaceActivity.PLACE_NAME, btnPlaceName.getText());
+                    i.putExtra(ChooseFirstPlaceActivity.PLACE_LAT, placeLat);
+                    i.putExtra(ChooseFirstPlaceActivity.PLACE_LNG, placeLng);
+                    i.putExtra(ChooseFirstPlaceActivity.PLACE_TYPE, placeType);
 
-                startActivity(i);
-                finish();
+                    startActivity(i);
+                    finish();
+                }
             }
         });
-
-
-
     }
 
+    private void showWarningDialog() {
+        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setTitle(getResources().getString(R.string.warning_title))
+                .setMessage(getResources().getString(R.string.warning_description))
+                .setCancelable(true)
+                .setPositiveButton(getResources().getString(R.string.dialog_ok),
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.cancel();
+                            }
+                        });
+        AlertDialog dialog = alertDialog.create();
+        dialog.show();
+    }
 
     public void onclickCalendarA(View v) {
         Intent intent = new Intent(this, Calendar.class);
@@ -369,6 +388,7 @@ public class NewActivity extends AppCompatActivity {
             isFirstPlaceSet = true;
             placeLat = data.getStringExtra(ChooseFirstPlaceActivity.PLACE_LAT);
             placeLng = data.getStringExtra(ChooseFirstPlaceActivity.PLACE_LNG);
+            placeType = data.getStringExtra(ChooseFirstPlaceActivity.PLACE_TYPE);
         }
 
     }
