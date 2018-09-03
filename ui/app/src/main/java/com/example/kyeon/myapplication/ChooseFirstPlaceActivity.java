@@ -68,6 +68,7 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
     private static int placeMarkerCount = 0;
 
     private static final float DEFAULT_LEN = 2.5f;
+    private static final int DEFAULT_LIM = 30;
     protected static final String PLACE_LAT = "FirstPlaceLat";
     protected static final String PLACE_LNG = "FirstPlaceLng";
     protected static final String PLACE_NAME = "FirstPlaceName";
@@ -107,7 +108,7 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
         scanButton.setOnClickListener(new Button.OnClickListener() {
            @Override
            public void onClick(View view) {
-               placesUpdate(DEFAULT_LEN);
+               placesUpdate(DEFAULT_LEN, DEFAULT_LIM);
            }
         });
 
@@ -324,7 +325,7 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
         return this;
     }
 
-    private void placesUpdate(float len) {
+    private void placesUpdate(float len, int lim) {
         removeAllPlaceMarker();
         CameraPosition cameraPosition = mMap.getCameraPosition();
         /**
@@ -336,7 +337,10 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
         if(len == 0) {
             len = 2.5f;
         }
-        MapUtility.FindPlacesTask findPlacesTask = new MapUtility.FindPlacesTask(currentLat, currentLng, len);
+        if(lim == 0) {
+            lim = 30;
+        }
+        MapUtility.FindPlacesTask findPlacesTask = new MapUtility.FindPlacesTask(currentLat, currentLng, len, lim);
         findPlacesTask.execute();
         try {
             adjacencyPlaces = findPlacesTask.get();

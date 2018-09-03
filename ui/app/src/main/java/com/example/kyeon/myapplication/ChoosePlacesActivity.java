@@ -82,6 +82,9 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
     private static final int markerHeight = 0;
     private static final int bottomOffset = 18;
 
+    private static final float DEFAULT_LEN = 2.5f;
+    private static final int DEFAULT_LIM = 30;
+
     private MapWrapperLayout wrapperLayout;
     private ViewGroup userInfoWindow;
     private TextView userInfoTitle;
@@ -340,8 +343,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
          */
         String currentLat = new Double(cameraPosition.target.latitude).toString();
         String currentLng = new Double(cameraPosition.target.longitude).toString();
-        float len = 1.5f;
-        MapUtility.FindPlacesTask findPlacesTask = new MapUtility.FindPlacesTask(currentLat, currentLng, len);
+        MapUtility.FindPlacesTask findPlacesTask = new MapUtility.FindPlacesTask(currentLat, currentLng, DEFAULT_LEN, DEFAULT_LIM);
         findPlacesTask.execute();
         try {
             adjacencyPlaces = findPlacesTask.get();
