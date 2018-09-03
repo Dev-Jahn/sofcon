@@ -25,7 +25,7 @@ var server = http.createServer(function(req, res) {
 	if(cmds[1] == "Learning") {
 		if(req.method == "GET") {
 			var test = {test: parsedQuery.test};
-			mongo.connect("mongodb://127.0.0.1:27017", function(err,db) {
+			mongo.connect("mongodb://127.0.0.1:27017",{useNewUrlParser : true} , function(err,db) {
 				if(err) 
 					res.end("db connect error");
 				var dbo = db.db(DbName);
@@ -43,24 +43,31 @@ var server = http.createServer(function(req, res) {
 				var lat = parseFloat(parsedQuery.lat);
 				var lon = parseFloat(parsedQuery.lon);
 				var len = parseFloat(parsedQuery.len);
+				var lim = parseFloat(parsedQuery.lim);
+				var flag = parseFloat(parsedQuery.flag);
 
-				mongo.connect("mongodb://127.0.0.1:27017",{useNewUrlParser : true} ,function(err,db) {
-					if(err) throw err;
-					var dbo = db.db(DbName);
-					var resarr = new Array();
-					dbo.collection(ColPlaces).find({}).project({"_id":false, "placeId":false, "name_eng":false}).toArray(function(err, result) {
-					if(err) throw err;
-					result.forEach(function(item, index, array) {
-						if(dis(lat, lon, array[index]["latitude"], array[index]["longitude"]) < len) {
-							resarr.push(array[index]);
-						}
-					});
+				if(flag  == 0) {
+					mongo.connect("mongodb://127.0.0.1:27017",{useNewUrlParser : true} ,function(err,db) {
+						if(err) throw err;
+						var dbo = db.db(DbName);
+						var resarr = new Array();
+						dbo.collection(ColPlaces).find({}).project({"_id":false, "placeId":false, "name_eng":false}).toArray(function(err, result) {
+						if(err) throw err;
+						var cnt = 0;
+						result.forEach(function(item, index, array) {
+							if(dis(lat, lon, array[index]["latitude"], array[index]["longitude"]) < len && cnt < lim) {
+								resarr.push(array[index]);
+								cnt += 1;
+							}
+						});
 
-					res.writeHead(200, {'Content-Type': 'application/json;charset=utf-8'});
-					res.end(JSON.stringify(resarr));
-					db.close();
+						res.writeHead(200, {'Content-Type': 'application/json;charset=utf-8'});
+						res.end(JSON.stringify(resarr));
+						db.close();
+						});
 					});
-				});
+				} else if(flag == 1) {
+				}
 			}
 		}
 	} else if(cmds[1] == "UI") {
@@ -110,13 +117,18 @@ var server = http.createServer(function(req, res) {
 					PWD : pwd}
 		if(cmds[2] == "Up"){
 			if(req.method == "GET") {
+				var phonenum = parsedQuery.pnum;
 				mongo.connect("mongodb://127.0.0.1:27017", {useNewUrlParser : true}, function(err, db) {
 					if(err) throw err;
 					var dbo = db.db(DbName);
 					dbo.collection(ColUser).findOne(User , function(err, result) {
 						if(err) throw err;
 						if(result == null) {
-							dbo.collection(ColUser).insertOne(User, function(err, result) {
+							var InsertUser = { UID : UID,
+												PWD : pwd,
+												phonenum : phonenum
+							};
+							dbo.collection(ColUser).insertOne(InsertUser, function(err, result) {
 								if(err) throw err;
 								res.writeHead(200, {'Contect-Type':'application/json;cherset=utf-8'});
 								res.end(JSON.stringify({"result":true}));
@@ -147,7 +159,7 @@ var server = http.createServer(function(req, res) {
 			}
 		}
 	}else {
-		res.writeHead(404, {'Content-Type': 'text.plain'});
+		res.writeHead(404, {'Content-Type': 'text/plain;charset=utf-8'});
 		res.end("wrong Query");
 	}
 });
