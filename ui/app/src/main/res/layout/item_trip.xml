@@ -84,7 +84,7 @@
                 android:id="@+id/dayText"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:gravity="center_horizontal"
+                android:gravity="center"
                 android:text="day" />
 
         </LinearLayout>

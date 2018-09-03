@@ -22,7 +22,6 @@
         android:layout_gravity="bottom|end"
         android:src="@drawable/baseline_add_black_24dp"
         android:tint="@color/colorApp"
-        android:backgroundTint="@color/colorPrimary"
         android:layout_margin="20sp"
         android:elevation="8dp"
         android:id="@+id/btn_add_floating"

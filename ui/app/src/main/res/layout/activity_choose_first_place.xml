@@ -36,6 +36,7 @@
             android:id="@+id/scanButton"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            style="@style/Base.Widget.AppCompat.Button.Colored"
             android:text="@string/scan_places"/>
 
     </LinearLayout>
