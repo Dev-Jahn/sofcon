@@ -43,6 +43,8 @@ public class TripCardAdapter extends RecyclerView.Adapter<TripCardAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final Item item = items.get(position);
+        if(item == null)
+            return;
         Drawable drawable = ContextCompat.getDrawable(context, item.getImage());
         holder.image.setBackground(drawable);
         holder.place.setText(item.getPlace());

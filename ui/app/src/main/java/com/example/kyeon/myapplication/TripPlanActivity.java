@@ -1,8 +1,10 @@
 package com.example.kyeon.myapplication;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -21,6 +23,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -46,6 +53,8 @@ public class TripPlanActivity extends AppCompatActivity {
     long diff_days;
 
     int day_count;
+
+    Travel travel;//to save travel datas to local
     /**
      * The {@link ViewPager} that will host the section contents.
      */
@@ -68,6 +77,7 @@ public class TripPlanActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("여행 계획");
 
+        get_datas_for_travel();
 
 
         //ImageButton comp = new ImageButton(getApplicationContext());
@@ -110,9 +120,18 @@ public class TripPlanActivity extends AppCompatActivity {
         else if (id == R.id.action_complete)
         {
             //s a v e to local
-            Toast.makeText(getApplicationContext(), "Title : "+etitle+"\n"+"departing date : "+d_yy+'/'+d_mm+'/'+d_dd+"\n"+"arriving date : "
-                    +a_yy+'/'+a_mm+'/'+a_dd+"\n"+"Group Size : "+person_count+"\n"+"Place Name : "+"\n"
-                    +"Diff_days = " + diff_days+"\n", Toast.LENGTH_SHORT).show();
+
+
+            try
+            {
+                travel.save();
+            }catch (IOException e)
+            {
+                e.printStackTrace();
+                Toast.makeText(this, "sibal", Toast.LENGTH_SHORT).show();
+            }
+
+
             finish();
         }
 
@@ -169,6 +188,10 @@ public class TripPlanActivity extends AppCompatActivity {
             args.putString(ARG_SECTION_PLACE_LAT, placeLng);
             args.putString(ARG_SECTION_PLACE_TYPE, placeType);
             fragment.setArguments(args);
+
+
+
+
             return fragment;
         }
 
@@ -310,5 +333,61 @@ public class TripPlanActivity extends AppCompatActivity {
         ePlaceLat = intent.getStringExtra(ChooseFirstPlaceActivity.PLACE_LAT);
         ePlaceLng = intent.getStringExtra(ChooseFirstPlaceActivity.PLACE_LNG);
         ePlaceType = intent.getStringExtra(ChooseFirstPlaceActivity.PLACE_TYPE);
+    }
+
+    private void get_datas_for_travel()// test for Travel class
+    {
+        Intent intent = getIntent();
+        d_yy = intent.getStringExtra("departing_year");
+        int s_yy = Integer.parseInt(d_yy);
+        d_mm = intent.getStringExtra("departing_month");
+        d_mm = add_zero_to_string(d_mm);
+        int s_mm = Integer.parseInt(d_mm);
+        d_dd = intent.getStringExtra("departing_day");
+        d_dd = add_zero_to_string(d_dd);
+        int s_dd = Integer.parseInt(d_dd);
+        a_yy = intent.getStringExtra("arriving_year");
+        int e_yy = Integer.parseInt(a_yy);
+        a_mm = intent.getStringExtra("arriving_month");
+        a_mm = add_zero_to_string(a_mm);
+        int e_mm = Integer.parseInt(a_mm);
+        a_dd = intent.getStringExtra("arriving_day");
+        a_dd = add_zero_to_string(a_dd);
+        int e_dd = Integer.parseInt(a_dd);
+        etitle = intent.getStringExtra("title_text");
+        person_count = intent.getStringExtra("person_count");
+        Date beginDate;
+        Date endDate;
+        long diff;
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+        try
+        {
+            beginDate = formatter.parse(d_yy+d_mm+d_dd);
+            endDate = formatter.parse(a_yy+a_mm+a_dd);
+            diff= endDate.getTime() - beginDate.getTime();
+        }catch (Exception e)
+        {
+            e.printStackTrace();
+            diff = 0;
+        }
+        diff_days = diff / (24 * 60 * 60 * 1000);
+        travel = new Travel(getApplicationContext(),"psm", Integer.parseInt(person_count), (int)diff_days + 1, s_mm, s_yy, s_mm, e_yy, e_mm, e_dd);
+
+        //let's test diff days is 3
+        travel.dailyDiary[0].addPlace(123123, "숭실대");
+        travel.dailyDiary[0].addPlace(123123, "숭실대학교");
+        travel.dailyDiary[0].addPlace(123123, "숭실대도서관");
+
+        travel.dailyDiary[1].addPlace(123123, "asd");
+        travel.dailyDiary[1].addPlace(123123, "aosd");
+        travel.dailyDiary[1].addPlace(123123, "123123");
+        travel.dailyDiary[1].addPlace(123123, "239493");
+        travel.dailyDiary[1].addPlace(123123, "1234104");
+
+        travel.dailyDiary[2].addPlace(123123, "qqoo");
+        travel.dailyDiary[2].addPlace(123123, "aoakk");
+        travel.dailyDiary[2].addPlace(123123, "11ww");
+        travel.dailyDiary[2].addPlace(123123, "open");
+
     }
 }

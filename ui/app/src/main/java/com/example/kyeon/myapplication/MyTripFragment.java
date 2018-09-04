@@ -1,6 +1,7 @@
 package com.example.kyeon.myapplication;
 
 import android.content.Intent;
+import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
@@ -14,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,7 +55,25 @@ public class MyTripFragment extends Fragment {
         item[1] = new Item(R.drawable.city_fukuoka, "열심히 쇼핑하다오는 후쿠오카", "Fukuoka", "4.3 ~ 4.10");
         item[2] = new Item(R.drawable.city_beijing, "옛 중국의 향기를 맡으러", "Beijing", "5.1 ~ 5.6");
         item[3] = new Item(R.drawable.city_busan, "여름에 가기좋은 부산여행", "Busan", "4.13 ~ 4.19");
-        item[4] = new Item(R.drawable.city_tai, "태국의 정취를 맡으러", "Tai", "7.4 ~ 7.11");
+
+        //for testing travel class
+        String dirPath = Environment.getExternalStorageDirectory().getAbsolutePath()+"/TEST/";
+        Travel travel;
+        try
+        {
+            travel = Travel.load(getContext(), "travel_1");
+            item[4] = new Item(R.drawable.city_tai, travel.title,travel.dailyDiary[0].getReview(0).place_name,
+                    travel.syy + "." + travel.smm + "." + travel.sdd + " ~ " + travel.eyy +"."+travel.emm+"."+travel.edd
+            );
+        }catch (Exception e)
+        {
+            travel = null;
+            e.printStackTrace();
+        }
+
+
+        //
+
 
         for (int i = 0; i < ITEM_SIZE; i++) {
             items.add(item[i]);
