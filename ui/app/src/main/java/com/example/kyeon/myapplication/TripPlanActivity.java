@@ -169,7 +169,7 @@ public class TripPlanActivity extends AppCompatActivity {
             args.putString(ARG_SECTION_TITLE, title);
             args.putString(ARG_SECTION_FIRST_PLACE, firstPlace);
             args.putString(ARG_SECTION_PLACE_LAT, placeLat);
-            args.putString(ARG_SECTION_PLACE_LAT, placeLng);
+            args.putString(ARG_SECTION_PLACE_LNG, placeLng);
             args.putString(ARG_SECTION_PLACE_TYPE, placeType);
             fragment.setArguments(args);
             return fragment;
@@ -185,7 +185,7 @@ public class TripPlanActivity extends AppCompatActivity {
             args.putString(ARG_SECTION_TITLE, title);
             args.putString(ARG_SECTION_FIRST_PLACE, firstPlace);
             args.putString(ARG_SECTION_PLACE_LAT, placeLat);
-            args.putString(ARG_SECTION_PLACE_LAT, placeLng);
+            args.putString(ARG_SECTION_PLACE_LNG, placeLng);
             args.putString(ARG_SECTION_PLACE_TYPE, placeType);
             fragment.setArguments(args);
 
@@ -267,7 +267,7 @@ public class TripPlanActivity extends AppCompatActivity {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
             if(position == diff_days)
-                return PlaceholderFragment.newInstance(position + 1, day_count, etitle, eFirstPlace, ePlaceLat, ePlaceLng, ePlaceType);
+                return PlaceholderFragment.newInstance(position+1, day_count, etitle, eFirstPlace, ePlaceLat, ePlaceLng, ePlaceType);
             else
                 return PlaceholderFragment.newInstance(position+1, etitle, eFirstPlace, ePlaceLat, ePlaceLng, ePlaceType);
         }
@@ -333,6 +333,7 @@ public class TripPlanActivity extends AppCompatActivity {
         ePlaceLat = intent.getStringExtra(ChooseFirstPlaceActivity.PLACE_LAT);
         ePlaceLng = intent.getStringExtra(ChooseFirstPlaceActivity.PLACE_LNG);
         ePlaceType = intent.getStringExtra(ChooseFirstPlaceActivity.PLACE_TYPE);
+
     }
 
     private void get_datas_for_travel()// test for Travel class

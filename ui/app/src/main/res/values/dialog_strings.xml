@@ -32,6 +32,9 @@
     <string name="warning_title">세부장소 설정</string>
     <string name="warning_description">여행 계획을 세우기 위해서 여행 제목과 첫 여행 시작지를 선택하셔야 합니다</string>
 
+    <string name="custom_select_title">경유지 추가</string>
+    <string name="custom_select_description">선택한 장소는 추천 장소가 아닙니다. 그래도 여행 경로에 포함하시겠습니까?</string>
+
     <string name="dialog_ok">네</string>
     <string name="dialog_no">아니오</string>
 
