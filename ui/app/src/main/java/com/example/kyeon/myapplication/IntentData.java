@@ -18,6 +18,8 @@ public class IntentData {
     public static final String aMMTag = "arriving_month";
     private String aDD;
     public static final String aDDTag = "arriving_day";
+    private String currentDay;
+    public static final String currentDayTag = "currentDay";
     private String title;
     public static final String titleTag = "title_text";
     private String personCount;
@@ -39,6 +41,7 @@ public class IntentData {
         aYY = intent.getStringExtra(aYYTag);
         aMM = intent.getStringExtra(aMMTag);
         aDD = intent.getStringExtra(aDDTag);
+        currentDay = intent.getStringExtra(currentDayTag);
         title = intent.getStringExtra(titleTag);
         personCount = intent.getStringExtra(countTag);
         firstPlace = intent.getStringExtra(firstPlaceTag);
@@ -96,6 +99,14 @@ public class IntentData {
 
     public void setaDD(String aDD) {
         this.aDD = aDD;
+    }
+
+    public String getCurrentDay() {
+        return currentDay;
+    }
+
+    public void setCurrentDay(String currentDay) {
+        this.currentDay = currentDay;
     }
 
     public String getTitle() {

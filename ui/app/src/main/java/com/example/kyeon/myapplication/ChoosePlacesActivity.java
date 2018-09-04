@@ -327,7 +327,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
-                addUserMarker(latLng);
+                showCustomSelectDialog(latLng);
             }
         });
 
@@ -423,6 +423,31 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         userMarkerCount = 0;
         hashMapUserMarker.clear();
         listMarkersToSave.clear();
+        addFirstPlaceMarker();
+    }
+
+    private void showCustomSelectDialog(final LatLng latLng) {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+        alertDialog.setTitle(getResources().getString(R.string.custom_select_title))
+                .setMessage(getResources().getString(R.string.custom_select_description))
+                .setCancelable(true)
+                .setPositiveButton(getResources().getString(R.string.dialog_ok),
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                addUserMarker(latLng);
+                            }
+                        })
+                .setNegativeButton(getResources().getString(R.string.dialog_no),
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.cancel();
+                            }
+                        });
+
+        AlertDialog dialog = alertDialog.create();
+        dialog.show();
     }
 
     /**
@@ -475,6 +500,8 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         options.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getContext(), customMarkerOriginDestRoot)));
 
         Marker marker = mMap.addMarker(options);
+        marker.setSnippet(intentData.getPlaceType());
+        marker.setTitle(intentData.getFirstPlace());
         hashMapUserMarker.put(userMarkerCount, marker);
         saveMarkerTag(marker, userMarkerCount, InfoWindowData.TYPE_FIRST_PLACE);
         listMarkersToSave.add(marker);

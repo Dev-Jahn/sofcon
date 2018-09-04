@@ -203,8 +203,9 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
                 options.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getContext(), customMarkerRoot)));
 
                 selectedMarker = mMap.addMarker(options);
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(selectedMarker.getPosition()));
                 showSelectDialog(selectedMarker);
-                selectedMarker.remove();
+                // selectedMarker.remove();
                 // showSelectDialog(latLng);
             }
         });
@@ -406,6 +407,7 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
      * This overloading codes need refactoring
      * --> combine using call a method
      */
+    @Deprecated
     private void showSelectDialog(final LatLng latLng) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
         alertDialog.setTitle(getResources().getString(R.string.set_place_title))
@@ -416,8 +418,8 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 Intent intent = new Intent();
-                                intent.putExtra(PLACE_LAT, latLng.latitude);
-                                intent.putExtra(PLACE_LNG, latLng.longitude);
+                                intent.putExtra(PLACE_LAT, String.valueOf(latLng.latitude));
+                                intent.putExtra(PLACE_LNG, String.valueOf(latLng.longitude));
                                 setResult(RESULT_OK, intent);
                                 finish();
                             }
@@ -444,8 +446,8 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 Intent intent = new Intent();
-                                intent.putExtra(PLACE_LAT, marker.getPosition().latitude);
-                                intent.putExtra(PLACE_LNG, marker.getPosition().longitude);
+                                intent.putExtra(PLACE_LAT, String.valueOf(marker.getPosition().latitude));
+                                intent.putExtra(PLACE_LNG, String.valueOf(marker.getPosition().longitude));
                                 intent.putExtra(PLACE_NAME, marker.getTitle());
                                 intent.putExtra(PLACE_TYPE, marker.getSnippet());
                                 setResult(RESULT_OK, intent);
