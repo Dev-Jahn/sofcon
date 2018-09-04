@@ -68,9 +68,11 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
     private static int placeMarkerCount = 0;
 
     private static final float DEFAULT_LEN = 2.5f;
+    private static final int DEFAULT_LIM = 30;
     protected static final String PLACE_LAT = "FirstPlaceLat";
     protected static final String PLACE_LNG = "FirstPlaceLng";
     protected static final String PLACE_NAME = "FirstPlaceName";
+    protected static final String PLACE_TYPE = "FirstPlaceType";
     private static final int WIDTH = 50;
     private static final int HEIGHT = 50;
 
@@ -107,7 +109,7 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
         scanButton.setOnClickListener(new Button.OnClickListener() {
            @Override
            public void onClick(View view) {
-               placesUpdate(DEFAULT_LEN);
+               placesUpdate(DEFAULT_LEN, DEFAULT_LIM);
            }
         });
 
@@ -201,7 +203,8 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
                 options.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getContext(), customMarkerRoot)));
 
                 selectedMarker = mMap.addMarker(options);
-                listLocsOfPlaces.add(latLng);
+                showSelectDialog(selectedMarker);
+                selectedMarker.remove();
                 // showSelectDialog(latLng);
             }
         });
@@ -324,7 +327,7 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
         return this;
     }
 
-    private void placesUpdate(float len) {
+    private void placesUpdate(float len, int lim) {
         removeAllPlaceMarker();
         CameraPosition cameraPosition = mMap.getCameraPosition();
         /**
@@ -336,7 +339,10 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
         if(len == 0) {
             len = 2.5f;
         }
-        MapUtility.FindPlacesTask findPlacesTask = new MapUtility.FindPlacesTask(currentLat, currentLng, len);
+        if(lim == 0) {
+            lim = 30;
+        }
+        MapUtility.FindPlacesTask findPlacesTask = new MapUtility.FindPlacesTask(currentLat, currentLng, len, lim, false);
         findPlacesTask.execute();
         try {
             adjacencyPlaces = findPlacesTask.get();
@@ -347,6 +353,8 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
                         addPlaceMarker(placeData);
                     }
                 }
+            } else {
+                Toast.makeText(getContext(), getResources().getString(R.string.scan_fail_message), Toast.LENGTH_SHORT).show();
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -439,6 +447,7 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
                                 intent.putExtra(PLACE_LAT, marker.getPosition().latitude);
                                 intent.putExtra(PLACE_LNG, marker.getPosition().longitude);
                                 intent.putExtra(PLACE_NAME, marker.getTitle());
+                                intent.putExtra(PLACE_TYPE, marker.getSnippet());
                                 setResult(RESULT_OK, intent);
                                 finish();
                             }

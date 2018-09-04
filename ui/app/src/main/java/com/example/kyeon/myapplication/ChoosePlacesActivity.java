@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -82,6 +83,9 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
     private static final int markerHeight = 0;
     private static final int bottomOffset = 18;
 
+    private static final float DEFAULT_LEN = 2.5f;
+    private static final int DEFAULT_LIM = 30;
+
     private MapWrapperLayout wrapperLayout;
     private ViewGroup userInfoWindow;
     private TextView userInfoTitle;
@@ -94,6 +98,10 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
     private TextView placeInfoSnippet;
     private ImageButton placeInfoButton;
     private InfoWindowTouchListener infoWindowAddListener;
+
+    private ViewGroup firstPlaceInfoWindow;
+    private TextView firstPlaceInfoTitle;
+    private TextView firstPlaceInfoSnippet;
 
     private String adjacencyPlaces;
 
@@ -272,6 +280,10 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         };
         placeInfoButton.setOnTouchListener(infoWindowAddListener);
 
+        firstPlaceInfoWindow = (ViewGroup) getLayoutInflater().inflate(R.layout.window_first_place_marker, null);
+        firstPlaceInfoTitle = (TextView) firstPlaceInfoWindow.findViewById(R.id.tvTitle);
+        firstPlaceInfoSnippet = (TextView) firstPlaceInfoWindow.findViewById(R.id.tvSnippet);
+
         mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
             @Override
             public View getInfoWindow(Marker marker) {
@@ -291,8 +303,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                     // to the MapWrapperLayout
                     wrapperLayout.setMarkerWithInfoWindow(marker, userInfoWindow);
                     return userInfoWindow;
-                }
-                else if(infoWindowData.getWindowType() == InfoWindowData.TYPE_PLACE) {
+                } else if(infoWindowData.getWindowType() == InfoWindowData.TYPE_PLACE) {
                     // Setting up the userInfoWindow with current's marker info
                     placeInfoTitle.setText(marker.getTitle());
                     placeInfoSnippet.setText(marker.getSnippet());
@@ -301,6 +312,10 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                     // to the MapWrapperLayout
                     wrapperLayout.setMarkerWithInfoWindow(marker, placeInfoWindow);
                     return placeInfoWindow;
+                } else if(infoWindowData.getWindowType() == InfoWindowData.TYPE_FIRST_PLACE){
+                    firstPlaceInfoTitle.setText(intentData.getFirstPlace());
+                    firstPlaceInfoSnippet.setText(intentData.getPlaceType());
+                    wrapperLayout.setMarkerWithInfoWindow(marker, firstPlaceInfoWindow);
                 }
                 return null;
             }
@@ -325,6 +340,10 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             }
         });
 
+        addFirstPlaceMarker();
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(intentData.getPlaceLatLng()));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(MapUtility.ZOOM_LEVEL));
+
         mLocationPermissionGranted = PermissionCodes.getPermission(getContext(), getActivity(),
                 Manifest.permission.ACCESS_FINE_LOCATION, PermissionCodes.REQUEST_CODE_FINE_LOCATION);
         PermissionCodes.getPermission(getContext(), getActivity(),
@@ -340,12 +359,10 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
          */
         String currentLat = new Double(cameraPosition.target.latitude).toString();
         String currentLng = new Double(cameraPosition.target.longitude).toString();
-        float len = 1.5f;
-        MapUtility.FindPlacesTask findPlacesTask = new MapUtility.FindPlacesTask(currentLat, currentLng, len);
+        MapUtility.FindPlacesTask findPlacesTask = new MapUtility.FindPlacesTask(currentLat, currentLng, DEFAULT_LEN, DEFAULT_LIM, true);
         findPlacesTask.execute();
         try {
             adjacencyPlaces = findPlacesTask.get();
-            Log.d("TESTTEST", adjacencyPlaces+" ");
             if(adjacencyPlaces != null) {
                 ArrayList<PlaceData> placeDataArrayList = MapUtility.placeParsing(adjacencyPlaces);
                 if(placeDataArrayList != null) {
@@ -353,6 +370,8 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                         addPlaceMarker(placeData);
                     }
                 }
+            } else {
+                Toast.makeText(getContext(), getResources().getString(R.string.scan_fail_message), Toast.LENGTH_SHORT);
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -444,6 +463,21 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         saveMarkerTag(marker, userMarkerCount, InfoWindowData.TYPE_USER);
         listMarkersToSave.add(marker);
         drawRoute();
+    }
+
+    private void addFirstPlaceMarker() {
+        listLocsToDraw.add(intentData.getPlaceLatLng());
+        // create a marker for starting location
+        MarkerOptions options = new MarkerOptions();
+        options.position(intentData.getPlaceLatLng());
+
+        tvCustomMarkerOriginDest.setText(new Integer(++userMarkerCount).toString());
+        options.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getContext(), customMarkerOriginDestRoot)));
+
+        Marker marker = mMap.addMarker(options);
+        hashMapUserMarker.put(userMarkerCount, marker);
+        saveMarkerTag(marker, userMarkerCount, InfoWindowData.TYPE_FIRST_PLACE);
+        listMarkersToSave.add(marker);
     }
 
     private void addPlaceMarker(PlaceData placeData) {

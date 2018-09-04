@@ -246,19 +246,28 @@ public class MapUtility {
     protected static class FindPlacesTask extends AsyncTask<String, Void, String> {
         String result;
         String url, lat, lon;
+        int lim;
         float len;
+        boolean serviceOn;
+        int flag;
 
-        public FindPlacesTask(String lat, String lon, float len) {
+        public FindPlacesTask(String lat, String lon, float len, int lim, boolean serviceOn) {
             this.lon = lon;
             this.lat = lat;
             this.len = len;
+            this.lim = lim;
+            this.serviceOn = serviceOn;
+            if(serviceOn)
+                flag = 1;
+            else
+                flag = 0;
         }
 
         @Override
         protected String doInBackground(String... params) {
             try {
                 // long start = System.currentTimeMillis();
-                url = "http://35.189.138.177:8080/navi/findPlace?lat=" + lat + "&lon=" + lon + "&len=" + len;
+                url = "http://35.189.138.177:8080/navi/findPlace?lat=" + lat + "&lon=" + lon + "&len=" + len + "&lim=" + lim + "&flag=" + flag;
                 URL obj = new URL(url);
                 HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
 
