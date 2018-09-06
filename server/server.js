@@ -72,28 +72,32 @@ var server = http.createServer(function(req, res) {
 		}
 	} else if(cmds[1] == "UI") {
 		if(req.method == "GET") {
-			var PlaceData = {
-				UID : "",
-				place : "",
-				people_count : 0,
-				days : 0,
-				syy : 0, smm : 0, sdd : 0,
-				eyy : 0, emm : 0, edd : 0,
+			var TravelData = {
+				travel_id : parsedQuery.travel_id,
+				UID : parsedQuery.uid,
+				People_count : parseInt(parsedQuery.people_count),
+				Title : parsedQuery.title,
+				days : parseInt(parsedQuery.days),
+				syy : parseInt(parsedQuery.syy), smm : parseInt(parsedQuery.smm), sdd : parseInt(parsedQuery.sdd),
+				eyy : parseInt(parsedQuery.eyy), emm : parseInt(parsedQuery.emm), edd : parseInt(parsedQuery.edd),
+				DailyDiary : []
 			};
-			var UID = {UID : parsedQuery.UID};
 			if(cmds[2] == "insert") {
 				if(req.method == "GET") {
 					mongo.connect("mongodb://127.0.0.1:27017", {useNewUrlParser : true}, function(err, db) {
 						if(err) throw err;
 						var dbo = db.db(DbName);
-						dbo.collection(ColTrip).find(UID).project({"_id":false}).toArray(function(err, result) {
-							if(err) throw err;
-							if(result.length == 1){
-								dbo.collection(ColTrip).updateOne();
-							} else {
-								dbo.collection(ColTrip).insertOnde();
-							}
+						dbo.collection(ColTrip).insert(TravelData, function(err, result) {
+							if (err) throw err;
 						});
+					//	dbo.collection(ColTrip).find(UID).project({"_id":false}).toArray(function(err, result) {
+					//		if(err) throw err;
+					//		if(result.length == 1){
+					//			dbo.collection(ColTrip).updateOne();
+					//		} else {
+					//			dbo.collection(ColTrip).insertOnde();
+					//		}
+					//	});
 					});
 				}
 			} else if(cmds[2] == "else") {
@@ -126,7 +130,9 @@ var server = http.createServer(function(req, res) {
 						if(result == null) {
 							var InsertUser = { UID : UID,
 												PWD : pwd,
-												phonenum : phonenum
+												phonenum : phonenum,
+												pos : [],
+												neg : []
 							};
 							dbo.collection(ColUser).insertOne(InsertUser, function(err, result) {
 								if(err) throw err;
@@ -152,7 +158,7 @@ var server = http.createServer(function(req, res) {
 							res.end(JSON.stringify({'result' : false}));
 						} else {
 							res.writeHead(200, {'Conetent-Type': 'application/json;charset=utf-8'});
-							res.end(JSON.stringify({'result' : result}));
+							res.end(JSON.stringify({'result' : true}));
 						}
 					});
 				});
