@@ -62,6 +62,7 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
     // Received intent data
     private IntentData intentData;
     private Marker selectedMarker;
+    private Bitmap snapshotBitmap;
 
     private ArrayList<LatLng> listLocsOfPlaces = new ArrayList<>();
     private HashMap<Integer, Marker> hashMapPlaceMarker = new HashMap<>();
@@ -73,6 +74,7 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
     protected static final String PLACE_LNG = "FirstPlaceLng";
     protected static final String PLACE_NAME = "FirstPlaceName";
     protected static final String PLACE_TYPE = "FirstPlaceType";
+    protected static final String PLACE_BITMAP = "PlaceBitmap";
     private static final int WIDTH = 50;
     private static final int HEIGHT = 50;
 
@@ -219,6 +221,22 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
         updateLocationUI();
         // Get the current location of the device and set the position of the map.
         getDeviceLocation();
+    }
+
+    private void captureScreen() {
+        final GoogleMap.SnapshotReadyCallback snapshotReadyCallback = new GoogleMap.SnapshotReadyCallback() {
+            Bitmap bitmap;
+            @Override
+            public void onSnapshotReady(Bitmap snapshot) {
+                bitmap = snapshot;
+                setSnapshotBitmap(bitmap);
+            }
+        };
+        mMap.snapshot(snapshotReadyCallback);
+    }
+
+    private void setSnapshotBitmap(Bitmap newBitmap) {
+        snapshotBitmap = newBitmap;
     }
 
     private Bitmap createDrawableFromView(Context context, View view) {
@@ -420,6 +438,8 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
                                 Intent intent = new Intent();
                                 intent.putExtra(PLACE_LAT, String.valueOf(latLng.latitude));
                                 intent.putExtra(PLACE_LNG, String.valueOf(latLng.longitude));
+                                captureScreen();
+                                intent.putExtra(PLACE_BITMAP, snapshotBitmap);
                                 setResult(RESULT_OK, intent);
                                 finish();
                             }
@@ -450,6 +470,8 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
                                 intent.putExtra(PLACE_LNG, String.valueOf(marker.getPosition().longitude));
                                 intent.putExtra(PLACE_NAME, marker.getTitle());
                                 intent.putExtra(PLACE_TYPE, marker.getSnippet());
+                                captureScreen();
+                                intent.putExtra(PLACE_BITMAP, snapshotBitmap);
                                 setResult(RESULT_OK, intent);
                                 finish();
                             }

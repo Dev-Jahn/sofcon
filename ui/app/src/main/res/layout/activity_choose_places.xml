@@ -41,6 +41,13 @@
             android:text="@string/reset_trip"/>
 
         <Button
+            android:id="@+id/scanButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            style="@style/Base.Widget.AppCompat.Button.Colored"
+            android:text="@string/scan_places"/>
+
+        <Button
             android:id="@+id/selectButton"
             android:layout_width="wrap_content"
             style="@style/Base.Widget.AppCompat.Button.Colored"

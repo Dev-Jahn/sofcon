@@ -6,14 +6,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
@@ -26,8 +23,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -47,7 +42,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -59,12 +56,8 @@ import java.util.concurrent.ExecutionException;
 public class ChoosePlacesActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private boolean mLocationPermissionGranted;
-    // The geographical location where the device is currently located. That is, the last-known
-    // location retrieved by the Fused Location Provider.
-    private Location mLastKnownLocation;
-    // The entry point to the Fused Location Provider.
-    private FusedLocationProviderClient mFusedLocationProviderClient;
+    private boolean isFirstPlaceAdded = false;
+    private Marker lastMarker;
     // Received intent data
     private IntentData intentData;
     // Locations to draw
@@ -73,8 +66,8 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
     private ArrayList<Marker> listMarkersToSave = new ArrayList<>();
     private HashMap<Integer, Marker> hashMapUserMarker = new HashMap<>();
     private HashMap<Integer, Marker> hashMapPlaceMarker = new HashMap<>();
-    private static int userMarkerCount = 0;
-    private static int placeMarkerCount = 0;
+    private int userMarkerCount = 0;
+    private int placeMarkerCount = 0;
     private View customMarkerOriginDestRoot;
     private TextView tvCustomMarkerOriginDest;
     private View customMarkerWayPointRoot;
@@ -123,9 +116,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
 
         Button cancelButton = (Button) findViewById(R.id.cancelButton);
         Button selectButton = (Button) findViewById(R.id.selectButton);
-
-        // Construct a FusedLocationProviderClient.
-        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+        Button scanButton = (Button)findViewById(R.id.scanButton);
 
         cancelButton.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -134,18 +125,17 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             }
         });
 
+        scanButton.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                placesUpdate(DEFAULT_LEN, DEFAULT_LIM);
+            }
+        });
+
         selectButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /**
-                 * places update is just test code.
-                 * In release, this function will be replaced to another.
-                 */
-                placesUpdate();
-                /**
-                 * day 1 will be replaced to appropirate numbers (by using intent data)
-                 */
-                MapUtility.saveMapUserMarkers(getContext(), mMap, listMarkersToSave, intentData.getTitle(), 1);
+                MapUtility.saveMapUserMarkers(getContext(), mMap, listMarkersToSave, intentData.getTitle(), Integer.parseInt(intentData.getCurrentDay()));
             }
         });
 
@@ -153,24 +143,24 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
          * Below codes are test code
          */
 /**
-        Button saveButton = (Button)findViewById(R.id.testSaveButton);
-        saveButton.setOnClickListener(new Button.OnClickListener() {
-            public void onClick(View view) {
-                MapUtility.saveMapUserMarkers(getContext(), mMap, listMarkersToSave, intentData.getTitle(), 1);
-            }
-        });
-        Button loadButton = (Button)findViewById(R.id.testLoadButton);
-        loadButton.setOnClickListener(new Button.OnClickListener() {
-            public void onClick(View view) {
-                listMarkersToSave.clear();
-                ArrayList<InfoWindowData> arrayList = MapUtility.loadMapUserMarkers(getContext(), intentData.getTitle() + "1.dat");
-                for(InfoWindowData info : arrayList) {
-                    addUserMarker(info);
-                }
-                userMarkerCount = arrayList.size();
-            }
-        });
-*/
+ Button saveButton = (Button)findViewById(R.id.testSaveButton);
+ saveButton.setOnClickListener(new Button.OnClickListener() {
+ public void onClick(View view) {
+ MapUtility.saveMapUserMarkers(getContext(), mMap, listMarkersToSave, intentData.getTitle(), 1);
+ }
+ });
+ Button loadButton = (Button)findViewById(R.id.testLoadButton);
+ loadButton.setOnClickListener(new Button.OnClickListener() {
+ public void onClick(View view) {
+ listMarkersToSave.clear();
+ ArrayList<InfoWindowData> arrayList = MapUtility.loadMapUserMarkers(getContext(), intentData.getTitle() + "1.dat");
+ for(InfoWindowData info : arrayList) {
+ addUserMarker(info);
+ }
+ userMarkerCount = arrayList.size();
+ }
+ });
+ */
         // test code end
         customMarkerOriginDestRoot = LayoutInflater.from(this).inflate(R.layout.marker_custom_origin_dest, null);
         tvCustomMarkerOriginDest = (TextView) customMarkerOriginDestRoot.findViewById(R.id.custom_marker_text);
@@ -189,6 +179,61 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
     private void getIntentDatas() {
         Intent intent = getIntent();
         intentData = new IntentData(intent);
+        if (intentData.getPlaceType() == null)
+            intentData.setPlaceType(getResources().getString(R.string.custom_place));
+    }
+
+    private void determineTrip() {
+        if(isTravelEnded()) {
+            saveIntentDatas();
+
+        } else {
+            saveIntentDatas();
+
+        }
+    }
+
+    private void saveIntentDatas() {
+        if(lastMarker != null) {
+            IntentData newIntentData = new IntentData(getIntent());
+            newIntentData.setCurrentDay(String.valueOf(Integer.parseInt(newIntentData.getCurrentDay()) + 1));
+            newIntentData.setFirstPlace(lastMarker.getTitle());
+            newIntentData.setPlaceLat(String.valueOf(lastMarker.getPosition().latitude));
+            newIntentData.setPlaceLng(String.valueOf(lastMarker.getPosition().longitude));
+            newIntentData.calcLatLng();
+            newIntentData.setPlaceType(lastMarker.getSnippet());
+
+            Intent intent = new Intent();
+            newIntentData.transferDataToIntent(intent);
+        }
+    }
+
+    private boolean isTravelEnded() {
+        int currentDay = Integer.parseInt(intentData.getCurrentDay());
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+        String d_yy = intentData.getdYY();
+        String d_mm = intentData.getdMM();
+        String d_dd = intentData.getdDD();
+        String a_yy = intentData.getaYY();
+        String a_mm = intentData.getaMM();
+        String a_dd = intentData.getaDD();
+        Date beginDate;
+        Date endDate;
+        try {
+            beginDate = formatter.parse(d_yy + d_mm + d_dd);
+            endDate = formatter.parse(a_yy + a_mm + a_dd);
+            long diff = endDate.getTime() - beginDate.getTime();
+            long diff_days = diff / (24 * 60 * 60 * 1000);
+
+            if (currentDay > diff_days + 1)
+                return true;
+            else
+                return false;
+
+        } catch (Exception e) {
+            Log.d("Error-Exception", e.getMessage());
+        }
+        return false;
     }
 
     /**
@@ -293,8 +338,8 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             @Override
             @SuppressLint("ClickableViewAccessibility")
             public View getInfoContents(Marker marker) {
-                InfoWindowData infoWindowData = (InfoWindowData)marker.getTag();
-                if(infoWindowData.getWindowType() == InfoWindowData.TYPE_USER) {
+                InfoWindowData infoWindowData = (InfoWindowData) marker.getTag();
+                if (infoWindowData.getWindowType() == InfoWindowData.TYPE_USER) {
                     // Setting up the userInfoWindow with current's marker info
                     userInfoTitle.setText(marker.getTitle());
                     userInfoSnippet.setText(marker.getSnippet());
@@ -303,7 +348,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                     // to the MapWrapperLayout
                     wrapperLayout.setMarkerWithInfoWindow(marker, userInfoWindow);
                     return userInfoWindow;
-                } else if(infoWindowData.getWindowType() == InfoWindowData.TYPE_PLACE) {
+                } else if (infoWindowData.getWindowType() == InfoWindowData.TYPE_PLACE) {
                     // Setting up the userInfoWindow with current's marker info
                     placeInfoTitle.setText(marker.getTitle());
                     placeInfoSnippet.setText(marker.getSnippet());
@@ -312,7 +357,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                     // to the MapWrapperLayout
                     wrapperLayout.setMarkerWithInfoWindow(marker, placeInfoWindow);
                     return placeInfoWindow;
-                } else if(infoWindowData.getWindowType() == InfoWindowData.TYPE_FIRST_PLACE){
+                } else if (infoWindowData.getWindowType() == InfoWindowData.TYPE_FIRST_PLACE) {
                     firstPlaceInfoTitle.setText(intentData.getFirstPlace());
                     firstPlaceInfoSnippet.setText(intentData.getPlaceType());
                     wrapperLayout.setMarkerWithInfoWindow(marker, firstPlaceInfoWindow);
@@ -344,13 +389,11 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         mMap.moveCamera(CameraUpdateFactory.newLatLng(intentData.getPlaceLatLng()));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(MapUtility.ZOOM_LEVEL));
 
-        mLocationPermissionGranted = PermissionCodes.getPermission(getContext(), getActivity(),
-                Manifest.permission.ACCESS_FINE_LOCATION, PermissionCodes.REQUEST_CODE_FINE_LOCATION);
         PermissionCodes.getPermission(getContext(), getActivity(),
                 Manifest.permission.ACCESS_COARSE_LOCATION, PermissionCodes.REQUEST_CODE_COARSE_LOCATION);
     }
 
-    private void placesUpdate() {
+    private void placesUpdate(float len, int lim) {
         removeAllPlaceMarker();
         CameraPosition cameraPosition = mMap.getCameraPosition();
         /**
@@ -359,7 +402,13 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
          */
         String currentLat = new Double(cameraPosition.target.latitude).toString();
         String currentLng = new Double(cameraPosition.target.longitude).toString();
-        MapUtility.FindPlacesTask findPlacesTask = new MapUtility.FindPlacesTask(currentLat, currentLng, DEFAULT_LEN, DEFAULT_LIM, true);
+        if(len == 0) {
+            len = 2.5f;
+        }
+        if(lim == 0) {
+            lim = 30;
+        }
+        MapUtility.FindPlacesTask findPlacesTask = new MapUtility.FindPlacesTask(currentLat, currentLng, len, lim, false);
         findPlacesTask.execute();
         try {
             adjacencyPlaces = findPlacesTask.get();
@@ -371,7 +420,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                     }
                 }
             } else {
-                Toast.makeText(getContext(), getResources().getString(R.string.scan_fail_message), Toast.LENGTH_SHORT);
+                Toast.makeText(getContext(), getResources().getString(R.string.scan_fail_message), Toast.LENGTH_SHORT).show();
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -423,6 +472,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         userMarkerCount = 0;
         hashMapUserMarker.clear();
         listMarkersToSave.clear();
+        isFirstPlaceAdded = false;
         addFirstPlaceMarker();
     }
 
@@ -470,6 +520,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         saveMarkerTag(marker, userMarkerCount, InfoWindowData.TYPE_USER);
         listMarkersToSave.add(marker);
         drawRoute();
+        lastMarker = marker;
     }
 
     protected void addUserMarker(InfoWindowData infoWindowData) {
@@ -488,29 +539,33 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         saveMarkerTag(marker, userMarkerCount, InfoWindowData.TYPE_USER);
         listMarkersToSave.add(marker);
         drawRoute();
+        lastMarker = marker;
     }
 
     private void addFirstPlaceMarker() {
-        listLocsToDraw.add(intentData.getPlaceLatLng());
-        // create a marker for starting location
-        MarkerOptions options = new MarkerOptions();
-        options.position(intentData.getPlaceLatLng());
+        if (isFirstPlaceAdded == false) {
+            listLocsToDraw.add(intentData.getPlaceLatLng());
+            // create a marker for starting location
+            MarkerOptions options = new MarkerOptions();
+            options.position(intentData.getPlaceLatLng());
 
-        tvCustomMarkerOriginDest.setText(new Integer(++userMarkerCount).toString());
-        options.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getContext(), customMarkerOriginDestRoot)));
+            tvCustomMarkerOriginDest.setText(new Integer(++userMarkerCount).toString());
+            options.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getContext(), customMarkerOriginDestRoot)));
 
-        Marker marker = mMap.addMarker(options);
-        marker.setSnippet(intentData.getPlaceType());
-        marker.setTitle(intentData.getFirstPlace());
-        hashMapUserMarker.put(userMarkerCount, marker);
-        saveMarkerTag(marker, userMarkerCount, InfoWindowData.TYPE_FIRST_PLACE);
-        listMarkersToSave.add(marker);
+            Marker marker = mMap.addMarker(options);
+            marker.setSnippet(intentData.getPlaceType());
+            marker.setTitle(intentData.getFirstPlace());
+            hashMapUserMarker.put(userMarkerCount, marker);
+            saveMarkerTag(marker, userMarkerCount, InfoWindowData.TYPE_FIRST_PLACE);
+            listMarkersToSave.add(marker);
+            isFirstPlaceAdded = true;
+        }
     }
 
     private void addPlaceMarker(PlaceData placeData) {
         MarkerOptions options = new MarkerOptions();
         LatLng position = new LatLng(Double.parseDouble(placeData.getLat()),
-                                     Double.parseDouble(placeData.getLng()));
+                Double.parseDouble(placeData.getLng()));
         options.position(position);
         options.title(placeData.getName());
         options.snippet(placeData.getType());
@@ -574,14 +629,14 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             }
             Marker currentMarker = mMap.addMarker(options);
             hashMapUserMarker.put(i + 1, currentMarker);
-            saveMarkerTag(currentMarker, i+1, InfoWindowData.TYPE_USER);
+            saveMarkerTag(currentMarker, i + 1, InfoWindowData.TYPE_USER);
             listMarkersToSave.add(currentMarker);
         }
         redrawRoute();
     }
 
     private void removeAllPlaceMarker() {
-        for(int i = 0; i < placeMarkerCount; ++i) {
+        for (int i = 0; i < placeMarkerCount; ++i) {
             Marker marker = hashMapPlaceMarker.remove(i);
             marker.remove();
         }
@@ -606,6 +661,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         hashMapPlaceMarker = newHashMap;
         placeMarkerCount = newMarkerCount;
     }
+
     /**
      * Convert View to Bitmap
      */
@@ -622,25 +678,6 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         view.draw(canvas);
 
         return bitmap;
-    }
-
-    /**
-     * Handles the result of the request for location permissions.
-     */
-    @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String permissions[],
-                                           @NonNull int[] grantResults) {
-        mLocationPermissionGranted = false;
-        switch (requestCode) {
-            case PermissionCodes.REQUEST_CODE_FINE_LOCATION: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    mLocationPermissionGranted = true;
-                }
-            }
-        }
     }
 
     private Context getContext() {

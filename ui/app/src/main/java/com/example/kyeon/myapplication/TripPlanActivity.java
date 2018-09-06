@@ -1,10 +1,8 @@
 package com.example.kyeon.myapplication;
 
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -23,11 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -116,17 +110,13 @@ public class TripPlanActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
-        }
-        else if (id == R.id.action_complete)
-        {
+        } else if (id == R.id.action_complete) {
             //s a v e to local
 
 
-            try
-            {
+            try {
                 travel.save();
-            }catch (IOException e)
-            {
+            } catch (IOException e) {
                 e.printStackTrace();
                 Toast.makeText(this, "sibal", Toast.LENGTH_SHORT).show();
             }
@@ -153,6 +143,7 @@ public class TripPlanActivity extends AppCompatActivity {
         private static final String ARG_SECTION_PLACE_LAT = ChooseFirstPlaceActivity.PLACE_LAT;
         private static final String ARG_SECTION_PLACE_LNG = ChooseFirstPlaceActivity.PLACE_LNG;
         private static final String ARG_SECTION_PLACE_TYPE = ChooseFirstPlaceActivity.PLACE_TYPE;
+        private ImageView ivTravelMap;
 
         public PlaceholderFragment() {
         }
@@ -189,24 +180,23 @@ public class TripPlanActivity extends AppCompatActivity {
             args.putString(ARG_SECTION_PLACE_TYPE, placeType);
             fragment.setArguments(args);
 
-
-
-
             return fragment;
         }
 
         @Override
         public View onCreateView(LayoutInflater choose_places, ViewGroup container,
                                  Bundle savedInstanceState) {
+
             final View rootView = choose_places.inflate(R.layout.fragment_plan, container, false);
+            ivTravelMap = (ImageView) rootView.findViewById(R.id.ivTravelMap);
             TextView textView = (TextView) rootView.findViewById(R.id.dt);
             ImageView left = (ImageView) rootView.findViewById(R.id.left);
             ImageView right = (ImageView) rootView.findViewById(R.id.right);
-            if(getArguments().getInt(ARG_SECTION_NUMBER) == 1)//get arrow distinguished
+            if (getArguments().getInt(ARG_SECTION_NUMBER) == 1)//get arrow distinguished
                 left.setVisibility(View.INVISIBLE);
             else
                 left.setVisibility(View.VISIBLE);
-            if(getArguments().getInt(ARG_SECTION_NUMBER) == getArguments().getInt(ARG_SECTION_LAST))//get arrow distinguished
+            if (getArguments().getInt(ARG_SECTION_NUMBER) == getArguments().getInt(ARG_SECTION_LAST))//get arrow distinguished
             {
                 right.setVisibility(View.INVISIBLE);
                 LinearLayout linearLayout = rootView.findViewById(R.id.linear_layout_fragment);
@@ -219,22 +209,21 @@ public class TripPlanActivity extends AppCompatActivity {
                 });
                 */
 
-            }
-            else
+            } else
                 right.setVisibility(View.VISIBLE);
             Button plan_self = (Button) rootView.findViewById(R.id.plan_self);
             plan_self.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("test", "onCreateView: "+ getArguments().getInt(ARG_SECTION_NUMBER));
-                Intent choose_places = new Intent(getActivity(), ChoosePlacesActivity.class);
-                choose_places.putExtra(ARG_SECTION_TITLE, getArguments().getString(ARG_SECTION_TITLE));
-                choose_places.putExtra(ARG_SECTION_FIRST_PLACE, getArguments().getString(ARG_SECTION_FIRST_PLACE));
-                choose_places.putExtra(ARG_SECTION_PLACE_LAT, getArguments().getString(ARG_SECTION_PLACE_LAT));
-                choose_places.putExtra(ARG_SECTION_PLACE_LNG, getArguments().getString(ARG_SECTION_PLACE_LNG));
-                startActivityForResult(choose_places, getArguments().getInt(ARG_SECTION_NUMBER));
-                getActivity().overridePendingTransition(R.anim.sliding_up, R.anim.stay);
-            }
+                @Override
+                public void onClick(View view) {
+                    Log.d("test", "onCreateView: " + getArguments().getInt(ARG_SECTION_NUMBER));
+                    Intent choose_places = new Intent(getActivity(), ChoosePlacesActivity.class);
+                    choose_places.putExtra(ARG_SECTION_TITLE, getArguments().getString(ARG_SECTION_TITLE));
+                    choose_places.putExtra(ARG_SECTION_FIRST_PLACE, getArguments().getString(ARG_SECTION_FIRST_PLACE));
+                    choose_places.putExtra(ARG_SECTION_PLACE_LAT, getArguments().getString(ARG_SECTION_PLACE_LAT));
+                    choose_places.putExtra(ARG_SECTION_PLACE_LNG, getArguments().getString(ARG_SECTION_PLACE_LNG));
+                    startActivityForResult(choose_places, getArguments().getInt(ARG_SECTION_NUMBER));
+                    getActivity().overridePendingTransition(R.anim.sliding_up, R.anim.stay);
+                }
 
             });
 
@@ -243,7 +232,7 @@ public class TripPlanActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     BottomSheetDialog bottomSheetDialog = BottomSheetDialog.getInstance();
-                    bottomSheetDialog.show(((AppCompatActivity)getActivity()).getSupportFragmentManager(),"bottomsheet");
+                    bottomSheetDialog.show(((AppCompatActivity) getActivity()).getSupportFragmentManager(), "bottomsheet");
                 }
             });
 
@@ -256,7 +245,7 @@ public class TripPlanActivity extends AppCompatActivity {
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
-    public class SectionsPagerAdapter extends FragmentStatePagerAdapter{
+    public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 
         public SectionsPagerAdapter(android.support.v4.app.FragmentManager fm) {
             super(fm);
@@ -266,10 +255,10 @@ public class TripPlanActivity extends AppCompatActivity {
         public android.support.v4.app.Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            if(position == diff_days)
-                return PlaceholderFragment.newInstance(position+1, day_count, etitle, eFirstPlace, ePlaceLat, ePlaceLng, ePlaceType);
+            if (position == diff_days)
+                return PlaceholderFragment.newInstance(position + 1, day_count, etitle, eFirstPlace, ePlaceLat, ePlaceLng, ePlaceType);
             else
-                return PlaceholderFragment.newInstance(position+1, etitle, eFirstPlace, ePlaceLat, ePlaceLng, ePlaceType);
+                return PlaceholderFragment.newInstance(position + 1, etitle, eFirstPlace, ePlaceLat, ePlaceLng, ePlaceType);
         }
 
         @Override
@@ -279,14 +268,12 @@ public class TripPlanActivity extends AppCompatActivity {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
             Date beginDate;
             Date endDate;
-            try
-            {
-                beginDate = formatter.parse(d_yy+d_mm+d_dd);
-                endDate = formatter.parse(a_yy+a_mm+a_dd);
-                long diff= endDate.getTime() - beginDate.getTime();
+            try {
+                beginDate = formatter.parse(d_yy + d_mm + d_dd);
+                endDate = formatter.parse(a_yy + a_mm + a_dd);
+                long diff = endDate.getTime() - beginDate.getTime();
                 diff_days = diff / (24 * 60 * 60 * 1000);
-            }catch (ParseException e)
-            {
+            } catch (ParseException e) {
                 e.printStackTrace();
                 diff_days = -1;
             }
@@ -298,23 +285,21 @@ public class TripPlanActivity extends AppCompatActivity {
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return "day" + (position+1);
+            return "day" + (position + 1);
         }
     }
 
-    private String add_zero_to_string(String number)
-    {
-        if(Integer.parseInt(number) < 10)
-            if(number.charAt(0) == '0')
+    private String add_zero_to_string(String number) {
+        if (Integer.parseInt(number) < 10)
+            if (number.charAt(0) == '0')
                 return number;
             else
-                return "0"+number;
+                return "0" + number;
         else
             return number;
     }
 
-    private void get_datas()
-    {
+    private void get_datas() {
         Intent intent = getIntent();
         d_yy = intent.getStringExtra("departing_year");
         d_mm = intent.getStringExtra("departing_month");
@@ -361,20 +346,19 @@ public class TripPlanActivity extends AppCompatActivity {
         Date endDate;
         long diff;
         SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
-        try
-        {
-            beginDate = formatter.parse(d_yy+d_mm+d_dd);
-            endDate = formatter.parse(a_yy+a_mm+a_dd);
-            diff= endDate.getTime() - beginDate.getTime();
-        }catch (Exception e)
-        {
+        try {
+            beginDate = formatter.parse(d_yy + d_mm + d_dd);
+            endDate = formatter.parse(a_yy + a_mm + a_dd);
+            diff = endDate.getTime() - beginDate.getTime();
+        } catch (Exception e) {
             e.printStackTrace();
             diff = 0;
         }
         diff_days = diff / (24 * 60 * 60 * 1000);
-        travel = new Travel(getApplicationContext(),"psm", Integer.parseInt(person_count), (int)diff_days + 1, s_mm, s_yy, s_mm, e_yy, e_mm, e_dd);
+        travel = new Travel(getApplicationContext(), "psm", Integer.parseInt(person_count), (int) diff_days + 1, s_mm, s_yy, s_mm, e_yy, e_mm, e_dd);
 
         //let's test diff days is 3
+        /*
         travel.dailyDiary[0].addPlace(123123, "숭실대");
         travel.dailyDiary[0].addPlace(123123, "숭실대학교");
         travel.dailyDiary[0].addPlace(123123, "숭실대도서관");
@@ -389,6 +373,6 @@ public class TripPlanActivity extends AppCompatActivity {
         travel.dailyDiary[2].addPlace(123123, "aoakk");
         travel.dailyDiary[2].addPlace(123123, "11ww");
         travel.dailyDiary[2].addPlace(123123, "open");
-
+        */
     }
 }

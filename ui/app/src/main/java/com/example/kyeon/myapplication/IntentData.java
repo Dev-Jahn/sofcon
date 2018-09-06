@@ -1,6 +1,8 @@
 package com.example.kyeon.myapplication;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -32,6 +34,8 @@ public class IntentData {
     public static final String placeLngTag = ChooseFirstPlaceActivity.PLACE_LNG;
     private String placeType;
     public static final String placeTypeTag = ChooseFirstPlaceActivity.PLACE_TYPE;
+    private Bitmap placeBitmap;
+    public static final String placeBitmapTag = ChooseFirstPlaceActivity.PLACE_BITMAP;
     private LatLng placeLatLng;
 
     public IntentData(Intent intent) {
@@ -47,10 +51,35 @@ public class IntentData {
         firstPlace = intent.getStringExtra(firstPlaceTag);
         placeLat = intent.getStringExtra(placeLatTag);
         placeLng = intent.getStringExtra(placeLngTag);
+        calcLatLng();
+        placeType = intent.getStringExtra(placeTypeTag);
+        try {
+            placeBitmap = (Bitmap) intent.getExtras().get(placeBitmapTag);
+        } catch(NullPointerException e) {
+            Log.d(".java", "역시는 역시 역시다");
+        }
+    }
+
+    protected void transferDataToIntent(Intent intent) {
+        intent.putExtra(dYYTag, dYY);
+        intent.putExtra(dMMTag, dMM);
+        intent.putExtra(dDDTag, dDD);
+        intent.putExtra(aYYTag, aYY);
+        intent.putExtra(aMMTag, aMM);
+        intent.putExtra(aDDTag, aDD);
+        intent.putExtra(currentDayTag, currentDay);
+        intent.putExtra(titleTag, title);
+        intent.putExtra(firstPlaceTag, firstPlace);
+        intent.putExtra(placeLatTag, placeLat);
+        intent.putExtra(placeLngTag, placeLng);
+        intent.putExtra(placeTypeTag, placeType);
+        intent.putExtra(placeBitmapTag, placeBitmap);
+    }
+
+    protected void calcLatLng() {
         if(placeLat != null && placeLng != null) {
             placeLatLng = new LatLng(Double.parseDouble(placeLat), Double.parseDouble(placeLng));
         }
-        placeType = intent.getStringExtra(placeTypeTag);
     }
 
     public String getdYY() {
@@ -163,5 +192,13 @@ public class IntentData {
 
     public void setPlaceType(String placeType) {
         this.placeType = placeType;
+    }
+
+    public Bitmap getPlaceBitmap() {
+        return placeBitmap;
+    }
+
+    public void setPlaceBitmap(Bitmap placeBitmap) {
+        this.placeBitmap = placeBitmap;
     }
 }
