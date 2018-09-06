@@ -51,7 +51,10 @@
         <activity android:name=".TravelActivity" />
         <activity android:name=".OthersTravel" />
         <activity android:name=".RecommendTravel" />
-        <activity android:name=".TagActivity"></activity>
+        <activity android:name=".TagActivity" />
+        <activity
+            android:name=".IdRegister"
+            android:theme="@android:style/Theme.Dialog"/>
     </application>
 
 </manifest>
