@@ -1,6 +1,7 @@
 package com.example.kyeon.myapplication;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.util.Log;
 
@@ -56,7 +57,7 @@ public class IntentData {
         try {
             placeBitmap = (Bitmap) intent.getExtras().get(placeBitmapTag);
         } catch(NullPointerException e) {
-            Log.d(".java", "역시는 역시 역시다");
+            Log.d(".java", "비트맵 이미지 전달 오류 in IntentData");
         }
     }
 

@@ -2,6 +2,7 @@ package com.example.kyeon.myapplication;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -35,6 +36,7 @@ public class NewActivity extends AppCompatActivity {
     private String placeLat;
     private String placeLng;
     private String placeType;
+    private Bitmap placeBitmap;
 
     private ListView navigationView;
     private String[] navItems = {"메인 메뉴", "새 여행", "내 여행", "다른 여행","추천 여행"};
@@ -248,6 +250,10 @@ public class NewActivity extends AppCompatActivity {
                     i.putExtra(ChooseFirstPlaceActivity.PLACE_LAT, placeLat);
                     i.putExtra(ChooseFirstPlaceActivity.PLACE_LNG, placeLng);
                     i.putExtra(ChooseFirstPlaceActivity.PLACE_TYPE, placeType);
+                    if(placeBitmap == null) {
+                        Log.d("DEBUG-TEST", getResources().getString(R.string.intent_bitmap_error) + "in NewActivity");
+                    }
+                    i.putExtra(ChooseFirstPlaceActivity.PLACE_BITMAP, placeBitmap);
 
                     startActivity(i);
                     finish();
@@ -389,6 +395,12 @@ public class NewActivity extends AppCompatActivity {
             placeLat = data.getStringExtra(ChooseFirstPlaceActivity.PLACE_LAT);
             placeLng = data.getStringExtra(ChooseFirstPlaceActivity.PLACE_LNG);
             placeType = data.getStringExtra(ChooseFirstPlaceActivity.PLACE_TYPE);
+            try {
+                placeBitmap = (Bitmap)data.getExtras().get(ChooseFirstPlaceActivity.PLACE_BITMAP);
+                Log.d("DEBUG-TEST", getResources().getString(R.string.intent_bitmap_error));
+            } catch(NullPointerException e) {
+                Log.d(".java", getResources().getString(R.string.intent_bitmap_error) + "in NewActivity");
+            }
         }
 
     }
