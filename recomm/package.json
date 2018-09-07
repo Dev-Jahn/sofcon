@@ -1,0 +1,15 @@
+{
+  "name": "recomm",
+  "version": "1.0.0",
+  "description": "test",
+  "main": "client.js",
+  "dependencies": {
+    "zerorpc": "^0.9.8"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
