@@ -102,30 +102,21 @@ public class TravelActivity extends AppCompatActivity {
 
             List<String> place_names = new ArrayList<>();
 
-            if(index == 0)
-            {
+            if (index == 0) {
                 place_names.add("보라매 공원");
                 place_names.add("시발");
                 place_names.add("숭실머학교");
-            }
-            else if(index == 1)
-            {
+            } else if (index == 1) {
                 place_names.add("부산대");
                 place_names.add("라면맛집");
-            }
-            else if(index == 2)
-            {
+            } else if (index == 2) {
                 place_names.add("aiqwdij");
                 place_names.add("asodjadijadoiaw");
                 place_names.add("asdasdasdu");
                 place_names.add("asodjadijadoedjweohdwoed");
-            }
-            else if(index == 3)
-            {
+            } else if (index == 3) {
                 place_names.add("asodr개새끼야");
-            }
-            else
-            {
+            } else {
                 place_names.add("아몰랑");
             }
             place_names.add("asdaccxx");
@@ -137,49 +128,45 @@ public class TravelActivity extends AppCompatActivity {
             //textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;
         }
+
         @Override
         public void onActivityResult(int requestCode, int resultCode, Intent data) {
-            super.onActivityResult(requestCode,resultCode,data);
-            if (resultCode == RESULT_OK)
-            {
-                switch (requestCode)
-                {
-                    case 1:
-                    {
+            super.onActivityResult(requestCode, resultCode, data);
+            if (resultCode == RESULT_OK) {
+                switch (requestCode) {
+                    case 1: {
                         Toast.makeText(getContext(), "sibal", Toast.LENGTH_SHORT).show();
                         DiaryAdapter.ViewHolder vh;
-                        vh = (DiaryAdapter.ViewHolder)recyclerView.findViewHolderForAdapterPosition(((LinearLayoutManager)recyclerView.getLayoutManager()).findFirstVisibleItemPosition());
+                        vh = (DiaryAdapter.ViewHolder) recyclerView.findViewHolderForAdapterPosition(((LinearLayoutManager) recyclerView.getLayoutManager()).findFirstVisibleItemPosition());
                         sendPicture(vh.add_image, data.getData());
                         break;
                     }
                 }
             }
-
         }
-        private void sendPicture(ImageButton imageButton, Uri imguri)
-        {
+
+        private void sendPicture(ImageButton imageButton, Uri imguri) {
             Bitmap img;
             String imagePath = getRealPathFromURI(imguri);
             ExifInterface exif = null;
             try {
                 exif = new ExifInterface(imagePath);
-            }catch (IOException e)
-            {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
             int exifOrientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
             int exifDegree = exifOrientationToDegrees(exifOrientation);
             BitmapFactory.Options options;
-            try{
+            try {
                 img = BitmapFactory.decodeFile(imagePath);
-            }catch (OutOfMemoryError e)
-            {
+            } catch (OutOfMemoryError e) {
                 options = new BitmapFactory.Options();
                 options.inSampleSize = 2;
                 img = BitmapFactory.decodeFile(imagePath, options);
             }
             imageButton.setImageBitmap(img);
         }
+
         private int exifOrientationToDegrees(int exifOrientation) {
             if (exifOrientation == ExifInterface.ORIENTATION_ROTATE_90) {
                 return 90;
@@ -190,11 +177,12 @@ public class TravelActivity extends AppCompatActivity {
             }
             return 0;
         }
+
         private String getRealPathFromURI(Uri contentUri) {
-            int column_index=0;
+            int column_index = 0;
             String[] proj = {MediaStore.Images.Media.DATA};
             Cursor cursor = getContext().getContentResolver().query(contentUri, proj, null, null, null);
-            if(cursor.moveToFirst()){
+            if (cursor.moveToFirst()) {
                 column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
             }
             return cursor.getString(column_index);
@@ -203,18 +191,20 @@ public class TravelActivity extends AppCompatActivity {
     }
 
 
-
-    public void packing()
-    {
+    public void packing() {
         id = 20142350;//user id
         place = "Seoul";//장소
         people_count = 4;//사람수
-        smm = 8; syy = 2018; sdd = 13;//시작~
-        emm = 8; eyy = 2018; edd = 16;//끝
+        smm = 8;
+        syy = 2018;
+        sdd = 13;//시작~
+        emm = 8;
+        eyy = 2018;
+        edd = 16;//끝
 
         days = sdd - edd;// 몇일짜리인지
 
-        DailyDiary diaries[] = new DailyDiary[days+1];//각 날별로 경유지들마다 리뷰들을 받아옴
+        DailyDiary diaries[] = new DailyDiary[days + 1];//각 날별로 경유지들마다 리뷰들을 받아옴
 
         Date date;
         date = new Date();
@@ -234,12 +224,10 @@ public class TravelActivity extends AppCompatActivity {
 
     }
 
-    public void shareOnInternet(View v)
-    {
+    public void shareOnInternet(View v) {
         // tmp dataset
 
     }
-
 
 
     class TripPagerAdapter extends FragmentPagerAdapter {
@@ -249,7 +237,7 @@ public class TravelActivity extends AppCompatActivity {
         }
 
         @Override
-        public Fragment getItem(int position){
+        public Fragment getItem(int position) {
             return DiaryholderFragment.newInstance(position + 1);
         }
 
@@ -261,21 +249,19 @@ public class TravelActivity extends AppCompatActivity {
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return "day" + (position+1);
+            return "day" + (position + 1);
         }
     }
 
-    private class DailyDiary
-    {
+    private class DailyDiary {
         int place_count;//정유지 갯수
         int place[];//장소id들
         int score[];//리뷰점수
         String review[];//리뷰 텍스트
         Drawable img[];
-        int yy,mm,dd;
+        int yy, mm, dd;
 
-        public DailyDiary (int count, int yy, int mm, int dd)
-        {
+        public DailyDiary(int count, int yy, int mm, int dd) {
             this.place_count = count;
             place = new int[place_count];
             score = new int[place_count];
@@ -286,8 +272,7 @@ public class TravelActivity extends AppCompatActivity {
             this.dd = dd;
         }
 
-        private void set_review(int index, int place_id, int score, String review, Drawable image)
-        {
+        private void set_review(int index, int place_id, int score, String review, Drawable image) {
             this.place[index] = place_id;
             this.score[index] = score;
             this.review[index] = review;
@@ -298,7 +283,6 @@ public class TravelActivity extends AppCompatActivity {
             return this.place_count;
         }
     }
-
 
 
 }

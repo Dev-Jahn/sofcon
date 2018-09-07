@@ -52,6 +52,8 @@ public class MapUtility {
     protected static final int ZOOM_LEVEL = 16;
     // Current default location is soongsil univ.
     protected static final LatLng DEFAULT_LOCATION = new LatLng(37.495999, 126.957050);
+    // default path of snapshot image
+    protected static final String DEFAULT_SNAPSHOT_PATH = "/sdcard/android/data/wander/snapshotImage";
 
     @Deprecated
     protected static Location getCurrentLocation(final Context context, final Activity activity) {

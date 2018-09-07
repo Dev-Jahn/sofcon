@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.location.Address;
 import android.location.Geocoder;
@@ -40,6 +41,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -59,10 +62,9 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
     private Location mLastKnownLocation;
     // The entry point to the Fused Location Provider.
     private FusedLocationProviderClient mFusedLocationProviderClient;
-    // Received intent data
     private IntentData intentData;
     private Marker selectedMarker;
-    private Bitmap snapshotBitmap;
+    private Intent returnIntent;
 
     private ArrayList<LatLng> listLocsOfPlaces = new ArrayList<>();
     private HashMap<Integer, Marker> hashMapPlaceMarker = new HashMap<>();
@@ -107,12 +109,12 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
             }
         });
 
-        Button scanButton = (Button)findViewById(R.id.scanButton);
+        Button scanButton = (Button) findViewById(R.id.scanButton);
         scanButton.setOnClickListener(new Button.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-               placesUpdate(DEFAULT_LEN, DEFAULT_LIM);
-           }
+            @Override
+            public void onClick(View view) {
+                placesUpdate(DEFAULT_LEN, DEFAULT_LIM);
+            }
         });
 
         // Construct a FusedLocationProviderClient.
@@ -191,13 +193,13 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
                 options.snippet(getResources().getString(R.string.default_place_name));
                 try {
                     List<Address> addressList = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 10);
-                    if(addressList == null || addressList.size() == 0) {
+                    if (addressList == null || addressList.size() == 0) {
                         options.title(getResources().getString(R.string.default_place_name));
                     } else {
                         Address address = addressList.get(0);
                         options.title(address.getAddressLine(0).toString());
                     }
-                } catch(IOException e) {
+                } catch (IOException e) {
                     Log.d("DEBUG-EXCEPTION", e.getMessage());
                     options.title(getResources().getString(R.string.default_place_name));
                 }
@@ -223,20 +225,20 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
         getDeviceLocation();
     }
 
-    private void captureScreen() {
+    private void captureScreenAndFinish() {
+        Log.d("DEBUG-TEST", "snapshot is called");
         final GoogleMap.SnapshotReadyCallback snapshotReadyCallback = new GoogleMap.SnapshotReadyCallback() {
-            Bitmap bitmap;
             @Override
             public void onSnapshotReady(Bitmap snapshot) {
-                bitmap = snapshot;
-                setSnapshotBitmap(bitmap);
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inJustDecodeBounds = true;
+                // It must be ...
+                returnIntent.putExtra(PLACE_BITMAP, snapshot);
+                setResult(RESULT_OK, returnIntent);
+                finish();
             }
         };
         mMap.snapshot(snapshotReadyCallback);
-    }
-
-    private void setSnapshotBitmap(Bitmap newBitmap) {
-        snapshotBitmap = newBitmap;
     }
 
     private Bitmap createDrawableFromView(Context context, View view) {
@@ -338,6 +340,7 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
             Log.e("Exception: %s", e.getMessage());
         }
     }
+
     private Context getContext() {
         return this;
     }
@@ -355,20 +358,20 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
          */
         String currentLat = new Double(cameraPosition.target.latitude).toString();
         String currentLng = new Double(cameraPosition.target.longitude).toString();
-        if(len == 0) {
+        if (len == 0) {
             len = 2.5f;
         }
-        if(lim == 0) {
+        if (lim == 0) {
             lim = 30;
         }
         MapUtility.FindPlacesTask findPlacesTask = new MapUtility.FindPlacesTask(currentLat, currentLng, len, lim, false);
         findPlacesTask.execute();
         try {
             adjacencyPlaces = findPlacesTask.get();
-            if(adjacencyPlaces != null) {
+            if (adjacencyPlaces != null) {
                 ArrayList<PlaceData> placeDataArrayList = MapUtility.placeParsing(adjacencyPlaces);
-                if(placeDataArrayList != null) {
-                    for(PlaceData placeData : placeDataArrayList) {
+                if (placeDataArrayList != null) {
+                    for (PlaceData placeData : placeDataArrayList) {
                         addPlaceMarker(placeData);
                     }
                 }
@@ -383,9 +386,9 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
     }
 
     private void removeAllPlaceMarker() {
-        for(int i = 0; i < placeMarkerCount; ++i) {
+        for (int i = 0; i < placeMarkerCount; ++i) {
             Marker marker = hashMapPlaceMarker.remove(i);
-            if(marker != null)
+            if (marker != null)
                 marker.remove();
         }
         placeMarkerCount = 0;
@@ -421,41 +424,6 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
         marker.setTag(infoWindowData);
     }
 
-    /**
-     * This overloading codes need refactoring
-     * --> combine using call a method
-     */
-    @Deprecated
-    private void showSelectDialog(final LatLng latLng) {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
-        alertDialog.setTitle(getResources().getString(R.string.set_place_title))
-                .setMessage(getResources().getString(R.string.set_place_description))
-                .setCancelable(true)
-                .setPositiveButton(getResources().getString(R.string.dialog_ok),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                Intent intent = new Intent();
-                                intent.putExtra(PLACE_LAT, String.valueOf(latLng.latitude));
-                                intent.putExtra(PLACE_LNG, String.valueOf(latLng.longitude));
-                                captureScreen();
-                                intent.putExtra(PLACE_BITMAP, snapshotBitmap);
-                                setResult(RESULT_OK, intent);
-                                finish();
-                            }
-                        })
-                .setNegativeButton(getResources().getString(R.string.dialog_no),
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.cancel();
-                            }
-                        });
-
-        AlertDialog dialog = alertDialog.create();
-        dialog.show();
-    }
-
     private void showSelectDialog(final Marker marker) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
         alertDialog.setTitle(getResources().getString(R.string.set_place_title))
@@ -465,15 +433,12 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                Intent intent = new Intent();
-                                intent.putExtra(PLACE_LAT, String.valueOf(marker.getPosition().latitude));
-                                intent.putExtra(PLACE_LNG, String.valueOf(marker.getPosition().longitude));
-                                intent.putExtra(PLACE_NAME, marker.getTitle());
-                                intent.putExtra(PLACE_TYPE, marker.getSnippet());
-                                captureScreen();
-                                intent.putExtra(PLACE_BITMAP, snapshotBitmap);
-                                setResult(RESULT_OK, intent);
-                                finish();
+                                returnIntent = new Intent();
+                                returnIntent.putExtra(PLACE_LAT, String.valueOf(marker.getPosition().latitude));
+                                returnIntent.putExtra(PLACE_LNG, String.valueOf(marker.getPosition().longitude));
+                                returnIntent.putExtra(PLACE_NAME, marker.getTitle());
+                                returnIntent.putExtra(PLACE_TYPE, marker.getSnippet());
+                                captureScreenAndFinish();
                             }
                         })
                 .setNegativeButton(getResources().getString(R.string.dialog_no),
@@ -487,5 +452,4 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
         AlertDialog dialog = alertDialog.create();
         dialog.show();
     }
-
 }

@@ -2,6 +2,8 @@ package com.example.kyeon.myapplication;
 
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -21,6 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -44,6 +47,7 @@ public class TripPlanActivity extends AppCompatActivity {
     private String ePlaceLat;
     private String ePlaceLng;
     private String ePlaceType;
+    private Bitmap ePlaceBitmap;
     long diff_days;
 
     int day_count;
@@ -143,6 +147,7 @@ public class TripPlanActivity extends AppCompatActivity {
         private static final String ARG_SECTION_PLACE_LAT = ChooseFirstPlaceActivity.PLACE_LAT;
         private static final String ARG_SECTION_PLACE_LNG = ChooseFirstPlaceActivity.PLACE_LNG;
         private static final String ARG_SECTION_PLACE_TYPE = ChooseFirstPlaceActivity.PLACE_TYPE;
+        private static final String ARG_SECTION_PLACE_BITMAP = ChooseFirstPlaceActivity.PLACE_BITMAP;
         private ImageView ivTravelMap;
 
         public PlaceholderFragment() {
@@ -153,7 +158,7 @@ public class TripPlanActivity extends AppCompatActivity {
          * number.
          */
         public static PlaceholderFragment newInstance(int sectionNumber, String title, String firstPlace,
-                                                      String placeLat, String placeLng, String placeType) {
+                                                      String placeLat, String placeLng, String placeType, Bitmap snapshot) {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
@@ -162,13 +167,14 @@ public class TripPlanActivity extends AppCompatActivity {
             args.putString(ARG_SECTION_PLACE_LAT, placeLat);
             args.putString(ARG_SECTION_PLACE_LNG, placeLng);
             args.putString(ARG_SECTION_PLACE_TYPE, placeType);
+            args.putParcelable(ARG_SECTION_PLACE_BITMAP, snapshot);
             fragment.setArguments(args);
             return fragment;
         }
 
 
         public static PlaceholderFragment newInstance(int sectionNumber, int count, String title, String firstPlace,
-                                                      String placeLat, String placeLng, String placeType) {
+                                                      String placeLat, String placeLng, String placeType, Bitmap snapshot) {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
@@ -178,6 +184,7 @@ public class TripPlanActivity extends AppCompatActivity {
             args.putString(ARG_SECTION_PLACE_LAT, placeLat);
             args.putString(ARG_SECTION_PLACE_LNG, placeLng);
             args.putString(ARG_SECTION_PLACE_TYPE, placeType);
+            args.putParcelable(ARG_SECTION_PLACE_BITMAP, snapshot);
             fragment.setArguments(args);
 
             return fragment;
@@ -189,6 +196,9 @@ public class TripPlanActivity extends AppCompatActivity {
 
             final View rootView = choose_places.inflate(R.layout.fragment_plan, container, false);
             ivTravelMap = (ImageView) rootView.findViewById(R.id.ivTravelMap);
+            byte[] bytes = getArguments().getByteArray(ARG_SECTION_PLACE_BITMAP);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+            ivTravelMap.setImageBitmap(bitmap);
             TextView textView = (TextView) rootView.findViewById(R.id.dt);
             ImageView left = (ImageView) rootView.findViewById(R.id.left);
             ImageView right = (ImageView) rootView.findViewById(R.id.right);
@@ -242,6 +252,19 @@ public class TripPlanActivity extends AppCompatActivity {
     }
 
     /**
+     * It must process snapshot of each day's plan...
+     * How????? I don't know now...
+     */
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode != RESULT_OK)
+            return;
+
+    }
+
+    /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
@@ -256,9 +279,11 @@ public class TripPlanActivity extends AppCompatActivity {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
             if (position == diff_days)
-                return PlaceholderFragment.newInstance(position + 1, day_count, etitle, eFirstPlace, ePlaceLat, ePlaceLng, ePlaceType);
+                return PlaceholderFragment.newInstance(position + 1, day_count, etitle, eFirstPlace,
+                        ePlaceLat, ePlaceLng, ePlaceType, ePlaceBitmap);
             else
-                return PlaceholderFragment.newInstance(position + 1, etitle, eFirstPlace, ePlaceLat, ePlaceLng, ePlaceType);
+                return PlaceholderFragment.newInstance(position + 1, etitle, eFirstPlace,
+                        ePlaceLat, ePlaceLng, ePlaceType, ePlaceBitmap);
         }
 
         @Override
@@ -318,6 +343,14 @@ public class TripPlanActivity extends AppCompatActivity {
         ePlaceLat = intent.getStringExtra(ChooseFirstPlaceActivity.PLACE_LAT);
         ePlaceLng = intent.getStringExtra(ChooseFirstPlaceActivity.PLACE_LNG);
         ePlaceType = intent.getStringExtra(ChooseFirstPlaceActivity.PLACE_TYPE);
+        try {
+            ePlaceBitmap = (Bitmap)intent.getExtras().get(ChooseFirstPlaceActivity.PLACE_BITMAP);
+            if(ePlaceBitmap == null) {
+                Log.d("DEBUG-TEST", getResources().getString(R.string.intent_bitmap_error) + "in TripPlanActivity");
+            }
+        } catch(NullPointerException e) {
+            Log.d(".java", getResources().getString(R.string.intent_bitmap_error) + "in TripPlanActivity");
+        }
 
     }
 
