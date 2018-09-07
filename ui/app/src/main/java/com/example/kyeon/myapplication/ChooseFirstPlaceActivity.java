@@ -42,6 +42,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -230,10 +231,19 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
         final GoogleMap.SnapshotReadyCallback snapshotReadyCallback = new GoogleMap.SnapshotReadyCallback() {
             @Override
             public void onSnapshotReady(Bitmap snapshot) {
-                BitmapFactory.Options options = new BitmapFactory.Options();
-                options.inJustDecodeBounds = true;
-                // It must be ...
-                returnIntent.putExtra(PLACE_BITMAP, snapshot);
+                int width = wrapperLayout.getWidth();
+                File file = new File(getContext().getFilesDir().getPath().toString() + "/"
+                        + "tempImage1.png");
+                Log.d("DEBUG-TEST", file.getAbsolutePath() + "in TripPlanActivity");
+                try {
+                    file.createNewFile();
+                    FileOutputStream fos = new FileOutputStream(file);
+                    snapshot.compress(Bitmap.CompressFormat.PNG, 90, fos);
+                    fos.close();
+                } catch(IOException e) {
+                    Log.d("DEBUG-TEST", "파일 출력 에러 in ChooseFirstPlaceActivity");
+                    Log.d("DEBUG-TEST", e.getMessage());
+                }
                 setResult(RESULT_OK, returnIntent);
                 finish();
             }

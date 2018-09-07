@@ -572,8 +572,8 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
 
         Marker marker = mMap.addMarker(options);
         listLocsOfPlaces.add(position);
-        hashMapPlaceMarker.put(placeMarkerCount++, marker);
-        saveMarkerTag(marker, placeMarkerCount, InfoWindowData.TYPE_PLACE);
+        hashMapPlaceMarker.put(userMarkerCount++, marker);
+        saveMarkerTag(marker, userMarkerCount, InfoWindowData.TYPE_PLACE);
     }
 
     private void saveMarkerTag(Marker marker, int markerCount, int windowType) {

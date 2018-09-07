@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 
 public class TripPlanActivity extends AppCompatActivity {
 
@@ -196,8 +197,9 @@ public class TripPlanActivity extends AppCompatActivity {
 
             final View rootView = choose_places.inflate(R.layout.fragment_plan, container, false);
             ivTravelMap = (ImageView) rootView.findViewById(R.id.ivTravelMap);
-            byte[] bytes = getArguments().getByteArray(ARG_SECTION_PLACE_BITMAP);
-            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+            String filePath = getContext().getFilesDir().getPath().toString() + "/tempImage1.png";
+            Log.d("DEBUG-TEST", filePath + "in TripPlanActivity");
+            Bitmap bitmap = BitmapFactory.decodeFile(filePath);
             ivTravelMap.setImageBitmap(bitmap);
             TextView textView = (TextView) rootView.findViewById(R.id.dt);
             ImageView left = (ImageView) rootView.findViewById(R.id.left);

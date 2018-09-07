@@ -53,7 +53,8 @@ public class MapUtility {
     // Current default location is soongsil univ.
     protected static final LatLng DEFAULT_LOCATION = new LatLng(37.495999, 126.957050);
     // default path of snapshot image
-    protected static final String DEFAULT_SNAPSHOT_PATH = "/sdcard/android/data/wander/snapshotImage";
+    protected static final String DEFAULT_SNAPSHOT_EXTERNAL_PATH = "/sdcard/android/data/wander/snapshotImage/";
+    protected static final String DEFAULT_SNAPSHOT_INTERNAL_PATH = "data/data/com.example.kyeon.myapplication/files/";
 
     @Deprecated
     protected static Location getCurrentLocation(final Context context, final Activity activity) {
