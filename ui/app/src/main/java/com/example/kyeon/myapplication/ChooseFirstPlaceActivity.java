@@ -232,7 +232,7 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
             public void onSnapshotReady(Bitmap snapshot) {
                 BitmapFactory.Options options = new BitmapFactory.Options();
                 options.inJustDecodeBounds = true;
-                
+                // It must be ...
                 returnIntent.putExtra(PLACE_BITMAP, snapshot);
                 setResult(RESULT_OK, returnIntent);
                 finish();
