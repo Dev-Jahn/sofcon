@@ -19,6 +19,7 @@
         android:textStyle="bold"/>
 
     <LinearLayout
+        android:layout_marginTop="25dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -29,14 +30,41 @@
             android:gravity="center"
             android:text="ID"
             android:textColor="@color/colorTextAccent"/>
-        <EditText
-            android:id="@+id/register_id_txt"
+        
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1">
+            
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:background="@drawable/black_underline"/>
+
+            <EditText
+                android:id="@+id/register_id_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:layout_weight="1"/>
+            
+        </FrameLayout>
+        
+
+
     </LinearLayout>
 
+    <TextView
+        android:id = "@+id/id_input_error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize = "12dp"
+        android:gravity="right|top"
+        android:textColor="@color/gourmet_color"/>
+
     <LinearLayout
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
@@ -46,14 +74,39 @@
             android:gravity="center"
             android:text="비밀번호"
             android:textColor="@color/colorTextAccent"/>
-        <EditText
-            android:id="@+id/register_passwd_txt"
+
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:background="@drawable/black_underline"/>
+
+            <EditText
+                android:id="@+id/register_passwd_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:layout_weight="1"/>
+
+        </FrameLayout>
+
     </LinearLayout>
 
+    <TextView
+        android:id = "@+id/passwd_input_error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize = "12dp"
+        android:gravity="right"
+        android:textColor="@color/gourmet_color"/>
+
     <LinearLayout
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
@@ -63,14 +116,39 @@
             android:gravity="center"
             android:text="비밀번호 확인"
             android:textColor="@color/colorTextAccent"/>
-        <EditText
-            android:id="@+id/register_passwd_commit_txt"
+
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:background="@drawable/black_underline"/>
+
+            <EditText
+                android:id="@+id/register_passwd_commit_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:layout_weight="1"/>
+
+        </FrameLayout>
+
     </LinearLayout>
 
+    <TextView
+        android:id = "@+id/passwd_commit_error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize = "12dp"
+        android:gravity="right"
+        android:textColor="@color/gourmet_color"/>
+
     <LinearLayout
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
@@ -80,14 +158,40 @@
             android:gravity="center"
             android:text="이름"
             android:textColor="@color/colorTextAccent"/>
-        <EditText
-            android:id="@+id/register_name_txt"
+
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:background="@drawable/black_underline"/>
+
+            <EditText
+                android:id="@+id/register_name_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:layout_weight="1"/>
+
+        </FrameLayout>
+
     </LinearLayout>
 
+    <TextView
+        android:id = "@+id/name_input_error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize = "12dp"
+        android:gravity="right"
+        android:textColor="@color/gourmet_color"/>
+
+
     <LinearLayout
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
@@ -97,14 +201,40 @@
             android:gravity="center"
             android:text="전화번호"
             android:textColor="@color/colorTextAccent"/>
-        <EditText
-            android:id="@+id/register_phoneNO_txt"
+
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="bottom"
+                android:background="@drawable/black_underline"/>
+
+            <EditText
+                android:id="@+id/register_phoneNO_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:layout_weight="1"/>
+
+        </FrameLayout>
+
     </LinearLayout>
 
+    <TextView
+        android:id = "@+id/phoneNO_input_error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize = "12dp"
+        android:gravity="right"
+        android:textColor="@color/gourmet_color"/>
+
+
     <LinearLayout
+        android:layout_marginTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <Button
