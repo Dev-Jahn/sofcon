@@ -30,6 +30,7 @@
             android:text="ID"
             android:textColor="@color/colorTextAccent"/>
         <EditText
+            android:id="@+id/register_id_txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
@@ -46,6 +47,7 @@
             android:text="비밀번호"
             android:textColor="@color/colorTextAccent"/>
         <EditText
+            android:id="@+id/register_passwd_txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
@@ -62,6 +64,7 @@
             android:text="비밀번호 확인"
             android:textColor="@color/colorTextAccent"/>
         <EditText
+            android:id="@+id/register_passwd_commit_txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
@@ -78,6 +81,7 @@
             android:text="이름"
             android:textColor="@color/colorTextAccent"/>
         <EditText
+            android:id="@+id/register_name_txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
@@ -94,6 +98,7 @@
             android:text="전화번호"
             android:textColor="@color/colorTextAccent"/>
         <EditText
+            android:id="@+id/register_phoneNO_txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
@@ -103,6 +108,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <Button
+            android:id="@+id/register_commit_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="확인"
