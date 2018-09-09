@@ -32,6 +32,9 @@ public class IntentData {
         aMM = intent.getStringExtra(MapUtility.A_MM_TAG);
         aDD = intent.getStringExtra(MapUtility.A_DD_TAG);
         currentDay = intent.getStringExtra(MapUtility.CURRENT_DAY_TAG);
+        if(currentDay == null) {
+            currentDay = "1";
+        }
         title = intent.getStringExtra(MapUtility.TRAVEL_TITLE_TAG);
         personCount = intent.getStringExtra(MapUtility.TRAVEL_PERSON_COUNT_TAG);
         firstPlace = intent.getStringExtra(MapUtility.PLACE_NAME_TAG);

@@ -23,10 +23,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 
 public class TripPlanActivity extends AppCompatActivity {
 
@@ -43,6 +45,7 @@ public class TripPlanActivity extends AppCompatActivity {
     String a_yy, a_mm, a_dd;
     String etitle, person_count, eplace;
     private String eFirstPlace;
+    private String eCurrentDay;
     private String ePlaceLat;
     private String ePlaceLng;
     private String ePlaceType;
@@ -161,6 +164,7 @@ public class TripPlanActivity extends AppCompatActivity {
         private static final String ARG_SECTION_NUMBER = "section_number";
         private static final String ARG_SECTION_LAST = "last_number";
         private static final String ARG_SECTION_TITLE = "title_text";
+        private static final String ARG_SECTION_CURRENT_DAY = MapUtility.CURRENT_DAY_TAG;
         private static final String ARG_SECTION_FIRST_PLACE = MapUtility.PLACE_NAME_TAG;
         private static final String ARG_SECTION_PLACE_LAT = MapUtility.PLACE_LAT_TAG;
         private static final String ARG_SECTION_PLACE_LNG = MapUtility.PLACE_LNG_TAG;
@@ -176,12 +180,13 @@ public class TripPlanActivity extends AppCompatActivity {
          * Returns a new instance of this fragment for the given section
          * number.
          */
-        public static PlaceholderFragment newInstance(int sectionNumber, String title, String firstPlace,
+        public static PlaceholderFragment newInstance(int sectionNumber, String title, String currentDay, String firstPlace,
                                                       String placeLat, String placeLng, String placeType, String placeBitmapFilePath) {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
             args.putString(ARG_SECTION_TITLE, title);
+            args.putString(ARG_SECTION_CURRENT_DAY, currentDay);
             args.putString(ARG_SECTION_FIRST_PLACE, firstPlace);
             args.putString(ARG_SECTION_PLACE_LAT, placeLat);
             args.putString(ARG_SECTION_PLACE_LNG, placeLng);
@@ -191,13 +196,14 @@ public class TripPlanActivity extends AppCompatActivity {
             return fragment;
         }
 
-        public static PlaceholderFragment newInstance(int sectionNumber, int count, String title, String firstPlace,
+        public static PlaceholderFragment newInstance(int sectionNumber, int count, String title, String currentDay, String firstPlace,
                                                       String placeLat, String placeLng, String placeType, String placeBitmapFilePath) {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
             args.putInt(ARG_SECTION_LAST, count);
             args.putString(ARG_SECTION_TITLE, title);
+            args.putString(ARG_SECTION_CURRENT_DAY, currentDay);
             args.putString(ARG_SECTION_FIRST_PLACE, firstPlace);
             args.putString(ARG_SECTION_PLACE_LAT, placeLat);
             args.putString(ARG_SECTION_PLACE_LNG, placeLng);
@@ -279,7 +285,7 @@ public class TripPlanActivity extends AppCompatActivity {
                     choose_places.putExtra(ARG_SECTION_PLACE_LAT, getArguments().getString(ARG_SECTION_PLACE_LAT));
                     choose_places.putExtra(ARG_SECTION_PLACE_LNG, getArguments().getString(ARG_SECTION_PLACE_LNG));
                     choose_places.putExtra(ARG_SECTION_PLACE_BITMAP, getArguments().getString(ARG_SECTION_PLACE_BITMAP));
-                    startActivityForResult(choose_places, getArguments().getInt(ARG_SECTION_NUMBER));
+                    startActivityForResult(choose_places, getArguments().getInt(ARG_SECTION_CURRENT_DAY));
                     getActivity().overridePendingTransition(R.anim.sliding_up, R.anim.stay);
                 }
 
@@ -308,11 +314,16 @@ public class TripPlanActivity extends AppCompatActivity {
             if (resultCode != RESULT_OK)
                 return;
 
-            int currentDay = getArguments().getInt(ARG_SECTION_NUMBER);
+            int currentDay = getArguments().getInt(ARG_SECTION_CURRENT_DAY);
 
             if (requestCode == currentDay) {
                 String filePath = getContext().getFilesDir().getPath().toString() + "/"
-                        + getArguments().getString(ARG_SECTION_TITLE) + currentDay + ".png";
+                        + getArguments().getString(ARG_SECTION_TITLE) + (currentDay+1) + ".png";
+                Log.d("DEBUG-TEST", filePath);
+                File file = new File(filePath);
+                if(file.exists()) {
+                    Log.d("DEBUG-TEST", "문제없음");
+                }
                 Bitmap bitmap = BitmapFactory.decodeFile(filePath);
                 ivTravelMap.setImageBitmap(bitmap);
 
@@ -350,11 +361,11 @@ public class TripPlanActivity extends AppCompatActivity {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
             if (position == diff_days)
-                return PlaceholderFragment.newInstance(position + 1, day_count, etitle, eFirstPlace,
-                        ePlaceLat, ePlaceLng, ePlaceType, ePlaceBitmapFilePath);
+                return PlaceholderFragment.newInstance(position + 1, day_count, etitle, eCurrentDay,
+                        eFirstPlace, ePlaceLat, ePlaceLng, ePlaceType, ePlaceBitmapFilePath);
             else
-                return PlaceholderFragment.newInstance(position + 1, etitle, eFirstPlace,
-                        ePlaceLat, ePlaceLng, ePlaceType, ePlaceBitmapFilePath);
+                return PlaceholderFragment.newInstance(position + 1, etitle, eCurrentDay,
+                        eFirstPlace, ePlaceLat, ePlaceLng, ePlaceType, ePlaceBitmapFilePath);
         }
 
         @Override
@@ -417,6 +428,7 @@ public class TripPlanActivity extends AppCompatActivity {
         ePlaceBitmapFilePath = intent.getStringExtra(MapUtility.PLACE_BITMAP_FILE_PATH_TAG);
         if(ePlaceBitmapFilePath == null)
             Log.d("DEBUG-TEST", getResources().getString(R.string.intent_bitmap_error) + "in TripPlanActivity");
+        eCurrentDay = intent.getStringExtra(MapUtility.CURRENT_DAY_TAG);
     }
 
     private void get_datas_for_travel()// test for Travel class
@@ -438,7 +450,7 @@ public class TripPlanActivity extends AppCompatActivity {
         a_dd = intent.getStringExtra("arriving_day");
         a_dd = add_zero_to_string(a_dd);
         int e_dd = Integer.parseInt(a_dd);
-        etitle = intent.getStringExtra("title_text");
+        etitle = intent.getStringExtra(MapUtility.TRAVEL_TITLE_TAG);
         person_count = intent.getStringExtra("person_count");
         Date beginDate;
         Date endDate;

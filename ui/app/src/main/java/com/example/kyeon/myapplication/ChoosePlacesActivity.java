@@ -179,7 +179,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
     }
 
     private void determineTrip() {
-        // MapUtility.saveMapUserMarkers(getContext(), mMap, listMarkersToSave, intentData.getTitle(), Integer.parseInt(intentData.getCurrentDay()));
+        MapUtility.saveMapUserMarkers(getContext(), mMap, listMarkersToSave, intentData.getTitle(), intentData.getCurrentDay());
         captureScreenAndSave();
         saveIntentDatas();
         setResult(RESULT_OK, returnIntent);
@@ -239,11 +239,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                 String filePath = getContext().getFilesDir().getPath().toString() + "/"
                         + intentData.getTitle() + intentData.getCurrentDay() + ".png";
                 File file = new File(filePath);
-                if (file.exists()) {
-                    file.delete();
-                    file = new File(filePath);
-                }
-                Log.d("DEBUG-TEST", file.getAbsolutePath() + "in ChoosePlacesActivity");
+                Log.d("DEBUG-TEST", file.getAbsolutePath() + " in ChoosePlacesActivity");
                 try {
                     file.createNewFile();
                     FileOutputStream fos = new FileOutputStream(file);

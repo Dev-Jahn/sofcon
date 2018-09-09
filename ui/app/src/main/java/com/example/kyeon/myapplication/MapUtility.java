@@ -186,7 +186,7 @@ public class MapUtility {
      * 3. How can I load map instance using filename?
      *    --> In loadMapUserMarkers, argument fileName is hard to receive from other methods
      */
-    protected static void saveMapUserMarkers(Context context, GoogleMap mMap, ArrayList<Marker> markers, String tripTitle, int day) {
+    protected static void saveMapUserMarkers(Context context, GoogleMap mMap, ArrayList<Marker> markers, String tripTitle, String day) {
         /**
          * It should be called in onPause
          */
