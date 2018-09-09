@@ -23,7 +23,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -47,8 +46,10 @@ public class TripPlanActivity extends AppCompatActivity {
     private String ePlaceLat;
     private String ePlaceLng;
     private String ePlaceType;
-    private Bitmap ePlaceBitmap;
+    private String ePlaceBitmapFilePath;
     long diff_days;
+
+    protected static long totalTravelDays;
 
     int day_count;
 
@@ -76,7 +77,7 @@ public class TripPlanActivity extends AppCompatActivity {
         actionBar.setTitle("여행 계획");
 
         get_datas_for_travel();
-
+        calcTotalTravelDays();
 
         //ImageButton comp = new ImageButton(getApplicationContext());
         //comp.setImageDrawable(getDrawable(R.drawable.outline_done_black_24dp));
@@ -132,6 +133,23 @@ public class TripPlanActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public long calcTotalTravelDays() {
+        get_datas();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
+        Date beginDate;
+        Date endDate;
+        try {
+            beginDate = formatter.parse(d_yy + d_mm + d_dd);
+            endDate = formatter.parse(a_yy + a_mm + a_dd);
+            long diff = endDate.getTime() - beginDate.getTime();
+            totalTravelDays = diff / (24 * 60 * 60 * 1000);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            totalTravelDays = -1;
+        }
+        return totalTravelDays;
+    }
+
     /**
      * A placeholder fragment containing a simple view.
      */
@@ -143,14 +161,15 @@ public class TripPlanActivity extends AppCompatActivity {
         private static final String ARG_SECTION_NUMBER = "section_number";
         private static final String ARG_SECTION_LAST = "last_number";
         private static final String ARG_SECTION_TITLE = "title_text";
-        private static final String ARG_SECTION_FIRST_PLACE = ChooseFirstPlaceActivity.PLACE_NAME;
-        private static final String ARG_SECTION_PLACE_LAT = ChooseFirstPlaceActivity.PLACE_LAT;
-        private static final String ARG_SECTION_PLACE_LNG = ChooseFirstPlaceActivity.PLACE_LNG;
-        private static final String ARG_SECTION_PLACE_TYPE = ChooseFirstPlaceActivity.PLACE_TYPE;
-        private static final String ARG_SECTION_PLACE_BITMAP = ChooseFirstPlaceActivity.PLACE_BITMAP;
+        private static final String ARG_SECTION_FIRST_PLACE = MapUtility.PLACE_NAME_TAG;
+        private static final String ARG_SECTION_PLACE_LAT = MapUtility.PLACE_LAT_TAG;
+        private static final String ARG_SECTION_PLACE_LNG = MapUtility.PLACE_LNG_TAG;
+        private static final String ARG_SECTION_PLACE_TYPE = MapUtility.PLACE_TYPE_TAG;
+        private static final String ARG_SECTION_PLACE_BITMAP = MapUtility.PLACE_BITMAP_FILE_PATH_TAG;
         private ImageView ivTravelMap;
 
         public PlaceholderFragment() {
+
         }
 
         /**
@@ -158,7 +177,7 @@ public class TripPlanActivity extends AppCompatActivity {
          * number.
          */
         public static PlaceholderFragment newInstance(int sectionNumber, String title, String firstPlace,
-                                                      String placeLat, String placeLng, String placeType, Bitmap snapshot) {
+                                                      String placeLat, String placeLng, String placeType, String placeBitmapFilePath) {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
@@ -167,14 +186,13 @@ public class TripPlanActivity extends AppCompatActivity {
             args.putString(ARG_SECTION_PLACE_LAT, placeLat);
             args.putString(ARG_SECTION_PLACE_LNG, placeLng);
             args.putString(ARG_SECTION_PLACE_TYPE, placeType);
-            args.putParcelable(ARG_SECTION_PLACE_BITMAP, snapshot);
+            args.putString(ARG_SECTION_PLACE_BITMAP, placeBitmapFilePath);
             fragment.setArguments(args);
             return fragment;
         }
 
-
         public static PlaceholderFragment newInstance(int sectionNumber, int count, String title, String firstPlace,
-                                                      String placeLat, String placeLng, String placeType, Bitmap snapshot) {
+                                                      String placeLat, String placeLng, String placeType, String placeBitmapFilePath) {
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
@@ -184,10 +202,31 @@ public class TripPlanActivity extends AppCompatActivity {
             args.putString(ARG_SECTION_PLACE_LAT, placeLat);
             args.putString(ARG_SECTION_PLACE_LNG, placeLng);
             args.putString(ARG_SECTION_PLACE_TYPE, placeType);
-            args.putParcelable(ARG_SECTION_PLACE_BITMAP, snapshot);
+            args.putString(ARG_SECTION_PLACE_BITMAP, placeBitmapFilePath);
             fragment.setArguments(args);
 
             return fragment;
+        }
+
+        private Intent getDataIntentForReloadMap() {
+            Intent intent = new Intent(getActivity(), ChoosePlacesActivity.class);
+
+            intent.putExtra(MapUtility.D_YY_TAG, getArguments().getString(MapUtility.D_YY_TAG));
+            intent.putExtra(MapUtility.D_MM_TAG, getArguments().getString(MapUtility.D_MM_TAG));
+            intent.putExtra(MapUtility.D_DD_TAG, getArguments().getString(MapUtility.D_DD_TAG));
+            intent.putExtra(MapUtility.A_YY_TAG, getArguments().getString(MapUtility.A_YY_TAG));
+            intent.putExtra(MapUtility.A_MM_TAG, getArguments().getString(MapUtility.A_MM_TAG));
+            intent.putExtra(MapUtility.A_DD_TAG, getArguments().getString(MapUtility.A_DD_TAG));
+            intent.putExtra(MapUtility.TRAVEL_TITLE_TAG, getArguments().getString(MapUtility.TRAVEL_TITLE_TAG));
+            intent.putExtra(MapUtility.TRAVEL_PERSON_COUNT_TAG, getArguments().getString(MapUtility.TRAVEL_PERSON_COUNT_TAG));
+            intent.putExtra(MapUtility.PLACE_NAME_TAG, getArguments().getString(MapUtility.PLACE_NAME_TAG));
+            intent.putExtra(MapUtility.PLACE_TYPE_TAG, getArguments().getString(MapUtility.PLACE_TYPE_TAG));
+            intent.putExtra(MapUtility.PLACE_LAT_TAG, getArguments().getString(MapUtility.PLACE_LAT_TAG));
+            intent.putExtra(MapUtility.PLACE_LNG_TAG, getArguments().getString(MapUtility.PLACE_LNG_TAG));
+            intent.putExtra(MapUtility.PLACE_BITMAP_FILE_PATH_TAG, getArguments().getString(MapUtility.PLACE_BITMAP_FILE_PATH_TAG));
+            intent.putExtra(MapUtility.PLACE_LOAD_TAG, true);
+
+            return intent;
         }
 
         @Override
@@ -196,9 +235,17 @@ public class TripPlanActivity extends AppCompatActivity {
 
             final View rootView = choose_places.inflate(R.layout.fragment_plan, container, false);
             ivTravelMap = (ImageView) rootView.findViewById(R.id.ivTravelMap);
-            byte[] bytes = getArguments().getByteArray(ARG_SECTION_PLACE_BITMAP);
-            Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+            String filePath = getContext().getFilesDir().getPath().toString() + "/tempImage1.png";
+            Log.d("DEBUG-TEST", filePath + "in TripPlanActivity");
+            Bitmap bitmap = BitmapFactory.decodeFile(filePath);
             ivTravelMap.setImageBitmap(bitmap);
+            ivTravelMap.setOnClickListener(new ImageView.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = getDataIntentForReloadMap();
+                    startActivity(intent);
+                }
+            });
             TextView textView = (TextView) rootView.findViewById(R.id.dt);
             ImageView left = (ImageView) rootView.findViewById(R.id.left);
             ImageView right = (ImageView) rootView.findViewById(R.id.right);
@@ -231,6 +278,7 @@ public class TripPlanActivity extends AppCompatActivity {
                     choose_places.putExtra(ARG_SECTION_FIRST_PLACE, getArguments().getString(ARG_SECTION_FIRST_PLACE));
                     choose_places.putExtra(ARG_SECTION_PLACE_LAT, getArguments().getString(ARG_SECTION_PLACE_LAT));
                     choose_places.putExtra(ARG_SECTION_PLACE_LNG, getArguments().getString(ARG_SECTION_PLACE_LNG));
+                    choose_places.putExtra(ARG_SECTION_PLACE_BITMAP, getArguments().getString(ARG_SECTION_PLACE_BITMAP));
                     startActivityForResult(choose_places, getArguments().getInt(ARG_SECTION_NUMBER));
                     getActivity().overridePendingTransition(R.anim.sliding_up, R.anim.stay);
                 }
@@ -249,19 +297,42 @@ public class TripPlanActivity extends AppCompatActivity {
             textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;
         }
-    }
+        /**
+         * It must process snapshot of each day's plan...
+         * How????? I don't know now...
+         */
 
-    /**
-     * It must process snapshot of each day's plan...
-     * How????? I don't know now...
-     */
+        @Override
+        public void onActivityResult(int requestCode, int resultCode, Intent data) {
+            super.onActivityResult(requestCode, resultCode, data);
+            if (resultCode != RESULT_OK)
+                return;
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode != RESULT_OK)
-            return;
+            int currentDay = getArguments().getInt(ARG_SECTION_NUMBER);
 
+            if (requestCode == currentDay) {
+                String filePath = getContext().getFilesDir().getPath().toString() + "/"
+                        + getArguments().getString(ARG_SECTION_TITLE) + currentDay + ".png";
+                Bitmap bitmap = BitmapFactory.decodeFile(filePath);
+                ivTravelMap.setImageBitmap(bitmap);
+
+                /**
+                 * new bitmap (new snapshot of last marker only) is needed.
+                 * How can I snapshot only last marker??? (Maybe it doesn't needed at all...)
+                 */
+                /**
+                if (currentDay != totalTravelDays) {
+                     Intent choose_places = new Intent(getActivity(), ChoosePlacesActivity.class);
+                     choose_places.putExtra(ARG_SECTION_TITLE, getArguments().getString(ARG_SECTION_TITLE));
+                     choose_places.putExtra(ARG_SECTION_FIRST_PLACE, getArguments().getString(ARG_SECTION_FIRST_PLACE));
+                     choose_places.putExtra(ARG_SECTION_PLACE_LAT, getArguments().getString(ARG_SECTION_PLACE_LAT));
+                     choose_places.putExtra(ARG_SECTION_PLACE_LNG, getArguments().getString(ARG_SECTION_PLACE_LNG));
+                     choose_places.putExtra(ARG_SECTION_PLACE_BITMAP, newFilePath);
+                     startActivityForResult(choose_places, currentDay+1);
+                }
+                 */
+            }
+        }
     }
 
     /**
@@ -280,10 +351,10 @@ public class TripPlanActivity extends AppCompatActivity {
             // Return a PlaceholderFragment (defined as a static inner class below).
             if (position == diff_days)
                 return PlaceholderFragment.newInstance(position + 1, day_count, etitle, eFirstPlace,
-                        ePlaceLat, ePlaceLng, ePlaceType, ePlaceBitmap);
+                        ePlaceLat, ePlaceLng, ePlaceType, ePlaceBitmapFilePath);
             else
                 return PlaceholderFragment.newInstance(position + 1, etitle, eFirstPlace,
-                        ePlaceLat, ePlaceLng, ePlaceType, ePlaceBitmap);
+                        ePlaceLat, ePlaceLng, ePlaceType, ePlaceBitmapFilePath);
         }
 
         @Override
@@ -339,19 +410,13 @@ public class TripPlanActivity extends AppCompatActivity {
         etitle = intent.getStringExtra("title_text");
         //eplace = intent.getStringExtra("place_name");
         person_count = intent.getStringExtra("person_count");
-        eFirstPlace = intent.getStringExtra(ChooseFirstPlaceActivity.PLACE_NAME);
-        ePlaceLat = intent.getStringExtra(ChooseFirstPlaceActivity.PLACE_LAT);
-        ePlaceLng = intent.getStringExtra(ChooseFirstPlaceActivity.PLACE_LNG);
-        ePlaceType = intent.getStringExtra(ChooseFirstPlaceActivity.PLACE_TYPE);
-        try {
-            ePlaceBitmap = (Bitmap)intent.getExtras().get(ChooseFirstPlaceActivity.PLACE_BITMAP);
-            if(ePlaceBitmap == null) {
-                Log.d("DEBUG-TEST", getResources().getString(R.string.intent_bitmap_error) + "in TripPlanActivity");
-            }
-        } catch(NullPointerException e) {
-            Log.d(".java", getResources().getString(R.string.intent_bitmap_error) + "in TripPlanActivity");
-        }
-
+        eFirstPlace = intent.getStringExtra(MapUtility.PLACE_NAME_TAG);
+        ePlaceLat = intent.getStringExtra(MapUtility.PLACE_LAT_TAG);
+        ePlaceLng = intent.getStringExtra(MapUtility.PLACE_LNG_TAG);
+        ePlaceType = intent.getStringExtra(MapUtility.PLACE_TYPE_TAG);
+        ePlaceBitmapFilePath = intent.getStringExtra(MapUtility.PLACE_BITMAP_FILE_PATH_TAG);
+        if(ePlaceBitmapFilePath == null)
+            Log.d("DEBUG-TEST", getResources().getString(R.string.intent_bitmap_error) + "in TripPlanActivity");
     }
 
     private void get_datas_for_travel()// test for Travel class

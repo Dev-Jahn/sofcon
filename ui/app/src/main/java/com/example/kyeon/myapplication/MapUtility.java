@@ -53,7 +53,24 @@ public class MapUtility {
     // Current default location is soongsil univ.
     protected static final LatLng DEFAULT_LOCATION = new LatLng(37.495999, 126.957050);
     // default path of snapshot image
-    protected static final String DEFAULT_SNAPSHOT_PATH = "/sdcard/android/data/wander/snapshotImage";
+    protected static final String DEFAULT_SNAPSHOT_EXTERNAL_PATH = "/sdcard/android/data/wander/snapshotImage/";
+    protected static final String DEFAULT_SNAPSHOT_INTERNAL_PATH = "data/data/com.example.kyeon.myapplication/files/";
+
+    protected static final String PLACE_LAT_TAG = "FirstPlaceLat";
+    protected static final String PLACE_LNG_TAG = "FirstPlaceLng";
+    protected static final String PLACE_NAME_TAG = "FirstPlaceName";
+    protected static final String PLACE_TYPE_TAG = "FirstPlaceType";
+    protected static final String PLACE_BITMAP_FILE_PATH_TAG = "PlaceBitmapFilePath";
+    protected static final String PLACE_LOAD_TAG = "IsPlaceLoaded?";
+    protected static final String D_YY_TAG = "departing_year";
+    protected static final String D_MM_TAG = "departing_month";
+    protected static final String D_DD_TAG = "departing_day";
+    protected static final String A_YY_TAG = "arriving_year";
+    protected static final String A_MM_TAG = "arriving_month";
+    protected static final String A_DD_TAG = "arriving_day";
+    protected static final String CURRENT_DAY_TAG = "currentDay";
+    protected static final String TRAVEL_TITLE_TAG = "title_text";
+    protected static final String TRAVEL_PERSON_COUNT_TAG = "person_count";
 
     @Deprecated
     protected static Location getCurrentLocation(final Context context, final Activity activity) {
@@ -105,8 +122,6 @@ public class MapUtility {
             Location location = locManager.getLastKnownLocation(bestProvider);
             // We should remove update listener (update only once)
             locManager.removeUpdates(mLocListener);
-            // Below code is just debug code, delete it if test is over
-            //Toast.makeText(context, "location is updating...", Toast.LENGTH_LONG).show();
             return location;
         } else {
             if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -176,7 +191,7 @@ public class MapUtility {
          * It should be called in onPause
          */
         try {
-            String fileName = tripTitle + Integer.toString(day) + ".dat";
+            String fileName = tripTitle + day + ".dat";
             // Modes: MODE_PRIVATE, MODE_WORLD_READABLE, MODE_WORLD_WRITABLE
             FileOutputStream fos = context.openFileOutput(fileName, Context.MODE_PRIVATE);
             DataOutputStream dos = new DataOutputStream(fos);

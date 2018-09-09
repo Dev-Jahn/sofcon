@@ -35,6 +35,9 @@
     <string name="custom_select_title">경유지 추가</string>
     <string name="custom_select_description">선택한 장소는 추천 장소가 아닙니다. 그래도 여행 경로에 포함하시겠습니까?</string>
 
+    <string name="line_draw_title">여행경로 그리기</string>
+    <string name="line_draw_description">선택하신 경유지에 대한 여행경로를 길을 따라 생성할 수 없습니다. 직선으로 여행경로를 생성하시겠습니까?</string>
+
     <string name="dialog_ok">네</string>
     <string name="dialog_no">아니오</string>
 
