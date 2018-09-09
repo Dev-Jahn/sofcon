@@ -7,67 +7,56 @@ import com.google.android.gms.maps.model.LatLng;
 public class IntentData {
 
     private String dYY;
-    public static final String dYYTag = "departing_year";
     private String dMM;
-    public static final String dMMTag = "departing_month";
     private String dDD;
-    public static final String dDDTag = "departing_day";
     private String aYY;
-    public static final String aYYTag = "arriving_year";
     private String aMM;
-    public static final String aMMTag = "arriving_month";
     private String aDD;
-    public static final String aDDTag = "arriving_day";
     private String currentDay;
-    public static final String currentDayTag = "currentDay";
     private String title;
-    public static final String titleTag = "title_text";
     private String personCount;
-    public static final String countTag = "person_count";
     private String firstPlace;
-    public static final String firstPlaceTag = MapUtility.PLACE_NAME;
     private String placeLat;
-    public static final String placeLatTag = MapUtility.PLACE_LAT;
     private String placeLng;
-    public static final String placeLngTag = MapUtility.PLACE_LNG;
     private String placeType;
-    public static final String placeTypeTag = MapUtility.PLACE_TYPE;
     private String placeBitmapFilePath;
-    public static final String placeBitmapFilePathTag = MapUtility.PLACE_BITMAP;
     private LatLng placeLatLng;
+    private boolean isLoaded;
+    public static final String isLoadedTag = MapUtility.PLACE_LOAD_TAG;
 
     public IntentData(Intent intent) {
-        dYY = intent.getStringExtra(dYYTag);
-        dMM = intent.getStringExtra(dMMTag);
-        dDD = intent.getStringExtra(dDDTag);
-        aYY = intent.getStringExtra(aYYTag);
-        aMM = intent.getStringExtra(aMMTag);
-        aDD = intent.getStringExtra(aDDTag);
-        currentDay = intent.getStringExtra(currentDayTag);
-        title = intent.getStringExtra(titleTag);
-        personCount = intent.getStringExtra(countTag);
-        firstPlace = intent.getStringExtra(firstPlaceTag);
-        placeLat = intent.getStringExtra(placeLatTag);
-        placeLng = intent.getStringExtra(placeLngTag);
+        dYY = intent.getStringExtra(MapUtility.D_YY_TAG);
+        dMM = intent.getStringExtra(MapUtility.D_MM_TAG);
+        dDD = intent.getStringExtra(MapUtility.D_DD_TAG);
+        aYY = intent.getStringExtra(MapUtility.A_YY_TAG);
+        aMM = intent.getStringExtra(MapUtility.A_MM_TAG);
+        aDD = intent.getStringExtra(MapUtility.A_DD_TAG);
+        currentDay = intent.getStringExtra(MapUtility.CURRENT_DAY_TAG);
+        title = intent.getStringExtra(MapUtility.TRAVEL_TITLE_TAG);
+        personCount = intent.getStringExtra(MapUtility.TRAVEL_PERSON_COUNT_TAG);
+        firstPlace = intent.getStringExtra(MapUtility.PLACE_NAME_TAG);
+        placeLat = intent.getStringExtra(MapUtility.PLACE_LAT_TAG);
+        placeLng = intent.getStringExtra(MapUtility.PLACE_LNG_TAG);
         calcLatLng();
-        placeType = intent.getStringExtra(placeTypeTag);
-        placeBitmapFilePath = intent.getStringExtra(placeBitmapFilePathTag);
+        placeType = intent.getStringExtra(MapUtility.PLACE_TYPE_TAG);
+        placeBitmapFilePath = intent.getStringExtra(MapUtility.PLACE_BITMAP_FILE_PATH_TAG);
+        isLoaded = intent.getBooleanExtra(MapUtility.PLACE_LOAD_TAG, false);
     }
 
     protected void transferDataToIntent(Intent intent) {
-        intent.putExtra(dYYTag, dYY);
-        intent.putExtra(dMMTag, dMM);
-        intent.putExtra(dDDTag, dDD);
-        intent.putExtra(aYYTag, aYY);
-        intent.putExtra(aMMTag, aMM);
-        intent.putExtra(aDDTag, aDD);
-        intent.putExtra(currentDayTag, currentDay);
-        intent.putExtra(titleTag, title);
-        intent.putExtra(firstPlaceTag, firstPlace);
-        intent.putExtra(placeLatTag, placeLat);
-        intent.putExtra(placeLngTag, placeLng);
-        intent.putExtra(placeTypeTag, placeType);
-        intent.putExtra(placeBitmapFilePathTag, placeBitmapFilePath);
+        intent.putExtra(MapUtility.D_YY_TAG, dYY);
+        intent.putExtra(MapUtility.D_MM_TAG, dMM);
+        intent.putExtra(MapUtility.D_DD_TAG, dDD);
+        intent.putExtra(MapUtility.A_YY_TAG, aYY);
+        intent.putExtra(MapUtility.A_MM_TAG, aMM);
+        intent.putExtra(MapUtility.A_DD_TAG, aDD);
+        intent.putExtra(MapUtility.CURRENT_DAY_TAG, currentDay);
+        intent.putExtra(MapUtility.TRAVEL_TITLE_TAG, title);
+        intent.putExtra(MapUtility.PLACE_NAME_TAG, firstPlace);
+        intent.putExtra(MapUtility.PLACE_LAT_TAG, placeLat);
+        intent.putExtra(MapUtility.PLACE_LNG_TAG, placeLng);
+        intent.putExtra(MapUtility.PLACE_TYPE_TAG, placeType);
+        intent.putExtra(MapUtility.PLACE_BITMAP_FILE_PATH_TAG, placeBitmapFilePath);
     }
 
     protected void calcLatLng() {

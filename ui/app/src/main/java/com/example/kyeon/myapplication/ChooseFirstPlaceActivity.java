@@ -8,7 +8,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.location.Address;
 import android.location.Geocoder;
@@ -41,7 +40,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -220,7 +218,7 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
                     Log.d("DEBUG-TEST", "파일 출력 에러 in ChooseFirstPlaceActivity");
                     Log.d("DEBUG-TEST", e.getMessage());
                 }
-                returnIntent.putExtra(MapUtility.PLACE_BITMAP, filePath);
+                returnIntent.putExtra(MapUtility.PLACE_BITMAP_FILE_PATH_TAG, filePath);
                 setResult(RESULT_OK, returnIntent);
                 finish();
             }
@@ -453,10 +451,10 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 returnIntent = new Intent();
-                                returnIntent.putExtra(MapUtility.PLACE_LAT, String.valueOf(marker.getPosition().latitude));
-                                returnIntent.putExtra(MapUtility.PLACE_LNG, String.valueOf(marker.getPosition().longitude));
-                                returnIntent.putExtra(MapUtility.PLACE_NAME, marker.getTitle());
-                                returnIntent.putExtra(MapUtility.PLACE_TYPE, marker.getSnippet());
+                                returnIntent.putExtra(MapUtility.PLACE_LAT_TAG, String.valueOf(marker.getPosition().latitude));
+                                returnIntent.putExtra(MapUtility.PLACE_LNG_TAG, String.valueOf(marker.getPosition().longitude));
+                                returnIntent.putExtra(MapUtility.PLACE_NAME_TAG, marker.getTitle());
+                                returnIntent.putExtra(MapUtility.PLACE_TYPE_TAG, marker.getSnippet());
                                 captureScreenAndFinish();
                             }
                         })

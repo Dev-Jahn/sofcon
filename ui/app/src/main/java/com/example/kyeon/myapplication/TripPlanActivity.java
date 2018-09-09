@@ -161,11 +161,11 @@ public class TripPlanActivity extends AppCompatActivity {
         private static final String ARG_SECTION_NUMBER = "section_number";
         private static final String ARG_SECTION_LAST = "last_number";
         private static final String ARG_SECTION_TITLE = "title_text";
-        private static final String ARG_SECTION_FIRST_PLACE = MapUtility.PLACE_NAME;
-        private static final String ARG_SECTION_PLACE_LAT = MapUtility.PLACE_LAT;
-        private static final String ARG_SECTION_PLACE_LNG = MapUtility.PLACE_LNG;
-        private static final String ARG_SECTION_PLACE_TYPE = MapUtility.PLACE_TYPE;
-        private static final String ARG_SECTION_PLACE_BITMAP = MapUtility.PLACE_BITMAP;
+        private static final String ARG_SECTION_FIRST_PLACE = MapUtility.PLACE_NAME_TAG;
+        private static final String ARG_SECTION_PLACE_LAT = MapUtility.PLACE_LAT_TAG;
+        private static final String ARG_SECTION_PLACE_LNG = MapUtility.PLACE_LNG_TAG;
+        private static final String ARG_SECTION_PLACE_TYPE = MapUtility.PLACE_TYPE_TAG;
+        private static final String ARG_SECTION_PLACE_BITMAP = MapUtility.PLACE_BITMAP_FILE_PATH_TAG;
         private ImageView ivTravelMap;
 
         public PlaceholderFragment() {
@@ -208,6 +208,27 @@ public class TripPlanActivity extends AppCompatActivity {
             return fragment;
         }
 
+        private Intent getDataIntentForReloadMap() {
+            Intent intent = new Intent(getActivity(), ChoosePlacesActivity.class);
+
+            intent.putExtra(MapUtility.D_YY_TAG, getArguments().getString(MapUtility.D_YY_TAG));
+            intent.putExtra(MapUtility.D_MM_TAG, getArguments().getString(MapUtility.D_MM_TAG));
+            intent.putExtra(MapUtility.D_DD_TAG, getArguments().getString(MapUtility.D_DD_TAG));
+            intent.putExtra(MapUtility.A_YY_TAG, getArguments().getString(MapUtility.A_YY_TAG));
+            intent.putExtra(MapUtility.A_MM_TAG, getArguments().getString(MapUtility.A_MM_TAG));
+            intent.putExtra(MapUtility.A_DD_TAG, getArguments().getString(MapUtility.A_DD_TAG));
+            intent.putExtra(MapUtility.TRAVEL_TITLE_TAG, getArguments().getString(MapUtility.TRAVEL_TITLE_TAG));
+            intent.putExtra(MapUtility.TRAVEL_PERSON_COUNT_TAG, getArguments().getString(MapUtility.TRAVEL_PERSON_COUNT_TAG));
+            intent.putExtra(MapUtility.PLACE_NAME_TAG, getArguments().getString(MapUtility.PLACE_NAME_TAG));
+            intent.putExtra(MapUtility.PLACE_TYPE_TAG, getArguments().getString(MapUtility.PLACE_TYPE_TAG));
+            intent.putExtra(MapUtility.PLACE_LAT_TAG, getArguments().getString(MapUtility.PLACE_LAT_TAG));
+            intent.putExtra(MapUtility.PLACE_LNG_TAG, getArguments().getString(MapUtility.PLACE_LNG_TAG));
+            intent.putExtra(MapUtility.PLACE_BITMAP_FILE_PATH_TAG, getArguments().getString(MapUtility.PLACE_BITMAP_FILE_PATH_TAG));
+            intent.putExtra(MapUtility.PLACE_LOAD_TAG, true);
+
+            return intent;
+        }
+
         @Override
         public View onCreateView(LayoutInflater choose_places, ViewGroup container,
                                  Bundle savedInstanceState) {
@@ -218,6 +239,13 @@ public class TripPlanActivity extends AppCompatActivity {
             Log.d("DEBUG-TEST", filePath + "in TripPlanActivity");
             Bitmap bitmap = BitmapFactory.decodeFile(filePath);
             ivTravelMap.setImageBitmap(bitmap);
+            ivTravelMap.setOnClickListener(new ImageView.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = getDataIntentForReloadMap();
+                    startActivity(intent);
+                }
+            });
             TextView textView = (TextView) rootView.findViewById(R.id.dt);
             ImageView left = (ImageView) rootView.findViewById(R.id.left);
             ImageView right = (ImageView) rootView.findViewById(R.id.right);
@@ -279,18 +307,20 @@ public class TripPlanActivity extends AppCompatActivity {
             super.onActivityResult(requestCode, resultCode, data);
             if (resultCode != RESULT_OK)
                 return;
-/**
+
             int currentDay = getArguments().getInt(ARG_SECTION_NUMBER);
 
             if (requestCode == currentDay) {
                 String filePath = getContext().getFilesDir().getPath().toString() + "/"
                         + getArguments().getString(ARG_SECTION_TITLE) + currentDay + ".png";
                 Bitmap bitmap = BitmapFactory.decodeFile(filePath);
-
-                String newFilePath = getContext().getFilesDir().getPath().toString() + "/"
-                        + getArguments().getString(ARG_SECTION_TITLE) + (currentDay + 1) + ".png";
-
                 ivTravelMap.setImageBitmap(bitmap);
+
+                /**
+                 * new bitmap (new snapshot of last marker only) is needed.
+                 * How can I snapshot only last marker??? (Maybe it doesn't needed at all...)
+                 */
+                /**
                 if (currentDay != totalTravelDays) {
                      Intent choose_places = new Intent(getActivity(), ChoosePlacesActivity.class);
                      choose_places.putExtra(ARG_SECTION_TITLE, getArguments().getString(ARG_SECTION_TITLE));
@@ -300,8 +330,8 @@ public class TripPlanActivity extends AppCompatActivity {
                      choose_places.putExtra(ARG_SECTION_PLACE_BITMAP, newFilePath);
                      startActivityForResult(choose_places, currentDay+1);
                 }
+                 */
             }
- */
         }
     }
 
@@ -380,11 +410,11 @@ public class TripPlanActivity extends AppCompatActivity {
         etitle = intent.getStringExtra("title_text");
         //eplace = intent.getStringExtra("place_name");
         person_count = intent.getStringExtra("person_count");
-        eFirstPlace = intent.getStringExtra(MapUtility.PLACE_NAME);
-        ePlaceLat = intent.getStringExtra(MapUtility.PLACE_LAT);
-        ePlaceLng = intent.getStringExtra(MapUtility.PLACE_LNG);
-        ePlaceType = intent.getStringExtra(MapUtility.PLACE_TYPE);
-        ePlaceBitmapFilePath = intent.getStringExtra(MapUtility.PLACE_BITMAP);
+        eFirstPlace = intent.getStringExtra(MapUtility.PLACE_NAME_TAG);
+        ePlaceLat = intent.getStringExtra(MapUtility.PLACE_LAT_TAG);
+        ePlaceLng = intent.getStringExtra(MapUtility.PLACE_LNG_TAG);
+        ePlaceType = intent.getStringExtra(MapUtility.PLACE_TYPE_TAG);
+        ePlaceBitmapFilePath = intent.getStringExtra(MapUtility.PLACE_BITMAP_FILE_PATH_TAG);
         if(ePlaceBitmapFilePath == null)
             Log.d("DEBUG-TEST", getResources().getString(R.string.intent_bitmap_error) + "in TripPlanActivity");
     }

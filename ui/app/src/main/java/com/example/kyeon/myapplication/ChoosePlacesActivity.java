@@ -124,7 +124,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
 
         Button cancelButton = (Button) findViewById(R.id.cancelButton);
         Button selectButton = (Button) findViewById(R.id.selectButton);
-        Button scanButton = (Button)findViewById(R.id.scanButton);
+        Button scanButton = (Button) findViewById(R.id.scanButton);
 
         cancelButton.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -143,7 +143,6 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         selectButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                MapUtility.saveMapUserMarkers(getContext(), mMap, listMarkersToSave, intentData.getTitle(), Integer.parseInt(intentData.getCurrentDay()));
                 determineTrip();
             }
         });
@@ -151,23 +150,14 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         /**
          * Below codes are test code
          */
+
 /**
- Button saveButton = (Button)findViewById(R.id.testSaveButton);
- saveButton.setOnClickListener(new Button.OnClickListener() {
- public void onClick(View view) {
- MapUtility.saveMapUserMarkers(getContext(), mMap, listMarkersToSave, intentData.getTitle(), 1);
- }
- });
- Button loadButton = (Button)findViewById(R.id.testLoadButton);
- loadButton.setOnClickListener(new Button.OnClickListener() {
- public void onClick(View view) {
  listMarkersToSave.clear();
- ArrayList<InfoWindowData> arrayList = MapUtility.loadMapUserMarkers(getContext(), intentData.getTitle() + "1.dat");
+ ArrayList<InfoWindowData> arrayList = MapUtility.loadMapUserMarkers(getContext(), intentData.getTitle() + intentData.getCurrentDay());
  for(InfoWindowData info : arrayList) {
  addUserMarker(info);
  }
  userMarkerCount = arrayList.size();
- }
  });
  */
         // test code end
@@ -179,10 +169,6 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
-        /**
-         *
-         */
     }
 
     private void getIntentDatas() {
@@ -193,21 +179,15 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
     }
 
     private void determineTrip() {
-        if(isTravelEnded()) {
-            saveIntentDatas();
-            captureScreenAndSave();
-
-            finish();
-        } else {
-            saveIntentDatas();
-            captureScreenAndSave();
-
-            finish();
-        }
+        // MapUtility.saveMapUserMarkers(getContext(), mMap, listMarkersToSave, intentData.getTitle(), Integer.parseInt(intentData.getCurrentDay()));
+        captureScreenAndSave();
+        saveIntentDatas();
+        setResult(RESULT_OK, returnIntent);
+        finish();
     }
 
     private void saveIntentDatas() {
-        if(lastUserMarker != null) {
+        if (lastUserMarker != null) {
             IntentData newIntentData = new IntentData(getIntent());
             newIntentData.setCurrentDay(String.valueOf(Integer.parseInt(newIntentData.getCurrentDay()) + 1));
             newIntentData.setFirstPlace(lastUserMarker.getTitle());
@@ -222,6 +202,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         }
     }
 
+    @Deprecated
     private boolean isTravelEnded() {
         int currentDay = Integer.parseInt(intentData.getCurrentDay());
         SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
@@ -258,7 +239,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                 String filePath = getContext().getFilesDir().getPath().toString() + "/"
                         + intentData.getTitle() + intentData.getCurrentDay() + ".png";
                 File file = new File(filePath);
-                if(file.exists()) {
+                if (file.exists()) {
                     file.delete();
                     file = new File(filePath);
                 }
@@ -268,7 +249,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                     FileOutputStream fos = new FileOutputStream(file);
                     snapshot.compress(Bitmap.CompressFormat.PNG, 90, fos);
                     fos.close();
-                } catch(IOException e) {
+                } catch (IOException e) {
                     Log.d("DEBUG-TEST", "파일 출력 에러 in ChoosePlacesActivity");
                     Log.d("DEBUG-TEST", e.getMessage());
                 }
@@ -444,20 +425,20 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
          */
         String currentLat = new Double(cameraPosition.target.latitude).toString();
         String currentLng = new Double(cameraPosition.target.longitude).toString();
-        if(len == 0) {
+        if (len == 0) {
             len = 2.5f;
         }
-        if(lim == 0) {
+        if (lim == 0) {
             lim = 30;
         }
         MapUtility.FindPlacesTask findPlacesTask = new MapUtility.FindPlacesTask(currentLat, currentLng, len, lim, false);
         findPlacesTask.execute();
         try {
             adjacencyPlaces = findPlacesTask.get();
-            if(adjacencyPlaces != null) {
+            if (adjacencyPlaces != null) {
                 ArrayList<PlaceData> placeDataArrayList = MapUtility.placeParsing(adjacencyPlaces);
-                if(placeDataArrayList != null) {
-                    for(PlaceData placeData : placeDataArrayList) {
+                if (placeDataArrayList != null) {
+                    for (PlaceData placeData : placeDataArrayList) {
                         addPlaceMarker(placeData);
                     }
                 }
@@ -838,7 +819,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
              * This is the case of cannot drawing a route
              */
             if (result.size() == 0) {
-                if(redraw == false) {
+                if (redraw == false) {
                     AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
                     alertDialog.setTitle(getResources().getString(R.string.line_draw_title))
                             .setMessage(getResources().getString(R.string.line_draw_description))

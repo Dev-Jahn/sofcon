@@ -2,7 +2,6 @@ package com.example.kyeon.myapplication;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -246,14 +245,14 @@ public class NewActivity extends AppCompatActivity {
                     i.putExtra("person_count", String.valueOf(personCount));
                     i.putExtra("title_text", travel_title);
                     i.putExtra("place_name", place_text);
-                    i.putExtra(MapUtility.PLACE_NAME, btnPlaceName.getText());
-                    i.putExtra(MapUtility.PLACE_LAT, placeLat);
-                    i.putExtra(MapUtility.PLACE_LNG, placeLng);
-                    i.putExtra(MapUtility.PLACE_TYPE, placeType);
+                    i.putExtra(MapUtility.PLACE_NAME_TAG, btnPlaceName.getText());
+                    i.putExtra(MapUtility.PLACE_LAT_TAG, placeLat);
+                    i.putExtra(MapUtility.PLACE_LNG_TAG, placeLng);
+                    i.putExtra(MapUtility.PLACE_TYPE_TAG, placeType);
                     if(placeBitmapFilePath == null) {
                         Log.d("DEBUG-TEST", getResources().getString(R.string.intent_bitmap_error) + "in NewActivity");
                     }
-                    i.putExtra(MapUtility.PLACE_BITMAP, placeBitmapFilePath);
+                    i.putExtra(MapUtility.PLACE_BITMAP_FILE_PATH_TAG, placeBitmapFilePath);
 
                     startActivity(i);
                     finish();
@@ -386,16 +385,16 @@ public class NewActivity extends AppCompatActivity {
                 }
             }
         } else if(requestCode == REQUEST_CODE_CHOOSE_PLACE) {
-            String placeName = data.getStringExtra(MapUtility.PLACE_NAME);
+            String placeName = data.getStringExtra(MapUtility.PLACE_NAME_TAG);
             if(placeName == null)
                 placeName = getResources().getString(R.string.default_place_name);
             btnPlaceName.setText(placeName);
             // placeLatLng = data.getStringExtra
             isFirstPlaceSet = true;
-            placeLat = data.getStringExtra(MapUtility.PLACE_LAT);
-            placeLng = data.getStringExtra(MapUtility.PLACE_LNG);
-            placeType = data.getStringExtra(MapUtility.PLACE_TYPE);
-            placeBitmapFilePath = data.getStringExtra(MapUtility.PLACE_BITMAP);
+            placeLat = data.getStringExtra(MapUtility.PLACE_LAT_TAG);
+            placeLng = data.getStringExtra(MapUtility.PLACE_LNG_TAG);
+            placeType = data.getStringExtra(MapUtility.PLACE_TYPE_TAG);
+            placeBitmapFilePath = data.getStringExtra(MapUtility.PLACE_BITMAP_FILE_PATH_TAG);
             if(placeBitmapFilePath == null)
                 Log.d(".java", getResources().getString(R.string.intent_bitmap_error) + "in NewActivity");
         }
