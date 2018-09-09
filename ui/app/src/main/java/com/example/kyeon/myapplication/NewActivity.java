@@ -36,7 +36,7 @@ public class NewActivity extends AppCompatActivity {
     private String placeLat;
     private String placeLng;
     private String placeType;
-    private Bitmap placeBitmap;
+    private String placeBitmapFilePath;
 
     private ListView navigationView;
     private String[] navItems = {"메인 메뉴", "새 여행", "내 여행", "다른 여행","추천 여행"};
@@ -246,14 +246,14 @@ public class NewActivity extends AppCompatActivity {
                     i.putExtra("person_count", String.valueOf(personCount));
                     i.putExtra("title_text", travel_title);
                     i.putExtra("place_name", place_text);
-                    i.putExtra(ChooseFirstPlaceActivity.PLACE_NAME, btnPlaceName.getText());
-                    i.putExtra(ChooseFirstPlaceActivity.PLACE_LAT, placeLat);
-                    i.putExtra(ChooseFirstPlaceActivity.PLACE_LNG, placeLng);
-                    i.putExtra(ChooseFirstPlaceActivity.PLACE_TYPE, placeType);
-                    if(placeBitmap == null) {
+                    i.putExtra(MapUtility.PLACE_NAME, btnPlaceName.getText());
+                    i.putExtra(MapUtility.PLACE_LAT, placeLat);
+                    i.putExtra(MapUtility.PLACE_LNG, placeLng);
+                    i.putExtra(MapUtility.PLACE_TYPE, placeType);
+                    if(placeBitmapFilePath == null) {
                         Log.d("DEBUG-TEST", getResources().getString(R.string.intent_bitmap_error) + "in NewActivity");
                     }
-                    i.putExtra(ChooseFirstPlaceActivity.PLACE_BITMAP, placeBitmap);
+                    i.putExtra(MapUtility.PLACE_BITMAP, placeBitmapFilePath);
 
                     startActivity(i);
                     finish();
@@ -386,21 +386,18 @@ public class NewActivity extends AppCompatActivity {
                 }
             }
         } else if(requestCode == REQUEST_CODE_CHOOSE_PLACE) {
-            String placeName = data.getStringExtra(ChooseFirstPlaceActivity.PLACE_NAME);
+            String placeName = data.getStringExtra(MapUtility.PLACE_NAME);
             if(placeName == null)
                 placeName = getResources().getString(R.string.default_place_name);
             btnPlaceName.setText(placeName);
             // placeLatLng = data.getStringExtra
             isFirstPlaceSet = true;
-            placeLat = data.getStringExtra(ChooseFirstPlaceActivity.PLACE_LAT);
-            placeLng = data.getStringExtra(ChooseFirstPlaceActivity.PLACE_LNG);
-            placeType = data.getStringExtra(ChooseFirstPlaceActivity.PLACE_TYPE);
-            try {
-                placeBitmap = (Bitmap)data.getExtras().get(ChooseFirstPlaceActivity.PLACE_BITMAP);
-                Log.d("DEBUG-TEST", getResources().getString(R.string.intent_bitmap_error));
-            } catch(NullPointerException e) {
+            placeLat = data.getStringExtra(MapUtility.PLACE_LAT);
+            placeLng = data.getStringExtra(MapUtility.PLACE_LNG);
+            placeType = data.getStringExtra(MapUtility.PLACE_TYPE);
+            placeBitmapFilePath = data.getStringExtra(MapUtility.PLACE_BITMAP);
+            if(placeBitmapFilePath == null)
                 Log.d(".java", getResources().getString(R.string.intent_bitmap_error) + "in NewActivity");
-            }
         }
 
     }

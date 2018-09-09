@@ -1,9 +1,6 @@
 package com.example.kyeon.myapplication;
 
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 
@@ -28,15 +25,15 @@ public class IntentData {
     private String personCount;
     public static final String countTag = "person_count";
     private String firstPlace;
-    public static final String firstPlaceTag = ChooseFirstPlaceActivity.PLACE_NAME;
+    public static final String firstPlaceTag = MapUtility.PLACE_NAME;
     private String placeLat;
-    public static final String placeLatTag = ChooseFirstPlaceActivity.PLACE_LAT;
+    public static final String placeLatTag = MapUtility.PLACE_LAT;
     private String placeLng;
-    public static final String placeLngTag = ChooseFirstPlaceActivity.PLACE_LNG;
+    public static final String placeLngTag = MapUtility.PLACE_LNG;
     private String placeType;
-    public static final String placeTypeTag = ChooseFirstPlaceActivity.PLACE_TYPE;
-    private Bitmap placeBitmap;
-    public static final String placeBitmapTag = ChooseFirstPlaceActivity.PLACE_BITMAP;
+    public static final String placeTypeTag = MapUtility.PLACE_TYPE;
+    private String placeBitmapFilePath;
+    public static final String placeBitmapFilePathTag = MapUtility.PLACE_BITMAP;
     private LatLng placeLatLng;
 
     public IntentData(Intent intent) {
@@ -54,11 +51,7 @@ public class IntentData {
         placeLng = intent.getStringExtra(placeLngTag);
         calcLatLng();
         placeType = intent.getStringExtra(placeTypeTag);
-        try {
-            placeBitmap = (Bitmap) intent.getExtras().get(placeBitmapTag);
-        } catch(NullPointerException e) {
-            Log.d(".java", "비트맵 이미지 전달 오류 in IntentData");
-        }
+        placeBitmapFilePath = intent.getStringExtra(placeBitmapFilePathTag);
     }
 
     protected void transferDataToIntent(Intent intent) {
@@ -74,7 +67,7 @@ public class IntentData {
         intent.putExtra(placeLatTag, placeLat);
         intent.putExtra(placeLngTag, placeLng);
         intent.putExtra(placeTypeTag, placeType);
-        intent.putExtra(placeBitmapTag, placeBitmap);
+        intent.putExtra(placeBitmapFilePathTag, placeBitmapFilePath);
     }
 
     protected void calcLatLng() {
@@ -195,11 +188,11 @@ public class IntentData {
         this.placeType = placeType;
     }
 
-    public Bitmap getPlaceBitmap() {
-        return placeBitmap;
+    public String getPlaceBitmapFilePath() {
+        return placeBitmapFilePath;
     }
 
-    public void setPlaceBitmap(Bitmap placeBitmap) {
-        this.placeBitmap = placeBitmap;
+    public void setPlaceBitmapFilePath(String placeBitmapFilePath) {
+        this.placeBitmapFilePath = placeBitmapFilePath;
     }
 }

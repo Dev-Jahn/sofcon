@@ -32,12 +32,10 @@ public class InfoWindowData {
         this.snippet = snippet;
     }
 
-    @Deprecated
     public String getScore() {
         return score;
     }
 
-    @Deprecated
     public void setScore(String score) {
         this.score = score;
     }
@@ -50,11 +48,10 @@ public class InfoWindowData {
         this.order = order;
     }
 
-    @Deprecated
     public String getPlaceID() {
         return placeID;
     }
-    @Deprecated
+
     public void setPlaceID(String placeID) {
         this.placeID = placeID;
     }

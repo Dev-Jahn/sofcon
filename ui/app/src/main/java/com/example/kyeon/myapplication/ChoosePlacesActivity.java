@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -37,6 +39,8 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -47,6 +51,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -57,7 +62,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
 
     private GoogleMap mMap;
     private boolean isFirstPlaceAdded = false;
-    private Marker lastMarker;
+    private Marker lastUserMarker;
     // Received intent data
     private IntentData intentData;
     // Locations to draw
@@ -97,6 +102,9 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
     private TextView firstPlaceInfoSnippet;
 
     private String adjacencyPlaces;
+    private String placeBitmapFilePath;
+
+    private Intent returnIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,7 +143,8 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         selectButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MapUtility.saveMapUserMarkers(getContext(), mMap, listMarkersToSave, intentData.getTitle(), Integer.parseInt(intentData.getCurrentDay()));
+//                MapUtility.saveMapUserMarkers(getContext(), mMap, listMarkersToSave, intentData.getTitle(), Integer.parseInt(intentData.getCurrentDay()));
+                determineTrip();
             }
         });
 
@@ -186,25 +195,30 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
     private void determineTrip() {
         if(isTravelEnded()) {
             saveIntentDatas();
+            captureScreenAndSave();
 
+            finish();
         } else {
             saveIntentDatas();
+            captureScreenAndSave();
 
+            finish();
         }
     }
 
     private void saveIntentDatas() {
-        if(lastMarker != null) {
+        if(lastUserMarker != null) {
             IntentData newIntentData = new IntentData(getIntent());
             newIntentData.setCurrentDay(String.valueOf(Integer.parseInt(newIntentData.getCurrentDay()) + 1));
-            newIntentData.setFirstPlace(lastMarker.getTitle());
-            newIntentData.setPlaceLat(String.valueOf(lastMarker.getPosition().latitude));
-            newIntentData.setPlaceLng(String.valueOf(lastMarker.getPosition().longitude));
+            newIntentData.setFirstPlace(lastUserMarker.getTitle());
+            newIntentData.setPlaceLat(String.valueOf(lastUserMarker.getPosition().latitude));
+            newIntentData.setPlaceLng(String.valueOf(lastUserMarker.getPosition().longitude));
             newIntentData.calcLatLng();
-            newIntentData.setPlaceType(lastMarker.getSnippet());
+            newIntentData.setPlaceType(lastUserMarker.getSnippet());
+            newIntentData.setPlaceBitmapFilePath(placeBitmapFilePath);
 
-            Intent intent = new Intent();
-            newIntentData.transferDataToIntent(intent);
+            returnIntent = new Intent();
+            newIntentData.transferDataToIntent(returnIntent);
         }
     }
 
@@ -234,6 +248,34 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             Log.d("Error-Exception", e.getMessage());
         }
         return false;
+    }
+
+    private void captureScreenAndSave() {
+        Log.d("DEBUG-TEST", "snapshot is called");
+        final GoogleMap.SnapshotReadyCallback snapshotReadyCallback = new GoogleMap.SnapshotReadyCallback() {
+            @Override
+            public void onSnapshotReady(Bitmap snapshot) {
+                String filePath = getContext().getFilesDir().getPath().toString() + "/"
+                        + intentData.getTitle() + intentData.getCurrentDay() + ".png";
+                File file = new File(filePath);
+                if(file.exists()) {
+                    file.delete();
+                    file = new File(filePath);
+                }
+                Log.d("DEBUG-TEST", file.getAbsolutePath() + "in ChoosePlacesActivity");
+                try {
+                    file.createNewFile();
+                    FileOutputStream fos = new FileOutputStream(file);
+                    snapshot.compress(Bitmap.CompressFormat.PNG, 90, fos);
+                    fos.close();
+                } catch(IOException e) {
+                    Log.d("DEBUG-TEST", "파일 출력 에러 in ChoosePlacesActivity");
+                    Log.d("DEBUG-TEST", e.getMessage());
+                }
+                placeBitmapFilePath = filePath;
+            }
+        };
+        mMap.snapshot(snapshotReadyCallback);
     }
 
     /**
@@ -443,12 +485,11 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
              * requests draw a line for origin & dest
              */
             String url = getDirectionsUrl(origin, dest);
-            DownloadTask downloadTask = new DownloadTask();
+            DownloadTask downloadTask = new DownloadTask(origin, dest, false);
             downloadTask.execute(url);
         }
     }
 
-    @Deprecated
     private void redrawRoute() {
         if (listLocsToDraw.size() >= 2) {
             LatLng origin;
@@ -460,7 +501,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                  * requests draw a line for origin & dest
                  */
                 String url = getDirectionsUrl(origin, dest);
-                DownloadTask downloadTask = new DownloadTask();
+                DownloadTask downloadTask = new DownloadTask(origin, dest, true);
                 downloadTask.execute(url);
             }
         }
@@ -500,12 +541,6 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         dialog.show();
     }
 
-    /**
-     * Deprecated method
-     * --> Just Test code for map click
-     * --> In release, below codes are forbidden
-     */
-    @Deprecated
     private void addUserMarker(LatLng latLng) {
         listLocsToDraw.add(latLng);
         // create a marker for starting location
@@ -516,11 +551,27 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         options.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getContext(), customMarkerOriginDestRoot)));
 
         Marker marker = mMap.addMarker(options);
+
+        Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
+        options.snippet(getResources().getString(R.string.default_place_name));
+        try {
+            List<Address> addressList = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 10);
+            if (addressList == null || addressList.size() == 0) {
+                options.title(getResources().getString(R.string.default_place_name));
+            } else {
+                Address address = addressList.get(0);
+                options.title(address.getAddressLine(0).toString());
+            }
+        } catch (IOException e) {
+            Log.d("DEBUG-EXCEPTION", e.getMessage());
+            options.title(getResources().getString(R.string.default_place_name));
+        }
+
         hashMapUserMarker.put(userMarkerCount, marker);
         saveMarkerTag(marker, userMarkerCount, InfoWindowData.TYPE_USER);
         listMarkersToSave.add(marker);
+        lastUserMarker = marker;
         drawRoute();
-        lastMarker = marker;
     }
 
     protected void addUserMarker(InfoWindowData infoWindowData) {
@@ -538,8 +589,8 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
 
         saveMarkerTag(marker, userMarkerCount, InfoWindowData.TYPE_USER);
         listMarkersToSave.add(marker);
+        lastUserMarker = marker;
         drawRoute();
-        lastMarker = marker;
     }
 
     private void addFirstPlaceMarker() {
@@ -694,6 +745,16 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
      */
     private class DownloadTask extends AsyncTask<String, Void, String> {
 
+        private LatLng origin;
+        private LatLng dest;
+        private boolean redraw;
+
+        public DownloadTask(LatLng origin, LatLng dest, boolean redraw) {
+            this.origin = origin;
+            this.dest = dest;
+            this.redraw = redraw;
+        }
+
         @Override
         protected String doInBackground(String... url) {
 
@@ -710,12 +771,22 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            ParserTask parserTask = new ParserTask();
+            ParserTask parserTask = new ParserTask(origin, dest, redraw);
             parserTask.execute(result);
         }
     }
 
     private class ParserTask extends AsyncTask<String, Integer, List<List<HashMap<String, String>>>> {
+
+        private LatLng origin;
+        private LatLng dest;
+        private boolean redraw;
+
+        public ParserTask(LatLng origin, LatLng dest, boolean redraw) {
+            this.origin = origin;
+            this.dest = dest;
+            this.redraw = redraw;
+        }
 
         @Override
         protected List<List<HashMap<String, String>>> doInBackground(String... jsonData) {
@@ -735,13 +806,13 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         @Override
         protected void onPostExecute(List<List<HashMap<String, String>>> result) {
             ArrayList points = null;
-            PolylineOptions lineOptions = null;
+            PolylineOptions routeLineOptions = null;
 
             Log.d(".java", "result.size = " + result.size());
 
             for (int i = 0; i < result.size(); ++i) {
                 points = new ArrayList();
-                lineOptions = new PolylineOptions();
+                routeLineOptions = new PolylineOptions();
 
                 List<HashMap<String, String>> path = result.get(i);
 
@@ -758,18 +829,58 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                 /**
                  * Route line options
                  */
-                lineOptions.addAll(points);
-                lineOptions.width(12);
-                lineOptions.color(Color.RED);
-                lineOptions.geodesic(true);
+                routeLineOptions.addAll(points);
+                routeLineOptions.width(12);
+                routeLineOptions.color(Color.RED);
+                routeLineOptions.geodesic(true);
             }
             /**
              * This is the case of cannot drawing a route
              */
             if (result.size() == 0) {
-                Toast.makeText(getContext(), "Invalid travel routes", Toast.LENGTH_LONG).show();
+                if(redraw == false) {
+                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
+                    alertDialog.setTitle(getResources().getString(R.string.line_draw_title))
+                            .setMessage(getResources().getString(R.string.line_draw_description))
+                            .setCancelable(true)
+                            .setPositiveButton(getResources().getString(R.string.dialog_ok),
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            PolylineOptions justLineOptions = new PolylineOptions();
+                                            justLineOptions = new PolylineOptions();
+                                            justLineOptions.add(origin);
+                                            justLineOptions.add(dest);
+                                            justLineOptions.width(12);
+                                            justLineOptions.color(Color.BLUE);
+                                            justLineOptions.geodesic(true);
+                                            mMap.addPolyline(justLineOptions);
+                                        }
+                                    })
+                            .setNegativeButton(getResources().getString(R.string.dialog_no),
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            dialogInterface.cancel();
+                                            removeUserMarker(lastUserMarker);
+                                            //removeUserMarker()
+                                        }
+                                    });
+
+                    AlertDialog dialog = alertDialog.create();
+                    dialog.show();
+                } else {
+                    PolylineOptions justLineOptions = new PolylineOptions();
+                    justLineOptions = new PolylineOptions();
+                    justLineOptions.add(origin);
+                    justLineOptions.add(dest);
+                    justLineOptions.width(12);
+                    justLineOptions.color(Color.BLUE);
+                    justLineOptions.geodesic(true);
+                    mMap.addPolyline(justLineOptions);
+                }
             } else {
-                mMap.addPolyline(lineOptions);
+                mMap.addPolyline(routeLineOptions);
             }
         }
     }

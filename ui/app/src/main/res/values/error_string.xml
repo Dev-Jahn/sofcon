@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="intent_bitmap_error">지도에 대한 비트맵 이미지 전달 실패</string>
+    <string name="no_travel_routes">선택한 경유지에 대한 여행 경로 생성이 불가능합니다</string>
 
 </resources>

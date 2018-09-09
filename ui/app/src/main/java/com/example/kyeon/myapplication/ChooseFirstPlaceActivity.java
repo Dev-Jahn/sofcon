@@ -73,11 +73,7 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
 
     private static final float DEFAULT_LEN = 2.5f;
     private static final int DEFAULT_LIM = 30;
-    protected static final String PLACE_LAT = "FirstPlaceLat";
-    protected static final String PLACE_LNG = "FirstPlaceLng";
-    protected static final String PLACE_NAME = "FirstPlaceName";
-    protected static final String PLACE_TYPE = "FirstPlaceType";
-    protected static final String PLACE_BITMAP = "PlaceBitmap";
+
     private static final int WIDTH = 50;
     private static final int HEIGHT = 50;
 
@@ -188,30 +184,7 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
-                Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
-                MarkerOptions options = new MarkerOptions();
-                options.position(latLng);
-                options.snippet(getResources().getString(R.string.default_place_name));
-                try {
-                    List<Address> addressList = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 10);
-                    if (addressList == null || addressList.size() == 0) {
-                        options.title(getResources().getString(R.string.default_place_name));
-                    } else {
-                        Address address = addressList.get(0);
-                        options.title(address.getAddressLine(0).toString());
-                    }
-                } catch (IOException e) {
-                    Log.d("DEBUG-EXCEPTION", e.getMessage());
-                    options.title(getResources().getString(R.string.default_place_name));
-                }
-
-                options.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getContext(), customMarkerRoot)));
-
-                selectedMarker = mMap.addMarker(options);
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(selectedMarker.getPosition()));
-                showSelectDialog(selectedMarker);
-                // selectedMarker.remove();
-                // showSelectDialog(latLng);
+                addFirstPlaceMarker(latLng);
             }
         });
 
@@ -231,9 +204,12 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
         final GoogleMap.SnapshotReadyCallback snapshotReadyCallback = new GoogleMap.SnapshotReadyCallback() {
             @Override
             public void onSnapshotReady(Bitmap snapshot) {
-                int width = wrapperLayout.getWidth();
-                File file = new File(getContext().getFilesDir().getPath().toString() + "/"
-                        + "tempImage1.png");
+                String filePath = getContext().getFilesDir().getPath().toString() + "/tempImage1.png";
+                File file = new File(filePath);
+                if(file.exists()) {
+                    file.delete();
+                    file = new File(filePath);
+                }
                 Log.d("DEBUG-TEST", file.getAbsolutePath() + "in TripPlanActivity");
                 try {
                     file.createNewFile();
@@ -244,6 +220,7 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
                     Log.d("DEBUG-TEST", "파일 출력 에러 in ChooseFirstPlaceActivity");
                     Log.d("DEBUG-TEST", e.getMessage());
                 }
+                returnIntent.putExtra(MapUtility.PLACE_BITMAP, filePath);
                 setResult(RESULT_OK, returnIntent);
                 finish();
             }
@@ -419,6 +396,38 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
         saveMarkerTag(marker, placeMarkerCount, InfoWindowData.TYPE_PLACE);
     }
 
+    private void addFirstPlaceMarker(LatLng latLng) {
+        if(selectedMarker == null) {
+            Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
+            MarkerOptions options = new MarkerOptions();
+            options.position(latLng);
+            options.snippet(getResources().getString(R.string.default_place_name));
+            try {
+                List<Address> addressList = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 10);
+                if (addressList == null || addressList.size() == 0) {
+                    options.title(getResources().getString(R.string.default_place_name));
+                } else {
+                    Address address = addressList.get(0);
+                    options.title(address.getAddressLine(0).toString());
+                }
+            } catch (IOException e) {
+                Log.d("DEBUG-EXCEPTION", e.getMessage());
+                options.title(getResources().getString(R.string.default_place_name));
+            }
+
+            options.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getContext(), customMarkerRoot)));
+
+            selectedMarker = mMap.addMarker(options);
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(selectedMarker.getPosition()));
+            showSelectDialog(selectedMarker);
+            // selectedMarker.remove();
+            // showSelectDialog(latLng);
+        } else {
+            selectedMarker.remove();
+            addFirstPlaceMarker(latLng);
+        }
+    }
+
     private void saveMarkerTag(Marker marker, int markerCount, int windowType) {
         InfoWindowData infoWindowData = new InfoWindowData();
         infoWindowData.setTitle(marker.getTitle());
@@ -444,10 +453,10 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 returnIntent = new Intent();
-                                returnIntent.putExtra(PLACE_LAT, String.valueOf(marker.getPosition().latitude));
-                                returnIntent.putExtra(PLACE_LNG, String.valueOf(marker.getPosition().longitude));
-                                returnIntent.putExtra(PLACE_NAME, marker.getTitle());
-                                returnIntent.putExtra(PLACE_TYPE, marker.getSnippet());
+                                returnIntent.putExtra(MapUtility.PLACE_LAT, String.valueOf(marker.getPosition().latitude));
+                                returnIntent.putExtra(MapUtility.PLACE_LNG, String.valueOf(marker.getPosition().longitude));
+                                returnIntent.putExtra(MapUtility.PLACE_NAME, marker.getTitle());
+                                returnIntent.putExtra(MapUtility.PLACE_TYPE, marker.getSnippet());
                                 captureScreenAndFinish();
                             }
                         })
