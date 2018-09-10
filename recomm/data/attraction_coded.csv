@@ -1,0 +1,205 @@
+class,placeId,score,name_kor,name_eng,location,결과,지번,x,y
+attractions,10020511,4.75,하이서울페스티벌,Hi Seoul Festival,서울특별시 영등포구 영등포동7가 57,정좌표,,126.90307,37.525122
+attractions,10620641,5,문정전각갤러리,Jeon-Gak Gallery,서울특별시 종로구 관훈동 74,정좌표,,126.984249,37.574684
+attractions,10625757,4,명성교회,Myungsung Presbyterian Church,서울특별시 강동구 명일1동 구천면로 452,정좌표,,127.147748,37.548523
+attractions,11772906,4.75,공항철도 여행센터,Airport Railroad Travel Center,서울특별시 용산구 남영동 한강대로 405,정좌표,,126.971718,37.554843
+attractions,13688351,4,고희동가옥,House of Go Hui-dong,서울특별시 종로구 원서동 16,정좌표,,126.988957,37.58314
+attractions,14064107,5,대원콘텐츠라이브,Popcond Square,서울특별시 용산구 한강로3가 한강대로23길 55 서울특별시 6층,정좌표,,126.964597,37.529633
+attractions,3808299,4.25,국립중앙박물관 어린이박물관,Children’s Museum of National Museum of Korea,서울특별시 용산구 서빙고동 서빙고로 137,정좌표,,126.97994,37.52372
+attractions,4094818,4,동덕아트갤러리,Dongduk Art Gallery,서울특별시 종로구 관훈동 우정국로 68,정좌표,,126.98326,37.574982
+attractions,4094832,4.666666667,갤러리나우,Gallery Now,서울특별시 종로구 관훈동 192-13,정좌표,,126.98494,37.573798
+attractions,4094887,5,아트센터나비,Art Center Nabi,서울특별시 종로구 서린동 99,정좌표,,126.980285,37.569803
+attractions,4094927,2,갤러리 루미나리에,Gallery Luminarie,서울 강남구 역삼로 218,정좌표,,127.041041,37.496381
+attractions,4095481,4,경희대학교 중앙박물관,The Central Museum of KyungHee University,서울특별시 동대문구 회기동 경희대로 26,정좌표,,127.052835,37.59569
+attractions,4095493,2,몽촌역사박물관,Mongchon Museum of History,서울특별시 송파구 방이동 올림픽로 424,정좌표,,127.115397,37.520352
+attractions,4095656,5,한국현대의상박물관,The Korea Museum of Modern Costume,서울특별시 종로구 충신동 55-1,정좌표,,127.005521,37.575469
+attractions,4798548,5,티오비보 신도림점,Tiovivo Shindorim Store,서울특별시 구로구 구로동 3-25,정좌표,,126.890258,37.507117
+attractions,4798567,5,국제갤러리,Kukje Gallery,서울특별시 종로구 소격동 삼청로 54,정좌표,,126.980544,37.580716
+attractions,4798570,4,덕원갤러리,Deokwon Gallery,서울특별시 종로구 인사동길 24,정좌표,,126.98648,37.572937
+attractions,4798571,5,윤갤러리,Yoon Gallery,서울특별시 종로구 관훈동 30-12,정좌표,,126.985455,37.574199
+attractions,4798574,5,트렁크갤러리,Trunk Gallery,서울특별시 종로구 소격동 128-3,정좌표,,126.98137,37.579904
+attractions,4798583,4.666666667,가나아트갤러리,Gana Art Gallery,서울특별시 종로구 평창동 97,정좌표,,126.975164,37.612215
+attractions,4798610,4,서울올림픽미술관,Seoul Olympic Misulgwan,서울특별시 송파구 방이동 88-8,정좌표,,127.116536,37.522551
+attractions,4798618,4,사진박물관,The Museum of Photography,서울특별시 송파구 방이동 45,정좌표,,127.113948,37.516602
+attractions,4798630,3.2,서울패션센터,Seoul Fashion Center,서울특별시 중구 신당동 251-7,정좌표,,127.011846,37.567197
+attractions,4798642,4,홍릉수목원,Hongreung Sumokwon,서울특별시 동대문구 청량리동 207,정좌표,,127.043604,37.593192
+attractions,4798676,5,종이나라박물관,Jong Ie Nara Paper Art Museum,서울특별시 중구 장충동1가 장충단로 166,정좌표,,127.006128,37.559589
+attractions,4798681,4,경찰박물관,The Korean National Police Heritage Museum,서울특별시 종로구 사직동 새문안로 41,정좌표,,126.969644,37.569016
+attractions,4798686,1,한국영상자료원,Korean Film Archive,서울특별시 마포구 상암동 1602,정좌표,,126.889655,37.580599
+attractions,4798687,5,보나장신구박물관,Bona Museum/Gallery,서울특별시 종로구 관훈동 192-10,정좌표,,126.984535,37.573579
+attractions,4798694,4.833333333,목인박물관,Mokin Museum,서울특별시 종로구 견지동 83,정좌표,,126.983726,37.573959
+attractions,4798717,4.5,삼청공원,Samcheong Park,서울특별시 종로구 북촌로 134-3,정좌표,,126.983994,37.588423
+attractions,4798825,4,우리금융아트홀,Woori Financial Art Hall,서울특별시 송파구 오륜동 올림픽로 424,정좌표,,127.115397,37.520352
+attractions,4798827,4,올림푸스홀,Olympus Hall,서울특별시 강남구 삼성동 114-9,정좌표,,127.048506,37.511381
+attractions,592515,2,마루존 김치 백화점,Maruzon Kimchi Market,서울특별시 강남구 논현동 241-3,정좌표,,127.040825,37.516743
+attractions,8121688,2,충무로 애완동물 거리,Chungmuro Pet Street,서울특별시 종로구 창신1동,행정동좌표,,127.016349,37.570766
+attractions,9997012,4.5,만해 한용운 심우장,Manhae Han Young Un Simujang,서울특별시 성북구 성북동 성북로29길 24,정좌표,,126.991658,37.593588
+attractions,10758285,2.833333333,강남스타일 말춤 동상,Gangnam Style Horse Dance Statue,서울 강남구 봉은사로,도로중심좌표,,127.046035,37.510919
+attractions,12948626,5,이태원어린이공원,Itaewon Children's Park,서울 용산구 녹사평대로46길,도로중심좌표,,126.989002,37.537945
+attractions,13229785,4,만화의거리 재미로,Seoul Comics Road Zaemiro,서울 중구 퇴계로20길,도로중심좌표,,126.986233,37.558573
+attractions,10536576,4.333333333,이화벽화마을,Ewha Mural Village,서울특별시 종로구 이화동 6-18,정좌표,,127.005765,37.577553
+attractions,13086792,4.5,우면산,Umyeonsan Mountain,서울특별시 양재1동,행정동좌표,,127.02675,37.471701
+attractions,3805632,2,아현동 웨딩드레스거리,Ahyeondong Wedding Street,서울 서대문구 북아현동,법정동좌표,,126.954397,37.562431
+attractions,3808296,4,창의문,Changuimun Gate (Jahamun Gate),서울특별시 종로구 청운동,법정동좌표,,126.969309,37.589206
+attractions,592442,4,아차산성,Achasanseong Fortress,서울특별시 광진구 워커힐로 117,인근좌표,,127.09945,37.551093
+attractions,7264192,4.416666667,응봉산,Eungbongsan Mountain,서울 성동구 응봉동,법정동좌표,,127.033903,37.550935
+attractions,8724136,4,북악산,Bugaksan Mountain,서울특별시 청운효자동,행정동좌표,,126.970626,37.584009
+attractions,9587015,4.5,마포대교,Mapodaegyo Bridge,서울특별시 여의도동,법정동좌표,,126.928428,37.528671
+attractions,7264066,4.6875,수성동 계곡,Suseongdong Valley,서울특별시 누상동,법정동좌표,,126.962728,37.580399
+attractions,7892131,4,서서울호수공원,Seoseoul Lake Park,서울특별시 양천구 신월3동 남부순환로64길 20,정좌표,,126.830075,37.527431
+attractions,9569019,4.428571429,원각사지 10층석탑,Ten-story Stone Pagoda of Wongaksa Temple Site,서울특별시 종로구 종로1.2.3.4가동 종로 99,정좌표,,126.988018,37.570545
+attractions,10779009,4,광희문,Gwanghuimun,서울특별시 중구 광희동 퇴계로 344,정좌표,,127.009665,37.564322
+attractions,13151875,5,평화의 소녀상,Statue of Peace,서울 성북구 동소문로3길 11,인근좌표,,127.006673,37.589346
+attractions,3805397,3.5,서울대학교 규장각,Gyujanggak Library of Seoul National University,서울 관악구 신림동 관악로 599 103동,인근좌표,,126.957212,37.490355
+attractions,4427670,3.666666667,서울대학교병원 의학박물관,Seoul University Hospital Medical Museum,서울 종로구 연건동 28,인근좌표,,127.001814,37.580096
+attractions,8019604,4,서대문독립공원,Seodaemun Independence Park,서울 서대문구 통일로 247,인근좌표,,126.958509,37.572748
+attractions,8627561,4.5,뮤지엄 김치간,Museum Kimchikan,서울 종로구 인사동 35-4,인근좌표,,126.986985,37.572437
+attractions,14956599,5,종로3가 포장마차골목,Jonglo3ga Pojangmacha Geoli,서울특별시 종로구 종로1.2.3.4가동,행정동좌표,,126.988943,37.570751
+attractions,14975458,4,종로타워,Jongno Tower,서울 종로구 종로 51,정좌표,,126.9836,37.57075
+attractions,14975672,3,동대문운동장기념관,Dongdaemun Stadium Memorial,서울 중구 신당동 853,정좌표,,127.01138,37.567301
+attractions,10210051,3.2,누죤,Nuzzon,서울 중구 을지로45길 62,정좌표,,127.013026,37.566954
+attractions,10253198,4.4,서울파이낸스센터,Seoul Finance Center,서울 중구 세종대로 136,정좌표,,126.978255,37.568424
+attractions,10270564,4.1875,코엑스,COEX Center,서울 강남구 영동대로 513,정좌표,,127.058762,37.512562
+attractions,10376613,4.8,망원 한강공원,Mangwon Hangang Park,서울 마포구 마포나루길 467,정좌표,,126.899875,37.552348
+attractions,10388757,3,북한산성 방문자센터,Bukhansanseong Visitor Center,서울 은평구 대서문길 43-9,정좌표,,126.94942,37.655643
+attractions,10447913,3.5,동대문역사관1398,Dongdaemun History Museum 1398,서울 중구 을지로 281,정좌표,,127.009754,37.566981
+attractions,10464413,5,시네코아비밥전용관,CineCore Bibap Theater,서울 종로구 삼일대로 386,정좌표,,126.988052,37.568887
+attractions,10686434,4,구로시장,Guro Market,서울 구로구 구로동로22길 18,정좌표,,126.885468,37.489267
+attractions,10686449,3.5,남구로시장,Namguro Market,서울 구로구 구로동로26길 33,정좌표,,126.885928,37.490289
+attractions,10813620,4.857142857,서울도서관,Seoul Metropolitan Library,서울 중구 세종대로 110,정좌표,,126.97811,37.566612
+attractions,10897838,4.75,북악스카이웨이,Bugak Skyway,서울 종로구 평창동 산6-94,정좌표,,126.977118,37.601023
+attractions,11434444,4.333333333,국기원,Kukkiwon World Taekwondo Headquarters,서울 강남구 테헤란로7길 32,정좌표,,127.030232,37.502276
+attractions,11850476,4,서울창포원,Seoul Iris Garden,서울 도봉구 마들로 916,정좌표,,127.047154,37.689505
+attractions,11879393,3.4,눈스퀘어,Noon Square,서울 중구 명동길 14,정좌표,,126.982885,37.563419
+attractions,11879406,3.666666667,인사동관광안내소,Insadong Tourist Information Center,서울 종로구 인사동길 62,정좌표,,126.983492,37.575408
+attractions,11879469,2.666666667,동대문지하쇼핑센터,Dongdaemun Underground Shopping Center,서울 종로구 율곡로 지하 308,정좌표,,127.009528,37.570412
+attractions,11879639,3.5,해밀턴,Hamilton Shopping Center,서울 용산구 이태원로 179,정좌표,,126.993944,37.534761
+attractions,11879686,4,하나아트갤러리,Hana Art Gallery,서울 종로구 인사동10길 2,정좌표,,126.985278,37.573927
+attractions,11879752,3.333333333,명동지하상가,Myeongdong Underground Shopping Center,서울 중구 남대문로 지하 72,정좌표,,126.982079,37.563565
+attractions,11926378,3,세빛섬,undefined,서울 서초구 올림픽대로 683,정좌표,,126.995231,37.512228
+attractions,11928572,4.571428571,삼청공원,Samcheong Park,서울 종로구 삼봉로 33,정좌표,,126.979002,37.572594
+attractions,11960625,4.25,피규어뮤지엄,Figure Museum,서울 강남구 선릉로158길 3,정좌표,,127.040381,37.525804
+attractions,12118155,5,열린극장,Open Hall,서울 종로구 창경궁로 258-12,정좌표,,127.000328,37.583697
+attractions,12202187,4.2,경의선숲길,Gyeongui line forest,서울 마포구 와우산로35길 50-4,정좌표,,126.92838,37.556539
+attractions,12238654,4,롯데몰 은평점,Lotte Mall Eunpyeong,서울 은평구 통일로 1050,정좌표,,126.950445,37.653634
+attractions,12339161,4.5,잠실종합운동장,Jamsil Sports Complex,서울 송파구 올림픽로 25,정좌표,,127.075042,37.514205
+attractions,12447861,2,종각지하쇼핑센터,Jonggak Basement Shopping Center,서울 종로구 종로 73,정좌표,,126.985688,37.570363
+attractions,12459280,4,시티스타몰,Citistar Mall,서울 중구 을지로 지하 12,정좌표,,126.979388,37.565866
+attractions,12496146,5,윤스칼라,Yoon's Color,서울 마포구 와우산로14길 12,정좌표,,126.92365,37.550171
+attractions,12538661,4.230769231,고속터미널상가,Express Bus Terminal Shopping Center,서울 서초구 신반포로 194,정좌표,,127.007074,37.505381
+attractions,12538691,4.5,에이피엠 플레이스,apm Place,서울 중구 을지로 276,정좌표,,127.008418,37.565303
+attractions,12587887,5,역삼동성당,Yeoksam Catholic Church,서울 강남구 언주로85길 23-11,정좌표,,127.041882,37.500442
+attractions,12657697,4,양천향교,Yangcheon Hyanggyo,서울 강서구 양천로47나길 53,정좌표,,126.839823,37.572984
+attractions,12673929,4,소악루,Soaknu Pavillion,서울 강서구 가양동 산4-7,정좌표,,126.840801,37.574165
+attractions,12763399,5,평화의소녀상,Statue of Peace,서울 종로구 율곡로2길 22,정좌표,,126.980041,37.575243
+attractions,12841946,4,롯데콘서트홀,Lotte Concert Hall,서울 송파구 올림픽로 300,정좌표,,127.103018,37.51306
+attractions,12847901,3,마포주민편익시설,Mapo Community Welfare Facility,서울 마포구 월드컵북로44길 40,정좌표,,126.895397,37.57668
+attractions,12881807,4.5,난지천공원,Nanjicheon Park,서울 마포구 상암동 1731-5,정좌표,,126.889113,37.572178
+attractions,12928976,4,DMC홍보관,Digital Media City Gallery,서울 마포구 월드컵북로 366,정좌표,,126.892098,37.577703
+attractions,12986922,5,소공지하도상가,Sogongdong Underground Shopping Center,서울 중구 소공로 106,정좌표,,126.980154,37.564494
+attractions,12986927,3.333333333,문화비축기지,Mapo Oil Tank Culture Park,서울 마포구 증산로 87,정좌표,,126.893763,37.571591
+attractions,13004245,4,공덕시장,Gongdeok Market,서울 마포구 만리재로 19,정좌표,,126.953152,37.544669
+attractions,13086721,3,최규하대통령가옥,House of Former President Choi Kyu-hah,서울 마포구 동교로15길 10,정좌표,,126.914907,37.555344
+attractions,13123227,4,장충체육관,Jangchung Arena,서울 중구 동호로 241,정좌표,,127.006634,37.558188
+attractions,13138039,4,연세대학교 신촌캠퍼스,Yonsei University Sinchon Campus,서울 서대문구 연세로 50,정좌표,,126.94026,37.564855
+attractions,13141984,4,보라매공원,Boramae Park,서울 동작구 여의대방로20길 33,정좌표,,126.919854,37.493272
+attractions,13147874,5,평화의 소녀상,Statue of Peace,서울 서초구 반포대로27길 29,정좌표,,127.005725,37.489412
+attractions,13151759,5,평화의 소녀상,Statue of Peace,서울 노원구 덕릉로 450,정좌표,,127.058718,37.644717
+attractions,13151896,5,평화의 소녀상,Statue of Peace,서울 중구 정동길 9,정좌표,,126.970082,37.567579
+attractions,13152278,5,평화의 소녀상,Statue of Peace,서울 강북구 도봉로 351,정좌표,,127.02635,37.63903
+attractions,13152481,5,평화의 소녀상,Statue of Peace,서울 성동구 행당동 192-3,정좌표,,127.037057,37.561692
+attractions,13155667,5,평화의 소녀상,Statue of Peace,서울 도봉구 도봉로 552,정좌표,,127.038665,37.654107
+attractions,13155689,5,평화의 소녀상,Statue of Peace,서울 용산구 이태원동 34-2,정좌표,,126.98868,37.534095
+attractions,13169763,4.333333333,올림픽공원 세계평화의문,World Peace Gate at Olympic Park,서울 송파구 올림픽로 424,정좌표,,127.115397,37.520352
+attractions,13172633,4,경의선책거리,Gyeongui Line Book Street,서울 마포구 와우산로35길 50-4,정좌표,,126.92838,37.556539
+attractions,13172639,5,아시아공원,Asia Park,서울 송파구 올림픽로 44,정좌표,,127.076008,37.51013
+attractions,13222799,4,목은선생영당,Mok Eun Seonsaeng Shrine,서울 종로구 종로5길 76,정좌표,,126.980695,37.573798
+attractions,13319719,4,영천시장,Yeongcheon Market,서울 서대문구 성산로 704,정좌표,,126.960121,37.571618
+attractions,13319724,4.333333333,망원시장,Mangwon Market,서울 마포구 포은로8길 14,정좌표,,126.905613,37.55624
+attractions,13412916,5,쎈토이뮤지엄&쇼룸,Ssentoy Museum & Showroom,서울 용산구 남산공원길 105,정좌표,,126.98785,37.551126
+attractions,13436805,4.333333333,김포공항 전망대,Gimpo International Airport Observatory Deck,서울 강서구 하늘길 78,정좌표,,126.799694,37.560905
+attractions,13553491,4,종로홍보관,Jongno Public Relations Hall,서울 종로구 종로3길 24-29,정좌표,,126.980034,37.571593
+attractions,13956902,4,사모바위,Samo Bawi,서울 종로구 진흥로 449,정좌표,,126.958477,37.607609
+attractions,13999912,4,강남스타일 말춤 무대,Gangnam Style Horse Dance Stage,서울 강남구 강남대로 406,정좌표,,127.027629,37.498947
+attractions,2269011,4,문묘,Munmyo,서울 종로구 성균관로 31,정좌표,,126.996692,37.585495
+attractions,3805417,4,리아나 화장박물관,Coreana Art & Culture Complex,서울 강남구 언주로 827,정좌표,,127.032767,37.524057
+attractions,3805419,4.666666667,한국미술박물관,Museum of Korean Art,서울 종로구 창덕궁길 73,정좌표,,126.988933,37.580734
+attractions,3805517,4,태릉,Taereung,서울 노원구 화랑로 681,정좌표,,127.097455,37.630153
+attractions,3805519,4.625,진관사,Jingwansa Temple,서울 은평구 진관길 73,정좌표,,126.946474,37.637957
+attractions,3805557,5,로봇 박물관,Robot Museum,서울 종로구 동숭동 1-44번지,정좌표,,127.003576,37.582967
+attractions,3805584,3,이화장,Ihwajang House,서울 종로구 이화동 1-2,정좌표,,127.006632,37.577956
+attractions,3805602,4.75,헌릉과 인릉,Heolleung / Illeung,서울 서초구 헌인릉길 34,정좌표,,127.082348,37.46437
+attractions,3805624,3.666666667,북촌 생활사박물관,Bukchon Museum Old Fragrance,서울 종로구 북촌로5나길 90,정좌표,,126.982961,37.584413
+attractions,3805629,4.25,구러시아 공사관,Former Russian Legation,서울 중구 정동길 21-18,정좌표,,126.971507,37.567672
+attractions,3805630,4,숙정문,Sukjeongmun Gate,서울 성북구 성북동 산 25-22,정좌표,,126.983206,37.594741
+attractions,3808276,4.5,혜화문 (홍화문),Hyehwamun Gate (Honghwamun),서울 종로구 창경궁로 185,정좌표,,126.99487,37.579542
+attractions,3957021,4.666666667,북촌 동양 문화 박물관,Asian Art Museum,서울 종로구 삼청동 35-91,정좌표,,126.983525,37.583788
+attractions,4067949,5,아트선재센터,Artsonje Center,서울 종로구 율곡로3길 87,정좌표,,126.981818,37.579412
+attractions,4427534,4.25,플라토,Plateao,서울 중구 태평로2가 150,정좌표,,126.974986,37.56162
+attractions,4427620,3.666666667,화정박물관,Hwajeong Museum,서울 종로구 평창8길 3,정좌표,,126.965982,37.604602
+attractions,4427650,5,울트라건축박물관,Ultra Architecture Museum,서울 양천구 중앙로 262,정좌표,,126.853395,37.519839
+attractions,4427657,5,생명과학체험박물관,Seangmyeong Gwahak Cheheom Bakmulgwan,서울 양천구 목동동로 206-1,정좌표,,126.871999,37.523928
+attractions,4427661,5,갤러리현대,Gallery Hyundae,서울 강남구 신사동 640-6,정좌표,,127.035808,37.527731
+attractions,4427662,5,분재박물관,Bonsai Museum,서울 서초구 신흥안길 40-10,정좌표,,127.075474,37.453432
+attractions,4438496,4,서울아트센터 공평갤러리,Seoul Art Center Gongpyeong Gallery,서울 종로구 공평동 5-1,정좌표,,126.983585,37.571885
+attractions,4438517,3,웅갤러리,Woong Gallery,서울 강남구 언주로150길 34,정좌표,,127.037144,37.521525
+attractions,4438637,5,강북문화예술회관,Ganbuk Munhwa Yesulhoekwan,서울 강북구 수유동 360-10,정좌표,,127.01341,37.640779
+attractions,4438686,4.5,강동구립해공도서관,Gandong Gurip Hegong Doseokwan,서울 강동구 천호동 360,정좌표,,127.126407,37.544384
+attractions,4438687,3,세곡문화센터,Segok Munhwa Center,서울 강남구 율현동 278-1,정좌표,,127.106924,37.469046
+attractions,4438706,4,개포2문화센터,Gepo2 Munhwa Center,서울 강남구 삼성동 8,정좌표,,127.042075,37.516357
+attractions,4438716,4.5,덕수궁 중명전,Jungmyeongjeon Hall,서울 중구 정동 1-11,정좌표,,126.972518,37.566627
+attractions,4440129,4.5,예술의전당 오페라하우스 자유소극장,Yesuli Jeondang Operahouse Jayu Sokukjang,서울 서초구 서초동 700,정좌표,,127.015231,37.481085
+attractions,4798598,5,관훈갤러리,Kwanhoon Gallery,서울 종로구 인사동길 11,정좌표,,126.986767,37.571796
+attractions,4798608,4.625,인사아트센터,Insa Art Center,서울 종로구 인사동길 41-1,정좌표,,126.984576,37.573885
+attractions,4798677,4,춘원당한방 박물관,Choonwondang Museum of Korean Medicine,서울 종로구 돈화문로9길 27,정좌표,,126.990201,37.571492
+attractions,4798710,4.7,송파나루공원,Songpa Naru Park,서울 송파구 잠실로 180,정좌표,,127.103757,37.511786
+attractions,7154877,4.4,국립중앙도서관,The National Library of Korea,서울 서초구 반포대로 201,정좌표,,127.0032,37.497284
+attractions,7272329,4.666666667,호림 박물관 신사 분관,Horim Museum Sinsa,서울 강남구 도산대로 317,정좌표,,127.036337,37.522698
+attractions,7353801,4.5,손기정 기념관,Son Kee Chung Memorial Hall,서울 중구 손기정로 101,정좌표,,126.965373,37.556148
+attractions,7717447,4.285714286,환구단,Hwangudan Altar,서울 중구 소공로 112,정좌표,,126.979984,37.564466
+attractions,7717516,3.827586207,국립 한글 박물관,National Hangeul Museum,서울 용산구 서빙고로 139,정좌표,,126.980699,37.521087
+attractions,7738848,3,디보 빌리지,Dibo Village,서울 중구 청계천로 400,정좌표,,127.021305,37.570961
+attractions,7891673,4.2,일민미술관,Ilmin Museum of Art,서울 종로구 청계천로 1 세종로,정좌표,,126.977968,37.569548
+attractions,7891676,3.777777778,가든파이브,Garden 5,서울 송파구 충민로 66,정좌표,,127.12498,37.477651
+attractions,7891834,4,광진교8번가,Riverview 8th Avenue,서울 강동구 선사로 4,정좌표,,127.121014,37.540109
+attractions,7891907,3.571428571,포스코센터,POSCO Art Museum,서울 강남구 테헤란로 440,정좌표,,127.056121,37.505819
+attractions,7891908,3.285714286,국립서울과학관,The Seoul National Science Museum,서울 종로구 창경궁로 215,정좌표,,126.996915,37.582388
+attractions,7891913,4,난지미술창작스튜디오,Nanji Art Studio,서울 마포구 하늘공원로 108,정좌표,,126.879811,37.569658
+attractions,7891916,5,아르코 예술 극장,Arko Arts Theater,서울 종로구 대학로8길 7,정좌표,,127.002988,37.581187
+attractions,7891917,4.25,약현성당,Yakhyeon Catholic Church,서울 중구 청파로 447-1,정좌표,,126.967176,37.559137
+attractions,7891918,4.333333333,소마미술관,Soma Museum of Art,서울 송파구 올림픽로 424,정좌표,,127.115397,37.520352
+attractions,7891933,5,갤러리 학고재,Hakgojae Gallery,서울 종로구 삼청로 50,정좌표,,126.980233,37.580263
+attractions,7891934,4.125,성곡미술관,Sungkok Art Museum,서울 종로구 경희궁길 42,정좌표,,126.969733,37.57318
+attractions,7891943,4.571428571,몽촌토성,Mongchontoseong Fortress,서울 송파구 올림픽로 424,정좌표,,127.115397,37.520352
+attractions,7891945,3.5,하이브랜드 프리미엄 아울렛,Hi Brand Premium Outlet,서울 서초구 매헌로 16,정좌표,,127.03693,37.462468
+attractions,7891946,4.777777778,서울성공회성당,Seoul Anglican Cathedral,서울 중구 세종대로21길 15,정좌표,,126.975554,37.567257
+attractions,7891951,3.8,엠플라자,M Plaza,서울 중구 명동8길 27,정좌표,,126.985161,37.562537
+attractions,7891956,4,가락시장,Garak Market,서울 송파구 양재대로 932,정좌표,,127.111778,37.492609
+attractions,7891981,5,김종영미술관,Kim Chong Yung Museum,서울 종로구 평창32길 30,정좌표,,126.977486,37.613064
+attractions,7891989,3.333333333,윤봉길 의사 기념관,The Memorial to the Patriot Yun Bonggil,서울 서초구 매헌로 99,정좌표,,127.036748,37.471324
+attractions,7892011,4.285714286,길동생태공원,Gildong Ecological Park,서울 강동구 천호대로 1298,정좌표,,127.154608,37.538264
+attractions,7892016,4.2,뚝섬 아름다운 나눔장터,Ttukseom Flea Market,서울 광진구 강변북로 139,정좌표,,127.073961,37.529361
+attractions,7892033,4,방학동 도깨비시장,Banghak Dokkaebi Market,서울 도봉구 도당로13다길 29,정좌표,,127.033149,37.665225
+attractions,7892121,4.666666667,한의약 박물관,Seoul Yangnyeongsi Herb Medicine Museum,서울 동대문구 왕산로 128,정좌표,,127.037665,37.577808
+attractions,7892126,4,대각사,Daegaksa Temple,서울 종로구 율곡로10길 87,정좌표,,126.991915,37.573678
+attractions,7892447,3,강남관광정보센터,Gangnam Tourist Information Center,서울 강남구 압구정로 161,정좌표,,127.027041,37.526839
+attractions,7892528,3,대중음악전시관,K-Pop Music Exhibition Hall,서울 송파구 올림픽로 424 올림픽홀,정좌표,,127.115397,37.520352
+attractions,7892561,5,경희대학교 한의학역사박물관,The Museum of Korean Medical History,서울 동대문구 경희대로 23,정좌표,,127.051794,37.59479
+attractions,7980918,5,도산 안창호 기념관,Dosan Ahn Chang Ho Memorial Hall,서울 강남구 도산대로45길 20,정좌표,,127.03554,37.523944
+attractions,7987267,4.444444444,청운공원,Chungun Park,서울 종로구 청운동 7-4,정좌표,,126.966366,37.590739
+attractions,7987806,4,서소문공원,Seosomun Park,서울 중구 의주로2가 16,정좌표,,126.968318,37.560904
+attractions,8076992,5,갤러리 현대,Gallery Hyundai,서울 종로구 삼청로 14,정좌표,,126.979889,37.577224
+attractions,8077234,4.5,도봉문화정보도서관,Dobong Culture Information Library,서울 도봉구 덕릉로 315,정좌표,,127.043875,37.644598
+attractions,8077812,4,강남아트홀,Gangnam Arthall,서울 서초구 서초대로73길 30,정좌표,,127.024865,37.500114
+attractions,8121809,5,한국잡지박물관,Korean Magazine Museum,서울 영등포구 여의대방로67길 11,정좌표,,126.930253,37.519758
+attractions,8121817,4,경희대학교 자연사박물관,Kyunghee University Natural History Museum,서울 동대문구 경희대로 26,정좌표,,127.052835,37.59569
+attractions,8123881,4.666666667,강북 문화정보 도서관,Gangbook Culture Information Library,서울 강북구 오현로 145,정좌표,,127.03606,37.625027
+attractions,8317410,3,현대원서공원,Wonseo Park,서울 종로구 창덕궁길 19,정좌표,,126.988662,37.578146
+attractions,8404036,4.4,인사동 홍보관 관광안내소,Insadong P.R & Tourist Information Center,서울 종로구 인사동11길 19,정좌표,,126.983571,37.573696
+attractions,8591663,5,동양 예술 극장,Dongyang Art Center,서울 종로구 대학로 14길 29,정좌표,,127.002264,37.584578
+attractions,8591974,4.333333333,영화사,Yeonghwasa Temple,서울 광진구 영화사로 107,정좌표,,127.098279,37.554337
+attractions,8693250,3.375,목동종합운동장,Mokdong Stadium,서울 양천구 안양천로 939,정좌표,,126.881028,37.530646
+attractions,9582763,4,그린월,Green Wall,서울 중구 세종대로 110,정좌표,,126.97811,37.566612
+attractions,9586394,4,석조전 대한제국역사관,Daehan Empire Historical Museum,서울 중구 세종대로 99,정좌표,,126.974939,37.565882
+attractions,9719010,4.571428571,독도체험관,Dokdo Museum Seoul,서울 서대문구 통일로 81,정좌표,,126.968603,37.562367
+attractions,9736432,3.5,BK성형박물관,BK Plastic Surgery Museum,서울 강남구 도산대로 106,정좌표,,127.020449,37.516125
