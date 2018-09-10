@@ -81,12 +81,13 @@
                 app:civ_border_color="#9E9E9E"/>
 
             <TextView
+                android:id = "@+id/user_info_text"
                 android:layout_marginBottom="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/colorPrimary"
                 android:gravity="bottom|left"
-                android:text="Testing Navigation\nDeveloped by DevJhan Team\na@a.a"/>
+                android:text=""/>
 
         </LinearLayout>
 

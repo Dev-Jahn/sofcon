@@ -234,7 +234,6 @@
         android:gravity="right"
         android:textColor="@color/gourmet_color"/>
 
-
     <LinearLayout
         android:layout_marginTop="15dp"
         android:layout_width="match_parent"

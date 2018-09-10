@@ -28,14 +28,16 @@ public class IdRegister extends Activity {
     private EditText register_passwd_commit_txt;
     private EditText register_name_txt;
     private EditText register_phoneNO_txt;
+    private EditText register_email_txt;
     private TextView id_input_error;
     private TextView passwd_input_error;
     private TextView passwd_commit_error;
     private TextView name_input_error;
     private TextView phoneNO_input_error;
+    private TextView email_input_error;
 
-    String id, passwd, passwdCM, name_owner, phoneNO;
-    int id_i = 0, passwd_i = 0, passwdCM_i = 0, name_i = 0, phone_i = 0; // identification option input flag
+    String id, passwd, passwdCM, name_owner, phoneNO, e_mail;
+    int id_i = 0, passwd_i = 0, passwdCM_i = 0, name_i = 0, phone_i = 0, email_i = 0; // identification option input flag
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +49,7 @@ public class IdRegister extends Activity {
         register_passwd_commit_txt=(EditText)findViewById(R.id.register_passwd_commit_txt);
         register_name_txt=(EditText)findViewById(R.id.register_name_txt);
         register_phoneNO_txt=(EditText)findViewById(R.id.register_phoneNO_txt);
+        register_email_txt=(EditText)findViewById(R.id.register_email_txt);
 
         register_commit_btn=(Button)findViewById(R.id.register_commit_btn);
         register_commit_btn.setOnClickListener(new View.OnClickListener() {
@@ -59,12 +62,14 @@ public class IdRegister extends Activity {
                 passwd_commit_error=(TextView)findViewById(R.id.passwd_commit_error);
                 name_input_error=(TextView)findViewById(R.id.name_input_error);
                 phoneNO_input_error=(TextView)findViewById(R.id.phoneNO_input_error);
+                email_input_error=(TextView)findViewById(R.id.email_input_error);
 
                 id = register_id_txt.getText().toString();
                 passwd = register_passwd_txt.getText().toString();
                 passwdCM = register_passwd_commit_txt.getText().toString();
                 name_owner = register_name_txt.getText().toString();
                 phoneNO = register_phoneNO_txt.getText().toString();
+                e_mail = register_email_txt.getText().toString();
 
                 //Log.d("DEBUG-TEST", id + id.length());
                 //Log.d("DEBUG-TEST", passwd + passwd.length());
@@ -133,6 +138,7 @@ public class IdRegister extends Activity {
                 else name_i = 1;
                 ////////////////////////////////////////////////////////////////////////////
 
+                //-----------------------------Phone NO input logic----------------------------------//
                 if(phoneNO.length() == 0) {
                     //Log.d("ERROR-msg", "no input phone no");
                     phoneNO_input_error.setText("* 전화번호가 입력되지 않았습니다.    ");
