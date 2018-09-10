@@ -66,7 +66,7 @@ public class RecommendTravel extends AppCompatActivity {
                     case 3:
                         intent = new Intent(
                                 getApplicationContext(),
-                                OthersTravel.class);
+                                OthersFragment.class);
                         startActivity(intent);
                         finish();
                         break;
