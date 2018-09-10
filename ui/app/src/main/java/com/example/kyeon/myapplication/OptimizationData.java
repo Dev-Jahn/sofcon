@@ -12,18 +12,18 @@ public class OptimizationData implements Comparable<OptimizationData> {
     public OptimizationData(Marker originMarker, Marker destMarker) {
         this.originMarker = originMarker;
         this.destMarker = destMarker;
-        originIndex = ((InfoWindowData)originMarker.getTag()).getOrder();
-        destIndex = ((InfoWindowData)originMarker.getTag()).getOrder();
+        this.originIndex = ((InfoWindowData)originMarker.getTag()).getOrder();
+        this.destIndex = ((InfoWindowData)destMarker.getTag()).getOrder();
     }
 
     @Override
     public int compareTo(OptimizationData optimizationData) {
         if(this.distance > optimizationData.distance) {
-            return -1;
+            return 1;
         } else if(this.distance == optimizationData.distance) {
             return 0;
         } else {
-            return 1;
+            return -1;
         }
     }
 

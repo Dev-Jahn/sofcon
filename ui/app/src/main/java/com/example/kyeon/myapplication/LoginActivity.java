@@ -40,6 +40,7 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -124,6 +125,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                             mPasswordView.setError("Incorrect Password");
                         }
                         else {
+                            Sign s = new Sign(saved_info[0], saved_info[1], 1);
+                            s.execute();
+
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             intent.putExtra("Identification", saved_info[0]);
                             startActivity(intent);
@@ -170,6 +174,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                             mPasswordView.setError("Incorrect Password");
                         }
                         else {
+                            Sign s = new Sign(saved_info[0], saved_info[1], 1);
+                            s.execute();
+
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
                         }

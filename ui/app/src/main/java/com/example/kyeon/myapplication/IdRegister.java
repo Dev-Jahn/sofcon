@@ -1,8 +1,6 @@
 package com.example.kyeon.myapplication;
 
 import android.app.Activity;
-import android.os.Environment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,7 +8,6 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -18,6 +15,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.concurrent.ExecutionException;
+
 
 public class IdRegister extends Activity {
 
@@ -34,8 +33,8 @@ public class IdRegister extends Activity {
     private TextView name_input_error;
     private TextView phoneNO_input_error;
 
-    String id, passwd, passwdCM, name_owner, phoneNO, e_mail;
-    int id_i = 0, passwd_i = 0, passwdCM_i = 0, name_i = 0, phone_i = 0, email_i = 0; // identification option input flag
+    String id, passwd, passwdCM, name_owner, phoneNO;
+    int id_i = 0, passwd_i = 0, passwdCM_i = 0, name_i = 0, phone_i = 0; // identification option input flag
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -197,7 +196,18 @@ public class IdRegister extends Activity {
                         }
                     }
 
+                    Sign s = new Sign(id, passwd, phoneNO, 0);
+                    s.execute();
+                    String test = "";
+                    try {
+                        test = s.get();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    }
 
+                    System.out.println(test);
                     finish();
                 }
             }

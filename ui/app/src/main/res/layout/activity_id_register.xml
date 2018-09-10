@@ -251,5 +251,9 @@
             android:text="취소"
             android:layout_weight="1"/>
     </LinearLayout>
+    <TextView
+        android:id="@+id/url_sign_in"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
