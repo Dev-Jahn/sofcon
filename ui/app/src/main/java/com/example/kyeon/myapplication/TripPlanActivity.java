@@ -25,6 +25,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.location.places.GeoDataClient;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.PlacePhotoMetadata;
+import com.google.android.gms.location.places.PlacePhotoMetadataResult;
+import com.google.android.gms.location.places.Places;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
@@ -368,6 +374,7 @@ public class TripPlanActivity extends AppCompatActivity {
         public android.support.v4.app.Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
+            Toast.makeText(TripPlanActivity.this, "diff_days = "+diff_days, Toast.LENGTH_SHORT).show();
             if (position == diff_days)
                 return PlaceholderFragment.newInstance(position + 1, day_count, etitle, eCurrentDay,
                         eFirstPlace, ePlaceLat, ePlaceLng, ePlaceType, ePlaceBitmapFilePath);
@@ -450,8 +457,9 @@ public class TripPlanActivity extends AppCompatActivity {
             ePlace = addresses.get(0).getLocality();
         }catch (IOException e)
         {
-
+            ePlace = "City not Found";
         }
+        //getting english city name ended
 
         ePlaceType = intent.getStringExtra(MapUtility.PLACE_TYPE_TAG);
         ePlaceBitmapFilePath = intent.getStringExtra(MapUtility.PLACE_BITMAP_FILE_PATH_TAG);
@@ -494,6 +502,7 @@ public class TripPlanActivity extends AppCompatActivity {
             diff = 0;
         }
         diff_days = diff / (24 * 60 * 60 * 1000);
+
         travel = new Travel(getApplicationContext(), "psm",etitle, ePlace, Integer.parseInt(person_count), (int) diff_days + 1, s_mm, s_yy, s_mm, e_yy, e_mm, e_dd);
 
         //let's test diff days is 3

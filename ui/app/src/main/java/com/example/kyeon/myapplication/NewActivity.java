@@ -166,7 +166,11 @@ public class NewActivity extends AppCompatActivity {
                     case 3:
                         intent = new Intent(
                                 getApplicationContext(),
+<<<<<<< Updated upstream
                                 OthersFragment.class);
+=======
+                                OthersActivity.class);
+>>>>>>> Stashed changes
                         startActivity(intent);
                         finish();
                         break;

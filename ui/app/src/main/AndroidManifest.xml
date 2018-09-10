@@ -51,6 +51,10 @@
             android:value="@string/google_maps_key" />
 
         <activity android:name=".TravelActivity" />
+<<<<<<< Updated upstream
+=======
+        <activity android:name=".OthersActivity" />
+>>>>>>> Stashed changes
         <activity android:name=".RecommendTravel" />
         <activity android:name=".TagActivity" />
         <activity
