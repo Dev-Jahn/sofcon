@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity{
 
     ImageView blnkImage;
     LinearLayout nav_image_text;
+    Intent intent = getIntent();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,10 +80,10 @@ public class MainActivity extends AppCompatActivity{
                         break;
 
                     case 2:
-                        intent = new Intent(
+                        /*intent = new Intent(
                                 getApplicationContext(),
                                 MyTripFragment.class);
-                        startActivity(intent);
+                        startActivity(intent);*/
                         break;
                     case 3:
                         intent = new Intent(

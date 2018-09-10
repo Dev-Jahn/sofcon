@@ -129,7 +129,7 @@ public class NewActivity extends AppCompatActivity {
 
         a_yy = today_yy;
         a_mm = today_mm;
-        a_dd = today_mm;
+        a_dd = today_dd;
 
         departButton.setText(today_yy+"/"+today_mm+"/"+today_dd);
         arrivingButton.setText(today_yy+"/"+today_mm+"/"+today_dd);
@@ -236,41 +236,60 @@ public class NewActivity extends AppCompatActivity {
                 } else {
                     Intent i = new Intent(NewActivity.this, TripPlanActivity.class);
 
-                    if (d_yy == null && d_mm == null && d_dd == null && a_yy == null && a_mm == null && a_dd == null) {
-                        d_yy = a_yy = today_yy;
-                        d_mm = a_mm = today_mm;
-                        d_dd = a_dd = today_dd;
-                    }
-
                     if (travel_title.length() == 0)
                         travel_title = "여행을 떠나요~!!";
-                /*
-                if(place_text.length() == 0)
-                    place_text = "서울";
-                */
+
                     Log.d("DEBUG-TEST", "전달되는 여행 타이틀 : " + travel_title);
 
-                    i.putExtra("departing_year", d_yy);
-                    i.putExtra("departing_month", d_mm);
-                    i.putExtra("departing_day", d_dd);
-                    i.putExtra("arriving_year", a_yy);
-                    i.putExtra("arriving_month", a_mm);
-                    i.putExtra("arriving_day", a_dd);
-                    i.putExtra("person_count", String.valueOf(personCount));
-                    i.putExtra(MapUtility.TRAVEL_TITLE_TAG, travel_title);
-                    i.putExtra("place_name", travel_title);
-                    i.putExtra(MapUtility.PLACE_NAME_TAG, btnPlaceName.getText());
-                    i.putExtra(MapUtility.PLACE_LAT_TAG, placeLat);
-                    i.putExtra(MapUtility.PLACE_LNG_TAG, placeLng);
-                    i.putExtra(MapUtility.PLACE_TYPE_TAG, placeType);
-                    i.putExtra(MapUtility.CURRENT_DAY_TAG, currentDay);
-                    if(placeBitmapFilePath == null) {
-                        Log.d("DEBUG-TEST", getResources().getString(R.string.intent_bitmap_error) + "in NewActivity");
-                    }
-                    i.putExtra(MapUtility.PLACE_BITMAP_FILE_PATH_TAG, placeBitmapFilePath);
+                    Log.d("DEBUG-TEST", d_dd+a_dd);
 
-                    startActivity(i);
-                    finish();
+                    if(d_mm.length() == 1) d_mm = "0" + d_mm;
+                    if(a_mm.length() == 1) a_mm = "0" + a_mm;
+                    if(d_dd.length() == 1) d_dd = "0" + d_dd;
+                    if(a_dd.length() == 1) a_dd = "0" + a_dd;
+
+                    String d_date = d_yy+""+d_mm+""+d_dd;
+                    String a_date = a_yy+""+a_mm+""+a_dd;
+                    int d_date_int = Integer.parseInt(d_date);
+                    int a_date_int = Integer.parseInt(a_date);
+
+                    if(a_date_int < d_date_int) {
+                        Log.d("DEBUG-TEST", "Departing Date cannot be later than Arriving Date : "+d_date_int+" > "+a_date_int);
+                        alertDialogCalendar = new AlertDialog.Builder(NewActivity.this);
+                        alertDialogCalendar.setTitle("일정 선택 오류입니다!!");
+                        alertDialogCalendar.setMessage("* 출발일정은 도착일정보다 늦을 수 없습니다.\n* 도착일정은 출발일정보다 빠를 수 없습니다.");
+                        alertDialogCalendar.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int i) {
+                                Log.v(TAG, "확인");
+                                dialog.dismiss();
+                            }
+                        });
+                        alertDialogCalendar.show();
+                    }
+
+                    else {
+                        i.putExtra("departing_year", d_yy);
+                        i.putExtra("departing_month", d_mm);
+                        i.putExtra("departing_day", d_dd);
+                        i.putExtra("arriving_year", a_yy);
+                        i.putExtra("arriving_month", a_mm);
+                        i.putExtra("arriving_day", a_dd);
+                        i.putExtra("person_count", String.valueOf(personCount));
+                        i.putExtra(MapUtility.TRAVEL_TITLE_TAG, travel_title);
+                        i.putExtra("place_name", travel_title);
+                        i.putExtra(MapUtility.PLACE_NAME_TAG, btnPlaceName.getText());
+                        i.putExtra(MapUtility.PLACE_LAT_TAG, placeLat);
+                        i.putExtra(MapUtility.PLACE_LNG_TAG, placeLng);
+                        i.putExtra(MapUtility.PLACE_TYPE_TAG, placeType);
+                        i.putExtra(MapUtility.CURRENT_DAY_TAG, currentDay);
+                        if(placeBitmapFilePath == null) {
+                            Log.d("DEBUG-TEST", getResources().getString(R.string.intent_bitmap_error) + "in NewActivity");
+                        }
+                        i.putExtra(MapUtility.PLACE_BITMAP_FILE_PATH_TAG, placeBitmapFilePath);
+                        startActivity(i);
+                        finish();
+                    }
                 }
             }
         });
@@ -326,13 +345,13 @@ public class NewActivity extends AppCompatActivity {
                 d_mm = month;
                 d_dd = day;
 
-                a_yy = year;
-                a_mm = month;
-                a_dd = day;
-
                 check_dyy = Integer.parseInt(d_yy);
                 check_dmm = Integer.parseInt(d_mm);
                 check_ddd = Integer.parseInt(d_dd);
+
+                check_ayy = 0;
+                check_amm = 0;
+                check_add = 0;
 
                 if(check_ayy != 0 && check_amm != 0 && check_add != 0) {
                     if (check_ayy < check_dyy || check_amm < check_dmm || check_add < check_ddd) {
@@ -356,8 +375,9 @@ public class NewActivity extends AppCompatActivity {
                     Button button = (Button) findViewById(R.id.departingDate);
                     button.setText(date);
 
-                    Button Abutton = (Button) findViewById(R.id.arrivingDate);
-                    Abutton.setText(date);
+                    //Button Abutton = (Button) findViewById(R.id.arrivingDate);
+                    //Abutton.setText(date);
+
                 }
 
             }
@@ -370,6 +390,10 @@ public class NewActivity extends AppCompatActivity {
                 check_ayy = Integer.parseInt(a_yy);
                 check_amm = Integer.parseInt(a_mm);
                 check_add = Integer.parseInt(a_dd);
+
+                check_dyy = 0;
+                check_dmm = 0;
+                check_ddd = 0;
 
                 System.out.println(check_add);
                 System.out.println(check_ddd);

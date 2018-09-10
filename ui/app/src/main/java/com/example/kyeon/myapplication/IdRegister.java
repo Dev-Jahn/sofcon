@@ -1,8 +1,6 @@
 package com.example.kyeon.myapplication;
 
 import android.app.Activity;
-import android.os.Environment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,7 +8,6 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -18,6 +15,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.concurrent.ExecutionException;
+
 
 public class IdRegister extends Activity {
 
@@ -133,6 +132,7 @@ public class IdRegister extends Activity {
                 else name_i = 1;
                 ////////////////////////////////////////////////////////////////////////////
 
+                //-----------------------------Phone NO input logic----------------------------------//
                 if(phoneNO.length() == 0) {
                     //Log.d("ERROR-msg", "no input phone no");
                     phoneNO_input_error.setText("* 전화번호가 입력되지 않았습니다.    ");
@@ -196,7 +196,18 @@ public class IdRegister extends Activity {
                         }
                     }
 
+                    Sign s = new Sign(id, passwd, phoneNO, 0);
+                    s.execute();
+                    String test = "";
+                    try {
+                        test = s.get();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    }
 
+                    System.out.println(test);
                     finish();
                 }
             }
