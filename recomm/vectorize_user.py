@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[6]:
+# In[11]:
 
 
 from gensim.models import Word2Vec
@@ -13,40 +13,37 @@ logging.basicConfig(
 	format='%(asctime)s : %(levelname)s : %(message)s',
 	level=logging.INFO)
 
-workers = 4
-
-list_places = ['data/kor/attraction_places.csv',
-               'data/kor/hotel_places.csv',
-               'data/kor/restaurant_places.csv']
-list_corpus = ['corpus/user-score-based_attraction.list',
-               'corpus/user-score-based_hotel.list',
-               'corpus/user-score-based_restaurant.list']
+cores = 8
+list_corpus = ['corpus/attraction_user.list',
+               'corpus/hotel_user.list',
+               'corpus/restaurant_user.list']
 list_user_model = ['model/attraction_user.model',
                    'model/hotel_user.model',
                    'model/restaurant_user.model']
-#              size window min  workers iter sg sample
-params_user = [(300, 99999,  0, workers, 100, 1,     1),
-               (300, 99999,  0, workers, 100, 1,     1),
-               (300, 99999,  0, workers, 100, 1,     1)]
+params_user = [{'size':300, 'window':99999, 'min_count':0,        # Attraction
+               'workers':cores, 'iter':100, 'sg':1, 'sample':1},
+               {'size':300, 'window':99999, 'min_count':0,        # Hotel
+               'workers':cores, 'iter':100, 'sg':1, 'sample':1},
+               {'size':300, 'window':99999, 'min_count':0,        # Restaurant
+               'workers':cores, 'iter':100, 'sg':1, 'sample':1}]
 
 
-# In[8]:
+# In[ ]:
 
 
+spent = []
 for i in range(3):
-    df_place = pd.read_csv(list_places[i], names=['placeId', 'name', 'location', 'class'], encoding='ms949')
     with open(list_corpus[i], 'rb') as f:
         corpus = pickle.load(f)
     start = time.time()
-    model = Word2Vec(corpus, *(params_users[i]))
-    print("Elapsed time: %s sec" % (time.time() - start),' [',place,']')
+    model = Word2Vec(corpus, **params_user[i])
+    spent.append('Elapsed time: '+str(time.time() - start)+' sec'+' ['+list_user_model[i]+']')
     model.wv.save(list_user_model[i])
 
 
-# In[83]:
+# In[ ]:
 
 
-top10 = model_attr.wv.most_similar(positive=['320359','324887'], negative=['1958940'])
-for place in top10:
-    print(df_places[df_places['placeId'] == int(place[0])].name)
+for string in spent:
+    print(string)
 

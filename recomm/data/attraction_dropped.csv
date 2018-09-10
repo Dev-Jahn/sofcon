@@ -1,0 +1,352 @@
+class,placeId,score,name_kor,name_eng,latitude,longitude
+attractions,10020510,5.0,한성백제문화제,Hanseong Baekje Cultural Festival,37.520847,127.11603
+attractions,10020529,4.142857142857143,서울불꽃축제,Seoul International Fireworks Festival,37.528095,126.92417
+attractions,10020530,4.681818181818182,서울빛초롱축제,Seoul Lantern Festival,37.569157,127.00403
+attractions,10130671,5.0,학아재미술관,Hagajae Museum,37.577007,126.9904
+attractions,10183192,4.435897435897436,석촌호수,Seokchon Lake,37.508343,127.1
+attractions,10288072,4.3,디뮤지엄,D Museum,37.53687,127.01137
+attractions,1046419,4.283880171184022,청계천,Cheonggyecheon Stream,37.568733,126.98553
+attractions,10467804,4.454545454545454,K-Style Hub,K-Style Hub,37.56904,126.981636
+attractions,10479243,4.888888888888889,Baek In-Je House Museum,Baek In-Je House Museum,37.580803,126.984085
+attractions,10483406,3.6666666666666665,헬로에이피엠,Hello APM,37.557457,126.95412
+attractions,1052311,4.162162162162162,화폐 금융 박물관,Bank of Korea Museum,37.562363,126.98146
+attractions,10543181,4.5,윤동주 문학관,Yoon Dongju Literary Museum,37.592113,126.96732
+attractions,10677413,4.25,남산야외식물원,Namsan Outdoor Botanical Garden,37.54252,126.9963
+attractions,10720451,3.727272727272727,종각젊음의거리,Jonggak Avenue of Youth,37.569542,126.985695
+attractions,10794564,3.7,러브뮤지엄,Love Museum,37.553482,126.92165
+attractions,10897845,3.7142857142857144,북악팔각정,Bugak Palgakjeong Pavilion,37.601746,126.98039
+attractions,1163226,3.764705882352941,중부시장,Jungbu Market,37.566235,127.00033
+attractions,1169465,4.1630859375,N 서울 타워,N Seoul Tower,37.551388,126.988106
+attractions,1176552,4.166666666666667,허준 박물관,Heojun Museum,37.567684,126.85114
+attractions,11850082,4.6,북촌한옥지원센터,Bukchon Traditional Culture Center,37.578953,126.986115
+attractions,11918183,4.176470588235294,스타일난다 핑크호텔,Stylenanda Pink Hotel Flagship Store,37.56207,126.985344
+attractions,12034029,4.538461538461538,에스알티,SRT,37.486824,127.10248
+attractions,12134415,4.0,경교장,Gyeonggyojang,37.56836,126.96748
+attractions,12309166,4.417910447761194,서울스카이,Seoul Sky,37.51264,127.10249
+attractions,12335291,5.0,호텔드코드,,37.551807,126.91909
+attractions,1235392,4.317738791423002,조계사,Jogyesa Temple,37.573803,126.98223
+attractions,12459260,3.9,서울로7017,Seoullo 7017,37.556667,126.972
+attractions,12499622,4.0,백범광장,Baekbeom Plaza,37.555042,126.97916
+attractions,12635586,4.40625,별마당 도서관,Starfield Library,37.509945,127.060425
+attractions,12910217,4.25,라뜰리에,L’atelier,37.56907,127.00724
+attractions,12986884,4.166666666666667,동대문성곽공원,Dongdaemun Seonggwak Park,37.57195,127.00905
+attractions,13199013,4.0,익선동한옥거리,Ikseon-dong Hanok Street,37.57343,126.98951
+attractions,13433251,5.0,국제선센터,International Seon Center,37.520996,126.87004
+attractions,13651545,4.5,현대카드 뮤직 라이브러리,Hyundai Card Music Library,37.536587,127.00066
+attractions,13794376,5.0,템플스테이 홍보관,Templestay Information Center,37.573895,126.98318
+attractions,13798962,4.0,주한중국문화원,China Cultural Center,37.574566,126.97133
+attractions,1379963,4.228090766823161,북촌 한옥마을,Bukchon Hanok Village,37.582767,126.98356
+attractions,1383393,3.4266666666666667,동대문 밀리오레,Migliore Dongdaemun Shop,37.568066,127.008934
+attractions,13860017,4.0,북한산영취사,Yeongchwisa,37.619324,126.99473
+attractions,13954612,4.0,성내동 쭈꾸미골목,Seongnae-dong Octopus Street,37.537117,127.12619
+attractions,13968712,5.0,사물놀이 한울림,,37.573788,126.98561
+attractions,14015599,3.0,풍납토성,Pungnaptoseong Fortress,37.53459,127.1206
+attractions,14021823,4.0,와룡묘,Waryongmyo Shrine,37.554836,126.98664
+attractions,14101026,3.0,종로 성당,Jongno Catholic Church,37.57117,126.996635
+attractions,14108530,3.0,영락교회,Youngnak Church,37.563328,126.98895
+attractions,14112185,3.0,신흥시장,Shinheung Market,37.545475,126.98481
+attractions,14112773,4.0,모래내시장,Moraenae Market,37.570427,126.91544
+attractions,14135425,3.0,종묘광장공원,Jongmyo Square Park,37.572933,126.994354
+attractions,14147985,3.0,옥인 교회,Okin Church,37.582184,126.97034
+attractions,14148633,3.0,남대문 커뮤니티 라운지,Namdaemun Community Lounge,37.560284,126.977196
+attractions,1418675,3.663265306122449,코엑스 센터,COEX Center,37.513798,127.058105
+attractions,14202310,4.0,화랑대역 - 폐역,Hwarangdae Station - Closed Station,37.624542,127.09266
+attractions,14202847,4.0,경춘선숲길,Gyeongchun Supgil,37.632008,127.06794
+attractions,14202981,4.0,안산자락길,Ansan Jarak-gil,37.568314,126.94721
+attractions,1440196,4.354368932038835,서대문 형무소 역사관,Seodaemun Prison History Hall,37.574574,126.956665
+attractions,14455910,4.0,황학정국궁전시관,Hwanghakjeong Archery Field,37.576195,126.974014
+attractions,14771392,4.0,퀸마마마켓,Queen Mama Market,37.525322,127.035675
+attractions,1478599,3.743961352657005,동대문 쇼핑몰,Dongdaemun Shopping Complex,37.568348,127.00919
+attractions,14789834,4.0,서울상상나라,Seoul Children's Museum,37.549362,127.08181
+attractions,1489411,2.58974358974359,세븐럭카지노 강북힐튼점,Seven Luck Casino Gangbuk Hilton,37.555824,126.975555
+attractions,1519813,4.372509960159363,한강 공원,Hangang Park,37.52343,127.00215
+attractions,1532473,3.3333333333333335,남평화 상가,Nampyeonghwa Sangga,37.569164,127.01081
+attractions,1537022,3.76,동대문 시장,Dongdaemun Market,37.569645,127.00944
+attractions,1549822,4.464285714285714,인왕산,Inwangsan Mountain,37.57841,126.95928
+attractions,1551271,4.188679245283019,남산골 한옥 마을,Namsangol Hanok Village,37.559303,126.994446
+attractions,1552278,4.147587511825923,광장시장,Gwangjang Market,37.570377,127.0009
+attractions,1554603,4.376731301939058,창경궁,Changgyeonggung Palace,37.57883,126.99468
+attractions,1579821,3.982456140350877,세종대왕 동상,Statue of Sejong the Great,37.57272,126.976944
+attractions,1604009,3.997354497354497,가로수길,Garosu-gil,37.52046,127.02281
+attractions,1627541,2.9411764705882355,롯데월드 스타 애비뉴,Star Avenue at Lotte World,37.511253,127.09839
+attractions,1643534,4.303571428571429,한가람 미술관,Hangaram Art Museum,37.48014,127.01394
+attractions,1675961,3.9873417721518987,선릉과 정릉,Seolleung & Jeongneung Royal Tomb,37.509323,127.04672
+attractions,1723779,3.5,소닌 프라자,Sonin Plaza,37.532913,126.96528
+attractions,1735171,3.3846153846153846,메사,Mesa,37.56043,126.97954
+attractions,1758805,3.7160493827160495,청와대,The Blue House (Cheong Wa Dae),37.586517,126.97581
+attractions,1761206,4.371428571428571,서울글로벌문화체험센터,Seoul Global Cultural Center,37.56242,126.98506
+attractions,1766551,3.925438596491228,쌈지길,Ssamji-gil,37.574013,126.98499
+attractions,1772732,4.333333333333333,한국 지역정보 센터,Korea Local Information Center,37.50444,127.00402
+attractions,1804662,4.529411764705882,홍릉 수목원,Hongneung Arboretum,37.593555,127.04408
+attractions,1809989,4.075268817204301,서울 시립 미술관,Seoul Museum of Art,37.56452,126.97384
+attractions,1821360,3.9285714285714284,청와대 사랑채,Cheongwadae Sarangchae,37.582905,126.97325
+attractions,1831099,4.402439024390244,국립국악원,National Gugak Center,37.477673,127.00956
+attractions,1836198,4.134831460674158,국립 고궁 박물관,National Palace Museum of Korea,37.576572,126.97549
+attractions,1842046,3.8438661710037176,노량진 수산 시장,Noryangjin Fish Market,37.515,126.94138
+attractions,1862191,4.2215686274509805,이화여자대학교,Ewha Womans University,37.56022,126.94569
+attractions,1862195,3.6,한국 자수 박물관,The Museum of Korean Embroidery,37.51538,127.03334
+attractions,1862199,3.888888888888889,명동 서초 불한증막,Myeongdong Seocobulhanjeungmag,37.56239,126.984
+attractions,1908282,4.4,산모퉁이,sanmotoonge,37.59536,126.96798
+attractions,1946087,3.5714285714285716,그랜드 마트,Grand Mart,37.55525,126.93624
+attractions,1956582,4.387096774193548,마장시장,Majang Meat Market,37.570858,127.042
+attractions,1957485,3.9714285714285715,홍익대학교,Hongik University,37.555077,126.923325
+attractions,1957627,4.342298288508557,여의도 공원,Yeouido Park,37.526897,126.92273
+attractions,1957629,3.696969696969697,국회 의사당,The National Assembly Building,37.52963,126.91627
+attractions,1958930,4.0886075949367084,한국의 집,Korea House,37.560486,126.99486
+attractions,1958940,4.331950207468879,홍대앞 거리,Hongik University Street,37.555458,126.92374
+attractions,1960133,3.6,중앙고등학교 (겨울연가 촬영지),Choong Ang High School (Location for Winter Sonata),37.583572,126.98687
+attractions,1960138,3.8623853211009176,문화역서울 284,Culture Station Seoul 284,37.555817,126.97284
+attractions,1962594,3.832558139534884,롯데백화점 본점,Lotte Department Store Main,37.564404,126.98256
+attractions,1972734,4.595238095238095,정동극장,Jeongdong Theater,37.565697,126.97292
+attractions,1972740,2.3823529411764706,세븐럭카지노 강남코엑스점,Seven Luck Casino Gangnam Coex,37.511883,127.05732
+attractions,1990451,4.183333333333334,타임스퀘어,Times Square Mall,37.517727,126.90346
+attractions,1992546,2.5555555555555554,명동밀리오레,Myeongdong Migliore,37.563473,126.98362
+attractions,2008729,4.568561872909699,잠실 야구 경기장,Jamsil Baseball Stadium,37.512516,127.07218
+attractions,2011401,4.162162162162162,신세계 백화점 본점,Shinsegae Dept. Store Main,37.56056,126.98091
+attractions,2014599,4.433333333333334,아차산,Achasan Mountain,37.560097,127.10143
+attractions,2015834,3.4,파라다이스 카지노 워커힐,Paradise Casino Walkerhill,37.555115,127.11027
+attractions,2015883,3.3043478260869565,굿모닝시티,Good Morning City,37.566467,127.007774
+attractions,2041644,4.333333333333333,사춤 시어터,SA.CHOOM Theater,37.572678,126.987976
+attractions,2041647,3.7142857142857144,롯데 월드 예술 극장,Lotte World Art Theater,37.51131,127.09772
+attractions,2092468,4.305555555555555,선유도 공원,Seonyudo Park,37.543514,126.89972
+attractions,2094166,4.353658536585366,서울 역사 박물관,Seoul Museum of History,37.570457,126.97044
+attractions,2173769,3.717391304347826,세빛섬,Sebitseom,37.512436,126.99599
+attractions,2194168,4.537437603993345,서울메트로,Seoul Metro,37.556664,126.98284
+attractions,2203080,4.2631578947368425,트릭아이뮤지엄 서울,Trickeye Museum Seoul,37.553406,126.92163
+attractions,2209195,3.8,뚝섬 전망문화 콤플렉스 J-Bug,Cultural Complex J-Bug,37.53101,127.066414
+attractions,2255376,4.833333333333333,낙산 묘각사,Naksan Myogaksa,37.575756,127.01891
+attractions,2269012,3.625,동묘,Dongmyo (Eastern Shrine),37.5732,127.01823
+attractions,2293568,3.8979591836734695,경희궁,Gyeonghuigung Palace,37.578438,126.97686
+attractions,2293574,3.888888888888889,서울 광장,Seoul Plaza,37.565556,126.977875
+attractions,2293590,3.8636363636363638,덕수궁 미술관,"MMCA - National Museum of Contemporary Art, Deoksugung",37.565968,126.9737
+attractions,2303919,3.875,절두산 순교 성지,Jeoldusan Martyrs' Shrine,37.544136,126.91246
+attractions,2341861,4.428571428571429,여의도 샛강 생태 공원,Yeouido Saetgang Ecological Park,37.518295,126.92196
+attractions,2341869,3.6666666666666665,환기 미술관,Whanki Museum,37.59445,126.96622
+attractions,2341870,4.571428571428571,쇳대박물관,Lock Museum,37.579796,127.00446
+attractions,2341887,4.0,도산 공원,Dosan Neighborhood Park,37.52383,127.03533
+attractions,2341905,4.1063829787234045,동대문 역사 문화 공원,Dongdaemun History & Culture Park,37.56655,127.00912
+attractions,2341922,4.631578947368421,길상사,Gilsangsa Shrine,37.598434,126.99371
+attractions,2367771,3.3076923076923075,서울풍물시장,Seoul Folk Flea Market,37.572567,127.025635
+attractions,2369065,4.357142857142857,부엉이 박물관,Owl Museum,37.587154,126.98296
+attractions,2392950,4.333333333333333,JN 쇼핑몰,JN Shopping Mall,37.561546,126.98618
+attractions,2428773,3.5454545454545454,회현 지하 상가,Hoehyeon Underground Shopping area,37.56075,126.98193
+attractions,2457547,3.977272727272727,동대문 시장 생선구이 골목,Grilled Fish Street in Dongdaemun Market,37.5696,127.006004
+attractions,2476657,4.25,비보이 시티 인 서울 - 쿵 (홍대 전용관),"B-Boy city in Seoul - Kung, Hongdae Theatre",37.55351,126.92682
+attractions,2476788,4.159420289855072,디큐브 시티,D-Cube City,37.508938,126.889305
+attractions,2483947,4.705882352941177,홍대난타전용극장,Hongdae NANTA Theatre,37.55309,126.92111
+attractions,2483960,5.0,수수보리 아카데미,Susubori Academy,37.564,126.96319
+attractions,2519674,3.7857142857142856,서울 애니메이션 센터,Seoul Animation Center,37.558468,126.9875
+attractions,2571660,3.991044776119403,이태원,Itaewon,37.534504,126.993935
+attractions,2571695,4.380952380952381,와룡 공원,Waryong Park,37.590614,126.99059
+attractions,3136733,4.0,칠궁,Chilgung,37.58499,126.97326
+attractions,3197992,4.315789473684211,국립극장,The National Theater of Korea,37.552673,126.99934
+attractions,320359,4.381642512077295,창덕궁,Changdeokgung Palace,37.579254,126.99215
+attractions,324887,4.24105461393597,덕수궁,Deoksugung,37.565495,126.974815
+attractions,324888,4.404741000877963,경복궁,Gyeongbokgung Palace,37.57843,126.97701
+attractions,324890,4.30938123752495,국립 민속 박물관,The National Folk Museum of Korea,37.58133,126.9789
+attractions,324891,3.8305949008498583,롯데월드,Lotte World,37.511112,127.09888
+attractions,324907,3.9911003236245954,남대문시장,Namdaemun Market,37.56031,126.97733
+attractions,324915,4.40625,명동난타극장,Myeongdong NANTA Theater,37.56353,126.98367
+attractions,324951,3.456140350877193,탑골 공원,Tapgol Park,37.5712,126.98835
+attractions,325043,4.468975468975469,국립중앙박물관,National Museum of Korea,37.523922,126.98085
+attractions,3313698,3.0,티움,T.um - SK telecom Ubiquitous Museum,37.566544,126.98499
+attractions,3313701,4.111111111111111,백사실 계곡,Baeksasil vally,37.600266,126.96631
+attractions,3322253,4.467268623024831,KTX,KTX (Korea Train Express),37.553448,126.97111
+attractions,3349619,4.666666666666667,세계장신구박물관,World Jewellery Museum,37.580963,126.98179
+attractions,3531799,4.7368421052631575,전쟁과 여성 인권 박물관,The War and Women's Human Rights Museum,37.560078,126.91486
+attractions,3568803,3.585185185185185,반포대교,Banpodaegyo Bridge,37.512417,126.99805
+attractions,3600495,3.7009345794392523,남산 케이블카,Namsan Cable Car,37.55657,126.98416
+attractions,3670803,3.75,서울대학교 미술관,"Museum of Art, Seoul National University",37.466446,126.94894
+attractions,3694405,4.176470588235294,운현궁,Unhyeongung,37.57614,126.98698
+attractions,3694519,4.052631578947368,이화 벽화마을,Ihwa Mural Village,37.577896,127.00732
+attractions,3694539,4.578947368421052,대림 미술관,Daelim Museum,37.5775,126.97345
+attractions,3694651,3.2857142857142856,영등포 시장,Yeongdeungpo Market,37.51975,126.90793
+attractions,3805413,4.4,국립국악박물관,Museum of Traditional Korean Music,37.478832,127.012
+attractions,3805418,4.1,"떡,부엌살림박물관",Tteok and Kitchen Utensil Museum,37.574867,126.99062
+attractions,3805427,4.0,아름다운 차박물관,Beautiful Tea Museum,37.572315,126.98586
+attractions,3805440,3.6,동림매듭박물관,Dong-Lim Knot Museum,37.581867,126.98561
+attractions,3805459,4.6,한상수자수박물관,Hansangsoo Embroidery Museum,37.58273,126.98564
+attractions,3805479,4.071428571428571,독립문,Dongnimmun Gate,37.5745,126.958
+attractions,3805483,4.285714285714286,서대문 자연사 박물관,Seodaemun Museum of Natural History,37.576622,126.93767
+attractions,3805494,4.5,이리자 한복전시관,Hanbok Museum,37.577576,126.97976
+attractions,3805521,4.111111111111111,서울 정릉,Jeongneung Royal Tomb,37.602272,127.00643
+attractions,3805530,5.0,평강 성서유물 박물관,Abraham Park Kenneth Vine Collection Museum,37.492,126.844
+attractions,3805545,5.0,명인박물관,Myeongin Museum,37.580135,126.98518
+attractions,3805561,4.0,정동교회,Chungdong Church,37.565323,126.97297
+attractions,3805568,4.571428571428571,가회민화박물관,Gahoe Museum,37.58213,126.98564
+attractions,3805580,4.666666666666667,간송 미술관,Gansong Art Museum,37.5942,126.997
+attractions,3805589,4.0,서울 의릉,Uireung,37.603836,127.05755
+attractions,3805601,3.9565217391304346,보신각,Bosingak,37.569973,126.98338
+attractions,3805639,4.285714285714286,우표박물관,Korean Postage Stamp Museum,37.561687,126.98229
+attractions,3808256,3.4814814814814814,이태원 앤틱 가구 거리,Itaewon Antique Furniture Street,37.53152,126.99374
+attractions,3808298,4.0,호림아트센터 신사분관,Horim Museum (Sinsa),37.522167,127.036
+attractions,3808303,4.166666666666667,국립민속박물관 어린이박물관,Children's Folk Museum,37.581566,126.97893
+attractions,3808305,4.0,연세로,Yeonsero (Yonsei University Street),37.56117,126.93992
+attractions,3808315,3.875912408759124,숭례문,Sungnyemun Gate,37.559937,126.97528
+attractions,3821647,5.0,꼭두 박물관,Kokdu Museum,37.583706,127.00359
+attractions,3822061,3.9913793103448274,IFC 몰,IFC Mall,37.52533,126.925644
+attractions,3871936,4.384615384615385,국립현대미술관 서울관,National Museum of Modern and Contemporary Art Seoul,37.579147,126.98032
+attractions,3901164,3.608108108108108,롯데아울렛 서울역점,Lotte Outlets Seoul Station,37.55235,126.97213
+attractions,3901265,4.371428571428571,서울중앙성원,Seoul Central Mosque,37.53338,126.99748
+attractions,3901448,4.2,경희대학교 서울캠퍼스,Kyunghee University Seoul Campus,37.595448,127.05276
+attractions,3957040,4.220588235294118,대한민국 역사 박물관,National Museum of Korean Contemporary History,37.57396,126.97768
+attractions,4084344,4.009433962264151,서울 시청,Seoul City Hall,37.56629,126.97784
+attractions,4084362,4.333333333333333,광희 패션몰,Kwanghee Fasion Mall,37.568584,127.01192
+attractions,4084386,4.448275862068965,북악산 서울 성곽,Bugaksan Seoul Fortress,37.59371,126.97753
+attractions,4094797,4.333333333333333,갤러리 아라리오 서울,Gallery Arario Seoul,37.57905,126.98201
+attractions,4094800,5.0,공근혜 갤러리,Gonggeunhye Gallery,37.58399,126.97965
+attractions,4094809,4.181818181818182,뚝섬 한강공원 수영장,Ttukseom Hangang Park,37.531868,127.07028
+attractions,4094815,4.0,알파갤러리,Alpha Gallery,37.56026,126.97672
+attractions,4094834,5.0,갤러리 더 스페이스,Gallery The Space,37.520798,127.04847
+attractions,4094840,5.0,Moin Gallery,Moin Gallery,37.574226,126.98581
+attractions,4094859,2.0,갤러리선컨템포러리,Gallery SUN Contemporary,37.5805,126.98037
+attractions,4094861,4.416,하늘공원,Haneul Park,37.566414,126.88615
+attractions,4094871,5.0,갤러리위,Gallery We,37.59123,126.98003
+attractions,4094877,4.166666666666667,충무아트센터,Chungmu Arts Center,37.566006,127.0148
+attractions,4094903,3.6,아이스갤러리,Ice Gallery,37.553883,126.92205
+attractions,4094934,4.0,유니버설아트센터,Universal Art Center,37.55025,127.08756
+attractions,4094936,3.3333333333333335,나이프갤러리,Knife Gallery,37.573765,126.984856
+attractions,4094942,3.5,구로아트밸리,Guro Art Valley,37.49654,126.88897
+attractions,4094957,5.0,갤러리 사비나,Gallery Sabina,37.57398,126.98543
+attractions,4095486,5.0,암사동선사주거지,Ahmsadong Seonsa Joogeoji,37.55764,127.13072
+attractions,4095494,3.0,육군박물관,Korea Army Museum,37.624485,127.08224
+attractions,4095498,2.6666666666666665,삼전도비,Samjeondobi,37.50332,127.10706
+attractions,4095502,3.78,아이파크몰,I-Park Mall,37.528965,126.96546
+attractions,4095561,5.0,숙명여자대학교박물관,Sookmyung Women's University Museum,37.545578,126.96539
+attractions,4095581,5.0,겸재정선기념관,Gyeomjae Jeongseon Memorial Museum,37.572166,126.83837
+attractions,4095605,5.0,박을복자수박물관,Park Eul Bok Embroidery Museum,37.653534,127.0086
+attractions,4095620,5.0,경운박물관,Kyungwoon Museum,37.486828,127.06609
+attractions,4095644,3.0,티벳박물관,Tibet Museum,37.580105,126.98194
+attractions,4095657,3.5,암사동선사주거지 원시생활전시관,Amsadong Pre-history Settlement Site,37.560566,127.13087
+attractions,4095668,5.0,산악박물관,Korea Alpine Museum,37.497837,127.0356
+attractions,4095671,4.571428571428571,연세대학교 박물관,Yonsei University Museum,37.5655,126.93793
+attractions,4095679,3.4,사육신공원,Sayookshin Park,37.513515,126.94866
+attractions,4095680,4.3,낙성대공원,Nakseongdae Park,37.470974,126.960526
+attractions,4095681,4.2727272727272725,장충단공원,Jangchungdan Park,37.558743,127.00477
+attractions,4095685,4.317829457364341,낙산공원,Naksan Park,37.580868,127.00816
+attractions,4096206,3.0,돈암문화스포츠센터,Donahm Moonhwa Sports Center,37.593277,127.01294
+attractions,4096207,4.5,용산구문화체육센터,Yongsangoo Moonhwa Chaeyook Center,37.53722,126.9677
+attractions,4096223,4.714285714285714,남산타운문화체육센터,Namsan Town Culture Sports Center,37.54956,127.01189
+attractions,4096226,4.166666666666667,마포아트센터,Mapo Art Center,37.549953,126.94558
+attractions,4097409,4.615384615384615,한국 가구 박물관,Korea Furniture Museum,37.60002,126.99316
+attractions,4211969,4.0,우정총국,Ujeongchongguk,37.574406,126.98273
+attractions,4235275,4.190476190476191,샤롯데 씨어터,Charlotte Theater,37.511253,127.09802
+attractions,4323885,4.6,충정로 난타극장,Chungjeongno NANTA Theatre,37.559956,126.9622
+attractions,4412686,5.0,안중근의사 기념관,An Jung-geun Memorial Hall,37.553432,126.98054
+attractions,4427522,5.0,서울시립미술관 남서울분관,Seoul Museum of Art Namseoul Bunkwan,37.47613,126.97959
+attractions,4427533,5.0,한원미술관,Hanwon Museum of Art,37.48176,127.01545
+attractions,4438505,4.371428571428571,롯데월드 민속박물관,Lotte World Folk Museum,37.5112,127.098
+attractions,4438789,4.5,불교중앙박물관,Central Buddhist Museum,37.573715,126.98198
+attractions,4798698,3.7777777777777777,서울 올림픽 기념관,Seoul Olympic Museum,37.521,127.116
+attractions,4798711,4.458874458874459,서울숲,Seoul Forest,37.544132,127.041725
+attractions,4798715,4.464788732394366,여의도 한강공원,Yeouido Hangang Park,37.52747,126.93387
+attractions,502576,4.204545454545454,삼청각,Samcheonggak,37.59759,126.98369
+attractions,553213,4.121621621621622,서울 대학로,Seoul Daehangno,37.58098,127.0024
+attractions,553246,3.97,신촌,Sinchon,37.55694,126.936806
+attractions,553546,4.249102656137832,명동 쇼핑 거리,Myeongdong Shopping Street,37.56355,126.98473
+attractions,554303,3.7670454545454546,스타필드 코엑스몰,Starfield COEX Mall,37.511185,127.06021
+attractions,554528,4.683908045977011,북한산 국립공원,Bukhansan National Park,37.654488,126.97902
+attractions,554533,3.7973856209150325,동대문 (흥인지문),Dongdaemun Gate (Heunginjimun),37.571075,127.009094
+attractions,554537,4.626850605652759,한국 전쟁 기념관,The War Memorial of Korea,37.535297,126.97722
+attractions,554551,3.7945205479452055,63시티,63 City,37.5198,126.94008
+attractions,554582,4.328843106180666,남산 공원,Namsan Park,37.551746,126.98804
+attractions,554634,4.204946996466431,종묘,Jongmyo Shrine,37.572933,126.994354
+attractions,561808,4.0,서울 월드컵 경기장 (상암 월드컵 경기장),Seoul World Cup Stadium,37.568386,126.896866
+attractions,590748,4.296391752577319,광화문,Gwanghwamun Gate,37.57581,126.97692
+attractions,5924188,4.0,트릭 월드,Trick World,37.562412,126.9841
+attractions,592440,3.75,사직 공원,Sajik Park,37.57572,126.96864
+attractions,592441,4.285714285714286,국립 4.19 민주 묘지,4.19 Memorial Cemetery,37.648933,127.00785
+attractions,592450,4.333333333333333,농업 박물관,Agricultural Museum,37.56663,126.968254
+attractions,5924658,4.095238095238095,서울 미술관,Seoul Museum,37.59487,126.963455
+attractions,592482,4.125,봉원사,Bongwonsa Temple,37.572132,126.9471
+attractions,592483,3.4285714285714284,63 시월드,Aquarium 63 SeaWorld,37.519783,126.94021
+attractions,592484,4.051470588235294,충무공 이순신 동상,Statue of Admiral Yi Sun-Sin,37.57072,126.97692
+attractions,592486,4.389972144846797,봉은사,Bongeunsa Temple,37.515244,127.056946
+attractions,592487,4.318181818181818,보라매 공원,Boramae Park,37.49184,126.91938
+attractions,592490,4.265560165975104,서울 어린이 대공원,Seoul Children's Grand Park,37.549084,127.08271
+attractions,592492,3.6666666666666665,한국 금융사 박물관,Shinhan Museum,37.568626,126.97645
+attractions,592495,4.0385395537525355,코엑스 아쿠아리움,Coex Aquarium,37.512913,127.05837
+attractions,592497,4.428571428571429,도선사,Doseonsa Temple,37.655304,126.98971
+attractions,592500,4.5,옹기 민속 박물관,Onggi Folk Museum,37.654522,127.014915
+attractions,592502,4.666666666666667,지구촌 민속 박물관,Global Village Folklore Museum,37.55451,126.98116
+attractions,592504,4.5,호림 박물관 신림 본관,Horim Museum Sillim,37.48087,126.918205
+attractions,592506,4.248700410396717,인사동,Insadong,37.574165,126.98491
+attractions,592507,4.21875,세종대왕 기념관,King Sejong Memorial Hall,37.590244,127.04338
+attractions,592508,4.228571428571429,국립 서울 현충원,Seoul National Cemetery,37.496075,126.96713
+attractions,592517,4.0,토탈 미술관,Total Art Museum,37.612144,126.97561
+attractions,592518,4.333333333333333,서울 세관 박물관,Korean Customs Museum,37.518185,127.03472
+attractions,592520,3.466666666666667,마로니에 공원,Marronnier Park,37.5804,127.00279
+attractions,592521,3.814814814814815,뮤지엄김치간,Museum Kimchikan,37.57356,126.98528
+attractions,592523,4.433333333333334,용산 가족 공원,Yongsan Family Park,37.521122,126.984146
+attractions,592524,4.0,육군 사관학교,Korea Military Academy,37.625015,127.097305
+attractions,592658,4.3951219512195125,올림픽 공원,Olympic Park,37.517876,127.1194
+attractions,5971975,3.909090909090909,KBS 온,KBS On,37.52559,126.91642
+attractions,598499,4.364963503649635,삼성미술관 리움,Leeum Samsung Museum of Art,37.538036,126.99899
+attractions,609340,4.34412955465587,명동 성당,Myeong-dong Cathedral,37.563774,126.986855
+attractions,6197433,4.333333333333333,덕수궁미술관,"National Museum of Art, Deoksugung",37.565872,126.97501
+attractions,6197467,3.0,수도국산 달동네박물관,Sudoguksan Museum of Housing and Living,37.572536,126.99806
+attractions,6197503,4.75,백범김구기념관,Kim Koo Museum & Library,37.545025,126.95974
+attractions,632509,4.444444444444445,화계사,Hwagyesa Temple,37.632664,127.007195
+attractions,6352852,3.953488372093023,메세나폴리스몰,Mecenatpolis Mall,37.5506,126.91368
+attractions,6378743,4.0576923076923075,박물관은살아있다 인사동점,Alive Museum Insadong,37.57171,126.98729
+attractions,6509932,4.178571428571429,낙산 공공 미술,Naksan Public Art,37.56657,127.00774
+attractions,6570666,4.0,이대 패션거리,Ewha Woman's University,37.557373,126.94583
+attractions,6656809,4.352941176470588,고려대학교,Korea University,37.59002,127.03184
+attractions,6656879,4.258181818181818,삼청동길,Samcheongdong-gil Road,37.582783,126.98187
+attractions,6671988,4.227761485826002,동대문 디자인 플라자,Dongdaemun Design Plaza (DDP),37.567024,126.99493
+attractions,6680423,4.3076923076923075,한국관광공사 관광안내전시관,Tourist Information Center of Korea Tourism Organization,37.568523,126.98165
+attractions,6732940,4.5,빛타래,Bittarae,37.51824,126.90121
+attractions,6847894,4.916666666666667,양화진 외국인 선교사 묘원,Yanghwajin Foreign Missionary Cemetery,37.546474,126.91138
+attractions,6847900,4.162291169451074,광화문 광장,Gwanghwamun Square,37.574066,126.97677
+attractions,6876616,4.0,서울 석촌동 고분군,Seoul Seokchon-dong Ancient Tombs,37.501972,127.10288
+attractions,6941864,4.0,서울남산국악당,Seoul Namsan Traditional Theater,37.5585,126.9935
+attractions,6960656,3.8275862068965516,마리오 아울렛,Mario outlet,37.478706,126.8865
+attractions,7028430,4.354838709677419,양재 시민 공원,Yangjae Citizens' Park,37.4699,127.03706
+attractions,7028432,4.666666666666667,꿈의 숲,Dream Forest,37.621567,127.04007
+attractions,7028448,4.375,몽마르뜨 공원,Montmartre Park,37.49502,127.00361
+attractions,7060791,4.0,63 스카이 아트,63 Sky Art,37.519733,126.940155
+attractions,7060830,3.0,시몬느 핸드백 박물관,Simone Handbag Museum,37.519024,127.023
+attractions,7060833,4.636363636363637,경인 미술관,Kyung-In Museum of Fine Art,37.57456,126.98562
+attractions,7060838,4.7,청계천 박물관,Cheonggyecheon Museum,37.57124,127.03502
+attractions,7118734,3.2,북촌 문화 센터,Bukchon Cultural Center,37.579037,126.9864
+attractions,7154750,4.294117647058823,홍대앞 예술시장 프리마켓,Hongdae Art Market Free Market,37.552277,126.922966
+attractions,7154824,4.5,대림 시장,Daelim Market,37.61003,126.92149
+attractions,7154849,2.8,리틀 도쿄,Little Tokyo,37.520683,126.96868
+attractions,7154853,5.0,중앙아시아촌,Central Asian Village,37.563797,127.00023
+attractions,7154858,4.565217391304348,아라리오뮤지엄 인 스페이스,Arario Museum in Space,37.577656,126.98847
+attractions,7154928,3.6,동묘벼룩시장,Dongmyo Flea Market,37.575405,127.01939
+attractions,7154939,3.75,청담동 패션 거리,Cheongdam Fashion Street,37.525063,127.04933
+attractions,7264107,4.157894736842105,고투 몰,GOTO Mall,37.506226,127.00491
+attractions,7264189,5.0,천주교 순교성지 새남터 기념성당,Saenamteo Catholic Holy Place of the Martyrs,37.524426,126.95614
+attractions,7353795,4.222222222222222,북촌 전망대,Bukchon Observatory,37.582973,126.98274
+attractions,7622540,4.384615384615385, ,Jeongdong Observatory,37.565514,126.97553
+attractions,7717373,4.446808510638298,서울 한양 도성,Seoul City Wall,37.566536,126.97797
+attractions,7891686,4.291666666666667,세종이야기  충무공이야기,The Story of King Sejong & The Story of Admiral Yi Sunshin,37.572693,126.9769
+attractions,7891838,4.4,LG 아트센터,LG Arts Center,37.5019,127.037285
+attractions,7891912,4.75,답십리 고미술상가,Dapsimni Antique Shopping Mall,37.569332,127.051
+attractions,7891924,4.8,금호미술관,Kumho Museum of Art,37.577526,126.97982
+attractions,7891939,3.75,선유교,Seonyugyo Bridge,37.540817,126.90172
+attractions,7891991,4.166666666666667,디지털파빌리온,Digital Pavilion,37.579636,126.89101
+attractions,7892136,4.166666666666667,배재학당역사박물관,Appenzeller Noble Memorial Museum,37.56389,126.97253
+attractions,8029067,4.076923076923077,테지움 서울,Teseum Seoul,37.57171,127.0153
+attractions,8084014,4.34375,현대백화점 압구정본점,Hyundai Department Store Apgujeong Main,37.52731,127.02749
+attractions,8121881,4.25,갤러리아 백화점 본점,The Galleria Main Store,37.527866,127.04159
+attractions,8262102,4.0,심심헌,Simsimheon,37.582684,126.98356
+attractions,8449187,4.181818181818182,한성 백제 박물관,Seoul Baekje Museum,37.51555,127.12097
+attractions,8556104,4.0,명동관광정보센터,Myeongdong Tourist Information Center,37.56581,126.98448
+attractions,8630566,4.75,다이나믹 메이즈,,37.571705,126.98727
+attractions,8693245,4.654545454545454,3D블랙아트 박물관,3D Black Art Museum,37.561787,126.98664
+attractions,8737878,4.767441860465116,그레뱅뮤지엄,Grevin Museum,37.56608,126.98047
+attractions,8749178,3.2142857142857144,평화시장,Pyeonghwa Market,37.569603,127.00953
+attractions,8769919,3.9285714285714284,한양도성박물관,Seoul City Wall Museum,37.572594,127.00805
+attractions,8790342,4.375,용마랜드,Yongma Land,37.59437,127.10529
+attractions,8798065,4.147058823529412,롯데월드 아쿠아리움,Lotte World Aquarium,37.509766,127.102684
+attractions,8822284,4.142857142857143,고척스카이돔,Gocheok Sky Dome,37.49816,126.86721
+attractions,8822309,3.7027027027027026,롯데 영플라자 명동점,Lotte Young Plaza Myeongdong,37.56363,126.98201
+attractions,8842556,4.305647840531561,롯데월드타워&몰,Lotte World Tower & Mall,37.512596,127.10259
+attractions,9582584,3.5211267605633805,두타,Doota,37.568806,127.009186
+attractions,9583000,3.5625,롯데 피트인,Lotte FitIn,37.565987,127.00741
+attractions,9583069,5.0,서초관광정보센터,Seocho Tourist Information Center,37.49809,127.02704
+attractions,9755552,4.1,신세계 강남점,Shinsegae Gangnam,37.50492,127.00419
+attractions,9796664,3.72972972972973,,Common Ground,37.541237,127.06583
+attractions,9996891,3.5555555555555554,놀이똥산,Poopoo Land,37.57438,126.98503
