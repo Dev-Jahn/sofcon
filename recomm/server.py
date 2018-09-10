@@ -1,9 +1,6 @@
 
 # coding: utf-8
 
-# In[12]:
-
-
 import zerorpc
 import pandas as pd
 from gensim.models import Word2Vec
@@ -69,48 +66,6 @@ class Recomm(object):
             return self.rank(self.restaurant_tag, entry, positive=positive, negative=negative)
         else:
             raise Exception('Unknown group')
-
-
-# In[6]:
-
-
-entry = ['10020511', '10020529', '10020530']
-
-
-# In[18]:
-
-
-entry = ['10686434', '10686449', '8749178']
-
-
-# In[ ]:
-
-
-8822309
-
-
-# In[16]:
-
-
-df = pd.read_csv(list_csv[0])
-df
-
-
-# In[19]:
-
-
-r = Recomm()
-r.recommend('attraction', entry, positive=['8822309'])
-
-
-# In[8]:
-
-
-r.by_score(entry)
-
-
-# In[ ]:
-
 
 try:
     server = zerorpc.Server(Recomm())
