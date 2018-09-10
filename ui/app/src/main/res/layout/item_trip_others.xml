@@ -7,7 +7,7 @@
     <android.support.design.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/cardview"
+        android:id="@+id/cardview_others"
         app:cardCornerRadius="5dp"
         app:cardElevation="4dp"
         android:background="@drawable/selector"
@@ -29,24 +29,28 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.2"
+                    android:layout_weight="1.1"
                     android:orientation="vertical">
 
                     <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/user_profile_image"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:id="@+id/user_profile_image_others"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
                         android:layout_gravity="center"
                         android:layout_marginTop="5dp"
                         android:src="@drawable/sample_image"
-                        app:civ_border_color="#9E9E9E"
-                        app:civ_border_width="2dp" />
+                        app:civ_border_color="@color/colorSecondaryText"
+                        app:civ_border_width="1dp" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="user_name" />
+                        android:text="user_name"
+                        android:paddingBottom="4dp"
+                        android:textColor="@color/colorBlue"
+                        android:id="@+id/user_name_others"
+                        />
 
                 </LinearLayout>
 
@@ -84,15 +88,16 @@
                     android:layout_weight="0.5"
                     android:layout_marginRight="5dp"
                     android:layout_gravity="center"
-                    app:srcCompat="@drawable/arrow_next" />
+                    app:srcCompat="@drawable/sharp_keyboard_arrow_right_black_18dp" />
 
             </LinearLayout>
 
 
             <ImageView
-                android:id="@+id/placeImg"
+                android:id="@+id/placeImg_others"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
+                android:scaleType="fitXY"
                 android:src="@drawable/city_seoul"
                 />
 
@@ -104,7 +109,7 @@
 
 
                 <TextView
-                    android:id="@+id/textView9"
+                    android:id="@+id/trip_content_others"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -124,12 +129,12 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         app:srcCompat="@drawable/baseline_remove_red_eye_black_18dp"
-                        android:scaleX="0.7"
-                        android:scaleY="0.7"
+                        android:scaleX="0.5"
+                        android:scaleY="0.5"
                         />
 
                     <TextView
-                        android:id="@+id/textView10"
+                        android:id="@+id/trip_views_others"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"

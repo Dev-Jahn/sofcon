@@ -51,7 +51,6 @@
             android:value="@string/google_maps_key" />
 
         <activity android:name=".TravelActivity" />
-        <activity android:name=".OthersTravel" />
         <activity android:name=".RecommendTravel" />
         <activity android:name=".TagActivity" />
         <activity

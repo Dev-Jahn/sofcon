@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity{
                     case 3:
                         intent = new Intent(
                                 getApplicationContext(),
-                                OthersTravel.class);
+                                OthersFragment.class);
                         startActivity(intent);
                         break;
                     case 4:
@@ -123,7 +123,7 @@ public class MainActivity extends AppCompatActivity{
                         break;
                     case R.id.action_others:
                         Toast.makeText(MainActivity.this, "구현중.", Toast.LENGTH_SHORT).show();;
-                        selectedFragment = HomeFragment.newInstance();
+                        selectedFragment = OthersFragment.newInstance();
                         break;
                 }
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
