@@ -74,6 +74,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
     private HashMap<Integer, Marker> hashMapPlaceMarker = new HashMap<>();
     private int userMarkerCount = 0;
     private int placeMarkerCount = 0;
+    private int[] reestablishCount = {0, 0, 0, 3, 9, 19, 34, 55, 83, 119, 164, 219, 285, 363, 454, 559, 679, 815, 968};
     private View customMarkerOriginDestRoot;
     private TextView tvCustomMarkerOriginDest;
     private View customMarkerWayPointRoot;
@@ -467,6 +468,8 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         hashMapUserMarker.clear();
         listMarkersToSave.clear();
         listLocsToOptimize.clear();
+        reestablishCount[0] = 0;
+        reestablishCount[1] = 0;
         isFirstPlaceAdded = false;
         addFirstPlaceMarker();
     }
@@ -583,7 +586,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         Marker marker = mMap.addMarker(options);
         listLocsOfPlaces.add(position);
         hashMapPlaceMarker.put(placeMarkerCount++, marker);
-        saveMarkerTag(marker, placeMarkerCount, InfoWindowData.TYPE_PLACE);
+        saveMarkerTag(marker, placeMarkerCount, InfoWindowData.TYPE_PLACE, placeData.getPlaceId());
     }
 
     private void saveMarkerTag(Marker marker, int markerCount, int windowType) {
@@ -595,6 +598,21 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         infoWindowData.setScore(Integer.toString(markerCount));
         // it will be replaced to real placeID
         infoWindowData.setPlaceID(Integer.toString(markerCount));
+        infoWindowData.setLatLng(marker.getPosition());
+        infoWindowData.setWindowType(windowType);
+
+        marker.setTag(infoWindowData);
+    }
+
+    private void saveMarkerTag(Marker marker, int markerCount, int windowType, String placeId) {
+        InfoWindowData infoWindowData = new InfoWindowData();
+        infoWindowData.setTitle(marker.getTitle());
+        infoWindowData.setSnippet(marker.getSnippet());
+        infoWindowData.setOrder(markerCount);
+        // it will be replaced to real score
+        infoWindowData.setScore(Integer.toString(markerCount));
+        // it will be replaced to real placeID
+        infoWindowData.setPlaceID(placeId);
         infoWindowData.setLatLng(marker.getPosition());
         infoWindowData.setWindowType(windowType);
 
@@ -759,6 +777,9 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                     OptimizationData optimizationData = new OptimizationData(originMarker, destMarker);
                     OptimizationTask optimizationTask = new OptimizationTask(optimizationData);
                     optimizationTask.execute(url);
+
+                    Log.d("DEBUG-TTT", (listLocsToDraw.size()) + "번째 마커에서 콜");
+
                 }
             }
         } else {
@@ -861,7 +882,8 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             for (int i = 1; i <= userMarkerCount; ++i)
                 loop += i;
 
-            if (listLocsToOptimize.size() == loop/2) {
+            Log.d("DEBUG-TTT", "lo.size : " + listLocsToOptimize.size() + "rec : " + reestablishCount[userMarkerCount]);
+            if (listLocsToOptimize.size() == reestablishCount[userMarkerCount]) {
                 Collections.sort(listLocsToOptimize);
                 reestablishUserMarker();
             }

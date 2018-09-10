@@ -3,11 +3,13 @@ package com.example.kyeon.myapplication;
 import com.google.android.gms.maps.model.LatLng;
 
 public class PlaceData {
+    private String placeId;
     private String type;
     private String name;
     private String lat;
     private String lng;
 
+    protected static final String jsonPlaceID = "placeId";
     protected static final String jsonType = "class";
     protected static final String jsonName = "name_kor";
     protected static final String jsonLat = "latitude";
@@ -54,5 +56,13 @@ public class PlaceData {
 
     public void setLng(String lng) {
         this.lng = lng;
+    }
+
+    public String getPlaceId() {
+        return placeId;
+    }
+
+    public void setPlaceId(String placeId) {
+        this.placeId = placeId;
     }
 }

@@ -335,6 +335,7 @@ public class MapUtility {
                 placeData.setName(jsonObject.getString(PlaceData.jsonName));
                 placeData.setLat(jsonObject.getString(PlaceData.jsonLat));
                 placeData.setLng(jsonObject.getString(PlaceData.jsonLng));
+                placeData.setPlaceId(jsonObject.getString(PlaceData.jsonPlaceID));
                 arrayList.add(placeData);
             }
             return arrayList;
