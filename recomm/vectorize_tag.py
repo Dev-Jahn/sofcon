@@ -28,7 +28,7 @@ params_tag = [{'size':300, 'window':99999, 'min_count':0,        # Attraction
               {'size':300, 'window':99999, 'min_count':0,        # Hotel
                'workers':cores, 'iter':100, 'sg':1, 'sample':1e-5},
               {'size':300, 'window':99999, 'min_count':0,        # Restaurant
-               'workers':cores, 'iter':100, 'sg':1, 'sample':1e-5}]
+               'workers':cores, 'iter':100, 'sg':1, 'sample':1e-3}]
 
 
 # In[9]:
@@ -62,23 +62,6 @@ for c in name_corpus:
     with open(corpus_path+c, 'wb') as f:
         pickle.dump(merged, f)
     corpora.append(merged)
-
-
-# In[16]:
-
-
-#test
-corpus = corpora[0]
-print('corpus 길이', len(corpus))
-total = pd.DataFrame([len(sent) for sent in corpus]).sum()
-length = 0
-for line in corpus:
-    length = max(length, len(line))
-print('corpus내 최대 길이', length)
-print('corpus내 모든 장소 합', total)
-
-
-# In[21]:
 
 
 spent = []
