@@ -399,13 +399,20 @@ public class TripPlanActivity extends AppCompatActivity {
     }
 
     private String add_zero_to_string(String number) {
-        if (Integer.parseInt(number) < 10)
-            if (number.charAt(0) == '0')
-                return number;
-            else
-                return "0" + number;
-        else
-            return number;
+        try
+        {
+            if (Integer.parseInt(number) < 10)
+                if (number.charAt(0) == '0')
+                    return number;
+                else
+                    return "0" + number;
+        }catch (NumberFormatException e)
+        {
+            Toast.makeText(this, number, Toast.LENGTH_SHORT).show();
+            number = "0";
+        }
+
+        return number;
     }
 
     private void get_datas() {

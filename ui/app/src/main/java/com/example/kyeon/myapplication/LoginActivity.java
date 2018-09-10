@@ -3,7 +3,9 @@ package com.example.kyeon.myapplication;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -20,6 +22,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -30,6 +33,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,6 +65,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      */
     private UserLoginTask mAuthTask = null;
 
+    private String[] saved_info;
+
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
@@ -68,11 +78,107 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
-        populateAutoComplete();
 
-        mPasswordView = (EditText) findViewById(R.id.password);
+        mEmailView = (AutoCompleteTextView)findViewById(R.id.email);
+        mPasswordView = (EditText)findViewById(R.id.password);
+        final Button mEmailSignInButton = (Button)findViewById(R.id.email_sign_in_button);
+
+        SharedPreferences pref = getSharedPreferences("isFirst", Activity.MODE_PRIVATE);
+        boolean isFirst = pref.getBoolean("isFirst", false);
+        if(!isFirst) {
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putBoolean("isFirst", true);
+            editor.commit();
+            //Log.d("FIRST_CHECK", "true");
+
+            mEmailSignInButton.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    String dir_path = getFilesDir().getAbsolutePath();
+                    File s_file = new File(dir_path);
+                    String cont = "", tmp = "";
+                    if(mEmailView.getText().toString().equals(null))
+                        mEmailView.setError(getString(R.string.error_field_required));
+
+                    else if(s_file.listFiles().length < 1) {
+                        mEmailView.setError("Create Account First");
+                    }
+                    else {
+                        for(File f : s_file.listFiles()) {
+                            String fl_name = f.getName();
+                            String new_loadPath = dir_path+File.separator+fl_name;
+                            if(fl_name.equals("account_setup.txt")) {
+                                try {
+                                    FileInputStream fiis = new FileInputStream(new_loadPath);
+                                    BufferedReader buferedReader = new BufferedReader(new InputStreamReader(fiis));
+                                    while((tmp = buferedReader.readLine()) != null) cont += tmp;
+                                    break;
+                                } catch(Exception e) { }
+                            }
+                        }
+                        saved_info = cont.split(" ");
+                        if(!saved_info[0].equals(mEmailView.getText().toString())) {
+                            mEmailView.setError("Incorrect ID");
+                        }
+                        else if(!saved_info[1].equals(mPasswordView.getText().toString())) {
+                            mPasswordView.setError("Incorrect Password");
+                        }
+                        else {
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(intent);
+                        }
+                    }
+                }
+            });
+
+        }
+        else {
+
+
+            //Log.d("FIRST_CHECK", "false");
+            String dirPath = getFilesDir().getAbsolutePath();
+            File file  =  new File(dirPath);
+            String content ="", temp="";
+
+            if(file.listFiles().length>0) {
+                for(File f : file.listFiles()) {
+                    String f_name = f.getName();
+                    String loadPath = dirPath+File.separator+f_name;
+                    if(f_name.equals("account_setup.txt")) {
+                        try {
+                            FileInputStream fis = new FileInputStream(loadPath);
+                            BufferedReader bufferReader = new BufferedReader(new InputStreamReader(fis));
+
+                            while( (temp = bufferReader.readLine()) != null) content += temp;
+                            break;
+                        } catch (Exception e) { }
+                    }
+                }
+                saved_info = content.split(" ");
+
+                mEmailView.setText(saved_info[0]);
+                mPasswordView.setText(saved_info[1]);
+
+                mEmailSignInButton.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if(!saved_info[0].equals(mEmailView.getText().toString())) {
+                            mEmailView.setError("Incorrect ID");
+                        }
+                        else if(!saved_info[1].equals(mPasswordView.getText().toString())) {
+                            mPasswordView.setError("Incorrect Password");
+                        }
+                        else {
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(intent);
+                        }
+                    }
+                });
+            }
+        }
+
+        // Set up the login form.
+        populateAutoComplete();
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -84,13 +190,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+        /*Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 attemptLogin();
             }
-        });
+        });*/
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
@@ -212,7 +318,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        return password.length() > 4;
+        return password.length() > 6;
     }
 
     /**

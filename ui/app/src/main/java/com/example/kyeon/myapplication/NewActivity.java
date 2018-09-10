@@ -123,6 +123,14 @@ public class NewActivity extends AppCompatActivity {
         today_mm = CurrentDate.substring(6, 8);
         today_dd = CurrentDate.substring(9, 11);
 
+        d_yy = today_yy;
+        d_mm = today_mm;
+        d_dd = today_dd;
+
+        a_yy = today_yy;
+        a_mm = today_mm;
+        a_dd = today_mm;
+
         departButton.setText(today_yy+"/"+today_mm+"/"+today_dd);
         arrivingButton.setText(today_yy+"/"+today_mm+"/"+today_dd);
 
@@ -158,7 +166,7 @@ public class NewActivity extends AppCompatActivity {
                     case 3:
                         intent = new Intent(
                                 getApplicationContext(),
-                                OthersTravel.class);
+                                OthersFragment.class);
                         startActivity(intent);
                         finish();
                         break;
