@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #jupyter notebook checkpoint
 .ipynb_checkpoints/
 #directory to ignore
@@ -5,6 +6,15 @@
 # nltk dataset
 nltk_data/
 >>>>>>> ced79e3b1069abd8a32bec1ba87168424eec9e22
+=======
+<<<<<<< HEAD
+=======
+#jupyter notebook checkpoint
+.ipynb_checkpoints/
+# nltk dataset
+nltk_data/
+>>>>>>> 73aecae3528e01dd225286092e39a47632e4533e
+>>>>>>> 0fc819dd65671edfe4cb9b520a061bbe54361b3a
 # Built application files
 *.apk
 *.ap_

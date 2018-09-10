@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "server.py", line 5, in <module>
+    import pandas as pd
+ImportError: No module named pandas
+Traceback (most recent call last):
+  File "server.py", line 5, in <module>
+    import pandas as pd
+ImportError: No module named pandas
+/usr/local/lib/python2.7/dist-packages/gensim/matutils.py:737: FutureWarning: Conversion of the second argument of issubdtype from `int` to `np.signedinteger` is deprecated. In future, it will be treated as `np.int64 == np.dtype(int).type`.
+  if np.issubdtype(vec.dtype, np.int):
+No handlers could be found for logger "zerorpc.core"

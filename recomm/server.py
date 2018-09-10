@@ -1,6 +1,11 @@
 
 # coding: utf-8
 
+import logging
+logging.basicConfig()
+logger = logging.getLogger('logger')
+logger.warning('warning')
+
 import zerorpc
 import pandas as pd
 from gensim.models import Word2Vec
