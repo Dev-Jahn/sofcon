@@ -8,6 +8,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -207,7 +208,8 @@ public class IdRegister extends Activity {
                         e.printStackTrace();
                     }
 
-                    System.out.println(test);
+                    Toast.makeText(IdRegister.this, "asdasd", Toast.LENGTH_SHORT).show();
+
                     finish();
                 }
             }

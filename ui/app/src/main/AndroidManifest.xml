@@ -28,7 +28,6 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity" />
         <activity android:name=".NewActivity" />
-        <activity android:name=".MyTripFragment" />
         <activity
             android:name=".Calendar"
             android:theme="@android:style/Theme.Dialog" />
@@ -53,10 +52,6 @@
             android:value="@string/google_maps_key" />
 
         <activity android:name=".TravelActivity" />
-<<<<<<< Updated upstream
-=======
-        <activity android:name=".OthersActivity" />
->>>>>>> Stashed changes
         <activity android:name=".RecommendTravel" />
         <activity android:name=".TagActivity" />
         <activity
