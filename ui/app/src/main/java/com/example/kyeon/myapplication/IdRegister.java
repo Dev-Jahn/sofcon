@@ -34,8 +34,8 @@ public class IdRegister extends Activity {
     private TextView name_input_error;
     private TextView phoneNO_input_error;
 
-    String id, passwd, passwdCM, name_owner, phoneNO;
-    int id_i = 0, passwd_i = 0, passwdCM_i = 0, name_i = 0, phone_i = 0; // identification option input flag
+    String id, passwd, passwdCM, name_owner, phoneNO, e_mail;
+    int id_i = 0, passwd_i = 0, passwdCM_i = 0, name_i = 0, phone_i = 0, email_i = 0; // identification option input flag
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -133,6 +133,7 @@ public class IdRegister extends Activity {
                 else name_i = 1;
                 ////////////////////////////////////////////////////////////////////////////
 
+                //-----------------------------Phone NO input logic----------------------------------//
                 if(phoneNO.length() == 0) {
                     //Log.d("ERROR-msg", "no input phone no");
                     phoneNO_input_error.setText("* 전화번호가 입력되지 않았습니다.    ");

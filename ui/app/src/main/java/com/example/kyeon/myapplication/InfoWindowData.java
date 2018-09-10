@@ -1,6 +1,7 @@
 package com.example.kyeon.myapplication;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 
 public class InfoWindowData {
     private String title;
@@ -15,6 +16,20 @@ public class InfoWindowData {
     public static final int TYPE_USER = 0x1234;
     public static final int TYPE_PLACE = 0x4321;
     public static final int TYPE_FIRST_PLACE = 0x1111;
+
+    public InfoWindowData() {
+
+    }
+
+    public InfoWindowData(Marker marker) {
+        title = ((InfoWindowData)marker.getTag()).title;
+        snippet = ((InfoWindowData)marker.getTag()).snippet;
+        score = ((InfoWindowData)marker.getTag()).score;
+        order = ((InfoWindowData)marker.getTag()).order;
+        placeID = ((InfoWindowData)marker.getTag()).placeID;
+        latLng = ((InfoWindowData)marker.getTag()).latLng;
+        windowType = ((InfoWindowData)marker.getTag()).windowType;
+    }
 
     public String getTitle() {
         return title;
