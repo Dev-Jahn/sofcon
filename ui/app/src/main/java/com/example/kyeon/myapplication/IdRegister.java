@@ -1,5 +1,7 @@
 package com.example.kyeon.myapplication;
 
+import android.os.AsyncTask;
+
 import android.app.Activity;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +20,10 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 
 public class IdRegister extends Activity {
 
@@ -34,8 +40,8 @@ public class IdRegister extends Activity {
     private TextView name_input_error;
     private TextView phoneNO_input_error;
 
-    String id, passwd, passwdCM, name_owner, phoneNO, e_mail;
-    int id_i = 0, passwd_i = 0, passwdCM_i = 0, name_i = 0, phone_i = 0, email_i = 0; // identification option input flag
+    String id, passwd, passwdCM, name_owner, phoneNO;
+    int id_i = 0, passwd_i = 0, passwdCM_i = 0, name_i = 0, phone_i = 0; // identification option input flag
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -210,5 +216,91 @@ public class IdRegister extends Activity {
                 finish();
             }
         });
+    }
+}
+
+class Sign extends AsyncTask<String, Void, String> {
+    String result;
+    String UID, pwd, phonenum;
+    int type;
+
+    public Sign(String UID, String pwd, String phonenum, int type) {
+        this.UID = UID;
+        this.pwd = pwd;
+        this.phonenum = phonenum;
+        this.type = type;
+    }
+    public Sign(String UID, String pwd, int type) {
+        this.UID = UID;
+        this.pwd = pwd;
+        this.type = type;
+    }
+
+    @Override
+    protected String doInBackground(String... params) {
+        try {
+            String url;
+            String U;
+            if(type == 0) {
+                U = "Up";
+                url = "http://35.189.138.177:8080/Sign/" + U + "?UID=" + UID+"&pwd=" + pwd + "&pnum=" + phonenum;
+                URL obj = new URL(url);
+                HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
+
+                conn.setReadTimeout(10000);
+                conn.setConnectTimeout(15000);
+                conn.setRequestMethod("GET");
+                conn.setDoInput(true);
+
+                int retCode = conn.getResponseCode();
+
+                InputStream is = conn.getInputStream();
+                BufferedReader br = new BufferedReader(new InputStreamReader(is));
+                String line;
+                StringBuilder response = new StringBuilder();
+
+                while ((line = br.readLine()) != null) {
+                    response.append(line);
+                    response.append('\r');
+                }
+                br.close();
+
+                result =response.toString();
+                return result;
+            }
+            else {
+                U = "In";
+                url = "http://35.189.138.177:8080/Sign/" + U + "?UID=" + UID+"&pwd=" + pwd;
+                URL obj = new URL(url);
+                HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
+
+                conn.setReadTimeout(10000);
+                conn.setConnectTimeout(15000);
+                conn.setRequestMethod("GET");
+                conn.setDoInput(true);
+
+                int retCode = conn.getResponseCode();
+
+                InputStream is = conn.getInputStream();
+                BufferedReader br = new BufferedReader(new InputStreamReader(is));
+                String line;
+                StringBuilder response = new StringBuilder();
+
+                while ((line = br.readLine()) != null) {
+                    response.append(line);
+                    response.append('\r');
+                }
+                br.close();
+
+                result =response.toString();
+                return result;
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
     }
 }

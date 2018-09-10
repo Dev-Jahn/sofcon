@@ -129,7 +129,7 @@ public class NewActivity extends AppCompatActivity {
 
         a_yy = today_yy;
         a_mm = today_mm;
-        a_dd = today_mm;
+        a_dd = today_dd;
 
         departButton.setText(today_yy+"/"+today_mm+"/"+today_dd);
         arrivingButton.setText(today_yy+"/"+today_mm+"/"+today_dd);
@@ -236,20 +236,12 @@ public class NewActivity extends AppCompatActivity {
                 } else {
                     Intent i = new Intent(NewActivity.this, TripPlanActivity.class);
 
-                    /*if (d_yy == null && d_mm == null && d_dd == null && a_yy == null && a_mm == null && a_dd == null) {
-                        d_yy = a_yy = today_yy;
-                        d_mm = a_mm = today_mm;
-                        d_dd = a_dd = today_dd;
-                    }*/
-
                     if (travel_title.length() == 0)
                         travel_title = "여행을 떠나요~!!";
-                /*
-                if(place_text.length() == 0)
-                    place_text = "서울";
-                */
+                
                     Log.d("DEBUG-TEST", "전달되는 여행 타이틀 : " + travel_title);
 
+                    Log.d("DEBUG-TEST", d_dd+a_dd);
 
                     if(d_mm.length() == 1) d_mm = "0" + d_mm;
                     if(a_mm.length() == 1) a_mm = "0" + a_mm;
