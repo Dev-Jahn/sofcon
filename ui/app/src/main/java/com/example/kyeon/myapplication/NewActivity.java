@@ -238,7 +238,7 @@ public class NewActivity extends AppCompatActivity {
 
                     if (travel_title.length() == 0)
                         travel_title = "여행을 떠나요~!!";
-                
+
                     Log.d("DEBUG-TEST", "전달되는 여행 타이틀 : " + travel_title);
 
                     Log.d("DEBUG-TEST", d_dd+a_dd);

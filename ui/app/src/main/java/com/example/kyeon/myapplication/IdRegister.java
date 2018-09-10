@@ -1,10 +1,6 @@
 package com.example.kyeon.myapplication;
 
-import android.os.AsyncTask;
-
 import android.app.Activity;
-import android.os.Environment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,7 +8,6 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -20,9 +15,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.util.concurrent.ExecutionException;
 
 
 public class IdRegister extends Activity {
@@ -203,7 +196,18 @@ public class IdRegister extends Activity {
                         }
                     }
 
+                    Sign s = new Sign(id, passwd, phoneNO, 0);
+                    s.execute();
+                    String test = "";
+                    try {
+                        test = s.get();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    }
 
+                    System.out.println(test);
                     finish();
                 }
             }
@@ -216,91 +220,5 @@ public class IdRegister extends Activity {
                 finish();
             }
         });
-    }
-}
-
-class Sign extends AsyncTask<String, Void, String> {
-    String result;
-    String UID, pwd, phonenum;
-    int type;
-
-    public Sign(String UID, String pwd, String phonenum, int type) {
-        this.UID = UID;
-        this.pwd = pwd;
-        this.phonenum = phonenum;
-        this.type = type;
-    }
-    public Sign(String UID, String pwd, int type) {
-        this.UID = UID;
-        this.pwd = pwd;
-        this.type = type;
-    }
-
-    @Override
-    protected String doInBackground(String... params) {
-        try {
-            String url;
-            String U;
-            if(type == 0) {
-                U = "Up";
-                url = "http://35.189.138.177:8080/Sign/" + U + "?UID=" + UID+"&pwd=" + pwd + "&pnum=" + phonenum;
-                URL obj = new URL(url);
-                HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
-
-                conn.setReadTimeout(10000);
-                conn.setConnectTimeout(15000);
-                conn.setRequestMethod("GET");
-                conn.setDoInput(true);
-
-                int retCode = conn.getResponseCode();
-
-                InputStream is = conn.getInputStream();
-                BufferedReader br = new BufferedReader(new InputStreamReader(is));
-                String line;
-                StringBuilder response = new StringBuilder();
-
-                while ((line = br.readLine()) != null) {
-                    response.append(line);
-                    response.append('\r');
-                }
-                br.close();
-
-                result =response.toString();
-                return result;
-            }
-            else {
-                U = "In";
-                url = "http://35.189.138.177:8080/Sign/" + U + "?UID=" + UID+"&pwd=" + pwd;
-                URL obj = new URL(url);
-                HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
-
-                conn.setReadTimeout(10000);
-                conn.setConnectTimeout(15000);
-                conn.setRequestMethod("GET");
-                conn.setDoInput(true);
-
-                int retCode = conn.getResponseCode();
-
-                InputStream is = conn.getInputStream();
-                BufferedReader br = new BufferedReader(new InputStreamReader(is));
-                String line;
-                StringBuilder response = new StringBuilder();
-
-                while ((line = br.readLine()) != null) {
-                    response.append(line);
-                    response.append('\r');
-                }
-                br.close();
-
-                result =response.toString();
-                return result;
-            }
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return result;
     }
 }
