@@ -71,7 +71,7 @@ var server = http.createServer(function(req, res) {
 			}
 		}
 	} else if(cmds[1] == "UI") {
-		if(req.method == "GET") {
+		if(req.method == "POST") {
 			var TravelData = {
 				travel_id : parsedQuery.travel_id,
 				UID : parsedQuery.uid,
@@ -82,6 +82,11 @@ var server = http.createServer(function(req, res) {
 				eyy : parseInt(parsedQuery.eyy), emm : parseInt(parsedQuery.emm), edd : parseInt(parsedQuery.edd),
 				DailyDiary : []
 			};
+			DiaryParse(req, result => {
+				console.log(result);
+				TravelData['DailyDiary'].push(result);
+			});
+			TravelData['DailyDiary'].push();
 			if(cmds[2] == "insert") {
 				if(req.method == "GET") {
 					mongo.connect("mongodb://127.0.0.1:27017", {useNewUrlParser : true}, function(err, db) {
@@ -89,6 +94,8 @@ var server = http.createServer(function(req, res) {
 						var dbo = db.db(DbName);
 						dbo.collection(ColTrip).insert(TravelData, function(err, result) {
 							if (err) throw err;
+							res.writeHead(200, {'Content-type' : 'application/json'});
+							res.end(JSON.stringify({'result': 'true'}));
 						});
 					//	dbo.collection(ColTrip).find(UID).project({"_id":false}).toArray(function(err, result) {
 					//		if(err) throw err;
@@ -184,6 +191,21 @@ function dis(lat1, lon1, lat2, lon2) {
 	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 	var d = R * c;
 	return d;
+}
+
+function DiaryParse(req, callback) {
+	const FORM_URLENCODED = 'application/x-www-form-urlencoded';
+	if(rq.headers['content-type'] === FORM_URLENCODED) {
+		let body = '';
+		req.on('data', function(data) {
+			body += data;
+		});
+		req.on('end', function() {
+			callback(query.parse(body));
+		});
+	} else {
+		callback(null);
+	}
 }
 
 server.listen(8080, '10.146.0.3', function() {
