@@ -5,11 +5,15 @@ import com.google.android.gms.maps.model.Marker;
 public class OptimizationData implements Comparable<OptimizationData> {
     private Marker originMarker;
     private Marker destMarker;
+    private int originIndex;
+    private int destIndex;
     private double distance;
 
     public OptimizationData(Marker originMarker, Marker destMarker) {
         this.originMarker = originMarker;
         this.destMarker = destMarker;
+        originIndex = ((InfoWindowData)originMarker.getTag()).getOrder();
+        destIndex = ((InfoWindowData)originMarker.getTag()).getOrder();
     }
 
     @Override
@@ -21,6 +25,22 @@ public class OptimizationData implements Comparable<OptimizationData> {
         } else {
             return 1;
         }
+    }
+
+    public void setOriginIndex(int originIndex) {
+        this.originIndex = originIndex;
+    }
+
+    public void setDestIndex(int destIndex) {
+        this.destIndex = destIndex;
+    }
+
+    public int getOriginIndex() {
+        return originIndex;
+    }
+
+    public int getDestIndex() {
+        return destIndex;
     }
 
     public Marker getOriginMarker() {

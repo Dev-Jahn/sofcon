@@ -46,10 +46,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -526,7 +524,8 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         saveMarkerTag(marker, userMarkerCount, InfoWindowData.TYPE_USER);
         listMarkersToSave.add(marker);
         lastUserMarker = marker;
-        drawRoute();
+        // drawRoute();
+        reestablishUserMarker();
     }
 
     protected void addUserMarker(InfoWindowData infoWindowData) {
@@ -545,7 +544,8 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         saveMarkerTag(marker, userMarkerCount, InfoWindowData.TYPE_USER);
         listMarkersToSave.add(marker);
         lastUserMarker = marker;
-        drawRoute();
+        // drawRoute();
+        reestablishUserMarker();
     }
 
     private void addFirstPlaceMarker() {
@@ -638,7 +638,8 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             saveMarkerTag(currentMarker, i + 1, InfoWindowData.TYPE_USER);
             listMarkersToSave.add(currentMarker);
         }
-        redrawRoute();
+        // redrawRoute();
+        optimizationRoutes();
     }
 
     private void removeAllPlaceMarker() {
@@ -669,7 +670,38 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
     }
 
     private void reestablishUserMarker() {
+        listLocsToDraw.clear();
+        listMarkersToSave.clear();
+        HashMap<Integer, Marker> saveHashMapUserMarker = hashMapUserMarker;
+        OptimizationData optimizationData;
+        ArrayList<InfoWindowData> infoWindowDataArrayList = new ArrayList<>();
 
+        boolean[] startCheck = new boolean[userMarkerCount + 1];
+        boolean[] endCheck = new boolean[userMarkerCount + 1];
+        int startVertex = 1;
+        int preVertex;
+
+        for(int i = 0; i < userMarkerCount; ++i) {
+            OptimizationGraph graph = new OptimizationGraph(userMarkerCount);
+            for (int j = 0; j < listLocsToOptimize.size(); ++j) {
+                optimizationData = listLocsToOptimize.get(j);
+                if(startCheck[optimizationData.getOriginIndex()] == true || endCheck[optimizationData.getDestIndex()] == true)
+                    continue;
+                graph.input(optimizationData.getOriginIndex(), optimizationData.getDestIndex(), optimizationData.getDistance());
+            }
+            preVertex = startVertex;
+            startVertex = graph.dijkstra(startVertex);
+            startCheck[preVertex] = true;
+            endCheck[startVertex] = true;
+            infoWindowDataArrayList.add(new InfoWindowData(hashMapUserMarker.get(preVertex)));
+        }
+
+        mMap.clear();
+        hashMapUserMarker.clear();
+        for (int i = 0; i < userMarkerCount; ++i) {
+            addUserMarker(infoWindowDataArrayList.get(i));
+        }
+        redrawRoute();
     }
 
     /**
@@ -690,8 +722,8 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         return bitmap;
     }
 
-    private void optimiztionRoutes() {
-        if (listLocsToDraw.size() >= 2) {
+    private void optimizationRoutes() {
+        if (listLocsToDraw.size() > 2) {
             for (int originIndex = 1; originIndex < userMarkerCount; ++originIndex) {
                 Marker originMarker = hashMapUserMarker.get(originIndex);
                 for(int destIndex = originIndex + 1; destIndex <= userMarkerCount; ++destIndex) {
@@ -703,6 +735,8 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                 }
 
             }
+        } else {
+            redrawRoute();
         }
     }
 
@@ -784,11 +818,17 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             }
             optimizationData.setDistance(totalDistance);
             listLocsToOptimize.add(optimizationData);
+            Marker tempMarker = optimizationData.getOriginMarker();
+            int tempIndex = optimizationData.getOriginIndex();
+            optimizationData.setOriginMarker(optimizationData.getDestMarker());
+            optimizationData.setDestMarker(tempMarker);
+            optimizationData.setOriginIndex(optimizationData.getDestIndex());
+            optimizationData.setDestIndex(tempIndex);
+            listLocsToOptimize.add(optimizationData);
 
-            if(listLocsToOptimize.size() == listLocsToDraw.size() - 1) {
+            if(listLocsToOptimize.size() == listLocsToDraw.size() * 2) {
                 Collections.sort(listLocsToOptimize);
-
-
+                reestablishUserMarker();
             }
         }
     }

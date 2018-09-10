@@ -1,34 +1,34 @@
 package com.example.kyeon.myapplication;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+
 public class OptimizationGraph {
-    private int n;           //노드들의 수
-    private int maps[][];    //노드들간의 가중치 저장할 변수
+    private int n;
+    private double maps[][];
+    private int shortest;
 
     public OptimizationGraph(int n) {
         this.n = n;
-        maps = new int[n + 1][n + 1];
-
+        maps = new double[n + 1][n + 1];
     }
 
-    public void input(int i, int j, int w) {
+    public void input(int i, int j, double w) {
         maps[i][j] = w;
         maps[j][i] = w;
     }
 
-    public void dijkstra(int v) {
-        int distance[] = new int[n + 1];          //최단 거리를 저장할 변수
-        boolean[] check = new boolean[n + 1];     //해당 노드를 방문했는지 체크할 변수
+    public int dijkstra(int v) {
+        double distance[] = new double[n + 1];
+        boolean[] check = new boolean[n + 1];
 
-        //distance값 초기화.
-        for (int i = 1; i < n + 1; i++) {
+        for (int i = 1; i < n + 1; i++)
             distance[i] = Integer.MAX_VALUE;
-        }
 
-        //시작노드값 초기화.
         distance[v] = 0;
         check[v] = true;
 
-        //연결노드 distance갱신
         for (int i = 1; i < n + 1; i++) {
             if (!check[i] && maps[v][i] != 0) {
                 distance[i] = maps[v][i];
@@ -37,12 +37,11 @@ public class OptimizationGraph {
 
 
         for (int i = 0; i < n - 1; i++) {
-            int min = Integer.MAX_VALUE;
+            double min = Double.MAX_VALUE;
             int minIndex = -1;
 
-            //최소값 찾기
             for (int j = 1; j < n + 1; j++) {
-                if (!check[j] && distance[j] != Integer.MAX_VALUE) {
+                if (!check[j] && distance[j] != Double.MAX_VALUE) {
                     if (distance[j] < min) {
                         min = distance[j];
                         minIndex = j;
@@ -57,13 +56,14 @@ public class OptimizationGraph {
                     }
                 }
             }
-
+            min = Double.MAX_VALUE;
+            minIndex = -1;
+            for (int j = 1; j < n + 1; j++) {
+                if(distance[j] != 0 && distance[j] < min)
+                    minIndex = j;
+            }
+            shortest = minIndex;
         }
-        //결과값 출력
-        for (int i = 1; i < n + 1; i++) {
-            System.out.print(distance[i] + " ");
-        }
-        System.out.println("");
-
+        return shortest;
     }
 }
