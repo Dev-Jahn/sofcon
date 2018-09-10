@@ -212,13 +212,16 @@ public class NewActivity extends AppCompatActivity {
             }
         });
 
-        travel_title = eTitle.getText().toString();
+
         //place_text = ePlace.getText().toString();
 
         Button btn_comp = (Button) findViewById(R.id.btn_comp);
         btn_comp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                travel_title = eTitle.getText().toString();
+
                 if(isFirstPlaceSet == false || travel_title == null) {
                     Log.d("DEBUG-TEST", "isFirstPlaceSet : " + isFirstPlaceSet +", travel_title : " + travel_title);
                     showWarningDialog();
@@ -237,6 +240,7 @@ public class NewActivity extends AppCompatActivity {
                 if(place_text.length() == 0)
                     place_text = "서울";
                 */
+                    Log.d("DEBUG-TEST", "전달되는 여행 타이틀 : " + travel_title);
 
                     i.putExtra("departing_year", d_yy);
                     i.putExtra("departing_month", d_mm);

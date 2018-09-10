@@ -231,6 +231,7 @@ public class TripPlanActivity extends AppCompatActivity {
             intent.putExtra(MapUtility.PLACE_LNG_TAG, getArguments().getString(MapUtility.PLACE_LNG_TAG));
             intent.putExtra(MapUtility.PLACE_BITMAP_FILE_PATH_TAG, getArguments().getString(MapUtility.PLACE_BITMAP_FILE_PATH_TAG));
             intent.putExtra(MapUtility.PLACE_LOAD_TAG, true);
+            intent.putExtra(MapUtility.CURRENT_DAY_TAG, getArguments().getString(MapUtility.CURRENT_DAY_TAG));
 
             return intent;
         }
@@ -285,7 +286,8 @@ public class TripPlanActivity extends AppCompatActivity {
                     choose_places.putExtra(ARG_SECTION_PLACE_LAT, getArguments().getString(ARG_SECTION_PLACE_LAT));
                     choose_places.putExtra(ARG_SECTION_PLACE_LNG, getArguments().getString(ARG_SECTION_PLACE_LNG));
                     choose_places.putExtra(ARG_SECTION_PLACE_BITMAP, getArguments().getString(ARG_SECTION_PLACE_BITMAP));
-                    startActivityForResult(choose_places, getArguments().getInt(ARG_SECTION_CURRENT_DAY));
+                    choose_places.putExtra(ARG_SECTION_CURRENT_DAY, getArguments().getString(ARG_SECTION_CURRENT_DAY));
+                    startActivityForResult(choose_places, getArguments().getInt(ARG_SECTION_NUMBER));
                     getActivity().overridePendingTransition(R.anim.sliding_up, R.anim.stay);
                 }
 
@@ -314,18 +316,18 @@ public class TripPlanActivity extends AppCompatActivity {
             if (resultCode != RESULT_OK)
                 return;
 
-            int currentDay = getArguments().getInt(ARG_SECTION_CURRENT_DAY);
+            int currentDay = getArguments().getInt(ARG_SECTION_NUMBER);
 
             if (requestCode == currentDay) {
                 String filePath = getContext().getFilesDir().getPath().toString() + "/"
-                        + getArguments().getString(ARG_SECTION_TITLE) + (currentDay+1) + ".png";
-                Log.d("DEBUG-TEST", filePath);
+                        + getArguments().getString(ARG_SECTION_TITLE) + currentDay + ".png";
                 File file = new File(filePath);
+                Log.d("DEBUG-TEST", "불러오는 파일의 path : " + file.getAbsolutePath());
                 if(file.exists()) {
-                    Log.d("DEBUG-TEST", "문제없음");
+                    Log.d("DEBUG-TEST", "스냅샷을 이미지버튼에 불러옵니다. in TripPlanActivity");
+                    Bitmap bitmap = BitmapFactory.decodeFile(filePath);
+                    ivTravelMap.setImageBitmap(bitmap);
                 }
-                Bitmap bitmap = BitmapFactory.decodeFile(filePath);
-                ivTravelMap.setImageBitmap(bitmap);
 
                 /**
                  * new bitmap (new snapshot of last marker only) is needed.

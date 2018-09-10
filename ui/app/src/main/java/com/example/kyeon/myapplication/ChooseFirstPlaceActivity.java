@@ -198,7 +198,7 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
     }
 
     private void captureScreenAndFinish() {
-        Log.d("DEBUG-TEST", "snapshot is called");
+        Log.d("DEBUG-TEST", "스냅샷 시작 in ChooseFirstPlaceActivity");
         final GoogleMap.SnapshotReadyCallback snapshotReadyCallback = new GoogleMap.SnapshotReadyCallback() {
             @Override
             public void onSnapshotReady(Bitmap snapshot) {
@@ -214,6 +214,7 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
                     FileOutputStream fos = new FileOutputStream(file);
                     snapshot.compress(Bitmap.CompressFormat.PNG, 90, fos);
                     fos.close();
+                    Log.d("DEBUG-TEST", "스냅샷 종료 in ChooseFirstPlaceActivity");
                 } catch (IOException e) {
                     Log.d("DEBUG-TEST", "파일 출력 에러 in ChooseFirstPlaceActivity");
                     Log.d("DEBUG-TEST", e.getMessage());
@@ -422,6 +423,7 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
             // showSelectDialog(latLng);
         } else {
             selectedMarker.remove();
+            selectedMarker = null;
             addFirstPlaceMarker(latLng);
         }
     }
