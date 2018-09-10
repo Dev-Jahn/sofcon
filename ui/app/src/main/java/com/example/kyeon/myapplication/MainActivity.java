@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity{
     ImageView blnkImage;
     LinearLayout nav_image_text;
     Intent intent = getIntent();
-    String id = intent.getStringExtra("Identification");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
