@@ -302,7 +302,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                                         InfoWindowData infoWindowData = (InfoWindowData) marker.getTag();
                                         infoWindowData.setOrder(userMarkerCount);
                                         infoWindowData.setWindowType(InfoWindowData.TYPE_USER);
-                                        addUserMarker(infoWindowData);
+                                        addUserMarker(infoWindowData, false);
                                         removePlaceMarker(marker);
                                     }
                                 })
@@ -466,6 +466,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         userMarkerCount = 0;
         hashMapUserMarker.clear();
         listMarkersToSave.clear();
+        listLocsToOptimize.clear();
         isFirstPlaceAdded = false;
         addFirstPlaceMarker();
     }
@@ -525,10 +526,10 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         listMarkersToSave.add(marker);
         lastUserMarker = marker;
         // drawRoute();
-        reestablishUserMarker();
+        optimizationRoutes();
     }
 
-    protected void addUserMarker(InfoWindowData infoWindowData) {
+    protected void addUserMarker(InfoWindowData infoWindowData, boolean isOptimized) {
         listLocsToDraw.add(infoWindowData.getLatLng());
         // create a marker for starting location
         MarkerOptions options = new MarkerOptions();
@@ -544,8 +545,11 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         saveMarkerTag(marker, userMarkerCount, InfoWindowData.TYPE_USER);
         listMarkersToSave.add(marker);
         lastUserMarker = marker;
-        // drawRoute();
-        reestablishUserMarker();
+        if (isOptimized) {
+            drawRoute();
+        } else {
+            optimizationRoutes();
+        }
     }
 
     private void addFirstPlaceMarker() {
@@ -638,8 +642,8 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             saveMarkerTag(currentMarker, i + 1, InfoWindowData.TYPE_USER);
             listMarkersToSave.add(currentMarker);
         }
-        // redrawRoute();
-        optimizationRoutes();
+        redrawRoute();
+        // optimizationRoutes();
     }
 
     private void removeAllPlaceMarker() {
@@ -672,36 +676,59 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
     private void reestablishUserMarker() {
         listLocsToDraw.clear();
         listMarkersToSave.clear();
-        HashMap<Integer, Marker> saveHashMapUserMarker = hashMapUserMarker;
+        // HashMap<Integer, Marker> saveHashMapUserMarker = hashMapUserMarker;
         OptimizationData optimizationData;
         ArrayList<InfoWindowData> infoWindowDataArrayList = new ArrayList<>();
 
         boolean[] startCheck = new boolean[userMarkerCount + 1];
-        boolean[] endCheck = new boolean[userMarkerCount + 1];
+//        boolean[] endCheck = new boolean[userMarkerCount + 1];
         int startVertex = 1;
-        int preVertex;
-
-        for(int i = 0; i < userMarkerCount; ++i) {
+        int preVertex = 0;
+        for (int i = 0; i < userMarkerCount - 1; ++i) {
             OptimizationGraph graph = new OptimizationGraph(userMarkerCount);
             for (int j = 0; j < listLocsToOptimize.size(); ++j) {
                 optimizationData = listLocsToOptimize.get(j);
-                if(startCheck[optimizationData.getOriginIndex()] == true || endCheck[optimizationData.getDestIndex()] == true)
-                    continue;
+                //if (startCheck[optimizationData.getOriginIndex()] == true || startCheck[optimizationData.getDestIndex()] == true)
+                //if (startCheck[startVertex] == true || endCheck[preVertex] == true)
+                //if(startCheck[startVertex] == true)
+                 //   continue;
+
+                //Log.d("DEBUG-TEST", "originIndex : " + optimizationData.getOriginIndex());
+                //Log.d("DEBUG-TEST", "destIndex : " + optimizationData.getDestIndex());
+                //Log.d("DEBUG-TEST", "totalDistance : " + optimizationData.getDistance());
+
                 graph.input(optimizationData.getOriginIndex(), optimizationData.getDestIndex(), optimizationData.getDistance());
+                for(int k = 1; k < userMarkerCount + 1; ++k) {
+                    if(startCheck[k] == true) {
+                        Log.d("DEBUG-TT", "k : " + k);
+                        graph.delete(k);
+                    }
+                }
             }
             preVertex = startVertex;
+            startCheck[startVertex] = true;
+            if(startVertex==0)
+                break;
             startVertex = graph.dijkstra(startVertex);
-            startCheck[preVertex] = true;
-            endCheck[startVertex] = true;
+            //startCheck[preVertex] = true;
+            //endCheck[startVertex] = true;
             infoWindowDataArrayList.add(new InfoWindowData(hashMapUserMarker.get(preVertex)));
+            Log.d("DEBUG-TEST", "수행되었음" + preVertex + "에서 " + startVertex);
+        }
+
+        for(int i = 1; i < userMarkerCount + 1; ++i) {
+            if(startCheck[i] == false)
+                infoWindowDataArrayList.add(new InfoWindowData(hashMapUserMarker.get(i)));
         }
 
         mMap.clear();
         hashMapUserMarker.clear();
-        for (int i = 0; i < userMarkerCount; ++i) {
-            addUserMarker(infoWindowDataArrayList.get(i));
+        int originUserMarkerCount = userMarkerCount;
+        userMarkerCount = 0;
+        for (int i = 0; i < originUserMarkerCount; i++) {
+            addUserMarker(infoWindowDataArrayList.get(i), true);
         }
-        redrawRoute();
+        userMarkerCount = originUserMarkerCount;
     }
 
     /**
@@ -726,14 +753,13 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         if (listLocsToDraw.size() > 2) {
             for (int originIndex = 1; originIndex < userMarkerCount; ++originIndex) {
                 Marker originMarker = hashMapUserMarker.get(originIndex);
-                for(int destIndex = originIndex + 1; destIndex <= userMarkerCount; ++destIndex) {
+                for (int destIndex = originIndex + 1; destIndex <= userMarkerCount; ++destIndex) {
                     Marker destMarker = hashMapUserMarker.get(destIndex);
                     String url = getDirectionsUrl(originMarker.getPosition(), destMarker.getPosition());
                     OptimizationData optimizationData = new OptimizationData(originMarker, destMarker);
                     OptimizationTask optimizationTask = new OptimizationTask(optimizationData);
                     optimizationTask.execute(url);
                 }
-
             }
         } else {
             redrawRoute();
@@ -792,10 +818,9 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
 
         @Override
         protected void onPostExecute(List<List<HashMap<String, String>>> result) {
-            ArrayList<LatLng> points = null;
+            ArrayList<LatLng> points = new ArrayList();
             double totalDistance = 0;
             for (int i = 0; i < result.size(); ++i) {
-
                 List<HashMap<String, String>> path = result.get(i);
 
                 for (int j = 0; j < path.size(); ++j) {
@@ -807,26 +832,36 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                     points.add(position);
                     // listLocsToOptimize.add(position);
                 }
+                if (result.size() == 0) {
+                    points.add(optimizationData.getOriginMarker().getPosition());
+                    points.add(optimizationData.getDestMarker().getPosition());
+                }
             }
-            for(int originIndex = 0; originIndex < points.size() - 1; ++ originIndex) {
+            for (int originIndex = 0; originIndex < points.size() - 1; ++originIndex) {
                 int destIndex = originIndex + 1;
                 LatLng originLatLng = points.get(originIndex);
                 LatLng destLatLng = points.get(destIndex);
 
                 totalDistance += ((originLatLng.latitude - destLatLng.latitude) * (originLatLng.latitude - destLatLng.latitude)
-                                + (originLatLng.longitude - destLatLng.longitude) * (originLatLng.longitude - destLatLng.longitude));
+                        + (originLatLng.longitude - destLatLng.longitude) * (originLatLng.longitude - destLatLng.longitude));
             }
             optimizationData.setDistance(totalDistance);
+            Log.d("DEBUG-TESTT", totalDistance + ":!");
             listLocsToOptimize.add(optimizationData);
-            Marker tempMarker = optimizationData.getOriginMarker();
-            int tempIndex = optimizationData.getOriginIndex();
-            optimizationData.setOriginMarker(optimizationData.getDestMarker());
-            optimizationData.setDestMarker(tempMarker);
-            optimizationData.setOriginIndex(optimizationData.getDestIndex());
-            optimizationData.setDestIndex(tempIndex);
-            listLocsToOptimize.add(optimizationData);
+            //Marker tempMarker = optimizationData.getOriginMarker();
+            //int tempIndex = optimizationData.getOriginIndex();
+            //optimizationData.setOriginMarker(optimizationData.getDestMarker());
+            //optimizationData.setDestMarker(tempMarker);
+            //optimizationData.setOriginIndex(optimizationData.getDestIndex());
+            //optimizationData.setDestIndex(tempIndex);
+            //listLocsToOptimize.add(optimizationData);
 
-            if(listLocsToOptimize.size() == listLocsToDraw.size() * 2) {
+
+            int loop = 0;
+            for (int i = 1; i <= userMarkerCount; ++i)
+                loop += i;
+
+            if (listLocsToOptimize.size() == loop/2) {
                 Collections.sort(listLocsToOptimize);
                 reestablishUserMarker();
             }
@@ -902,8 +937,6 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         protected void onPostExecute(List<List<HashMap<String, String>>> result) {
             ArrayList points = null;
             PolylineOptions routeLineOptions = null;
-
-            Log.d(".java", "result.size = " + result.size());
 
             for (int i = 0; i < result.size(); ++i) {
                 points = new ArrayList();
