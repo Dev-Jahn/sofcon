@@ -1,1164 +1,1044 @@
-class,placeId,name_kor,name_eng,location
-hotels,10000046,댓 하우스,,
-hotels,10038332,XYM 부티크 호텔,Boutique Hotel Xym,"37.50938,127.064384"
-hotels,10081452,호텔 라싸,Hotel Lassa,
-hotels,10081500,호텔 2.4,Hotel 2.4,
-hotels,10172901,K-그랜드 호스텔 명동,,"37.562878,126.98515"
-hotels,10183757,호스텔 88 서울 크라운,,"37.56299,126.92639"
-hotels,10189330,류게스트하우스,,"37.523125,127.02618"
-hotels,10202384,K 게스트하우스 동대문1호점,,
-hotels,10205834,티마크 그랜드 호텔 명동,Tmark Grand Hotel Myeongdong,"37.55831,126.97836"
-hotels,10205977,마중하우스,Majung Haus,"37.5526,126.97573"
-hotels,10299463,Guest House ABOUT,Guest House ABOUT,"37.5628,127.00823"
-hotels,10331620,호스텔하루,Hostel HARU,"37.56893,126.98434"
-hotels,10380258,이비스 앰배서더 서울 동대문,,"37.566307,127.00208"
-hotels,10399655,보눔1957 한옥 스테이 앤 호텔,Bonum 1957 Hanok Stay and Hotel,"37.581764,126.98486"
-hotels,10428145,호텔 소울하다,Hotel Soulhada,"37.49894,127.03245"
-hotels,10447640,모노하우스버젯,Mono House Budget,"37.562973,126.924355"
-hotels,10449106,Stay Hotel Gangnam,Stay Hotel Gangnam,"37.499454,127.03539"
-hotels,10464266,필스테이 명동 센터럴 호텔,Philstay Myeongdong Central Hotel,"37.56476,126.98461"
-hotels,10483549,호텔스카이파크 킹스타운동대문점,Hotel Skypark Kingstown Dongdaemun,"37.56894,127.00771"
-hotels,10514149,아만티 호텔 서울,,"37.557198,126.918816"
-hotels,10543135,게스트하우스 파자마파티,Guesthouse Pajamaparty,"37.56464,126.923744"
-hotels,10597697,정 하우스 홍대,Jeong House Hongdae,"37.558483,126.92813"
-hotels,10636497,컴온 게스트하우스 명동,Come On Guesthouse Myeongdong,"37.55967,126.99583"
-hotels,10637576,시타딘 한리버 서울,Citadines Han River Seoul,"37.540787,126.89071"
-hotels,10641837,아트몬스테이 게스트하우스,Artmonstay Guesthouse,"37.557392,126.98523"
-hotels,10692374,호텔28 명동,Hotel28 Myeongdong,"37.564274,126.98392"
-hotels,10750332,K게스트하우스 동대문 프리미엄,,"37.563656,127.00682"
-hotels,10766180,다다름 게스트하우스,,"37.507412,126.91044"
-hotels,10794734,게스트하우스 수,Guesthouse Soo,"37.579918,126.96798"
-hotels,10999937,코코모 호텔,,"37.502,126.88334"
-hotels,1112201,비원 게스트하우스,Beewon Guest House,"37.57611,126.98986"
-hotels,11444263,칠리게스트하우스,Chilli Guesthouse,"37.556274,126.91902"
-hotels,1149130,필스테이 명동역점,Philstay Myeongdong Station,"37.561653,126.98541"
-hotels,1149165,미오 II 디자인 레지던스,Mmmio II Design Residence,"37.565475,126.99161"
-hotels,1150903,영빈 호텔,Youngbin Hotel,"37.562958,127.00564"
-hotels,11626607,호텔 엔트라 강남,,"37.524338,127.048325"
-hotels,1162688,레이크 호텔,,"37.506706,127.10095"
-hotels,11667433,브릭스 호텔,,"37.59995,126.920975"
-hotels,11704055,K게스트하우스 동대문5호점,K-Guesthouse Dongdaemun 5,"37.56533,127.00686"
-hotels,11725904,  강남,Glad Live Gangnam,"37.50825,127.03635"
-hotels,11725914,참 한옥 게스트 하우스,Charm Hanok Guest House,"37.575756,126.989525"
-hotels,1174409,세림호텔,Saerim Hotel,"37.573475,126.984474"
-hotels,1175377,한강 호텔,Han Kang Hotel,"37.548027,127.10973"
-hotels,1175419,호텔 프린세스,,"37.527367,127.03664"
-hotels,11804600,에이퍼스트호텔 명동,,"37.56762,126.98096"
-hotels,11807873,소풍 더 어반,,"37.562313,126.92641"
-hotels,11827962,호텔카파쓰,,"37.50158,127.04105"
-hotels,11832219,나비호스텔,,"37.557926,126.92483"
-hotels,11836259,드림하우스,Dream House,
-hotels,11836364,강남 선시티게스트하우스,,"37.51553,127.02083"
-hotels,11846421,서촌 가치 비엔비,Seochon Gachi B&amp;B,"37.579556,126.96612"
-hotels,11857609,24게스트하우스 신촌에비뉴,24 Guesthouse Sinchon Avenue,"37.55789,126.93765"
-hotels,11858387,글로벌인 동대문 시티데이즈인,Global Inn Seoul Dongdaemun City Days Inn,
-hotels,11858504,OPPA 호스텔,,"37.553436,126.9359"
-hotels,1186374,가락 관광호텔,Karak Tourist Hotel,
-hotels,1186443,뉴 코리아 호텔,New Korea Hotel,"37.55827,126.97956"
-hotels,11864693,필스테이 동국대점,Philstay Dongguk Univ.,"37.564465,127.0081"
-hotels,11875163,칸쿤,,"37.48463,127.01285"
-hotels,11893477,송린 게스트하우스,,"37.555676,126.92514"
-hotels,11920134,써니힐 호스텔 홍대,,"37.56055,126.92105"
-hotels,11925083,동화 킴스 호텔,,"37.60946,126.975334"
-hotels,11928170,공간게스트하우스,,"37.558083,126.99558"
-hotels,1192832,뉴천지호텔,New Cheonji Hotel,
-hotels,11930699,아트뷰 호텔,Artview Hotel,"37.56293,126.992226"
-hotels,11946590,그리드인호텔,Grid Inn Hotel,"37.5696,126.99133"
-hotels,11951860,DH 명동 게스트하우스,DH Myeongdong Guesthouse,
-hotels,11959021,아임그린게스트하우스,I&#39;m Green Guesthouse,"37.59227,126.99284"
-hotels,11961013,영등포동 6가 71-2,,"37.520554,126.90373"
-hotels,1196129,호스텔 코리아,,"37.575535,127.020515"
-hotels,1196458,리앤노 게스트하우스,,"37.561447,126.92109"
-hotels,11964803,타임트래블러 릴렉스,,"37.56042,126.93024"
-hotels,11964809,서울숲 게스트하우스,,"37.477543,127.00857"
-hotels,1196533,바나나 백패커스,,"37.54635,126.97903"
-hotels,11997899,모노하우스 홍대 3호점,,"37.55427,126.918915"
-hotels,12006445,24게스트하우스 서울잠실,,
-hotels,12019574,호텔도트명동,Hotel Dott Myeongdong,"37.56182,126.987915"
-hotels,1202980,홍대 게스트하우스,,"37.556564,126.92308"
-hotels,12033515,호텔더디자이너스 건대점,Hotel The Designers Kondae,"37.558506,127.07653"
-hotels,12033802,필스테이 명동청계점,,
-hotels,12079226,호텔조커,Hotel Joker,"37.526432,126.88393"
-hotels,12079770,디에이스호텔,,"37.506912,127.05395"
-hotels,12079886,호텔유리앤,Hotel URI&amp;,"37.50894,127.05771"
-hotels,12094531,도미인 서울 강남,Dormy Inn Seoul Gangnam,"37.505795,127.02938"
-hotels,12101833,알로프트 서울 명동,Aloft Seoul Myeongdong,"37.56248,126.98169"
-hotels,12105731,라마다앙코르서울마곡호텔,,"37.56808,126.82634"
-hotels,12133931,필스테이 명동점,Philstay Myeongdong,"37.564102,126.98537"
-hotels,12154191,포레스타 호텔,,"37.562492,127.03515"
-hotels,12154415,호텔 가온 종로,,"37.5705,126.98706"
-hotels,12171858,길버트 게스트하우스,,"37.582253,127.00255"
-hotels,12188178,호텔이노스테이,Hotel Inno Stay,"37.565876,127.05395"
-hotels,12193383,레피하우스,Refee house,"37.523746,127.05243"
-hotels,12196120,집게스트하우스,,"37.547565,126.914925"
-hotels,12196520,나누게스트하우스케이팝,Nanu Guesthouse KPOP,"37.555145,126.91865"
-hotels,12221592,나인트리 프리미어 호텔 명동2,,"37.564316,126.99087"
-hotels,12222316,스탠다드 호텔,,"37.551064,126.86344"
-hotels,12222773,뜨랑블루 호텔,,"37.48453,126.92682"
-hotels,12222795,K게스트하우스 서울시티점,K-Guesthouse Seoul City,"37.56673,126.99011"
-hotels,12222818,케이게스트하우스 동대문4,,"37.563644,127.03066"
-hotels,12226329,하이준더스타일,,
-hotels,12231518,호텔스타프리미어 역삼점,Yeoksam Hotel Star Premier,"37.502842,127.04027"
-hotels,12231683,호텔 루체브릿지,,"37.558964,126.83719"
-hotels,12231972,모스크,MOSC,"37.533035,126.99554"
-hotels,12231981,에그하우스 동대문점,,"37.572052,127.011696"
-hotels,12238832,필스테이 명동메트로,,"37.56306,126.98572"
-hotels,12242034,호텔 GMS,,"37.51732,126.90914"
-hotels,12242440,신라스테이 서초,Shilla Stay Seocho,"37.48936,127.03014"
-hotels,12244969,킴스테이 게스트하우스,KimStay,"37.55643,126.93643"
-hotels,12251056,한류 호스텔,Hallyu Hostel,"37.564674,127.00225"
-hotels,12257734,K그랜드호스텔 동대문,K-Grand Hostel Dongdaemun,"37.563023,127.03201"
-hotels,12264023,딜라이트  호텔,,"37.51535,127.1093"
-hotels,12264115,낙원장 호텔,Nagwonjang Hotel,"37.57296,126.98993"
-hotels,12273316,호텔 더 디자이너스 서울역,Hotel The Designers Seoul Station,"37.545483,126.97157"
-hotels,12287729,G2 호텔,G2 Hotel,"37.56331,126.99033"
-hotels,12290061,로얄스퀘어 호텔,Royal Square Hotel,"37.560467,126.81036"
-hotels,12292815,Hoseong Guesthouse,Hoseong Guesthouse,"37.556355,126.947365"
-hotels,1230995,호텔아르누보 역삼,,"37.503487,127.04299"
-hotels,12310284,시그니엘 서울,,"37.512707,127.10255"
-hotels,12315022,호텔렉스빌,Hotel Rexvill,"37.51818,126.910645"
-hotels,1236989,계림장 게스트하우스,Gyerimjang Guest House,"37.559822,126.985916"
-hotels,1236995,인사동미니호텔,Mini Hotel Insa,"37.575054,126.98546"
-hotels,12377445,스타 호스텔 명동 패밀리,,"37.560722,126.99541"
-hotels,12388243,나인브릭호텔,9Brick Hotel,"37.55391,126.920364"
-hotels,12396150,대영호텔 서울,,"37.558346,126.9803"
-hotels,12396407,K-그랜드 호텔 앤 게스트 하우스 서울,,"37.55274,126.97222"
-hotels,12419900,명동선샤인 게스트하우스,,"37.56202,126.98645"
-hotels,12430674,친구 게스트하우스,Chingu Guesthouse,"37.545494,126.92203"
-hotels,12430895,H에비뉴호텔 녹번,H Avenue Hotel Nokbeon,
-hotels,12434582,WD호텔,,"37.48545,126.92929"
-hotels,12454272,팝 앳 이태원 게스트하우스,Pop at Itaewon Guesthouse,"37.533623,126.98939"
-hotels,12491652,레드스톤게스트하우스,,"37.559742,126.919914"
-hotels,12511642,호텔 파크 힐 명동,Hotel Park Hill Myeongdong,"37.55769,126.98165"
-hotels,12519557,아마존게스트하우스,Amazon Guesthouse,"37.532642,126.99304"
-hotels,12527338,미조 호텔,,"37.56172,126.98539"
-hotels,12542874,호텔 파크하비오,Hotel Parkhabio,"37.481945,127.123474"
-hotels,12547367,더리센츠동대문호텔,The Recenz Dongdaemun Hotel,"37.56209,127.06161"
-hotels,12550700,베니키아 프리미어 여의도 호텔,Benikea Premier Yeouido Hotel,"37.51361,126.92151"
-hotels,12550987,디자인호텔 다니엘 캄파넬라,,"37.637356,127.02587"
-hotels,12558233,또와 하우스,,"37.558346,126.98449"
-hotels,12581921,라비앙호텔,Hotel Lavieen,"37.511154,127.082184"
-hotels,12597060,브라우니 게스트하우스,,"37.559444,126.92509"
-hotels,12604521,H 에비뉴 호텔 이대점,H Avenue Hotel Ewha Univ.,"37.556515,126.942764"
-hotels,12639491,이화 호텔,Ehwa Hotel,"37.564144,126.98797"
-hotels,12667390,베스트인 부띠크,Vestin Boutique,"37.56151,126.99212"
-hotels,12667661,나비호텔 레지던스,Navi Hotel Residence,
-hotels,12670129,K그랜드호스텔 이대,,"37.556973,126.94308"
-hotels,12674038,호텔부티크나인 능동점,Hotel Boutique 9 Neungdong,"37.55672,127.080185"
-hotels,12690380,그랜드 머큐어 앰배서더 서울 용산,,"37.531742,126.96329"
-hotels,12698628,이비스 스타일 앰배서더 서울 용산,ibis Styles Ambassador Seoul Yongsan,"37.53173,126.96336"
-hotels,12698724,블루마운틴 명동,,"37.5631,126.98583"
-hotels,12703706,알 게스트하우스,,"37.55365,126.96662"
-hotels,12707152,도봉 호텔 베이 204,,"37.667793,127.043625"
-hotels,12707649,노보텔 스위트 앰배서더 서울 용산,Novotel Suites Ambassador Seoul Yongsan,"37.53173,126.96337"
-hotels,12707683,노보텔 앰배서더 서울 용산,Novotel Ambassador Seoul Yongsan,"37.531742,126.96335"
-hotels,12720709,호텔 A314,A314 Hotel,"37.53785,127.07778"
-hotels,12726131,동대문하우스,,"37.575066,127.027466"
-hotels,12730428,홍대 레이지 폭스 덴 호스텔,Hongdae Lazyfox Den Hostel,"37.553123,126.91537"
-hotels,12730569,피에스 게스트하우스 이태원,P.S. GuestHouse Itaewon,"37.537365,126.988914"
-hotels,12730914,에이치에비뉴 이대점,H Avenue Hotel Shinchon &amp; Idae,"37.55658,126.9424"
-hotels,12730919,디 에블린 동대문 호텔,,"37.5614,127.067535"
-hotels,12789877,필하우스,Fillhouse,"37.57157,127.00762"
-hotels,12856116,라마다 서울 신도림 호텔,Ramada Seoul Sindorim Hotel,"37.506298,126.88539"
-hotels,12940832,로드 명동,Road Myeongdong,"37.561836,126.99399"
-hotels,12951821,퍼스트스테이호텔,First Stay Hotel,"37.562645,126.97723"
-hotels,12956021,더스테이트선유호텔,The State Sunyu Hotel,"37.538372,126.89317"
-hotels,13009660,코멧 게스트하우스,Comet Guesthouse,"37.532303,126.972916"
-hotels,13084680,펠리스까사,Feliz Casa,"37.562126,127.00075"
-hotels,1310694,호텔 아카시아,Benikea Hotel Acacia,"37.566372,127.0026"
-hotels,13131314,Hi Jun Guesthouse,Hi Jun Guesthouse,"37.56457,126.92493"
-hotels,13166512,갤럭시호텔,Galaxy Hotel,"37.526222,126.90887"
-hotels,13283029,글래드 강남 코엑스 센터,GLAD Gangnam COEX Center,"37.50899,127.064445"
-hotels,13293144,호텔 토마스 명동,Hotel Thomas Myeongdong,"37.563477,126.978294"
-hotels,13319648,L7강남,L7 Gangnam,"37.505558,127.05184"
-hotels,13361835,부띠끄호텔 Young Inn,Boutique Hotel Young Inn,"37.55627,126.99372"
-hotels,13369640,사보이호텔,Savoy Hotel,"37.56195,126.9844"
-hotels,13373610,앨리스레지던스호텔,Alice Residence,
-hotels,13386173,미스홍대 게스트하우스,Miss Hongdae Guest House,
-hotels,13392050,ENA스위트호텔,ENA Suite Hotel Namdaemun Seoul,"37.562298,126.97388"
-hotels,13394600,호텔해담채가산,Hotel Haedamchae Gasan,"37.479767,126.88837"
-hotels,13397346,호텔더디자이너스 디디피,Hotel The Designers DDP,"37.563778,127.004265"
-hotels,13401342,루미아호텔2,Lumia Hotel 2,"37.57383,127.02217"
-hotels,13402121,에이치에비뉴 호텔 건대점,H Avenue Hotel Kondae,"37.546524,127.06665"
-hotels,13414457,노블호텔,Noble Hotel,"37.576874,126.989456"
-hotels,13426084,L7홍대,L7 Hongdae,"37.555782,126.92142"
-hotels,13781380,포포인츠 바이 쉐라톤 서울 강남,,"37.520008,127.0283"
-hotels,13819581,글래드 마포,Glad Mapo,"37.543037,126.95146"
-hotels,13846825,코트야드 서울 보타닉 파크,Courtyard Seoul Botanic Park,"37.56705,126.82945"
-hotels,1392824,힐 하우스 호텔,Hotel Hill House,"37.556946,126.98192"
-hotels,13965841,페어필드 바이 메리어트 서울호텔,Fairfield by Marriott Seoul,"37.51696,126.90914"
-hotels,13984475,플렉스홈,FlexHome Guest House,"37.553093,126.90547"
-hotels,14090461,엠펠리체 호텔,M Felice Hotel,"37.567795,126.82296"
-hotels,14159708,지브로 S 게스트하우스,Zibro S Guesthouse,"37.54818,126.92388"
-hotels,14159727,노보텔 앰배서더 서울 동대문 호텔,,"37.56616,127.00426"
-hotels,14199590,호텔쿠레타케소 인사동,Hotel Kuretakeso Insadong,"37.572357,126.98717"
-hotels,1462081,베니키아호텔 플라워,Benikea Hotel Flower,"37.58478,127.05065"
-hotels,1462085,호텔 꾸띠,Hotel Cutee,
-hotels,1462343,메이트 호텔 서울,Mate Hotel Seoul,"37.52993,126.84094"
-hotels,1465296,롯데 시티 호텔 마포,Lotte City Hotel Mapo,"37.544697,126.950714"
-hotels,1467802,아모렉스 호텔,Amourex Hotel,"37.563698,127.03532"
-hotels,14789575,수송 게스트 하우스,Soo Song Guest House,"37.573017,126.981155"
-hotels,1499077,호텔 대우인,Hotel Daewoo Inn,"37.56286,126.97801"
-hotels,1535250,토요코 인 서울 동대문,Toyoko Inn Seoul Dongdaemun,"37.564495,127.00914"
-hotels,1557869,코트야드 메리어트 서울 타임스퀘어,Courtyard by Marriott Seoul Times Square,"37.517864,126.90402"
-hotels,1563983,블루 게스트하우스 1,Blu GuestHouse 1,
-hotels,1569561,시티 파크 호텔,,"37.576466,126.98982"
-hotels,1575192,그레이프 가든 하우스,,"37.554188,126.92647"
-hotels,1625995,봉 하우스,Bong House,"37.584225,126.99701"
-hotels,1626230,백패커스 인사이드,,"37.584476,126.99776"
-hotels,1640728,더 클래식 500 이그제큐티브 레지던스 펜타즈,The Classic 500 Executive Residence Pentaz,"37.538776,127.07108"
-hotels,1643621,강남 아르누보 씨티 II,,"37.49342,127.02796"
-hotels,1644474,굿스테이 피터캣 호텔 인사동,Goodstay Petercat Hotel Insadong,"37.574947,126.98942"
-hotels,1653156,임피리얼 팰리스 부티크 호텔,Imperial Palace Boutique Hotel,"37.53517,126.99839"
-hotels,1657213,호텔 마레,Hotel Mare,"37.56354,127.057625"
-hotels,1657413,그랜드 스위트,The Grand Suite Serviced Residence,
-hotels,1718120,M. 비즈 호텔,,"37.507664,127.055244"
-hotels,1741199,고궁 호텔,Gogung Hotel,"37.575375,126.997284"
-hotels,1745679,행복한 눈물 호텔,Amfree Hotel,"37.56949,127.0697"
-hotels,1745681,아미가 모텔,,"37.572754,126.99943"
-hotels,1745757,갤러리아 호텔,,"37.495945,126.84566"
-hotels,1745764,호텔 트리아,Tria Hotel,"37.503063,127.03958"
-hotels,1745767,오픈게스트하우스,Open Guest House,
-hotels,1745768,상주호텔,,"37.510017,127.08054"
-hotels,1745779,세화 호스텔,,"37.574715,126.99028"
-hotels,1749318,카라 모텔,,
-hotels,1749320,노블레스 관광 호텔,,"37.65513,127.05934"
-hotels,1754759,모텔B,Motel B,"37.56771,126.969086"
-hotels,1755840,첼로 호텔,,
-hotels,1788891,유진 한옥 게스트하우스,Hanok Guesthouse Eugene&#39;s House,
-hotels,1815319,준희빈 호텔,Boutique Hotel Juni Bin,"37.548344,126.91118"
-hotels,1887763,호텔 비즈 종로 인사동,,"37.573334,126.9884"
-hotels,1903752,컴인 게스트하우스,Come Inn Guesthouse,"37.552704,126.92292"
-hotels,1905601,호텔 스카이파크 명동 I,,"37.561417,126.9842"
-hotels,1954031,폭스모텔,Fox Motel,
-hotels,1955496,소선재 게스트하우스,So Sun Jae Guesthouse,
-hotels,1987696,베스트 웨스턴 프리미어 구로 호텔,,"37.483154,126.89897"
-hotels,1996081,김치 홍대 게스트하우스,,"37.558956,126.919876"
-hotels,2045570,호텔 아이린,Hotel Irene,
-hotels,2054116,호텔야자 종로점,,"37.57288,126.98892"
-hotels,2100902,라까사호텔,Hotel La Casa,"37.52219,127.01927"
-hotels,2103201,스튜디오 41st,Studio 41st,"37.561543,126.921684"
-hotels,2150227,오슬로호텔,Oslo Hotel,"37.48608,127.0129"
-hotels,2150233,아이엠티 호텔,Imt Hotel,"37.48679,127.013"
-hotels,2150290,히트 호텔,Hit Hotel,"37.511242,127.0797"
-hotels,2150334,호텔 톰지,Hotel Tomgi,"37.500626,127.0391"
-hotels,2150335,호텔 아트 컴바인,Hotel Art Combine,
-hotels,2150439,호텔 스토리,Hotel Story,"37.58203,127.02106"
-hotels,2150692,녹스 호텔,Nox Hotel,"37.502586,127.03969"
-hotels,2150714,아르고 호텔,,
-hotels,2151168,라마다 서울 동대문,Ramada Seoul Dongdaemun,"37.56586,127.002525"
-hotels,2153731,윤게스트하우스,Yun Guest House,"37.558086,126.98469"
-hotels,2159977,쉐라톤 서울 디큐브 시티 호텔,Sheraton Seoul D Cube City Hotel,"37.509,126.88978"
-hotels,2179387,나나 레지던스,,"37.5618,126.98797"
-hotels,2179397,마마 게스트하우스 명동,Mama Guesthouse Myeongdong,"37.558475,126.98837"
-hotels,2202393,호텔 아드리게,Hotel Adlige,"37.500793,127.038895"
-hotels,2202395,호텔 스카이파크 명동 II,Hotel Skypark Myeongdong II,"37.564716,126.98482"
-hotels,2202400,호텔 스카이파크 명동 III,Hotel Skypark Myeongdong III,"37.561356,126.987236"
-hotels,2210698,호텔 코지 명동,Hotel Cozy Myoungdong,"37.560642,126.97938"
-hotels,2212705,두 게스트하우스 북촌 1,Doo guesthouse Bukchon,"37.579468,126.98647"
-hotels,2224772,서울 명동 하우스,Seoul Myeongdong House,
-hotels,2226404,H2O 게스트하우스,H2O Guesthouse,"37.566883,126.994995"
-hotels,2233911,호텔 아르누보 서초,,"37.496033,127.02087"
-hotels,2258766,대한장 모텔,Daehanjang Motel,"37.560787,126.99509"
-hotels,2293670,리즈 호텔,Liz Hotel,"37.49228,127.01347"
-hotels,2301772,리버사이드 호텔 서울,The Riverside Hotel Seoul,"37.518574,127.01814"
-hotels,2303934,자자 백팩커스 호스텔,Zaza Backpackers Hostel,"37.558784,126.9864"
-hotels,2314093,뉴월드호텔,Hotel New World,"37.544285,126.97345"
-hotels,2314103,밀라노 모텔,Milano Motel,"37.56427,127.03621"
-hotels,2325235,동도 모텔,Dongdo Motel,
-hotels,2333443,라뉘 호텔,Hotel Lanuit,
-hotels,2337202,호텔 아마레,Hotel Amare,"37.57149,126.9897"
-hotels,2337371,비브클래식호텔,Hotel VIV Classic,"37.568287,127.06923"
-hotels,2367780,호텔 아이린 시티,Hotel Irene City,"37.5621,126.97806"
-hotels,2393710,스탠포드 호텔 서울,Stanford Hotel Seoul,"37.581818,126.88676"
-hotels,2415959,벤허모텔,Motel Benhur,"37.57177,127.000305"
-hotels,2457276,굿스테이 피터캣호텔 홍대,,"37.553665,126.93586"
-hotels,2471997,대림 레지던스,Daelim Residence,"37.498734,126.88258"
-hotels,2472017,비하우스,,"37.56263,126.92355"
-hotels,2476467,신촌 메르디앙 모텔,Sinchon Meridian Motel,
-hotels,2508404,롯데 시티 호텔 김포공항,,"37.564026,126.80233"
-hotels,2533507,호텔 마레 강남,Hotel Mare Gangnam,
-hotels,2537406,충무로 레지던스 호텔,Chungmuro Residence &amp; Hotel,"37.562542,126.99938"
-hotels,2537451,투비인호텔,Two Be In Hotel,"37.53756,127.13866"
-hotels,2537498,더 뷰 호텔,,"37.516174,127.11156"
-hotels,2537527,렉스 관광 호텔,LEX Tourist Hotel,"37.514362,127.020454"
-hotels,2539264,문 게스트하우스,Moon Guesthouse,"37.576065,126.98851"
-hotels,2539382,초콜릿호텔,,"37.497192,127.02918"
-hotels,2539397,에스호텔,S Hotel,
-hotels,2539436,렉시 호텔,,
-hotels,2539454,캘리포니아 호텔 서울 서초,,"37.485107,127.01464"
-hotels,2542094,초콜릿 호텔 화곡,,
-hotels,2542837,킴스 패밀리 게스트하우스,,"37.55579,126.91896"
-hotels,2546608,에그 게스트하우스 코리아,Egg Guesthouse Korea,
-hotels,2616315,호텔 FA,Hotel FA,
-hotels,2635666,호텔 GS,,"37.56909,126.99207"
-hotels,2641870,보그 호텔,Vogue Hotel,"37.55311,126.93594"
-hotels,2641878,신촌 Y,Shinchon Y,"37.5534,126.936165"
-hotels,2641885,제이제이 호텔,JJ Hotel,
-hotels,2642150,아모텔,,"37.554134,126.93646"
-hotels,2642164,리베라 모텔,Riviera Motel,"37.553642,126.93644"
-hotels,2642177,호텔 스타,Hotel Star,"37.499535,127.03545"
-hotels,2642183,앳눈 호텔,,"37.553864,126.935974"
-hotels,2642273,아나 호텔,,"37.501152,127.04054"
-hotels,2658455,초콜렛 트리,,"37.55336,126.9352"
-hotels,2658471,달콤 게스트하우스,,"37.56348,126.99671"
-hotels,2662475,팝 호텔 1,Pop Hotel 1,"37.570946,126.98995"
-hotels,299152,베스트웨스턴프리미어서울가든호텔,Best Western Premier Seoul Garden Hotel,"37.540817,126.94821"
-hotels,299154,인터컨티넨탈 서울 코엑스,InterContinental Seoul COEX,"37.513355,127.057365"
-hotels,299502,뉴서울 호텔,New Seoul Hotel,"37.56792,126.97804"
-hotels,299504,호텔 비젼,Hotel Vision,"37.564575,127.03632"
-hotels,299505,호텔 동대문,Hotel Dongdaemun,"37.57092,127.01015"
-hotels,299533,이비스 스타일 앰배서더 서울 강남,ibis styles Ambassador Seoul Gangnam,"37.505074,127.05708"
-hotels,299536,노보텔 앰배서더 서울 강남 호텔,Novotel Ambassador Seoul Gangnam,"37.505363,127.02844"
-hotels,299537,그랜드 앰배서더 서울 어소시에이티드 풀만 호텔,,"37.560192,127.00236"
-hotels,299538,노보텔 앰배서더 독산,Novotel Ambassador Seoul Doksan,"37.46746,126.898"
-hotels,301253,서울신라호텔,The Shilla Seoul,"37.556087,127.00512"
-hotels,301605,오크우드 프리미어 코엑스 센터,,"37.51089,127.05813"
-hotels,301815,서울 웨스틴 조선 호텔,The Westin Chosun Seoul,"37.56446,126.9798"
-hotels,301817,그랜드 워커힐 서울,Grand Walkerhill Seoul,"37.555775,127.11091"
-hotels,302237,르 메르디앙 서울,Le Meridien Seoul,"37.505142,127.02739"
-hotels,306105,임피리얼 팰리스 서울,,"37.514023,127.03588"
-hotels,306113,오라카이 인사동 스위츠,Orakai Insadong Suites,"37.57327,126.98718"
-hotels,306114,그랜드 힐튼 서울,Grand Hilton Seoul,"37.59,126.934746"
-hotels,306115,그랜드 하얏트 서울,,"37.540142,126.997154"
-hotels,306118,그랜드 인터컨티넨탈 서울 파르나스,Grand InterContinental Seoul Parnas,"37.508766,127.06103"
-hotels,306123,인사동 크라운호텔,Insadong Crown Hotel,"37.573742,126.98795"
-hotels,306125,크라운 호텔 이태원,Crown Hotel Itaewon,"37.531387,126.99058"
-hotels,306126,호텔 피제이 명동,,"37.56476,126.99569"
-hotels,306127,코리아나 호텔,Koreana Hotel,"37.568016,126.97659"
-hotels,306128,롯데 호텔 월드,,"37.51177,127.1003"
-hotels,306130,롯데 호텔 서울,Lotte Hotel Seoul,"37.56577,126.98074"
-hotels,306132,밀레니엄 서울 힐튼,,"37.55531,126.97582"
-hotels,306136,호텔 프레지던트,Hotel President,"37.565567,126.9794"
-hotels,306139,더 플라자,,"37.56463,126.978065"
-hotels,306145,로얄 호텔 서울,,"37.564217,126.98564"
-hotels,306168,호텔 리베라,Hotel Riviera,"37.523968,127.05478"
-hotels,307024,게스트하우스 코리아,Guesthouse Korea,"37.576668,126.99103"
-hotels,307032,서울 백팩커스,Seoul Backpackers,"37.557167,126.97717"
-hotels,307040,켄싱턴 호텔 여의도,Kensington Hotel Yoido,"37.53051,126.92216"
-hotels,307042,서울 YMCA 관광호텔,Seoul YMCA Tourist Hotel,"37.570198,126.98536"
-hotels,308007,세종 호텔,Sejong Hotel,"37.561127,126.98807"
-hotels,309825,호텔 앳 홈,,
-hotels,309826,해밀톤 호텔,Hamilton Hotel Seoul,"37.534782,126.993996"
-hotels,3136705,에어호스텔 서울,Air Hostel Seoul,"37.571625,127.00347"
-hotels,3154945,뉴 힐탑 호텔,New Hilltop Hotel,"37.51125,127.03197"
-hotels,3154953,머큐어 서울 앰배서더 강남 쏘도베,Mercure Seoul Ambassador Gangnam Sodowe,"37.5015,127.03552"
-hotels,3154970,스테이 서울,,
-hotels,3161529,해피 가든 게스트하우스,,"37.55804,126.98586"
-hotels,3164518,제이비스 호텔,,"37.50515,127.05283"
-hotels,3164521,남현당 게스트하우스,Namhyundang Guesthouse,"37.5738,126.98539"
-hotels,3189967,DH 네상스 호텔,DH Naissance Hotel,"37.592617,127.01854"
-hotels,3191662,에이블 호스텔 동대문,Able Hostel in Dongdaemun,"37.565037,127.00527"
-hotels,3197505,해밀 한옥 게스트하우스,,"37.57661,126.99132"
-hotels,3218799,엘름 트리 게스트하우스,Elm Tree Guest House,"37.5615,126.97852"
-hotels,323987,호텔 프린스 서울,Prince Hotel Seoul,"37.560825,126.98641"
-hotels,3249513,명동 에코 게스트하우스,,"37.560448,126.98659"
-hotels,3295599,곳,The Place Seoul,"37.579655,126.987366"
-hotels,3326049,취운정,Chiwoonjung,"37.583202,126.9835"
-hotels,3344577,티파니 호텔,,"37.548,126.82001"
-hotels,3346189,케이팝 레지던스 명동 1,K-POP Residence Myeongdong 1,"37.563442,126.98522"
-hotels,3356431,블루밍 서비스드 레지던스 호텔,Blooming Serviced Residence Hotel,"37.500706,127.03883"
-hotels,3356500,베스틴 레지던스 명동,,"37.56038,126.98712"
-hotels,3358813,나인 스타 호텔,,"37.556465,126.93798"
-hotels,3358977,케이팝 게스트하우스 서울역,,"37.553226,126.97458"
-hotels,3368813,호텔 첼로,Hotel Cello,"37.486168,127.0135"
-hotels,3368857,게스트하우스 명동,,"37.56113,126.9876"
-hotels,3369164,마루 게스트하우스,Guesthouse The Maru,"37.54976,126.96921"
-hotels,3369181,호텔 더 디자이너스 삼성,,"37.507282,127.05543"
-hotels,3370845,크립 49 게스트하우스,Crib 49 Guesthouse,"37.55708,126.98565"
-hotels,3370998,블레싱 인 서울,Blessing In Seoul,"37.58672,127.05214"
-hotels,3389037,아벤트리 호텔 종로,Hotel Aventree Jongno,"37.573086,126.98317"
-hotels,3389245,서울 53 호텔,Seoul 53 Hotel,"37.575,126.98944"
-hotels,3477056,코스테이,,"37.531998,126.8606"
-hotels,3477065,서울앤호텔 동대문,Seoul N Hotel Dongdaemun,"37.573444,127.02077"
-hotels,3477071,엔포시즌,N Fourseason,"37.557014,126.97975"
-hotels,3477077,엔조이 서울,NJoy Seoul,"37.556686,126.923"
-hotels,3477083,호텔 스카이파크 센트럴 명동,Hotel Skypark Central Myeongdong,"37.564648,126.98524"
-hotels,3477158,콘래드 서울,,"37.525414,126.92662"
-hotels,3477194,케이팝 레지던스 명동 2,,"37.56289,126.9856"
-hotels,3479249,이태원 백팩커스,,"37.534,126.99994"
-hotels,3497931,ICOS 게스트하우스,,"37.554768,126.9385"
-hotels,3531770,유기농 게스트하우스,Yooginong Guesthouse,"37.553043,126.90741"
-hotels,3540785,비 마이 게스트하우스,B My Guesthouse,"37.5586,126.983894"
-hotels,3568790,오렌지 게스트하우스,Orange Guesthouse,"37.554794,126.91895"
-hotels,3568908,고운당,Go Woon Dang,"37.578903,126.97275"
-hotels,3571247,라온 게스트하우스,,"37.57755,126.981155"
-hotels,3571251,클릭 호텔,,"37.56192,126.9884"
-hotels,3571309,루이 호텔,,"37.556335,126.9382"
-hotels,3575113,모텔 제로,Motel Zero,"37.57456,126.99685"
-hotels,3575356,센터마크 호텔,,"37.572346,126.98434"
-hotels,3575583,서울 로프트 아파트먼트 ,Seoul Loft Apartments,"37.576424,126.99727"
-hotels,3581563,코지 게스트하우스,Cozzzy Guesthouse,"37.558395,126.91867"
-hotels,3595039,애플 백패커스 게스트하우스,Apple Backpackers Guesthouse,"37.57354,126.99102"
-hotels,3595040,스타즈 호텔 명동 1호점,Staz Hotel Myeongdong 1,"37.56695,126.991425"
-hotels,3595091,북촌 마루 한옥 게스트하우스,,"37.58311,126.98742"
-hotels,3612247,다비드호텔,,"37.511047,127.07926"
-hotels,3616590,모나이 게스트하우스,,"37.5365,126.89894"
-hotels,3618263,휴가 하우스 호스텔,Huga Haus Hostel,"37.591137,127.04187"
-hotels,3618299,야코리아 호스텔 이태원,,"37.53437,126.97491"
-hotels,3618306,호텔 마누,Hotel Manu,"37.557076,126.97487"
-hotels,3618350,E-레지던스,E-Residence,"37.513638,127.02103"
-hotels,3656150,나인트리 호텔 명동,Nine Tree Hotel Myeong-dong,"37.561623,126.98592"
-hotels,3656188,몽 모텔,Mong Motel,"37.639526,127.02658"
-hotels,3661945,에스피@이태원 게스트하우스,SP@Itaewon Guesthouse,"37.53545,126.99245"
-hotels,3682080,아리 하우스 명동,,"37.56029,126.98683"
-hotels,3723601,호텔 아이콘,,"37.574944,126.98893"
-hotels,3723670,펜슬 게스트하우스,,"37.560036,126.92548"
-hotels,3793064,블루 게스트하우스 4,,"37.554626,126.91817"
-hotels,3813528,DW 디자인 레지던스,,"37.558285,126.9207"
-hotels,3813529,청계하우스,,"37.56928,126.99869"
-hotels,3813530,GV레지던스,GV Residence,"37.53466,126.99067"
-hotels,3813590,ZIP 호텔,,"37.479477,126.95297"
-hotels,3813616,메리골드 호텔,,"37.55356,126.91949"
-hotels,3813667,로이하우스,,"37.563065,126.92398"
-hotels,3814456,더스틴 게스트하우스,,"37.55553,126.923836"
-hotels,3814459,게스트하우스 명동 2,Guest House Myeongdong 2,"37.560444,126.99076"
-hotels,3814736,아지트 게스트하우스,,"37.55367,127.01064"
-hotels,3850464,이슈 서울 게스트 하우스,Issue Seoul guest house,"37.55472,126.91421"
-hotels,3855729,옐로우 브릭 종로 호스텔,Yellow Brick Jongno Hostel,"37.574627,126.98959"
-hotels,4006151,코스테이 숙대점,Korstay Sookmyung Women&#39;s Univ.,"37.546104,126.97249"
-hotels,4052408,한옥 게스트하우스 201,Hanok Guesthouse 201,"37.580395,126.98542"
-hotels,4055360,미오 하우스,Mmmio House,"37.569824,127.00301"
-hotels,4071465,더 그랜드 호텔 명동,The Grand Hotel Myeongdong,"37.56171,126.98718"
-hotels,4084323,공심가 게스트하우스,,"37.57786,126.9808"
-hotels,4134726,이비스 앰배서더 서울 인사동,Ibis Ambassador Seoul Insadong,"37.57437,126.98944"
-hotels,4134729,루크홈 명동,Lookhome Myeongdong,"37.55833,126.98578"
-hotels,4134785,SS 게스트하우스 서울역,SS Guest House Seoul Station,"37.551495,126.96891"
-hotels,4134798,미스터 콤마 게스트하우스,,"37.558964,126.92018"
-hotels,4134800,호텔 더 디자이너스 홍대,Hotel The Designers Hongdae,"37.551956,126.91764"
-hotels,4134801,비젼 게스트하우스,Vision Guesthouse,"37.509136,127.08513"
-hotels,4134983,호텔 디바,Diva Hotel,"37.567993,127.06934"
-hotels,4135103,파로스 관광 호텔,Pharos Tourist Hotel,"37.511124,127.08135"
-hotels,4135265,베니키아 호텔 KP,Benikea Hotel KP,"37.589397,127.056755"
-hotels,4135823,국제 명동 하우스,Kukje Myeongdong House,"37.559357,126.98865"
-hotels,4136289,유 게스트 하우스 - 홍대,"U Guesthouse in Hongdae, Seoul","37.549534,126.92065"
-hotels,4136389,포춘호스텔,Fortune Hostel,"37.574547,126.98964"
-hotels,4137678,마루 게스트하우스 2,Maru Guesthouse 2,
-hotels,4137679,마인드 호텔,Mind Hotel,"37.47881,126.89095"
-hotels,4170932,두리 게스트하우스,Duri Guest House,"37.591625,127.03713"
-hotels,4193521,SH 서울 홍대,SH Seoul Hongdae,"37.557743,126.92435"
-hotels,4235369,신신 호텔,,"37.562332,126.97904"
-hotels,4344692,베니키아 Home the M 호텔,,"37.563824,126.91317"
-hotels,4354698,와우 힐스 게스트하우스,,"37.552128,126.92662"
-hotels,4354707,호텔 아로파 남대문,Hotel Aropa Namdaemun,"37.563198,126.97808"
-hotels,4412261,호스텔 코리아 11th - 창덕궁,Hostel Korea 11th - Changdeokgung,"37.57624,126.99032"
-hotels,4412263,프레이저 플레이스 남대문 서울,Fraser Place Namdaemun Seoul,"37.56134,126.97631"
-hotels,4462683,김치 신촌 게스트하우스,Kimchee Sinchon Guesthouse,"37.558224,126.92935"
-hotels,446846,라마다 서울 호텔,Ramada Seoul,"37.51066,127.04507"
-hotels,447944,삼정 호텔,,"37.505768,127.031296"
-hotels,447945,여의도 호텔,Yoido Hotel,"37.530167,126.925385"
-hotels,4504699,이랑 한옥스테이,Irang Hanok Stay,"37.581318,126.98898"
-hotels,4507857,케이스타하우스,Kstar House,"37.558083,126.96907"
-hotels,455446,쉐라톤 서울 팔래스 강남 호텔,Sheraton Seoul Palace Gangnam Hotel,"37.500893,127.00167"
-hotels,455538,을지로 코업레지던스,Euljiro CO-OP Residence,"37.56645,127.00553"
-hotels,455856,메트로 호텔,Metro Hotel,"37.565098,126.98372"
-hotels,455860,잠실 관광 호텔,Jamsil Tourist Hotel,
-hotels,455862,동서울 호텔,Hotel Dong Seoul,"37.53422,127.09186"
-hotels,455973,뉴국제호텔,New Kukje Hotel,"37.567802,126.97771"
-hotels,456115,호텔 프리마 서울,Hotel Prima Seoul,"37.524548,127.052124"
-hotels,4608574,JJ 레지던스,JJ Residence,"37.55678,126.97852"
-hotels,4712309,부엉이 게스트하우스,,"37.5755,127.020164"
-hotels,4777343,신디&#39;s B&amp;B,Cindy&#39;s B&amp;B,"37.59602,126.96506"
-hotels,477908,코아텔 쉐르빌,Coatel Chereville,"37.493923,127.0279"
-hotels,4783677,인사동 호스텔,Insadong Hostel,"37.57492,126.98463"
-hotels,4799364,24게스트하우스 신촌 스타일,,"37.55702,126.93483"
-hotels,4884030,문스호스텔,Moon&#39;s Hostel,"37.560627,126.99118"
-hotels,4913610,시어소 호텔,Sieoso Hotel,"37.5657,126.991264"
-hotels,500996,비스타 워커힐 서울,Vista Walkerhill Seoul,"37.555218,127.11091"
-hotels,505891,라이즈 오토그래프 컬렉션,"RYSE, Autograph Collection","37.554543,126.921165"
-hotels,506101,선샤인 호텔,Hotel Sunshine,"37.520542,127.02875"
-hotels,506110,호텔 썬비,,"37.572872,126.98486"
-hotels,506121,뉴 오리엔탈 호텔,,"37.56029,126.98351"
-hotels,506801,노블레스 역삼 호텔 서울,Noblesse Yeoksam Hotel Seoul,
-hotels,5113510,JW 메리어트 동대문 스퀘어 서울,,"37.570164,127.00882"
-hotels,518444,베스트 웨스턴 프리미어 강남,,"37.50634,127.02978"
-hotels,5250436,써미트 호텔,The Summit Hotel Seoul Dongdaemun,"37.562283,127.00664"
-hotels,5252365,호텔 팩토리,Hotel Factory,"37.572067,126.98818"
-hotels,5287493,스타리아 호스텔,,"37.55857,126.98621"
-hotels,5287499,뉴 썬 게스트하우스 명동,New Sun Guesthouse Myeongdong,"37.558018,126.98113"
-hotels,536020,호텔 M,,"37.529613,126.91963"
-hotels,5460911,티마크 호텔 명동,Tmark Hotel Myeongdong,"37.562622,126.99267"
-hotels,547045,호텔 에어포트 서울,Airport Hotel Seoul,
-hotels,5484623,머뭄 게스트하우스,MuMum Guesthouse,"37.580074,126.98726"
-hotels,5540457,호텔 아트리움,Hotel Atrium Jongno,"37.571712,126.99799"
-hotels,555275,파크 하얏트 서울,Park Hyatt Seoul,"37.508526,127.06414"
-hotels,558398,나이아가라 호텔,,"37.549248,126.87861"
-hotels,569419,강남 패밀리 호텔,Gangnam Family Hotel,"37.506218,127.03044"
-hotels,582965,프로비스타 호텔,Provista Hotel,"37.495113,127.01854"
-hotels,582967,임스 하우스,Yim&#39;s House,"37.576378,126.99092"
-hotels,587051,명동 게스트하우스,Myeongdong Guest House,"37.560383,126.9872"
-hotels,5895849,코업 시티 호텔 BMK,Coop City Hotel BMK,"37.495804,126.84492"
-hotels,5895858,시스앤브로,,"37.561123,126.92255"
-hotels,5895977,이가 정원,Lee&#39;s Garden,"37.55905,126.98653"
-hotels,5895989,24게스트하우스 인사동,24Guesthouse Insadong,"37.56923,126.98715"
-hotels,5896602,제로미네 게스트하우스,Xeromine Guesthouse,"37.535477,126.99216"
-hotels,5897152,서울 글로벌 호스텔,Seoul Global Hostel,"37.558334,126.98508"
-hotels,5963221,골든서울 호텔,Golden Seoul Hotel,"37.547832,126.87813"
-hotels,5970253,호텔파밀리아인,Hotel Familia Inn,"37.571964,127.01343"
-hotels,598299,호텔 아트리움 바비엥2,Hotel Atrium Vabien II,"37.565212,126.96767"
-hotels,602902,웨스턴 코업호텔&amp;레지던스,Western CO-OP Hotel &amp; Residence,"37.566414,127.003296"
-hotels,6034361,유자 게스트하우스,UJA Guesthouse,"37.550358,126.91797"
-hotels,607466,호텔 발렌타인,Hotel Valentine,
-hotels,607480,서울 레지던스,,"37.503464,127.04779"
-hotels,6104497,스테이 강남,,"37.517773,127.01835"
-hotels,6104649,모리 게스트하우스,,"37.548923,126.93126"
-hotels,6104780,스위트 컴포트,,"37.555805,126.91849"
-hotels,611304,이비스 앰배서더 서울 명동,Ibis Ambassador Seoul Myeongdong,"37.56419,126.98259"
-hotels,6160747,네오 서울 게스트하우스,Neo Seoul Guesthouse,"37.554607,126.91818"
-hotels,619065,현대레지던스,Hyundai Residence,"37.563717,127.00051"
-hotels,622211,프레이저 플레이스 센트럴 서울,Fraser Place Central Seoul,"37.56238,126.96911"
-hotels,6225109,아이하우스 친친,,"37.564053,126.918564"
-hotels,6225290,리안 호텔,,"37.568943,126.99096"
-hotels,6225403,24게스트하우스 종로타워점,24 Guesthouse Jongno Tower,"37.571663,127.00008"
-hotels,6226170,문 호스텔,Moon Hostel,"37.560497,126.92485"
-hotels,623402,남산게스트하우스 2,,"37.559105,126.984955"
-hotels,6352655,궁 게스트하우스,Gung Guest House,"37.574352,126.99138"
-hotels,6378634,24게스트하우스 가로수길점,24guesthouse Garosu-gil,"37.520267,127.02263"
-hotels,6378733,이코노미 호텔 은평점,,"37.5879,126.91627"
-hotels,6402630,호텔 아띠 충무로,,"37.560646,126.997185"
-hotels,6402635,Ever8 서비스 레지던스,,"37.557434,126.94254"
-hotels,6476325,필름 37.2 호텔,Film 37.2 Hotel,"37.51644,127.1128"
-hotels,6476794,미소 게스트하우스,Miso Guesthouse,"37.55763,126.927315"
-hotels,6476796,K-스테이 게스트하우스,,"37.561985,126.98843"
-hotels,6476798,24게스트하우스 명동시티점,,
-hotels,6476847,호텔 미도,Hotel Mido,"37.558754,126.98062"
-hotels,6476900,호텔 로프트,Hotel Loft,"37.534977,126.89885"
-hotels,6476902,24게스트하우스 강남 센터점,24guesthouse Gangnam Center,"37.50399,127.0335"
-hotels,6476903,24게스트하우스 명동 에비뉴,24guesthouse Myeongdong Avenue,"37.561317,126.97766"
-hotels,6483063,클로이 게스트하우스,Chloe Guest House,"37.51712,127.01968"
-hotels,650959,베스트 웨스턴 프리미어 호텔 국도,Best Western Premier Hotel Kukdo,"37.566376,126.99638"
-hotels,6535698,드림 컴포트,,"37.55797,126.92246"
-hotels,6535744,호텔 더 디자이너스 종로,Hotel The Designers Jongno,"37.56915,126.988846"
-hotels,6536277,88 호스텔,,"37.5549,126.92651"
-hotels,6552893,오빠 호스텔,Oppa Hostel,"37.557648,126.94359"
-hotels,6552915,호텔 카라쉬,Hotel Karashy,"37.47709,126.98041"
-hotels,6556403,데이즈 호텔 명동,Days Hotel Myeongdong,"37.560772,126.98369"
-hotels,6561878,한강 레지던스 &amp; 게스트하우스,,"37.536087,126.94513"
-hotels,6591787,김치 다운타운 게스트하우스,Kimchee Downtown Guesthouse,"37.560814,126.96514"
-hotels,6591791,사랑채 한옥 게스트하우스 ,,"37.577065,126.98444"
-hotels,6591870,남산 힐 호텔,Namsan Hill Hotel,"37.556736,126.982506"
-hotels,659341,여의도파크센터 서울 - 메리어트 이그제큐티브 아파트먼트,,"37.521133,126.91877"
-hotels,661056,더케이호텔서울,The-K Hotel Seoul,"37.466606,127.03297"
-hotels,6621149,베스틴 빌라 명동,,"37.55768,126.9852"
-hotels,6622618,JC 인 동대문 호스텔,,"37.561012,127.00523"
-hotels,6622669,G 이태원 게스트하우스,G Itaewon Guest House,"37.533184,126.99495"
-hotels,6622670,원즈빌 명동,Won&#39;s Ville Myeong-dong,"37.560665,126.98972"
-hotels,6663003,롯데 시티 호텔 구로,Lotte City Hotels Guro,"37.485394,126.89638"
-hotels,6680392,호텔 더 디자이너스 여의도,Hotel The Designers Yeouido,"37.528248,126.92008"
-hotels,6725448,골드힐 게스트하우스,,"37.514233,127.02522"
-hotels,673519,프라임 인 서울 호텔,Prime in Seoul Hotel,"37.616886,126.92383"
-hotels,673725,엘르인 호텔,Hotel Elle Inn,"37.541737,126.97219"
-hotels,6759613,언니네 하우스,Unni House,"37.57632,127.02235"
-hotels,6759637,울타리 호스텔,Ultari Hostel,"37.553864,126.93562"
-hotels,6759652,케이팝 호텔 동대문,,"37.566235,127.006714"
-hotels,6816677,블루보트 호스텔 명동,,"37.563007,126.99068"
-hotels,6817242,필스테이 동대문점,Philstay Dongdaemun DDP,"37.564957,127.00657"
-hotels,6845532,풀리 홍 호스텔,,"37.569904,126.99128"
-hotels,6867343,호텔 스카이파크 동대문 I,,"37.56415,127.002075"
-hotels,6867409,CMS 인 서울,,"37.58936,127.05663"
-hotels,6867428,YD 레지던스,,"37.55087,126.9612"
-hotels,6867443,에이치호텔,,"37.48708,127.01397"
-hotels,6871129,24게스트하우스 서울역 프리미어점,24guesthouse Seoul Station Premier,"37.55361,126.97472"
-hotels,6877397,호텔릿,,"37.55446,126.97351"
-hotels,6892917,24게스트하우스 신촌,,"37.55497,126.93514"
-hotels,6941436,에이블 게스트하우스 홍대 2호점,,"37.55531,126.92689"
-hotels,6941818,에이 하우스,,"37.58317,126.98131"
-hotels,6941825,  ,Benikea Seoul Hotel,"37.5568,126.85999"
-hotels,6941842,케이팝 호텔 서울역점,K-POP Hotel Seoul Station,"37.554688,126.974075"
-hotels,6998634,이비스 버젯 앰배서더 서울 동대문,ibis budget Ambassador Seoul Dongdaemun,"37.564297,127.00858"
-hotels,6998671,예포 게스트하우스,YE&#39;4 Guesthouse,"37.567497,126.91958"
-hotels,6998962,명동 다다하우스,,"37.55956,126.9862"
-hotels,7003892,신설동역 레지던스 동대문,,"37.57626,127.02489"
-hotels,7008092,도미 인 프리미엄 서울 가로수길,,"37.517056,127.02171"
-hotels,7034132,효선재 한옥 게스트하우스,Hyosunjae Hanok Guesthouse,
-hotels,7043159,청연재,Cheong Yeon Jae Hanok Hotel,"37.58033,126.985634"
-hotels,7043377,스타 호스텔 서울 동대문,,
-hotels,7043480,아티스트 77 하우스,Artist 77 House,"37.52682,127.0514"
-hotels,7043495,토모 레지던스,,"37.56193,126.98795"
-hotels,7053590,패밀리 &amp; 프렌즈 하우스 2,,"37.560238,126.92225"
-hotels,7053783,동대문 화신 호스텔,Dongdaemun Hwashin Hostel,"37.56522,127.00339"
-hotels,7053968,호텔 가온,Hotel Gaon,
-hotels,7054545,신라스테이 역삼,Shilla Stay Yeoksam,"37.504753,127.04153"
-hotels,7064499,맘하우스,MOM House,"37.560486,126.9867"
-hotels,7064545,빅 존스 플레이스,Big John&#39;s Place,
-hotels,7074384,D.H 신촌 게스트하우스,D.H Sinchon Guesthouse,"37.552628,126.93677"
-hotels,7074393,베이튼 서울 동대문,,"37.565117,127.00268"
-hotels,7074398,보르조미 서울 부티크 호텔,,
-hotels,7074636,소설 호텔,Snow Hotel,
-hotels,7074669,호스텔 클로이,Hostel Chloe,"37.56862,126.98862"
-hotels,7074698,고고 게스트하우스,Gogo Guesthouse,
-hotels,7089489,호스텔 KW 신사,Hostel KW Sinsa,"37.5126,127.01864"
-hotels,7103191,청담게스트하우스,Cheongdam Guesthouse,"37.525665,127.05014"
-hotels,7103647,이노 호스텔 &amp; 펍라운지 홍대,Inno Hostel &amp; Pub Lounge Hongdae,"37.553623,126.91419"
-hotels,7107794,더 해밀 게스트하우스,The Haemil Feel Like Home,"37.562107,126.926346"
-hotels,7107952,달집 북촌,Dalzip Bukchon,"37.584137,126.983444"
-hotels,7134179,이코노미 호텔 명동 프리미어,Ekonomy Hotel Myeongdong Premier,"37.56151,126.984535"
-hotels,7161281,도담게스트하우스,Dodam Guesthouse,"37.5351,126.9928"
-hotels,7161291,알로프트 서울 강남,,"37.52372,127.05565"
-hotels,7181422,호텔 봉봉,Hotel Bonbon,"37.56649,126.98237"
-hotels,7244241,글래드 호텔 여의도,GLAD Hotel Yeouido,"37.527695,126.91745"
-hotels,7268921,어반 플레이스 강남,Urban Place Gangnam,"37.49163,127.02915"
-hotels,7268972,능마루 게스트하우스,,"37.558918,126.98544"
-hotels,7268980,호텔 마루,,
-hotels,7269014,에스알 호텔 서울 마곡,SR Hotel Seoul Magok,"37.56109,126.83942"
-hotels,7274687,오클라우드 호텔,Ocloud Hotel,"37.503033,127.02389"
-hotels,7274753,호스텔 바닐라 1,,"37.572903,127.011024"
-hotels,7289673,야코리아 호스텔 홍대,YaKorea Hostel Hongdae,"37.557335,126.92918"
-hotels,7305732,호스텔 더 스타일,Hostel The Style,"37.55955,126.923546"
-hotels,7353565,베니키아 프리미어 호텔 베르누이,,"37.49732,126.84589"
-hotels,7353880,쁘찌하우스 노부꼬,Petit House Nobuko,
-hotels,7356220,피오나,Fiona,
-hotels,7356258,동대문 게스트하우스,,
-hotels,7356275,창덕궁 소담,Changdeokgung Sodam,"37.576298,126.99063"
-hotels,7356344,발트 호텔,Valt Hotel,
-hotels,7356363,가온 골든파크,Gaon Golden Park,"37.57083,127.01447"
-hotels,7356365,레인보우 호텔 명동,Rainbow Hotel Myeongdong,"37.56252,126.992134"
-hotels,7357114,케이 서울 호스텔,,
-hotels,7358712,스타즈 호텔 명동 II,Staz Hotel Myeongdong II,"37.562553,126.99065"
-hotels,7358738,골든 시티 호텔,,"37.56265,127.06087"
-hotels,7358746,하우스 740,House 740,"37.558037,126.920975"
-hotels,7358751,쉴 모텔,Sheel Motel,
-hotels,7358763,스타 게스트하우스,Star Guest House,"37.561848,126.97801"
-hotels,7367802,레오 게스트하우스 홍대,Leo Guest House Hongdae,
-hotels,7367825,메이 플레이스 서울 동대문,May Place Seoul Dongdaemun,"37.576206,126.99862"
-hotels,7372632,리치 다이아몬드 호텔,,
-hotels,7382024,호텔 아띠 성수,Hotel Atti Seongsu,"37.54373,127.05695"
-hotels,754311,라마다 호텔 앤드 스위트 서울 남대문,Ramada Hotel and Suites Seoul Namdaemun,"37.560467,126.97217"
-hotels,7597494,송파 호스텔,Songpa Hostel,"37.50829,127.1113"
-hotels,7597620,코코아게스트하우스,Cocoa Guesthouse,"37.549755,126.92175"
-hotels,7597626,트윈래빗 게스트하우스,Twin Rabbit Guesthouse,"37.56058,126.92258"
-hotels,7597655,호텔 나포레,Hotel Nafore,"37.569046,126.990555"
-hotels,7613319,이비스 스타일 앰배서더 서울 명동,Ibis Styles Ambassador Seoul Myeongdong,"37.56166,126.98929"
-hotels,7619069,에이메스 호텔,AMASS Hotel,"37.57721,126.99095"
-hotels,7640343,동대문 인,Dongdaemun Inn,
-hotels,7647148,르와지르 호텔 서울 명동,Loisir Hotel Seoul Myeongdong,"37.561237,126.98465"
-hotels,7654137,호텔 경동,Hotel Kyoungdong,
-hotels,7654251,호텔 부티크 나인,Hotel Boutique 9,
-hotels,7654275,아로하 게스트하우스,Aroha Guest House,"37.55176,126.974396"
-hotels,7654277,MK 리버티 하우스,Mk Liberty House Seoul Station,"37.55448,126.96899"
-hotels,7658049,아이하우스,,
-hotels,7679092,탕파스호스텔,,"37.561653,126.98981"
-hotels,7685020,써클 호텔 서울,,
-hotels,7685026,스테이 비 호텔 명동,Stay B Hotel Myeongdong,"37.56331,126.99287"
-hotels,7685036,플랜 A 호스텔,Plan A Hostel,
-hotels,7685088,케이걸 게스트하우스 여성전용,K-girl Guesthouse Female Only,
-hotels,7685101,남산 시티 호텔 명동,Namsan City Hotel Myeongdong,"37.55798,126.97847"
-hotels,7685147,라온 레지던스 인 강남,,
-hotels,7685521,하모니 호텔,Harmony Hotel,"37.538303,127.13796"
-hotels,7685665,호텔 디오레,Hotel The-Ore,"37.555614,126.92047"
-hotels,7686966,KW 홍대 호스텔,KW Hongdae Hostel,
-hotels,7686969,신라스테이 서대문,Shilla Stay Seodaemun,"37.565163,126.96675"
-hotels,7686974,KW 홍대 라인 호스텔,,
-hotels,7687450,24 게스트하우스 종로3가역,24 Guesthouse Jongno 3ga Station,"37.572895,126.99228"
-hotels,7687499,호텔 명동,,"37.5606,126.97942"
-hotels,7688203,미니 호텔 달콤 동대문,,
-hotels,7688216,솔라리아 니시테츠 호텔 서울 명동,,"37.5626,126.98516"
-hotels,7701584,웰 플러스 비앤비 게스트하우스,Well Plus BnB Guest House,"37.55842,126.9856"
-hotels,7701591,누하당 게스트하우스,Nuhadang Hanok Guesthouse,"37.579826,126.968475"
-hotels,7701925,모노하우스,,"37.555813,126.91881"
-hotels,7738789, ,,"37.58259,126.98743"
-hotels,7738820,쿠즈 호텔,Coups Hotel,
-hotels,7788085,그림 호텔,Grim Hotel,
-hotels,7790767,K-게스트하우스 명동 2,K-guesthouse Myeongdong 2,"37.56187,126.986946"
-hotels,7790768,K-게스트하우스 인사동,K-guesthouse Insadong,"37.573547,126.98618"
-hotels,7790781,K 관광호텔,K-Hotel,"37.545223,126.93005"
-hotels,7792581,케이팝 레지던스동대문,K-POP Residence Dongdaemun,"37.563335,127.00685"
-hotels,7805316,88 게스트하우스,,"37.560062,126.9842"
-hotels,7810424,오리엔스 호텔 &amp; 레지던스,Oriens Hotel &amp; Residences,"37.56005,126.99114"
-hotels,7815269,치선 호텔 서울 명동,Chisun Hotel Seoul Myeongdong,"37.564148,126.99848"
-hotels,7834720,포 포인츠 바이 쉐라톤 서울 남산,"Four Points by Sheraton Seoul, Namsan","37.535984,126.97135"
-hotels,7834994,선라이즈 인 동대문,Sunrise Inn Dongdaemun,"37.575733,127.02177"
-hotels,7905854,인 서울 게스트하우스,In Seoul Guesthouse,"37.570644,126.98739"
-hotels,7905978,이태원 랜드 게스트룸,Itaewon Land Guest Room,"37.53433,126.99726"
-hotels,7905993,지나 하우스 홍대,,"37.561607,126.92542"
-hotels,7917969,비빔밥 게스트하우스,Bibimbap Guesthouse,"37.573364,126.98976"
-hotels,7951496,코쿤 스테이 홍대,,
-hotels,7951531,스카이호텔,Hotel Sky,
-hotels,7997916,서울 N 스테이 호스텔,Seoul N Stay Hostel,"37.564976,127.00211"
-hotels,8024697,K-게스트하우스 신촌 2,K-guesthouse Sinchon 2,"37.55455,126.93492"
-hotels,8024699,K-게스트하우스 명동 1,K-guesthouse Myeongdong 1,"37.560696,126.9833"
-hotels,8026730,나루 호스텔,Naru Hostel,
-hotels,8070350,호텔 스테이 인,Hotel Stay Inn,"37.551964,126.97375"
-hotels,8070371,G 미니호텔 동대문,,
-hotels,8073848,남산게스트하우스 3호점,Namsan Guest House 3,"37.559166,126.98511"
-hotels,8076685,호텔 도마,,"37.561493,126.99564"
-hotels,8076702,홀리데이 인 익스프레스 서울 을지로,Holiday Inn Express Seoul Euljiro,"37.5666,126.98949"
-hotels,8092982,문 썬 게스트 하우스,Moon Sun Guesthouse,
-hotels,8093043,이코노미 호텔 명동 센트럴,Ekonomy Hotel Myeongdong Central,
-hotels,8098623,남산게스트하우스,Namsan Guesthouse,"37.558033,126.98453"
-hotels,8107311,린 호텔,Lin Hotel,
-hotels,8110812,보리 호텔,Boree Hotel,"37.49497,127.036644"
-hotels,8110867,소테츠 호텔즈 더 스프라지르 서울 동대문,,"37.564655,127.00771"
-hotels,8114042,파크 애비뉴 게스트하우스,Park Avenue Guest House,"37.562386,126.92299"
-hotels,8118189,신라스테이 마포,Shilla Stay Mapo,"37.542778,126.94963"
-hotels,8261880,스테이 나우 게스트하우스,Stay Now Guest House,"37.562965,126.92563"
-hotels,8285182,스타 호스텔 동대문 스위트,Star Hostel Dongdaemun Suite,"37.571613,127.00291"
-hotels,8285373,큐브 게스트하우스,Cube Guesthouse,
-hotels,8289152,더 원 호스텔,The One Hostel,
-hotels,8298647,더스테이호텔,The Stay Hotel,"37.56171,126.98674"
-hotels,8298699,나누 게스트하우스 핑크,Nanu Guesthouse Pink,"37.55895,126.92575"
-hotels,8299878,까사 명동 게스트하우스,Casa Myeongdong Guesthouse,"37.56189,126.98767"
-hotels,8299926,동대문 맥스타일 게스트하우스,Dongdaemun Maxtyle Guesthouse,
-hotels,8300169,드림 게스트하우스,Dream Guest House,
-hotels,8300448,호텔 리치웰,Hotel Richwell,
-hotels,8308047,우 게스트하우스,,
-hotels,8308049,88 게스트하우스 종로,,"37.5823,126.980835"
-hotels,8322447,호텔 페이토 강남,Hotel Peyto Gangnam,"37.486523,127.033134"
-hotels,8322705,에스비 호텔,,
-hotels,8327049,JW 스테이,,
-hotels,8368838,호텔 8 아워즈,Hotel 8 Hours,"37.562202,126.97791"
-hotels,8369100,비 마이 게스트,Be My Guest,"37.533234,126.993225"
-hotels,8394112,요트 게스트하우스,,"37.535408,126.99226"
-hotels,8457967,탑 호텔,Top Hotel,"37.55897,126.97985"
-hotels,8458163,24게스트하우스 명동 타운,24guesthouse Myeongdong Town,"37.559456,126.97897"
-hotels,8458286,카림 게스트하우스,Charim Guesthouse,"37.564926,127.007355"
-hotels,8458309,루미아 호텔,Lumia Hotel,"37.55804,126.97965"
-hotels,8458310,제이 스토리 게스트하우스,,
-hotels,8458325,필스테이 동대문 이코노믹,Philstay Dongdaemun Economic,"37.5663,127.00394"
-hotels,8458377,탑 호텔 &amp; 레지던스,Top Hotel &amp; Residence,"37.57352,126.98886"
-hotels,8476641,더 메이 하우스,The Mei Haus,"37.567745,126.919075"
-hotels,8476681,서울달빛 DDP지점,Seoul Dalbit DDP,"37.56165,127.00555"
-hotels,8476780,하모리 게스트하우스,Hamory Guesthouse,"37.56542,127.00943"
-hotels,8476956,명동 게스트하우스 ZZ,Myeongdong Guesthouse ZZ,"37.560677,126.986885"
-hotels,8482107,명동 와이 하우스,,
-hotels,8522924,호텔 바로아토,,"37.559216,126.92434"
-hotels,8522933,L7명동,,"37.56136,126.98682"
-hotels,8522945,롯데 시티 호텔 명동,Lotte City Hotel Myeongdong,"37.566803,126.98803"
-hotels,8523099,타임 트래블러즈 파티 호스텔,,"37.56087,126.92748"
-hotels,8523103,57 명동 호스텔,57 Myeongdong Hostel,"37.56093,126.98339"
-hotels,8555505,호텔 더 디자이너스 동대문,Hotel The Designers Dongdaemun,"37.56373,127.00562"
-hotels,8555913,파티오 59 게스트하우스 홍대점 2,Patio 59 Guesthouse Hongdae Branch 2,"37.56231,126.92"
-hotels,8591381,리안 게스트하우스,,"37.613167,127.01109"
-hotels,8608162,소테츠호텔즈 더 스프라지르 서울 명동,Sotetsu Hotels the Splaisir Seoul Myeong-Dong,"37.56203,126.9789"
-hotels,8611003,타라 호텔,Tara Hotel,
-hotels,8630628,호텔 더 디자이너스 리즈 강남 프리미어,Hotel The Designers LYJ Gangnam Premier,"37.505337,127.02593"
-hotels,8631724,모닝스카이 호텔,,"37.56399,126.99996"
-hotels,8672688,한스 하우스,Han&#39;s House,
-hotels,8672927,한 게스트하우스,Han Guesthouse,
-hotels,8673254,도담 게스트하우스,Guesthouse Dodam,
-hotels,8673261,레지던스 유니콘 인 동대문,Residence Unicorn in Dongdaemun,
-hotels,8681682,호텔 포레힐,Hotel Foreheal,"37.51197,127.023735"
-hotels,8681735,호텔 카푸치노,Hotel Cappuccino,"37.5068,127.03149"
-hotels,8681737,aPM 게스트하우스,,
-hotels,8686250,트리앙겔 게스트하우스,Triangel Guesthouse,
-hotels,8686362,24 게스트하우스 서울시청점,24guesthouse Seoul City Hall,"37.56486,126.97636"
-hotels,8691139,S.A 아파트먼트 서울역,Service Apartment Seoul Station,"37.55504,126.96838"
-hotels,8691279,호텔 페이토 삼성,Hotel Peyto Samseong,"37.50849,127.05922"
-hotels,8691294,서울타워 패밀리 게스트하우스,Seoul Tower Family Guesthouse,
-hotels,8691395,스타호스텔 인사동,Star Hostel Insadong,"37.572998,126.99044"
-hotels,8691771,필스테이 이태원점,,"37.535614,126.99198"
-hotels,8691874,예하도예 게스트하우스,Yehadoye Guest House,
-hotels,8692195,바티카 호텔,Vatica Hotel,
-hotels,8692479,호텔 슬리피 판다 스트림워크,Hotel Sleepy Panda Stream Walk,
-hotels,8692646,투투 하우스,,"37.561485,126.92446"
-hotels,8692662,크라운 파크 호텔 서울,,"37.563755,126.98076"
-hotels,8692780,엠버시 게스트하우스,Guesthouse Embassy,"37.53335,127.00554"
-hotels,8701595,양미모텔,,"37.561146,127.005684"
-hotels,8701673,허브 호텔,,"37.50962,127.08549"
-hotels,8701716,몽모텔,Mong Motel,"37.576447,127.025406"
-hotels,8705143,코지박스,Cozybox,
-hotels,8705163,해피 데이 패밀리,,"37.533142,127.07041"
-hotels,8705421,저스트포유 게스트하우스,Just4u Guesthouse,"37.571507,127.00741"
-hotels,8706009,하오 게스트하우스,,"37.5554,126.92676"
-hotels,8706565,써니힐 게스트하우스 홍대,Sunnyhill Guesthouse Hongdae,"37.584385,127.00267"
-hotels,8706793,하우스테이 게스트하우스 2호점,Housetay Guesthouse 2,"37.555607,126.92561"
-hotels,8708102,준 게스트 하우스,,
-hotels,8709452,홍대스타일 게스트하우스,,"37.557465,126.92085"
-hotels,8709460,드림인서울,Dream Inn Seoul,"37.486485,126.92988"
-hotels,8713943,31 페이지,31 Page,"37.582424,127.04865"
-hotels,8766134,10 게스트하우스,,
-hotels,8773807,바빌론 관광호텔,Babylon Tourist Hotel,
-hotels,8773892,호텔 648,,
-hotels,8773968,큐모텔,Q Motel,"37.553467,126.93575"
-hotels,8790502,The AN 호스텔,The AN Hostel,"37.565216,126.98955"
-hotels,8806838,글로리 인,Glory Inn,"37.56506,127.00212"
-hotels,9452203,신라스테이 광화문,Shilla Stay Gwanghwamun,"37.57244,126.98114"
-hotels,9454059,아이스테이,Istay,
-hotels,9454368,K-게스트하우스 명동 3,K-Guesthouse Myeongdong 3,"37.562454,126.985825"
-hotels,9454415,에이큐브 호텔,Acube Hotel,"37.566257,127.00177"
-hotels,9454482,호텔 밀리오레,Hotel Migliore,"37.568066,127.00848"
-hotels,9454537,신라스테이 구로,Shilla Stay Guro,"37.485657,126.9044"
-hotels,9553151,지월장 게스트하우스,Jiwoljang Guest House,"37.54711,126.9791"
-hotels,9564232,두 게스트하우스 북촌 2,Doo guesthouse Bukchon 2,"37.579838,126.9865"
-hotels,9594362,K-게스트하우스 프리미엄 강남 1,K-guesthouse Premium Gangnam 1,"37.50538,127.025246"
-hotels,9594423,공감 호텔,Gonggam Hotel,
-hotels,9594532,호텔 더 디자이너스 청량리,Hotel the Designers Cheongnyangni,"37.58167,127.0476"
-hotels,9594536,스타 호스텔 명동 패밀리,,"37.56076,126.99545"
-hotels,9594549,K-게스트하우스 인사동 2,K-Guesthouse Insadong 2,"37.56927,126.98406"
-hotels,9709682,베니키아 프리미어 호텔 동대문,,"37.573547,127.02015"
-hotels,9722314,서울 달빛 게스트하우스,Seoul Dalbit Dongdaemun Guesthouse,"37.571976,127.01455"
-hotels,9735755,마이 리틀 게스트하우스,,"37.56171,126.91984"
-hotels,9751158,호텔 칸,Hotel Khan,"37.525063,126.90961"
-hotels,9796468,호텔 베네,Hotel Bene,"37.565052,126.9925"
-hotels,9796501,벙크 게스트하우스,,"37.554863,126.92709"
-hotels,9806612,호텔 인피니,Hotel Infini,
-hotels,9811641,나그네 하우스,NagNe House,"37.576736,126.97163"
-hotels,9820385,로드하우스 명동,,"37.561893,126.99399"
-hotels,9861332,호텔 베뉴지,Hotel Venue G,"37.568253,126.99102"
-hotels,9861769,블랑 호텔,Blanc Hotel,
-hotels,9861857,코코리빙텔,,
-hotels,9861917,E-호텔,E-Hotel,
-hotels,9861925,모스트 스테이,Most Stay,
-hotels,9865547,K게스트하우스 프리미엄 명동4호점,K-Guesthouse Premium Myeongdong 4,
-hotels,9981959,메이커스호텔,,"37.57242,126.98954"
-hotels,9982952,베스틴 호스텔 명동,Vestin Hostel Myeongdong,"37.561844,126.989426"
-hotels,9986158,코트야드 서울 남대문,,"37.56108,126.97658"
-hotels,10308634,,Paul&#39;s Guesthouse,
-hotels,10435947,,Midam Hanok Guesthouse,
-hotels,10517178,,Bukchon Guesthouse,
-hotels,10532596,,Dajayon Hanok Guesthouse,
-hotels,10815717,,Michigan House &amp; Pub,
-hotels,1092902,,Blue Pearl,
-hotels,1149394,,New Chonji Hotel,
-hotels,1162483,,Hotel Dodo,
-hotels,1174525,,Green Grass Hotel,
-hotels,1174908,,Inn daewon,
-hotels,11858514,,Hanok Guesthouse 202,
-hotels,1186308,,Cima Hotel,
-hotels,1186366,,Hotel Giant,
-hotels,1186436,,Hilltop Tourist Hotel,
-hotels,11864486,,Seoul Station Guesthouse,
-hotels,11864553,,Gyerim Guesthouse,
-hotels,1186456,,Yeongdeungpo Tourist Hotel,
-hotels,11893470,,Yeonwoo House,
-hotels,11930690,,Western River Gangseo Hotel,
-hotels,1196104,,Goldenpond Guesthouse,
-hotels,11961065,,96 BUN&#39;Z Travelers Lodge,
-hotels,1201688,,Zen House,
-hotels,1207481,,Soo Eun Motel,
-hotels,12222145,,Kpop Hotel,
-hotels,12276613,,Gold River Hotel,
-hotels,12404787,,Bed Station,
-hotels,12581877,,Oasis Hostel,
-hotels,12711314,,Hotel Bridge,
-hotels,12881255,,JM Guest house,
-hotels,13090210,,Petercat Hotel,
-hotels,13222713,,Natzam Guesthouse,
-hotels,13369899,,TravelersA Seoul Hostel,
-hotels,13397073,,Hostel Gaon,
-hotels,13428462,,Whitetail Backpacker Hostel,
-hotels,13440554,,Myeong Dong Tomato Guest House,
-hotels,1373946,,Tuyosinoie,
-hotels,13952968,,Hotel Bellagio,
-hotels,13984668,,MW Guest House,
-hotels,1462092,,Bali Tourist Hotel,
-hotels,1500586,,Rakkojae Seoul,
-hotels,1568154,,Seoul I Guesthouse,
-hotels,1627213,,JIN Guest House,
-hotels,1628967,,Bangrang Hostel,
-hotels,1637184,,Bebop Guesthouse,
-hotels,1745746,,Chung Jin Motel,
-hotels,1745756,,Emerald Motel,
-hotels,1745760,,Green Residence,
-hotels,1745761,,Hotel Cape Town,
-hotels,1748605,,Samo Motel,
-hotels,1754398,,Rainbow Guest House,
-hotels,1754763,,Prada Hotel,
-hotels,1796658,,Banyan Tree Club &amp; Spa Seoul,
-hotels,1818900,,Ann Guesthouse,
-hotels,1837003,,IB Ville Guesthouse,
-hotels,1871966,,Yoo&#39;s Family Guesthouses Yeorumjip,
-hotels,1935824,,Hotel-D,
-hotels,1948629,,Namu Guesthouse,
-hotels,1971598,,Seoul Walker Guest House,
-hotels,2024033,,Jun Motel,
-hotels,2046600,,The WIN Boutique Hotel,
-hotels,2076592,,Seoulwise Guesthouse,
-hotels,2097820,,City Guesthouse,
-hotels,2143287,,IS@K Traveler&#39;s Lounge,
-hotels,2150190,,Hotel Tomgi,
-hotels,2150223,,8 Motel,
-hotels,2150260,,Toptel Hotel,
-hotels,2150285,,M Hotel,
-hotels,2150328,,Carlton Hotel,
-hotels,2150403,,Motel Mido,
-hotels,2150532,,Cf Motel,
-hotels,2150542,,Violin Hotel,
-hotels,2150611,,Mojo Hotel,
-hotels,2150620,,Noblesse Hotel,
-hotels,2150642,,Hotel Dubai,
-hotels,2150693,,Highway Hotel,
-hotels,2150726,,Hotel Bellagio,
-hotels,2150913,,Keumkangjang inn,
-hotels,2150945,,Ritz Motel,
-hotels,2182167,,Metro Spa Cabin,
-hotels,2198830,,Traditional Korean Guesthouse,
-hotels,2219111,,Bongsan Guesthouse,
-hotels,2282463,,2C House Wangsimni,
-hotels,2293677,,Hangul House,
-hotels,2293780,,Namkyong Hotel,
-hotels,2295120,,Kundaemunjip,
-hotels,2303927,,Seoul Youth Hostel,
-hotels,2337168,,Hotel Echae,
-hotels,2337194,,Hotel April,
-hotels,2483958,,Guesthouse Phil-house,
-hotels,2513907,,Dongdaemun Hostel,
-hotels,2519660,,Birdsnest Hostel,
-hotels,2530060,,ZaZa Hotel Jamsil,
-hotels,2530498,,Hotel Pav,
-hotels,2533593,,Chezlee Hotel,
-hotels,2533673,,Nex Hotel,
-hotels,2539495,,Dongdaemun 2C House,
-hotels,2542071,,Daeyang Motel,
-hotels,2543627,,Mint Guesthouse in Hongdae - Mr. Kim&#39;s Branch,
-hotels,2546614,,Homestay Seoul Ahn,
-hotels,2553756,,An-Nyoung Guesthouse,
-hotels,2571575,,Girls Generation Hostel,
-hotels,2629757,,Soul Guesthouse,
-hotels,2641873,,Carlton Motel,
-hotels,2641883,,Cutee Hotel,
-hotels,2642077,,Shinchon Eureka Guesthouse,
-hotels,2642160,,Hotel S,
-hotels,2642171,,Stylish Hotel Ditto,
-hotels,2653697,,FL Hotel,
-hotels,2658445,,Segumjung Blues Guest House,
-hotels,2658481,,Big Tree Guesthouse,
-hotels,299776,,JW Marriott Hotel Seoul,
-hotels,3154906,,Nyx Hotel,
-hotels,3154922,,Seocho-dong Co-op Residence,
-hotels,3154940,,Tea Time Share Residence,
-hotels,3161549,,Bando Hotel,
-hotels,3161565,,Seoul Hostel Center,
-hotels,3161571,,POP@Itaewon Guesthouse,
-hotels,3249458,,Space Torra,
-hotels,3254548,,U &amp; I Hostel,
-hotels,3272476,,Backpackers Space,
-hotels,3274076,,KW Pencil Hostel,
-hotels,3274321,,Jin&#39;s Paradise,
-hotels,3274728,,Sky Motel,
-hotels,3291621,,Morning Guesthouse Gangnam 1,
-hotels,3291643,,MW Hotel,
-hotels,3291645,,Red Fish Guesthouse,
-hotels,3291647,,Guesthouse Beehive,
-hotels,3291684,,Hotel Yaja Guro,
-hotels,3291686,,Mi House,
-hotels,3291691,,WS Hotel,
-hotels,3295602,,Four Seasons House,
-hotels,3349559,,Ultari House 1,
-hotels,3354449,,Fully House,
-hotels,3356594,,Yoo&#39;s Family Guesthouses Byeolhadang,
-hotels,3366752,,Hotel Parfe,
-hotels,3369103,,K Hostel,
-hotels,3370879,,Hite Motel,
-hotels,3389031,,Hotel Tree shade,
-hotels,3389289,,Pearl Hotel,
-hotels,3433133,,Lavinia,
-hotels,3438789,,Lodge 82,
-hotels,3438793,,Sloth guesthouse,
-hotels,3447139,,Hawseongjang,
-hotels,3477036,,Myeongdong Town Guesthouse,
-hotels,3477095,,Motel Yam Sinchon,
-hotels,3477113,,Mong Hotel,
-hotels,3477119,,Family House Tel,
-hotels,3531768,,DSBC,
-hotels,3540875,,Boa travel house,
-hotels,3568795,,Chez Nicolas B&amp;B,
-hotels,3568833,,May Hotel Dongdaemun,
-hotels,3568904,,Kimchi Guesthouse,
-hotels,3568954,,Hotel Time,
-hotels,3568977,,Koose Motel,
-hotels,3571239,,Greentel,
-hotels,3571244,,Just Stay Hotel,
-hotels,3575497,,We2 Hotel,
-hotels,3575500,,Hotel Star,
-hotels,3575561,,Hotel Unique by Foret,
-hotels,3581568,,The Seoul,
-hotels,3595030,,Hotel Yaja Yeongdeungpo,
-hotels,3600472,,Ceylon Hotel,
-hotels,3612234,,Ritz Hotel,
-hotels,3616687,,Leo Haus,
-hotels,3618328,,Hill Livingtel Nambu Terminal,
-hotels,3627578,,Hotel M,
-hotels,3627933,,Khaosan In Seoul,
-hotels,3630329,,BNB Chungdam,
-hotels,3640677,,Park Hill Residence,
-hotels,3642712,,KpopStay,
-hotels,3642742,,Ewha Dh Guesthouse,
-hotels,3653244,,Gangnam Guesthouse,
-hotels,3656148,,Seochon Guesthouse,
-hotels,3660712,,New Myeongdong Guesthouse,
-hotels,3682077,,Gom Hostel Dongdaemun,
-hotels,3687344,,The JA in Gangnam,
-hotels,3723552,,Sarangbang Motel,
-hotels,3793058,,Blu GuestHouse 3,
-hotels,3813601,,JJ Residence,
-hotels,3814474,,FunFunStay Guesthouse,
-hotels,3814669,,Guesthouse The Hill,
-hotels,3814735,,Soo Guesthouse,
-hotels,3858610,,Sopoong Guest House,
-hotels,3950995,,Two Star Motel,
-hotels,3951109,,TM Motel,
-hotels,3965332,,Paras,
-hotels,3974714,,Samsung Motel,
-hotels,3976703,,Sky Motel,
-hotels,3977299,,Piano Motel,
-hotels,3979548,,Opera Motel,
-hotels,3980745,,Theme Motel,
-hotels,4006069,,Khaosan Seoul Insadong,
-hotels,4006171,,Rio House Hongdae,
-hotels,4009695,,Crossroad Backpackers,
-hotels,4036576,,Mrs. Yoon BnB,
-hotels,4054919,,Motel Rexville,
-hotels,4071531,,Dragon Hill Lodge,
-hotels,4105523,,Hostel Tommy,
-hotels,4134889,,Motel Yam Jongno,
-hotels,4134992,,Roo Roo Residence,
-hotels,4135824,,Inn-the City Serviced Residence Gangnam,
-hotels,4137680,,Hotel Grammos,
-hotels,4153722,,Maruji Guesthouse,
-hotels,4170938,,Dongdaemun Hostel,
-hotels,4344758,,Suitcasers,
-hotels,4354716,,Agrina Guesthouse,
-hotels,4409027,,Jongno Lemontree Hotel,
-hotels,4412264,,Garosu Stay,
-hotels,4412459,,Pigfly House,
-hotels,447939,,Mayfield Hotel &amp; Resort,
-hotels,447940,,Hotel Double A,
-hotels,4504693,,Bridge Backpackers,
-hotels,454920,,Yeongdong Hotel,
-hotels,455448,,California Hotel,
-hotels,455859,,Central Tourist,
-hotels,455861,,The Kims Tourist Hotel,
-hotels,4590180,,Travelers Planet Hostel,
-hotels,4590202,,Samho Park Hotel,
-hotels,4590208,,K-POP Starz House,
-hotels,4608638,,May guesthouse,
-hotels,4749758,,24guesthouse Dongdaemun Style,
-hotels,4763185,,Mamas &amp; Papas Hongdae Guesthouse,
-hotels,4777440,,24 Guesthouse Dongdaemun,
-hotels,5020087,,HueAhn Guesthouse,
-hotels,5039804,,Sinchon Yasuragi,
-hotels,506326,,Kyung Nam Tourist Hotel,
-hotels,5122452,,Sazanami Guesthouse,
-hotels,5252370,,Local Stitch,
-hotels,535491,,California Tourist Hotel,
-hotels,5540642,,Bigbang Hostel,
-hotels,5541130,,Hato Guest House,
-hotels,5541135,,G.O.D Guest House,
-hotels,5541138,,Charm House,
-hotels,557914,,Wow! Guest House,
-hotels,5579765,,It Place Korea,
-hotels,558060,,Hotel River Park,
-hotels,558396,,Nest B&amp;B,
-hotels,578729,,Hotel Victoria,
-hotels,582966,,Tiffany Tourist Hotel,
-hotels,5895936,,Uwa Guesthouse,
-hotels,5895982,,24 guesthouse Edae,
-hotels,5895986,,24guesthouse Daehakro,
-hotels,5897190,,Gyeongbokgung Guest House,
-hotels,5897213,,Urbanwood Guesthouse,
-hotels,6104325,,Salut ABC Guesthouse,
-hotels,6104327,,Gaonjae,
-hotels,6104646,,Hostel KW Gangnam,
-hotels,6104681,,Wonnie&#39;s Guest House,
-hotels,6104831,,Feliz Guesthouse,
-hotels,6104852,,Solarium City,
-hotels,6104872,,The Rooming House,
-hotels,6160692,,Philstay Ehwa Womans Univ.,
-hotels,634779,,Hotel Benhur,
-hotels,6378649,,I.T.W Hotel,
-hotels,6380504,,Kimchee Dongnimmun Guesthouse,
-hotels,6400700,,Bounce Guesthouse,
-hotels,6476904,,24guesthouse Dongdaemun Market,
-hotels,649806,,Han Suites Serviced Residences,
-hotels,6536275,,Korstay Jonggak Insadong,
-hotels,6541532,,OMG Hostel,
-hotels,6541616,,Hotel Tong Andante Insadong,
-hotels,6552922,,Morning Sky Residence,
-hotels,6556234,,Hotel Cullinan Jongno,
-hotels,6556289,,BJ Hotel,
-hotels,655897,,Vabien Suite I Serviced Residence,
-hotels,6561923,,the BOOT Guesthouse,
-hotels,6628354,,Haechi Hostel,
-hotels,6662767,,Ujin Motel,
-hotels,6662999,,24 Guesthouse Namsan Garden,
-hotels,6759626,,Small House Big Door,
-hotels,6816705,,Manaedang Guesthouse,
-hotels,6871335,,IU Guesthouse,
-hotels,6876146,,Ramada Encore Seoul Dongdaemun,
-hotels,6941461,,Reading Bank,
-hotels,6941478,,YaKorea Hostel Dongdaemun,
-hotels,6941511,,Hide &amp; Seek GuestHouse,
-hotels,6960801,,Seoul City Hotel,
-hotels,7043488,,Hotel Imt,
-hotels,7053601,,Icos Guesthouse 2,
-hotels,7054436,,Hotel Tong Seoul Myeongdong,
-hotels,7065399,,The Mei Forestvill,
-hotels,7065406,,Chachacha Guest House,
-hotels,7074389,,Hotel Eastern I,
-hotels,7074449,,Story House Jamsil,
-hotels,7074454,,Hotel QB,
-hotels,7074490,,Good Morning Parktel,
-hotels,7089473,,Skycity Residence,
-hotels,7112812,,Gateway Korea Guesthouse,
-hotels,7161309,,Insandong Design Hostel,
-hotels,7178669,,Hoam Faculty House,
-hotels,7183894,,Capetown,
-hotels,7186671,,Albergue Guesthouse,
-hotels,7221558,,Vin Guest House,
-hotels,7221841,,JNJ Residence,
-hotels,7274718,,Hostel Vanilla 2,
-hotels,7274742,,STEP INN Myeongdong 1,
-hotels,7289688,,K-POP HOTEL Seoul Tower,
-hotels,7296172,,Cozy Box Guest House,
-hotels,7353793,,Bodeum Guest House,
-hotels,7356359,,Log-Inn Guesthouse Seoul,
-hotels,7367829,,Jouvence Motel,
-hotels,7390323,,Lazy Fox,
-hotels,7619090,,D Seven Suites,
-hotels,7654211,,Hotel Denim,
-hotels,7654241,,Dongdaemun Wellbeing Hostel,
-hotels,7658156,,NJoy Guesthouse,
-hotels,7679094,,Hostel Korea 10th,
-hotels,7685049,,Gonggam Guesthouse,
-hotels,7687019,,Golden Pond Guest House,
-hotels,7701462,,Nanu Guesthouse Black,
-hotels,7701863,,1969 GuestHouse,
-hotels,7717643,,Jenna Suite,
-hotels,7717649,,May&#39;s House,
-hotels,7762294,,Jamsil Guest House,
-hotels,7793011,,Seoul Sweet Style Guest House,
-hotels,7835598,,Cozyplace Guesthouse,
-hotels,7954585,,Goguma Hotel,
-hotels,799326,,CasaVille Residence Sinchon,
-hotels,7998017,,Trick Art Guest House Hongdae,
-hotels,8073776,,Leo Guesthouse,
-hotels,8073792,,Town Guest House 2,
-hotels,8076781,,Bauhaus Guesthouse,
-hotels,8107148,,Seoul Sweet Theme Guest House,
-hotels,8294557,,Motel Daeha,
-hotels,8299865,,Housetay 2,
-hotels,8308055,,N Guest House Itaewon,
-hotels,8317146,,BoBo Memberstel SNU Branch,
-hotels,8317279,,Grand Field Residence Hostel,
-hotels,8323639,,Haedamchae Stay,
-hotels,8368983,,Gana Myeongdong Guesthouse,
-hotels,8404072,,Dragon Hill Spa &amp; Resort,
-hotels,8404091,,Bong Backpackers,
-hotels,8428750,,Hongdae Chef Guesthouse,
-hotels,8492267,,Eel Guest House,
-hotels,8611025,,Donggyeong Hotel,
-hotels,8681406,,Single House,
-hotels,8681704,,Olive Guesthouse,
-hotels,8681714,,Andy House,
-hotels,8681726,,IS at K Guesthouse,
-hotels,8705097,,Daon House,
-hotels,8705103,,Charlestel Guesthouse,
-hotels,8705408,,Haha Guesthouse,
-hotels,8705711,,Hotel Pop 2,
-hotels,8706575,,Doors Guesthouse,
-hotels,8709450,,Hotel Nine,
-hotels,8773880,,Running Man Hostel,
-hotels,8790387,,Comestay,
-hotels,8806857,,Mir Residnece,
-hotels,9457183,,Seoul JJ House,
-hotels,9594414,,H Myeongdong Stay,
-hotels,9597881,,Prince Hotel,
-hotels,9735758,,MUST STAY HOTEL Myeongdong,
-hotels,9764289,,Hotel ROinhome,
-hotels,9770463,,Usimdang,
-hotels,9799771,,Villa Seoul Garosugil,
-hotels,9806494,,24 Guesthouse Gyeongbokgung,
-hotels,9806598,,Evada Residence,
-hotels,9820471,,IBC Hotel,
-hotels,9861024,,J. Garden,
+class,placeId,score,name_kor,name_eng,location
+hotels,10000046,5.0,댓 하우스,,
+hotels,10038332,2.5,XYM 부티크 호텔,Boutique Hotel Xym,"37.50938,127.064384"
+hotels,10081452,3.3333333333333335,호텔 라싸,Hotel Lassa,
+hotels,10081500,2.5,호텔 2.4,Hotel 2.4,
+hotels,10189330,5.0,류게스트하우스,,"37.523125,127.02618"
+hotels,10205834,4.445454545454545,티마크 그랜드 호텔 명동,Tmark Grand Hotel Myeongdong,"37.55831,126.97836"
+hotels,10205977,4.666666666666667,마중하우스,Majung Haus,"37.5526,126.97573"
+hotels,10299463,5.0,Guest House ABOUT,Guest House ABOUT,"37.5628,127.00823"
+hotels,10331620,4.966666666666667,호스텔하루,Hostel HARU,"37.56893,126.98434"
+hotels,10380258,4.604166666666667,이비스 앰배서더 서울 동대문,,"37.566307,127.00208"
+hotels,10399655,4.714285714285714,보눔1957 한옥 스테이 앤 호텔,Bonum 1957 Hanok Stay and Hotel,"37.581764,126.98486"
+hotels,10428145,2.5,호텔 소울하다,Hotel Soulhada,"37.49894,127.03245"
+hotels,10447640,4.0,모노하우스버젯,Mono House Budget,"37.562973,126.924355"
+hotels,10449106,4.4,Stay Hotel Gangnam,Stay Hotel Gangnam,"37.499454,127.03539"
+hotels,10483549,4.397849462365591,호텔스카이파크 킹스타운동대문점,Hotel Skypark Kingstown Dongdaemun,"37.56894,127.00771"
+hotels,10514149,4.3023255813953485,아만티 호텔 서울,,"37.557198,126.918816"
+hotels,10543135,4.823529411764706,게스트하우스 파자마파티,Guesthouse Pajamaparty,"37.56464,126.923744"
+hotels,10597697,5.0,정 하우스 홍대,Jeong House Hongdae,"37.558483,126.92813"
+hotels,10636497,3.7777777777777777,컴온 게스트하우스 명동,Come On Guesthouse Myeongdong,"37.55967,126.99583"
+hotels,10637576,4.194444444444445,시타딘 한리버 서울,Citadines Han River Seoul,"37.540787,126.89071"
+hotels,10641837,4.0,아트몬스테이 게스트하우스,Artmonstay Guesthouse,"37.557392,126.98523"
+hotels,10692374,4.665271966527197,호텔28 명동,Hotel28 Myeongdong,"37.564274,126.98392"
+hotels,10794734,5.0,게스트하우스 수,Guesthouse Soo,"37.579918,126.96798"
+hotels,10999937,4.0,코코모 호텔,,"37.502,126.88334"
+hotels,1112201,4.2,비원 게스트하우스,Beewon Guest House,"37.57611,126.98986"
+hotels,11444263,4.0,칠리게스트하우스,Chilli Guesthouse,"37.556274,126.91902"
+hotels,1149130,4.777777777777778,필스테이 명동역점,Philstay Myeongdong Station,"37.561653,126.98541"
+hotels,1149165,3.142857142857143,미오 II 디자인 레지던스,Mmmio II Design Residence,"37.565475,126.99161"
+hotels,1150903,4.111111111111111,영빈 호텔,Youngbin Hotel,"37.562958,127.00564"
+hotels,11626607,4.523809523809524,호텔 엔트라 강남,,"37.524338,127.048325"
+hotels,1162688,3.125,레이크 호텔,,"37.506706,127.10095"
+hotels,11667433,5.0,브릭스 호텔,,"37.59995,126.920975"
+hotels,11704055,5.0,K게스트하우스 동대문5호점,K-Guesthouse Dongdaemun 5,"37.56533,127.00686"
+hotels,11725904,4.205882352941177,  강남,Glad Live Gangnam,"37.50825,127.03635"
+hotels,11725914,3.5,참 한옥 게스트 하우스,Charm Hanok Guest House,"37.575756,126.989525"
+hotels,1174409,4.033333333333333,세림호텔,Saerim Hotel,"37.573475,126.984474"
+hotels,1175377,3.0,한강 호텔,Han Kang Hotel,"37.548027,127.10973"
+hotels,1175419,3.75,호텔 프린세스,,"37.527367,127.03664"
+hotels,11804600,4.634920634920635,에이퍼스트호텔 명동,,"37.56762,126.98096"
+hotels,11807873,5.0,소풍 더 어반,,"37.562313,126.92641"
+hotels,11832219,5.0,나비호스텔,,"37.557926,126.92483"
+hotels,11836259,4.333333333333333,드림하우스,Dream House,
+hotels,11846421,5.0,서촌 가치 비엔비,Seochon Gachi B&amp;B,"37.579556,126.96612"
+hotels,11857609,3.0,24게스트하우스 신촌에비뉴,24 Guesthouse Sinchon Avenue,"37.55789,126.93765"
+hotels,11858387,3.0833333333333335,글로벌인 동대문 시티데이즈인,Global Inn Seoul Dongdaemun City Days Inn,
+hotels,1186374,3.111111111111111,가락 관광호텔,Karak Tourist Hotel,
+hotels,1186443,3.7,뉴 코리아 호텔,New Korea Hotel,"37.55827,126.97956"
+hotels,11864693,4.0,필스테이 동국대점,Philstay Dongguk Univ.,"37.564465,127.0081"
+hotels,1192832,4.0,뉴천지호텔,New Cheonji Hotel,
+hotels,11930699,3.5,아트뷰 호텔,Artview Hotel,"37.56293,126.992226"
+hotels,11946590,4.8,그리드인호텔,Grid Inn Hotel,"37.5696,126.99133"
+hotels,11951860,1.0,DH 명동 게스트하우스,DH Myeongdong Guesthouse,
+hotels,11959021,5.0,아임그린게스트하우스,I&#39;m Green Guesthouse,"37.59227,126.99284"
+hotels,1196129,4.4,호스텔 코리아,,"37.575535,127.020515"
+hotels,1196458,4.4,리앤노 게스트하우스,,"37.561447,126.92109"
+hotels,11964803,5.0,타임트래블러 릴렉스,,"37.56042,126.93024"
+hotels,1196533,4.4,바나나 백패커스,,"37.54635,126.97903"
+hotels,12019574,3.8333333333333335,호텔도트명동,Hotel Dott Myeongdong,"37.56182,126.987915"
+hotels,1202980,4.0,홍대 게스트하우스,,"37.556564,126.92308"
+hotels,12033515,3.7142857142857144,호텔더디자이너스 건대점,Hotel The Designers Kondae,"37.558506,127.07653"
+hotels,12079226,4.428571428571429,호텔조커,Hotel Joker,"37.526432,126.88393"
+hotels,12079886,4.333333333333333,호텔유리앤,Hotel URI&amp;,"37.50894,127.05771"
+hotels,12094531,4.444444444444445,도미인 서울 강남,Dormy Inn Seoul Gangnam,"37.505795,127.02938"
+hotels,12101833,4.75098814229249,알로프트 서울 명동,Aloft Seoul Myeongdong,"37.56248,126.98169"
+hotels,12105731,2.6666666666666665,라마다앙코르서울마곡호텔,,"37.56808,126.82634"
+hotels,12133931,3.0,필스테이 명동점,Philstay Myeongdong,"37.564102,126.98537"
+hotels,12154415,4.0,호텔 가온 종로,,"37.5705,126.98706"
+hotels,12188178,4.125,호텔이노스테이,Hotel Inno Stay,"37.565876,127.05395"
+hotels,12193383,1.0,레피하우스,Refee house,"37.523746,127.05243"
+hotels,12196120,5.0,집게스트하우스,,"37.547565,126.914925"
+hotels,12196520,2.0,나누게스트하우스케이팝,Nanu Guesthouse KPOP,"37.555145,126.91865"
+hotels,12221592,4.325581395348837,나인트리 프리미어 호텔 명동2,,"37.564316,126.99087"
+hotels,12222316,4.848484848484849,스탠다드 호텔,,"37.551064,126.86344"
+hotels,12222795,4.4,K게스트하우스 서울시티점,K-Guesthouse Seoul City,"37.56673,126.99011"
+hotels,12231518,3.0,호텔스타프리미어 역삼점,Yeoksam Hotel Star Premier,"37.502842,127.04027"
+hotels,12231683,4.0,호텔 루체브릿지,,"37.558964,126.83719"
+hotels,12231972,4.5,모스크,MOSC,"37.533035,126.99554"
+hotels,12242034,3.5,호텔 GMS,,"37.51732,126.90914"
+hotels,12242440,4.2105263157894735,신라스테이 서초,Shilla Stay Seocho,"37.48936,127.03014"
+hotels,12244969,3.0,킴스테이 게스트하우스,KimStay,"37.55643,126.93643"
+hotels,12251056,4.5,한류 호스텔,Hallyu Hostel,"37.564674,127.00225"
+hotels,12257734,4.5,K그랜드호스텔 동대문,K-Grand Hostel Dongdaemun,"37.563023,127.03201"
+hotels,12264023,4.8,딜라이트  호텔,,"37.51535,127.1093"
+hotels,12264115,4.0,낙원장 호텔,Nagwonjang Hotel,"37.57296,126.98993"
+hotels,12273316,3.25,호텔 더 디자이너스 서울역,Hotel The Designers Seoul Station,"37.545483,126.97157"
+hotels,12287729,4.691666666666666,G2 호텔,G2 Hotel,"37.56331,126.99033"
+hotels,12290061,4.0,로얄스퀘어 호텔,Royal Square Hotel,"37.560467,126.81036"
+hotels,12292815,4.0,Hoseong Guesthouse,Hoseong Guesthouse,"37.556355,126.947365"
+hotels,1230995,4.454545454545454,호텔아르누보 역삼,,"37.503487,127.04299"
+hotels,12310284,4.642857142857143,시그니엘 서울,,"37.512707,127.10255"
+hotels,12315022,4.0,호텔렉스빌,Hotel Rexvill,"37.51818,126.910645"
+hotels,1236989,3.466666666666667,계림장 게스트하우스,Gyerimjang Guest House,"37.559822,126.985916"
+hotels,1236995,4.25,인사동미니호텔,Mini Hotel Insa,"37.575054,126.98546"
+hotels,12388243,4.416666666666667,나인브릭호텔,9Brick Hotel,"37.55391,126.920364"
+hotels,12430674,4.666666666666667,친구 게스트하우스,Chingu Guesthouse,"37.545494,126.92203"
+hotels,12430895,4.285714285714286,H에비뉴호텔 녹번,H Avenue Hotel Nokbeon,
+hotels,12454272,5.0,팝 앳 이태원 게스트하우스,Pop at Itaewon Guesthouse,"37.533623,126.98939"
+hotels,12511642,3.1666666666666665,호텔 파크 힐 명동,Hotel Park Hill Myeongdong,"37.55769,126.98165"
+hotels,12519557,3.0,아마존게스트하우스,Amazon Guesthouse,"37.532642,126.99304"
+hotels,12542874,4.4,호텔 파크하비오,Hotel Parkhabio,"37.481945,127.123474"
+hotels,12547367,3.3333333333333335,더리센츠동대문호텔,The Recenz Dongdaemun Hotel,"37.56209,127.06161"
+hotels,12550700,4.0,베니키아 프리미어 여의도 호텔,Benikea Premier Yeouido Hotel,"37.51361,126.92151"
+hotels,12550987,4.0,디자인호텔 다니엘 캄파넬라,,"37.637356,127.02587"
+hotels,12581921,5.0,라비앙호텔,Hotel Lavieen,"37.511154,127.082184"
+hotels,12604521,4.0,H 에비뉴 호텔 이대점,H Avenue Hotel Ewha Univ.,"37.556515,126.942764"
+hotels,12639491,4.0,이화 호텔,Ehwa Hotel,"37.564144,126.98797"
+hotels,12667390,4.0,베스트인 부띠크,Vestin Boutique,"37.56151,126.99212"
+hotels,12667661,3.0,나비호텔 레지던스,Navi Hotel Residence,
+hotels,12674038,2.3333333333333335,호텔부티크나인 능동점,Hotel Boutique 9 Neungdong,"37.55672,127.080185"
+hotels,12690380,4.842105263157895,그랜드 머큐어 앰배서더 서울 용산,,"37.531742,126.96329"
+hotels,12698628,4.666666666666667,이비스 스타일 앰배서더 서울 용산,ibis Styles Ambassador Seoul Yongsan,"37.53173,126.96336"
+hotels,12707649,4.473684210526316,노보텔 스위트 앰배서더 서울 용산,Novotel Suites Ambassador Seoul Yongsan,"37.53173,126.96337"
+hotels,12707683,4.088888888888889,노보텔 앰배서더 서울 용산,Novotel Ambassador Seoul Yongsan,"37.531742,126.96335"
+hotels,12720709,2.0,호텔 A314,A314 Hotel,"37.53785,127.07778"
+hotels,12726131,3.0,동대문하우스,,"37.575066,127.027466"
+hotels,12730428,4.875,홍대 레이지 폭스 덴 호스텔,Hongdae Lazyfox Den Hostel,"37.553123,126.91537"
+hotels,12730569,3.0,피에스 게스트하우스 이태원,P.S. GuestHouse Itaewon,"37.537365,126.988914"
+hotels,12730914,3.8,에이치에비뉴 이대점,H Avenue Hotel Shinchon &amp; Idae,"37.55658,126.9424"
+hotels,12789877,4.0,필하우스,Fillhouse,"37.57157,127.00762"
+hotels,12856116,4.090909090909091,라마다 서울 신도림 호텔,Ramada Seoul Sindorim Hotel,"37.506298,126.88539"
+hotels,12940832,5.0,로드 명동,Road Myeongdong,"37.561836,126.99399"
+hotels,12951821,5.0,퍼스트스테이호텔,First Stay Hotel,"37.562645,126.97723"
+hotels,12956021,4.666666666666667,더스테이트선유호텔,The State Sunyu Hotel,"37.538372,126.89317"
+hotels,13009660,5.0,코멧 게스트하우스,Comet Guesthouse,"37.532303,126.972916"
+hotels,1310694,3.32,호텔 아카시아,Benikea Hotel Acacia,"37.566372,127.0026"
+hotels,13131314,5.0,Hi Jun Guesthouse,Hi Jun Guesthouse,"37.56457,126.92493"
+hotels,13166512,3.5,갤럭시호텔,Galaxy Hotel,"37.526222,126.90887"
+hotels,13283029,4.875,글래드 강남 코엑스 센터,GLAD Gangnam COEX Center,"37.50899,127.064445"
+hotels,13293144,4.75,호텔 토마스 명동,Hotel Thomas Myeongdong,"37.563477,126.978294"
+hotels,13319648,4.363636363636363,L7강남,L7 Gangnam,"37.505558,127.05184"
+hotels,13361835,4.714285714285714,부띠끄호텔 Young Inn,Boutique Hotel Young Inn,"37.55627,126.99372"
+hotels,13369640,3.8225806451612905,사보이호텔,Savoy Hotel,"37.56195,126.9844"
+hotels,13373610,3.0,앨리스레지던스호텔,Alice Residence,
+hotels,13386173,4.0,미스홍대 게스트하우스,Miss Hongdae Guest House,
+hotels,13392050,4.5,ENA스위트호텔,ENA Suite Hotel Namdaemun Seoul,"37.562298,126.97388"
+hotels,13394600,3.0,호텔해담채가산,Hotel Haedamchae Gasan,"37.479767,126.88837"
+hotels,13397346,3.4,호텔더디자이너스 디디피,Hotel The Designers DDP,"37.563778,127.004265"
+hotels,13401342,2.5,루미아호텔2,Lumia Hotel 2,"37.57383,127.02217"
+hotels,13402121,4.0,에이치에비뉴 호텔 건대점,H Avenue Hotel Kondae,"37.546524,127.06665"
+hotels,13414457,3.9245283018867925,노블호텔,Noble Hotel,"37.576874,126.989456"
+hotels,13426084,4.411764705882353,L7홍대,L7 Hongdae,"37.555782,126.92142"
+hotels,13781380,4.5,포포인츠 바이 쉐라톤 서울 강남,,"37.520008,127.0283"
+hotels,13819581,4.943661971830986,글래드 마포,Glad Mapo,"37.543037,126.95146"
+hotels,13846825,4.428571428571429,코트야드 서울 보타닉 파크,Courtyard Seoul Botanic Park,"37.56705,126.82945"
+hotels,1392824,4.024390243902439,힐 하우스 호텔,Hotel Hill House,"37.556946,126.98192"
+hotels,13965841,3.857142857142857,페어필드 바이 메리어트 서울호텔,Fairfield by Marriott Seoul,"37.51696,126.90914"
+hotels,13984475,1.0,플렉스홈,FlexHome Guest House,"37.553093,126.90547"
+hotels,14159708,5.0,지브로 S 게스트하우스,Zibro S Guesthouse,"37.54818,126.92388"
+hotels,14159727,4.5,노보텔 앰배서더 서울 동대문 호텔,,"37.56616,127.00426"
+hotels,14199590,4.0,호텔쿠레타케소 인사동,Hotel Kuretakeso Insadong,"37.572357,126.98717"
+hotels,1462081,4.0,베니키아호텔 플라워,Benikea Hotel Flower,"37.58478,127.05065"
+hotels,1462085,4.0,호텔 꾸띠,Hotel Cutee,
+hotels,1462343,4.05,메이트 호텔 서울,Mate Hotel Seoul,"37.52993,126.84094"
+hotels,1465296,4.476454293628809,롯데 시티 호텔 마포,Lotte City Hotel Mapo,"37.544697,126.950714"
+hotels,1467802,3.357142857142857,아모렉스 호텔,Amourex Hotel,"37.563698,127.03532"
+hotels,14789575,4.0,수송 게스트 하우스,Soo Song Guest House,"37.573017,126.981155"
+hotels,1499077,3.764705882352941,호텔 대우인,Hotel Daewoo Inn,"37.56286,126.97801"
+hotels,1535250,3.975,토요코 인 서울 동대문,Toyoko Inn Seoul Dongdaemun,"37.564495,127.00914"
+hotels,1557869,4.371428571428571,코트야드 메리어트 서울 타임스퀘어,Courtyard by Marriott Seoul Times Square,"37.517864,126.90402"
+hotels,1563983,3.75,블루 게스트하우스 1,Blu GuestHouse 1,
+hotels,1569561,3.8,시티 파크 호텔,,"37.576466,126.98982"
+hotels,1575192,3.6,그레이프 가든 하우스,,"37.554188,126.92647"
+hotels,1625995,4.418181818181818,봉 하우스,Bong House,"37.584225,126.99701"
+hotels,1626230,4.4,백패커스 인사이드,,"37.584476,126.99776"
+hotels,1640728,4.630872483221476,더 클래식 500 이그제큐티브 레지던스 펜타즈,The Classic 500 Executive Residence Pentaz,"37.538776,127.07108"
+hotels,1643621,3.7142857142857144,강남 아르누보 씨티 II,,"37.49342,127.02796"
+hotels,1644474,4.333333333333333,굿스테이 피터캣 호텔 인사동,Goodstay Petercat Hotel Insadong,"37.574947,126.98942"
+hotels,1653156,4.084677419354839,임피리얼 팰리스 부티크 호텔,Imperial Palace Boutique Hotel,"37.53517,126.99839"
+hotels,1657213,3.5555555555555554,호텔 마레,Hotel Mare,"37.56354,127.057625"
+hotels,1657413,3.5714285714285716,그랜드 스위트,The Grand Suite Serviced Residence,
+hotels,1718120,4.4,M. 비즈 호텔,,"37.507664,127.055244"
+hotels,1741199,3.064516129032258,고궁 호텔,Gogung Hotel,"37.575375,126.997284"
+hotels,1745679,3.0,행복한 눈물 호텔,Amfree Hotel,"37.56949,127.0697"
+hotels,1745681,3.4,아미가 모텔,,"37.572754,126.99943"
+hotels,1745757,3.0,갤러리아 호텔,,"37.495945,126.84566"
+hotels,1745764,3.7333333333333334,호텔 트리아,Tria Hotel,"37.503063,127.03958"
+hotels,1745767,4.125,오픈게스트하우스,Open Guest House,
+hotels,1745768,4.4,상주호텔,,"37.510017,127.08054"
+hotels,1745779,4.6,세화 호스텔,,"37.574715,126.99028"
+hotels,1749318,3.0,카라 모텔,,
+hotels,1749320,2.6,노블레스 관광 호텔,,"37.65513,127.05934"
+hotels,1754759,4.375,모텔B,Motel B,"37.56771,126.969086"
+hotels,1755840,3.4,첼로 호텔,,
+hotels,1788891,4.0,유진 한옥 게스트하우스,Hanok Guesthouse Eugene&#39;s House,
+hotels,1815319,3.4545454545454546,준희빈 호텔,Boutique Hotel Juni Bin,"37.548344,126.91118"
+hotels,1887763,3.25,호텔 비즈 종로 인사동,,"37.573334,126.9884"
+hotels,1903752,4.880794701986755,컴인 게스트하우스,Come Inn Guesthouse,"37.552704,126.92292"
+hotels,1905601,4.125,호텔 스카이파크 명동 I,,"37.561417,126.9842"
+hotels,1954031,3.2222222222222223,폭스모텔,Fox Motel,
+hotels,1955496,4.111111111111111,소선재 게스트하우스,So Sun Jae Guesthouse,
+hotels,1987696,4.70873786407767,베스트 웨스턴 프리미어 구로 호텔,,"37.483154,126.89897"
+hotels,1996081,4.5,김치 홍대 게스트하우스,,"37.558956,126.919876"
+hotels,2045570,3.3333333333333335,호텔 아이린,Hotel Irene,
+hotels,2054116,4.0,호텔야자 종로점,,"37.57288,126.98892"
+hotels,2100902,4.2368421052631575,라까사호텔,Hotel La Casa,"37.52219,127.01927"
+hotels,2103201,4.776315789473684,스튜디오 41st,Studio 41st,"37.561543,126.921684"
+hotels,2150227,1.0,오슬로호텔,Oslo Hotel,"37.48608,127.0129"
+hotels,2150290,4.090909090909091,히트 호텔,Hit Hotel,"37.511242,127.0797"
+hotels,2150334,3.5,호텔 톰지,Hotel Tomgi,"37.500626,127.0391"
+hotels,2150335,2.0,호텔 아트 컴바인,Hotel Art Combine,
+hotels,2150439,4.0,호텔 스토리,Hotel Story,"37.58203,127.02106"
+hotels,2150692,4.117647058823529,녹스 호텔,Nox Hotel,"37.502586,127.03969"
+hotels,2150714,5.0,아르고 호텔,,
+hotels,2151168,3.5384615384615383,라마다 서울 동대문,Ramada Seoul Dongdaemun,"37.56586,127.002525"
+hotels,2153731,3.8,윤게스트하우스,Yun Guest House,"37.558086,126.98469"
+hotels,2159977,4.497572815533981,쉐라톤 서울 디큐브 시티 호텔,Sheraton Seoul D Cube City Hotel,"37.509,126.88978"
+hotels,2179387,3.8,나나 레지던스,,"37.5618,126.98797"
+hotels,2179397,4.0,마마 게스트하우스 명동,Mama Guesthouse Myeongdong,"37.558475,126.98837"
+hotels,2202393,3.7142857142857144,호텔 아드리게,Hotel Adlige,"37.500793,127.038895"
+hotels,2202395,3.978723404255319,호텔 스카이파크 명동 II,Hotel Skypark Myeongdong II,"37.564716,126.98482"
+hotels,2202400,4.090909090909091,호텔 스카이파크 명동 III,Hotel Skypark Myeongdong III,"37.561356,126.987236"
+hotels,2210698,3.3636363636363638,호텔 코지 명동,Hotel Cozy Myoungdong,"37.560642,126.97938"
+hotels,2212705,4.391304347826087,두 게스트하우스 북촌 1,Doo guesthouse Bukchon,"37.579468,126.98647"
+hotels,2224772,4.555555555555555,서울 명동 하우스,Seoul Myeongdong House,
+hotels,2226404,2.5,H2O 게스트하우스,H2O Guesthouse,"37.566883,126.994995"
+hotels,2233911,4.377777777777778,호텔 아르누보 서초,,"37.496033,127.02087"
+hotels,2258766,3.9166666666666665,대한장 모텔,Daehanjang Motel,"37.560787,126.99509"
+hotels,2293670,2.0,리즈 호텔,Liz Hotel,"37.49228,127.01347"
+hotels,2301772,2.5277777777777777,리버사이드 호텔 서울,The Riverside Hotel Seoul,"37.518574,127.01814"
+hotels,2303934,4.6,자자 백팩커스 호스텔,Zaza Backpackers Hostel,"37.558784,126.9864"
+hotels,2314093,3.526315789473684,뉴월드호텔,Hotel New World,"37.544285,126.97345"
+hotels,2314103,4.0,밀라노 모텔,Milano Motel,"37.56427,127.03621"
+hotels,2325235,2.5,동도 모텔,Dongdo Motel,
+hotels,2333443,3.2222222222222223,라뉘 호텔,Hotel Lanuit,
+hotels,2337202,4.157894736842105,호텔 아마레,Hotel Amare,"37.57149,126.9897"
+hotels,2337371,3.5,비브클래식호텔,Hotel VIV Classic,"37.568287,127.06923"
+hotels,2367780,3.25,호텔 아이린 시티,Hotel Irene City,"37.5621,126.97806"
+hotels,2393710,3.9315068493150687,스탠포드 호텔 서울,Stanford Hotel Seoul,"37.581818,126.88676"
+hotels,2415959,2.6666666666666665,벤허모텔,Motel Benhur,"37.57177,127.000305"
+hotels,2457276,3.6,굿스테이 피터캣호텔 홍대,,"37.553665,126.93586"
+hotels,2471997,4.392857142857143,대림 레지던스,Daelim Residence,"37.498734,126.88258"
+hotels,2472017,5.0,비하우스,,"37.56263,126.92355"
+hotels,2476467,3.8333333333333335,신촌 메르디앙 모텔,Sinchon Meridian Motel,
+hotels,2508404,4.7482993197278915,롯데 시티 호텔 김포공항,,"37.564026,126.80233"
+hotels,2533507,4.0,호텔 마레 강남,Hotel Mare Gangnam,
+hotels,2537406,3.7,충무로 레지던스 호텔,Chungmuro Residence &amp; Hotel,"37.562542,126.99938"
+hotels,2537451,3.0,투비인호텔,Two Be In Hotel,"37.53756,127.13866"
+hotels,2537498,3.5,더 뷰 호텔,,"37.516174,127.11156"
+hotels,2537527,3.4545454545454546,렉스 관광 호텔,LEX Tourist Hotel,"37.514362,127.020454"
+hotels,2539264,4.35,문 게스트하우스,Moon Guesthouse,"37.576065,126.98851"
+hotels,2539382,3.0,초콜릿호텔,,"37.497192,127.02918"
+hotels,2539397,3.0,에스호텔,S Hotel,
+hotels,2539436,4.0,렉시 호텔,,
+hotels,2539454,4.0,캘리포니아 호텔 서울 서초,,"37.485107,127.01464"
+hotels,2542094,4.0,초콜릿 호텔 화곡,,
+hotels,2546608,4.2105263157894735,에그 게스트하우스 코리아,Egg Guesthouse Korea,
+hotels,2616315,4.0,호텔 FA,Hotel FA,
+hotels,2635666,3.8,호텔 GS,,"37.56909,126.99207"
+hotels,2641870,4.0625,보그 호텔,Vogue Hotel,"37.55311,126.93594"
+hotels,2641878,4.5,신촌 Y,Shinchon Y,"37.5534,126.936165"
+hotels,2641885,3.25,제이제이 호텔,JJ Hotel,
+hotels,2642164,3.0,리베라 모텔,Riviera Motel,"37.553642,126.93644"
+hotels,2642177,3.5714285714285716,호텔 스타,Hotel Star,"37.499535,127.03545"
+hotels,2642183,3.5,앳눈 호텔,,"37.553864,126.935974"
+hotels,2642273,2.0,아나 호텔,,"37.501152,127.04054"
+hotels,2658455,4.8,초콜렛 트리,,"37.55336,126.9352"
+hotels,2658471,4.6,달콤 게스트하우스,,"37.56348,126.99671"
+hotels,2662475,3.857142857142857,팝 호텔 1,Pop Hotel 1,"37.570946,126.98995"
+hotels,299152,3.9859154929577465,베스트웨스턴프리미어서울가든호텔,Best Western Premier Seoul Garden Hotel,"37.540817,126.94821"
+hotels,299154,4.366666666666666,인터컨티넨탈 서울 코엑스,InterContinental Seoul COEX,"37.513355,127.057365"
+hotels,299502,3.621212121212121,뉴서울 호텔,New Seoul Hotel,"37.56792,126.97804"
+hotels,299504,3.1052631578947367,호텔 비젼,Hotel Vision,"37.564575,127.03632"
+hotels,299505,2.769230769230769,호텔 동대문,Hotel Dongdaemun,"37.57092,127.01015"
+hotels,299533,4.205970149253731,이비스 스타일 앰배서더 서울 강남,ibis styles Ambassador Seoul Gangnam,"37.505074,127.05708"
+hotels,299536,4.265486725663717,노보텔 앰배서더 서울 강남 호텔,Novotel Ambassador Seoul Gangnam,"37.505363,127.02844"
+hotels,299537,4.288288288288288,그랜드 앰배서더 서울 어소시에이티드 풀만 호텔,,"37.560192,127.00236"
+hotels,299538,4.404109589041096,노보텔 앰배서더 독산,Novotel Ambassador Seoul Doksan,"37.46746,126.898"
+hotels,301253,4.510588235294118,서울신라호텔,The Shilla Seoul,"37.556087,127.00512"
+hotels,301605,4.725609756097561,오크우드 프리미어 코엑스 센터,,"37.51089,127.05813"
+hotels,301815,4.501168224299065,서울 웨스틴 조선 호텔,The Westin Chosun Seoul,"37.56446,126.9798"
+hotels,301817,4.3164556962025316,그랜드 워커힐 서울,Grand Walkerhill Seoul,"37.555775,127.11091"
+hotels,302237,4.442622950819672,르 메르디앙 서울,Le Meridien Seoul,"37.505142,127.02739"
+hotels,306105,4.512096774193548,임피리얼 팰리스 서울,,"37.514023,127.03588"
+hotels,306113,4.263736263736264,오라카이 인사동 스위츠,Orakai Insadong Suites,"37.57327,126.98718"
+hotels,306114,3.8297872340425534,그랜드 힐튼 서울,Grand Hilton Seoul,"37.59,126.934746"
+hotels,306115,3.9479166666666665,그랜드 하얏트 서울,,"37.540142,126.997154"
+hotels,306118,4.335664335664336,그랜드 인터컨티넨탈 서울 파르나스,Grand InterContinental Seoul Parnas,"37.508766,127.06103"
+hotels,306123,3.533333333333333,인사동 크라운호텔,Insadong Crown Hotel,"37.573742,126.98795"
+hotels,306125,2.9285714285714284,크라운 호텔 이태원,Crown Hotel Itaewon,"37.531387,126.99058"
+hotels,306126,4.620689655172414,호텔 피제이 명동,,"37.56476,126.99569"
+hotels,306127,3.9814814814814814,코리아나 호텔,Koreana Hotel,"37.568016,126.97659"
+hotels,306128,4.774480712166172,롯데 호텔 월드,,"37.51177,127.1003"
+hotels,306130,4.613360323886639,롯데 호텔 서울,Lotte Hotel Seoul,"37.56577,126.98074"
+hotels,306132,4.3061224489795915,밀레니엄 서울 힐튼,,"37.55531,126.97582"
+hotels,306136,3.6341463414634148,호텔 프레지던트,Hotel President,"37.565567,126.9794"
+hotels,306139,4.510416666666667,더 플라자,,"37.56463,126.978065"
+hotels,306145,4.622641509433962,로얄 호텔 서울,,"37.564217,126.98564"
+hotels,306168,3.6341463414634148,호텔 리베라,Hotel Riviera,"37.523968,127.05478"
+hotels,307024,3.4444444444444446,게스트하우스 코리아,Guesthouse Korea,"37.576668,126.99103"
+hotels,307032,3.638888888888889,서울 백팩커스,Seoul Backpackers,"37.557167,126.97717"
+hotels,307040,4.067226890756302,켄싱턴 호텔 여의도,Kensington Hotel Yoido,"37.53051,126.92216"
+hotels,307042,3.727272727272727,서울 YMCA 관광호텔,Seoul YMCA Tourist Hotel,"37.570198,126.98536"
+hotels,308007,3.810344827586207,세종 호텔,Sejong Hotel,"37.561127,126.98807"
+hotels,309825,2.2,호텔 앳 홈,,
+hotels,309826,3.4820143884892087,해밀톤 호텔,Hamilton Hotel Seoul,"37.534782,126.993996"
+hotels,3136705,4.346938775510204,에어호스텔 서울,Air Hostel Seoul,"37.571625,127.00347"
+hotels,3154945,3.2,뉴 힐탑 호텔,New Hilltop Hotel,"37.51125,127.03197"
+hotels,3154953,4.093425605536332,머큐어 서울 앰배서더 강남 쏘도베,Mercure Seoul Ambassador Gangnam Sodowe,"37.5015,127.03552"
+hotels,3161529,4.5,해피 가든 게스트하우스,,"37.55804,126.98586"
+hotels,3164518,3.8,제이비스 호텔,,"37.50515,127.05283"
+hotels,3164521,4.678571428571429,남현당 게스트하우스,Namhyundang Guesthouse,"37.5738,126.98539"
+hotels,3189967,4.7,DH 네상스 호텔,DH Naissance Hotel,"37.592617,127.01854"
+hotels,3191662,4.3,에이블 호스텔 동대문,Able Hostel in Dongdaemun,"37.565037,127.00527"
+hotels,3197505,4.75,해밀 한옥 게스트하우스,,"37.57661,126.99132"
+hotels,3218799,2.7857142857142856,엘름 트리 게스트하우스,Elm Tree Guest House,"37.5615,126.97852"
+hotels,323987,4.326388888888889,호텔 프린스 서울,Prince Hotel Seoul,"37.560825,126.98641"
+hotels,3249513,4.5,명동 에코 게스트하우스,,"37.560448,126.98659"
+hotels,3295599,4.521739130434782,곳,The Place Seoul,"37.579655,126.987366"
+hotels,3326049,4.4,취운정,Chiwoonjung,"37.583202,126.9835"
+hotels,3346189,3.8823529411764706,케이팝 레지던스 명동 1,K-POP Residence Myeongdong 1,"37.563442,126.98522"
+hotels,3356431,4.222222222222222,블루밍 서비스드 레지던스 호텔,Blooming Serviced Residence Hotel,"37.500706,127.03883"
+hotels,3356500,5.0,베스틴 레지던스 명동,,"37.56038,126.98712"
+hotels,3358977,4.4,케이팝 게스트하우스 서울역,,"37.553226,126.97458"
+hotels,3368813,3.8,호텔 첼로,Hotel Cello,"37.486168,127.0135"
+hotels,3368857,3.6,게스트하우스 명동,,"37.56113,126.9876"
+hotels,3369164,3.727272727272727,마루 게스트하우스,Guesthouse The Maru,"37.54976,126.96921"
+hotels,3369181,4.0,호텔 더 디자이너스 삼성,,"37.507282,127.05543"
+hotels,3370845,4.666666666666667,크립 49 게스트하우스,Crib 49 Guesthouse,"37.55708,126.98565"
+hotels,3370998,4.0,블레싱 인 서울,Blessing In Seoul,"37.58672,127.05214"
+hotels,3389037,4.108108108108108,아벤트리 호텔 종로,Hotel Aventree Jongno,"37.573086,126.98317"
+hotels,3389245,3.6818181818181817,서울 53 호텔,Seoul 53 Hotel,"37.575,126.98944"
+hotels,3477056,3.3333333333333335,코스테이,,"37.531998,126.8606"
+hotels,3477065,4.4,서울앤호텔 동대문,Seoul N Hotel Dongdaemun,"37.573444,127.02077"
+hotels,3477071,3.723076923076923,엔포시즌,N Fourseason,"37.557014,126.97975"
+hotels,3477077,4.666666666666667,엔조이 서울,NJoy Seoul,"37.556686,126.923"
+hotels,3477083,4.111940298507463,호텔 스카이파크 센트럴 명동,Hotel Skypark Central Myeongdong,"37.564648,126.98524"
+hotels,3477158,4.199233716475096,콘래드 서울,,"37.525414,126.92662"
+hotels,3477194,4.4,케이팝 레지던스 명동 2,,"37.56289,126.9856"
+hotels,3479249,4.5,이태원 백팩커스,,"37.534,126.99994"
+hotels,3497931,5.0,ICOS 게스트하우스,,"37.554768,126.9385"
+hotels,3531770,4.904761904761905,유기농 게스트하우스,Yooginong Guesthouse,"37.553043,126.90741"
+hotels,3540785,4.742857142857143,비 마이 게스트하우스,B My Guesthouse,"37.5586,126.983894"
+hotels,3568790,4.166666666666667,오렌지 게스트하우스,Orange Guesthouse,"37.554794,126.91895"
+hotels,3568908,4.666666666666667,고운당,Go Woon Dang,"37.578903,126.97275"
+hotels,3571247,4.85,라온 게스트하우스,,"37.57755,126.981155"
+hotels,3571251,3.2,클릭 호텔,,"37.56192,126.9884"
+hotels,3571309,4.0,루이 호텔,,"37.556335,126.9382"
+hotels,3575113,4.5,모텔 제로,Motel Zero,"37.57456,126.99685"
+hotels,3575356,4.447761194029851,센터마크 호텔,,"37.572346,126.98434"
+hotels,3575583,4.142857142857143,서울 로프트 아파트먼트 ,Seoul Loft Apartments,"37.576424,126.99727"
+hotels,3581563,4.846153846153846,코지 게스트하우스,Cozzzy Guesthouse,"37.558395,126.91867"
+hotels,3595039,4.52,애플 백패커스 게스트하우스,Apple Backpackers Guesthouse,"37.57354,126.99102"
+hotels,3595040,3.9215686274509802,스타즈 호텔 명동 1호점,Staz Hotel Myeongdong 1,"37.56695,126.991425"
+hotels,3595091,4.8,북촌 마루 한옥 게스트하우스,,"37.58311,126.98742"
+hotels,3612247,4.0,다비드호텔,,"37.511047,127.07926"
+hotels,3616590,4.0,모나이 게스트하우스,,"37.5365,126.89894"
+hotels,3618263,4.0,휴가 하우스 호스텔,Huga Haus Hostel,"37.591137,127.04187"
+hotels,3618299,3.6666666666666665,야코리아 호스텔 이태원,,"37.53437,126.97491"
+hotels,3618306,4.262910798122066,호텔 마누,Hotel Manu,"37.557076,126.97487"
+hotels,3618350,4.125,E-레지던스,E-Residence,"37.513638,127.02103"
+hotels,3656150,4.285714285714286,나인트리 호텔 명동,Nine Tree Hotel Myeong-dong,"37.561623,126.98592"
+hotels,3656188,4.0,몽 모텔,Mong Motel,"37.639526,127.02658"
+hotels,3661945,3.5,에스피@이태원 게스트하우스,SP@Itaewon Guesthouse,"37.53545,126.99245"
+hotels,3682080,3.0,아리 하우스 명동,,"37.56029,126.98683"
+hotels,3723601,4.0,호텔 아이콘,,"37.574944,126.98893"
+hotels,3723670,5.0,펜슬 게스트하우스,,"37.560036,126.92548"
+hotels,3813528,4.6,DW 디자인 레지던스,,"37.558285,126.9207"
+hotels,3813530,3.8666666666666667,GV레지던스,GV Residence,"37.53466,126.99067"
+hotels,3813590,4.0,ZIP 호텔,,"37.479477,126.95297"
+hotels,3813616,3.3333333333333335,메리골드 호텔,,"37.55356,126.91949"
+hotels,3813667,5.0,로이하우스,,"37.563065,126.92398"
+hotels,3814456,5.0,더스틴 게스트하우스,,"37.55553,126.923836"
+hotels,3814459,4.0,게스트하우스 명동 2,Guest House Myeongdong 2,"37.560444,126.99076"
+hotels,3814736,5.0,아지트 게스트하우스,,"37.55367,127.01064"
+hotels,3850464,4.666666666666667,이슈 서울 게스트 하우스,Issue Seoul guest house,"37.55472,126.91421"
+hotels,3855729,4.473684210526316,옐로우 브릭 종로 호스텔,Yellow Brick Jongno Hostel,"37.574627,126.98959"
+hotels,4006151,4.285714285714286,코스테이 숙대점,Korstay Sookmyung Women&#39;s Univ.,"37.546104,126.97249"
+hotels,4052408,4.615384615384615,한옥 게스트하우스 201,Hanok Guesthouse 201,"37.580395,126.98542"
+hotels,4055360,4.0,미오 하우스,Mmmio House,"37.569824,127.00301"
+hotels,4071465,4.638655462184874,더 그랜드 호텔 명동,The Grand Hotel Myeongdong,"37.56171,126.98718"
+hotels,4084323,4.333333333333333,공심가 게스트하우스,,"37.57786,126.9808"
+hotels,4134726,4.321981424148607,이비스 앰배서더 서울 인사동,Ibis Ambassador Seoul Insadong,"37.57437,126.98944"
+hotels,4134729,3.75,루크홈 명동,Lookhome Myeongdong,"37.55833,126.98578"
+hotels,4134785,4.315789473684211,SS 게스트하우스 서울역,SS Guest House Seoul Station,"37.551495,126.96891"
+hotels,4134798,4.75,미스터 콤마 게스트하우스,,"37.558964,126.92018"
+hotels,4134800,3.185185185185185,호텔 더 디자이너스 홍대,Hotel The Designers Hongdae,"37.551956,126.91764"
+hotels,4134801,3.0,비젼 게스트하우스,Vision Guesthouse,"37.509136,127.08513"
+hotels,4134983,4.0,호텔 디바,Diva Hotel,"37.567993,127.06934"
+hotels,4135103,4.3478260869565215,파로스 관광 호텔,Pharos Tourist Hotel,"37.511124,127.08135"
+hotels,4135265,3.6,베니키아 호텔 KP,Benikea Hotel KP,"37.589397,127.056755"
+hotels,4135823,3.5,국제 명동 하우스,Kukje Myeongdong House,"37.559357,126.98865"
+hotels,4136289,4.833333333333333,유 게스트 하우스 - 홍대,"U Guesthouse in Hongdae, Seoul","37.549534,126.92065"
+hotels,4136389,4.571428571428571,포춘호스텔,Fortune Hostel,"37.574547,126.98964"
+hotels,4137678,3.8333333333333335,마루 게스트하우스 2,Maru Guesthouse 2,
+hotels,4137679,5.0,마인드 호텔,Mind Hotel,"37.47881,126.89095"
+hotels,4170932,4.6,두리 게스트하우스,Duri Guest House,"37.591625,127.03713"
+hotels,4193521,4.571428571428571,SH 서울 홍대,SH Seoul Hongdae,"37.557743,126.92435"
+hotels,4235369,4.181818181818182,신신 호텔,,"37.562332,126.97904"
+hotels,4344692,3.0,베니키아 Home the M 호텔,,"37.563824,126.91317"
+hotels,4354707,3.883116883116883,호텔 아로파 남대문,Hotel Aropa Namdaemun,"37.563198,126.97808"
+hotels,4412261,4.346153846153846,호스텔 코리아 11th - 창덕궁,Hostel Korea 11th - Changdeokgung,"37.57624,126.99032"
+hotels,4412263,4.337979094076655,프레이저 플레이스 남대문 서울,Fraser Place Namdaemun Seoul,"37.56134,126.97631"
+hotels,4462683,3.375,김치 신촌 게스트하우스,Kimchee Sinchon Guesthouse,"37.558224,126.92935"
+hotels,446846,3.2803030303030303,라마다 서울 호텔,Ramada Seoul,"37.51066,127.04507"
+hotels,447944,4.3,삼정 호텔,,"37.505768,127.031296"
+hotels,447945,3.466666666666667,여의도 호텔,Yoido Hotel,"37.530167,126.925385"
+hotels,4504699,5.0,이랑 한옥스테이,Irang Hanok Stay,"37.581318,126.98898"
+hotels,4507857,3.4,케이스타하우스,Kstar House,"37.558083,126.96907"
+hotels,455446,3.8857142857142857,쉐라톤 서울 팔래스 강남 호텔,Sheraton Seoul Palace Gangnam Hotel,"37.500893,127.00167"
+hotels,455538,3.7432432432432434,을지로 코업레지던스,Euljiro CO-OP Residence,"37.56645,127.00553"
+hotels,455856,4.599022004889975,메트로 호텔,Metro Hotel,"37.565098,126.98372"
+hotels,455860,2.9166666666666665,잠실 관광 호텔,Jamsil Tourist Hotel,
+hotels,455862,2.25,동서울 호텔,Hotel Dong Seoul,"37.53422,127.09186"
+hotels,455973,4.055555555555555,뉴국제호텔,New Kukje Hotel,"37.567802,126.97771"
+hotels,456115,3.5384615384615383,호텔 프리마 서울,Hotel Prima Seoul,"37.524548,127.052124"
+hotels,4608574,3.5,JJ 레지던스,JJ Residence,"37.55678,126.97852"
+hotels,4712309,5.0,부엉이 게스트하우스,,"37.5755,127.020164"
+hotels,4777343,4.842105263157895,신디&#39;s B&amp;B,Cindy&#39;s B&amp;B,"37.59602,126.96506"
+hotels,477908,3.9827586206896552,코아텔 쉐르빌,Coatel Chereville,"37.493923,127.0279"
+hotels,4783677,4.5,인사동 호스텔,Insadong Hostel,"37.57492,126.98463"
+hotels,4884030,4.333333333333333,문스호스텔,Moon&#39;s Hostel,"37.560627,126.99118"
+hotels,4913610,4.2105263157894735,시어소 호텔,Sieoso Hotel,"37.5657,126.991264"
+hotels,500996,4.789189189189189,비스타 워커힐 서울,Vista Walkerhill Seoul,"37.555218,127.11091"
+hotels,505891,4.695652173913044,라이즈 오토그래프 컬렉션,"RYSE, Autograph Collection","37.554543,126.921165"
+hotels,506101,3.8846153846153846,선샤인 호텔,Hotel Sunshine,"37.520542,127.02875"
+hotels,506110,4.333333333333333,호텔 썬비,,"37.572872,126.98486"
+hotels,506121,4.833333333333333,뉴 오리엔탈 호텔,,"37.56029,126.98351"
+hotels,506801,3.772727272727273,노블레스 역삼 호텔 서울,Noblesse Yeoksam Hotel Seoul,
+hotels,5113510,4.402298850574713,JW 메리어트 동대문 스퀘어 서울,,"37.570164,127.00882"
+hotels,518444,3.923076923076923,베스트 웨스턴 프리미어 강남,,"37.50634,127.02978"
+hotels,5250436,4.136,써미트 호텔,The Summit Hotel Seoul Dongdaemun,"37.562283,127.00664"
+hotels,5252365,4.181818181818182,호텔 팩토리,Hotel Factory,"37.572067,126.98818"
+hotels,5287499,4.090909090909091,뉴 썬 게스트하우스 명동,New Sun Guesthouse Myeongdong,"37.558018,126.98113"
+hotels,536020,3.6,호텔 M,,"37.529613,126.91963"
+hotels,5460911,4.300699300699301,티마크 호텔 명동,Tmark Hotel Myeongdong,"37.562622,126.99267"
+hotels,547045,2.6923076923076925,호텔 에어포트 서울,Airport Hotel Seoul,
+hotels,5484623,4.25,머뭄 게스트하우스,MuMum Guesthouse,"37.580074,126.98726"
+hotels,5540457,4.1558441558441555,호텔 아트리움,Hotel Atrium Jongno,"37.571712,126.99799"
+hotels,555275,4.4567627494456765,파크 하얏트 서울,Park Hyatt Seoul,"37.508526,127.06414"
+hotels,558398,3.5,나이아가라 호텔,,"37.549248,126.87861"
+hotels,569419,3.8727272727272726,강남 패밀리 호텔,Gangnam Family Hotel,"37.506218,127.03044"
+hotels,582965,3.7241379310344827,프로비스타 호텔,Provista Hotel,"37.495113,127.01854"
+hotels,582967,4.170731707317073,임스 하우스,Yim&#39;s House,"37.576378,126.99092"
+hotels,587051,3.75,명동 게스트하우스,Myeongdong Guest House,"37.560383,126.9872"
+hotels,5895849,3.272727272727273,코업 시티 호텔 BMK,Coop City Hotel BMK,"37.495804,126.84492"
+hotels,5895977,5.0,이가 정원,Lee&#39;s Garden,"37.55905,126.98653"
+hotels,5895989,3.4285714285714284,24게스트하우스 인사동,24Guesthouse Insadong,"37.56923,126.98715"
+hotels,5896602,4.5,제로미네 게스트하우스,Xeromine Guesthouse,"37.535477,126.99216"
+hotels,5897152,4.444444444444445,서울 글로벌 호스텔,Seoul Global Hostel,"37.558334,126.98508"
+hotels,5963221,3.9722222222222223,골든서울 호텔,Golden Seoul Hotel,"37.547832,126.87813"
+hotels,5970253,3.0,호텔파밀리아인,Hotel Familia Inn,"37.571964,127.01343"
+hotels,598299,3.8135593220338984,호텔 아트리움 바비엥2,Hotel Atrium Vabien II,"37.565212,126.96767"
+hotels,602902,3.9310344827586206,웨스턴 코업호텔&amp;레지던스,Western CO-OP Hotel &amp; Residence,"37.566414,127.003296"
+hotels,6034361,5.0,유자 게스트하우스,UJA Guesthouse,"37.550358,126.91797"
+hotels,607466,2.5714285714285716,호텔 발렌타인,Hotel Valentine,
+hotels,607480,4.6,서울 레지던스,,"37.503464,127.04779"
+hotels,6104497,4.0,스테이 강남,,"37.517773,127.01835"
+hotels,611304,4.220024721878863,이비스 앰배서더 서울 명동,Ibis Ambassador Seoul Myeongdong,"37.56419,126.98259"
+hotels,6160747,4.375,네오 서울 게스트하우스,Neo Seoul Guesthouse,"37.554607,126.91818"
+hotels,619065,3.533333333333333,현대레지던스,Hyundai Residence,"37.563717,127.00051"
+hotels,622211,4.261224489795918,프레이저 플레이스 센트럴 서울,Fraser Place Central Seoul,"37.56238,126.96911"
+hotels,6225109,4.8,아이하우스 친친,,"37.564053,126.918564"
+hotels,6225290,3.2,리안 호텔,,"37.568943,126.99096"
+hotels,6225403,4.25,24게스트하우스 종로타워점,24 Guesthouse Jongno Tower,"37.571663,127.00008"
+hotels,6226170,4.142857142857143,문 호스텔,Moon Hostel,"37.560497,126.92485"
+hotels,623402,4.0,남산게스트하우스 2,,"37.559105,126.984955"
+hotels,6352655,5.0,궁 게스트하우스,Gung Guest House,"37.574352,126.99138"
+hotels,6378634,4.0,24게스트하우스 가로수길점,24guesthouse Garosu-gil,"37.520267,127.02263"
+hotels,6378733,5.0,이코노미 호텔 은평점,,"37.5879,126.91627"
+hotels,6402630,4.5,호텔 아띠 충무로,,"37.560646,126.997185"
+hotels,6402635,4.085106382978723,Ever8 서비스 레지던스,,"37.557434,126.94254"
+hotels,6476325,4.333333333333333,필름 37.2 호텔,Film 37.2 Hotel,"37.51644,127.1128"
+hotels,6476794,3.6,미소 게스트하우스,Miso Guesthouse,"37.55763,126.927315"
+hotels,6476798,4.5,24게스트하우스 명동시티점,,
+hotels,6476847,4.5,호텔 미도,Hotel Mido,"37.558754,126.98062"
+hotels,6476900,4.324324324324325,호텔 로프트,Hotel Loft,"37.534977,126.89885"
+hotels,6476902,4.833333333333333,24게스트하우스 강남 센터점,24guesthouse Gangnam Center,"37.50399,127.0335"
+hotels,6476903,3.7142857142857144,24게스트하우스 명동 에비뉴,24guesthouse Myeongdong Avenue,"37.561317,126.97766"
+hotels,6483063,3.7,클로이 게스트하우스,Chloe Guest House,"37.51712,127.01968"
+hotels,650959,3.9928057553956835,베스트 웨스턴 프리미어 호텔 국도,Best Western Premier Hotel Kukdo,"37.566376,126.99638"
+hotels,6535744,3.272727272727273,호텔 더 디자이너스 종로,Hotel The Designers Jongno,"37.56915,126.988846"
+hotels,6552893,4.6,오빠 호스텔,Oppa Hostel,"37.557648,126.94359"
+hotels,6552915,4.2105263157894735,호텔 카라쉬,Hotel Karashy,"37.47709,126.98041"
+hotels,6556403,4.244186046511628,데이즈 호텔 명동,Days Hotel Myeongdong,"37.560772,126.98369"
+hotels,6591787,3.96,김치 다운타운 게스트하우스,Kimchee Downtown Guesthouse,"37.560814,126.96514"
+hotels,6591870,4.318181818181818,남산 힐 호텔,Namsan Hill Hotel,"37.556736,126.982506"
+hotels,659341,4.68,여의도파크센터 서울 - 메리어트 이그제큐티브 아파트먼트,,"37.521133,126.91877"
+hotels,661056,3.3555555555555556,더케이호텔서울,The-K Hotel Seoul,"37.466606,127.03297"
+hotels,6622669,4.8108108108108105,G 이태원 게스트하우스,G Itaewon Guest House,"37.533184,126.99495"
+hotels,6622670,3.769230769230769,원즈빌 명동,Won&#39;s Ville Myeong-dong,"37.560665,126.98972"
+hotels,6663003,4.708542713567839,롯데 시티 호텔 구로,Lotte City Hotels Guro,"37.485394,126.89638"
+hotels,6680392,2.8181818181818183,호텔 더 디자이너스 여의도,Hotel The Designers Yeouido,"37.528248,126.92008"
+hotels,673519,3.076923076923077,프라임 인 서울 호텔,Prime in Seoul Hotel,"37.616886,126.92383"
+hotels,673725,3.8666666666666667,엘르인 호텔,Hotel Elle Inn,"37.541737,126.97219"
+hotels,6759613,4.0,언니네 하우스,Unni House,"37.57632,127.02235"
+hotels,6759637,4.0,울타리 호스텔,Ultari Hostel,"37.553864,126.93562"
+hotels,6816677,4.2,블루보트 호스텔 명동,,"37.563007,126.99068"
+hotels,6817242,4.25,필스테이 동대문점,Philstay Dongdaemun DDP,"37.564957,127.00657"
+hotels,6867343,4.6,호텔 스카이파크 동대문 I,,"37.56415,127.002075"
+hotels,6867409,4.666666666666667,CMS 인 서울,,"37.58936,127.05663"
+hotels,6867428,5.0,YD 레지던스,,"37.55087,126.9612"
+hotels,6867443,5.0,에이치호텔,,"37.48708,127.01397"
+hotels,6871129,4.5,24게스트하우스 서울역 프리미어점,24guesthouse Seoul Station Premier,"37.55361,126.97472"
+hotels,6877397,4.0,호텔릿,,"37.55446,126.97351"
+hotels,6892917,3.3333333333333335,24게스트하우스 신촌,,"37.55497,126.93514"
+hotels,6941818,5.0,에이 하우스,,"37.58317,126.98131"
+hotels,6941825,3.3333333333333335,  ,Benikea Seoul Hotel,"37.5568,126.85999"
+hotels,6941842,4.194444444444445,케이팝 호텔 서울역점,K-POP Hotel Seoul Station,"37.554688,126.974075"
+hotels,6998634,4.012345679012346,이비스 버젯 앰배서더 서울 동대문,ibis budget Ambassador Seoul Dongdaemun,"37.564297,127.00858"
+hotels,6998671,4.666666666666667,예포 게스트하우스,YE&#39;4 Guesthouse,"37.567497,126.91958"
+hotels,7003892,1.0,신설동역 레지던스 동대문,,"37.57626,127.02489"
+hotels,7008092,4.12,도미 인 프리미엄 서울 가로수길,,"37.517056,127.02171"
+hotels,7034132,4.333333333333333,효선재 한옥 게스트하우스,Hyosunjae Hanok Guesthouse,
+hotels,7043159,4.571428571428571,청연재,Cheong Yeon Jae Hanok Hotel,"37.58033,126.985634"
+hotels,7043377,5.0,스타 호스텔 서울 동대문,,
+hotels,7043480,4.0,아티스트 77 하우스,Artist 77 House,"37.52682,127.0514"
+hotels,7043495,5.0,토모 레지던스,,"37.56193,126.98795"
+hotels,7053590,5.0,패밀리 &amp; 프렌즈 하우스 2,,"37.560238,126.92225"
+hotels,7053783,4.2,동대문 화신 호스텔,Dongdaemun Hwashin Hostel,"37.56522,127.00339"
+hotels,7053968,2.6666666666666665,호텔 가온,Hotel Gaon,
+hotels,7054545,4.015151515151516,신라스테이 역삼,Shilla Stay Yeoksam,"37.504753,127.04153"
+hotels,7064499,3.6153846153846154,맘하우스,MOM House,"37.560486,126.9867"
+hotels,7064545,4.875,빅 존스 플레이스,Big John&#39;s Place,
+hotels,7074384,4.333333333333333,D.H 신촌 게스트하우스,D.H Sinchon Guesthouse,"37.552628,126.93677"
+hotels,7074393,3.8,베이튼 서울 동대문,,"37.565117,127.00268"
+hotels,7074398,4.666666666666667,보르조미 서울 부티크 호텔,,
+hotels,7074636,3.75,소설 호텔,Snow Hotel,
+hotels,7074669,3.75,호스텔 클로이,Hostel Chloe,"37.56862,126.98862"
+hotels,7074698,4.0,고고 게스트하우스,Gogo Guesthouse,
+hotels,7089489,5.0,호스텔 KW 신사,Hostel KW Sinsa,"37.5126,127.01864"
+hotels,7103191,5.0,청담게스트하우스,Cheongdam Guesthouse,"37.525665,127.05014"
+hotels,7103647,4.636363636363637,이노 호스텔 &amp; 펍라운지 홍대,Inno Hostel &amp; Pub Lounge Hongdae,"37.553623,126.91419"
+hotels,7107794,4.545454545454546,더 해밀 게스트하우스,The Haemil Feel Like Home,"37.562107,126.926346"
+hotels,7107952,4.375,달집 북촌,Dalzip Bukchon,"37.584137,126.983444"
+hotels,7134179,3.967741935483871,이코노미 호텔 명동 프리미어,Ekonomy Hotel Myeongdong Premier,"37.56151,126.984535"
+hotels,7161281,4.615384615384615,도담게스트하우스,Dodam Guesthouse,"37.5351,126.9928"
+hotels,7161291,4.132352941176471,알로프트 서울 강남,,"37.52372,127.05565"
+hotels,7181422,3.4285714285714284,호텔 봉봉,Hotel Bonbon,"37.56649,126.98237"
+hotels,7244241,4.582608695652174,글래드 호텔 여의도,GLAD Hotel Yeouido,"37.527695,126.91745"
+hotels,7268921,3.875,어반 플레이스 강남,Urban Place Gangnam,"37.49163,127.02915"
+hotels,7269014,4.634146341463414,에스알 호텔 서울 마곡,SR Hotel Seoul Magok,"37.56109,126.83942"
+hotels,7274687,4.2745098039215685,오클라우드 호텔,Ocloud Hotel,"37.503033,127.02389"
+hotels,7289673,5.0,야코리아 호스텔 홍대,YaKorea Hostel Hongdae,"37.557335,126.92918"
+hotels,7305732,4.666666666666667,호스텔 더 스타일,Hostel The Style,"37.55955,126.923546"
+hotels,7353565,4.3076923076923075,베니키아 프리미어 호텔 베르누이,,"37.49732,126.84589"
+hotels,7353880,4.0,쁘찌하우스 노부꼬,Petit House Nobuko,
+hotels,7356220,2.5,피오나,Fiona,
+hotels,7356275,4.416666666666667,창덕궁 소담,Changdeokgung Sodam,"37.576298,126.99063"
+hotels,7356344,3.0,발트 호텔,Valt Hotel,
+hotels,7356363,2.5,가온 골든파크,Gaon Golden Park,"37.57083,127.01447"
+hotels,7356365,4.666666666666667,레인보우 호텔 명동,Rainbow Hotel Myeongdong,"37.56252,126.992134"
+hotels,7358712,4.124183006535947,스타즈 호텔 명동 II,Staz Hotel Myeongdong II,"37.562553,126.99065"
+hotels,7358738,4.25,골든 시티 호텔,,"37.56265,127.06087"
+hotels,7358746,3.4,하우스 740,House 740,"37.558037,126.920975"
+hotels,7358763,3.6,스타 게스트하우스,Star Guest House,"37.561848,126.97801"
+hotels,7367802,4.545454545454546,레오 게스트하우스 홍대,Leo Guest House Hongdae,
+hotels,7367825,3.8333333333333335,메이 플레이스 서울 동대문,May Place Seoul Dongdaemun,"37.576206,126.99862"
+hotels,7382024,4.0,호텔 아띠 성수,Hotel Atti Seongsu,"37.54373,127.05695"
+hotels,754311,4.0324825986078885,라마다 호텔 앤드 스위트 서울 남대문,Ramada Hotel and Suites Seoul Namdaemun,"37.560467,126.97217"
+hotels,7597494,4.5,송파 호스텔,Songpa Hostel,"37.50829,127.1113"
+hotels,7597620,4.705882352941177,코코아게스트하우스,Cocoa Guesthouse,"37.549755,126.92175"
+hotels,7597626,4.7368421052631575,트윈래빗 게스트하우스,Twin Rabbit Guesthouse,"37.56058,126.92258"
+hotels,7597655,4.385542168674699,호텔 나포레,Hotel Nafore,"37.569046,126.990555"
+hotels,7613319,4.467261904761905,이비스 스타일 앰배서더 서울 명동,Ibis Styles Ambassador Seoul Myeongdong,"37.56166,126.98929"
+hotels,7619069,4.355555555555555,에이메스 호텔,AMASS Hotel,"37.57721,126.99095"
+hotels,7640343,4.0,동대문 인,Dongdaemun Inn,
+hotels,7647148,3.774011299435028,르와지르 호텔 서울 명동,Loisir Hotel Seoul Myeongdong,"37.561237,126.98465"
+hotels,7654137,4.2727272727272725,호텔 경동,Hotel Kyoungdong,
+hotels,7654251,3.4285714285714284,호텔 부티크 나인,Hotel Boutique 9,
+hotels,7654275,3.5,아로하 게스트하우스,Aroha Guest House,"37.55176,126.974396"
+hotels,7654277,4.4,MK 리버티 하우스,Mk Liberty House Seoul Station,"37.55448,126.96899"
+hotels,7685020,3.5,써클 호텔 서울,,
+hotels,7685026,4.074074074074074,스테이 비 호텔 명동,Stay B Hotel Myeongdong,"37.56331,126.99287"
+hotels,7685036,4.5,플랜 A 호스텔,Plan A Hostel,
+hotels,7685088,5.0,케이걸 게스트하우스 여성전용,K-girl Guesthouse Female Only,
+hotels,7685101,4.0,남산 시티 호텔 명동,Namsan City Hotel Myeongdong,"37.55798,126.97847"
+hotels,7685147,4.0,라온 레지던스 인 강남,,
+hotels,7685521,4.0,하모니 호텔,Harmony Hotel,"37.538303,127.13796"
+hotels,7685665,4.0,호텔 디오레,Hotel The-Ore,"37.555614,126.92047"
+hotels,7686966,4.4,KW 홍대 호스텔,KW Hongdae Hostel,
+hotels,7686969,4.206185567010309,신라스테이 서대문,Shilla Stay Seodaemun,"37.565163,126.96675"
+hotels,7687450,3.5,24 게스트하우스 종로3가역,24 Guesthouse Jongno 3ga Station,"37.572895,126.99228"
+hotels,7688216,3.375,솔라리아 니시테츠 호텔 서울 명동,,"37.5626,126.98516"
+hotels,7701584,4.5,웰 플러스 비앤비 게스트하우스,Well Plus BnB Guest House,"37.55842,126.9856"
+hotels,7701591,4.75,누하당 게스트하우스,Nuhadang Hanok Guesthouse,"37.579826,126.968475"
+hotels,7738789,5.0, ,,"37.58259,126.98743"
+hotels,7738820,4.0,쿠즈 호텔,Coups Hotel,
+hotels,7790767,4.2105263157894735,K-게스트하우스 명동 2,K-guesthouse Myeongdong 2,"37.56187,126.986946"
+hotels,7790768,4.2,K-게스트하우스 인사동,K-guesthouse Insadong,"37.573547,126.98618"
+hotels,7790781,4.444444444444445,K 관광호텔,K-Hotel,"37.545223,126.93005"
+hotels,7792581,4.2,케이팝 레지던스동대문,K-POP Residence Dongdaemun,"37.563335,127.00685"
+hotels,7810424,3.9375,오리엔스 호텔 &amp; 레지던스,Oriens Hotel &amp; Residences,"37.56005,126.99114"
+hotels,7815269,4.586206896551724,치선 호텔 서울 명동,Chisun Hotel Seoul Myeongdong,"37.564148,126.99848"
+hotels,7834720,4.375438596491228,포 포인츠 바이 쉐라톤 서울 남산,"Four Points by Sheraton Seoul, Namsan","37.535984,126.97135"
+hotels,7834994,3.75,선라이즈 인 동대문,Sunrise Inn Dongdaemun,"37.575733,127.02177"
+hotels,7905854,4.75,인 서울 게스트하우스,In Seoul Guesthouse,"37.570644,126.98739"
+hotels,7905978,3.25,이태원 랜드 게스트룸,Itaewon Land Guest Room,"37.53433,126.99726"
+hotels,7917969,4.636363636363637,비빔밥 게스트하우스,Bibimbap Guesthouse,"37.573364,126.98976"
+hotels,7951531,2.5,스카이호텔,Hotel Sky,
+hotels,7997916,4.5,서울 N 스테이 호스텔,Seoul N Stay Hostel,"37.564976,127.00211"
+hotels,8024697,2.8,K-게스트하우스 신촌 2,K-guesthouse Sinchon 2,"37.55455,126.93492"
+hotels,8024699,4.3125,K-게스트하우스 명동 1,K-guesthouse Myeongdong 1,"37.560696,126.9833"
+hotels,8026730,4.0,나루 호스텔,Naru Hostel,
+hotels,8070350,3.7142857142857144,호텔 스테이 인,Hotel Stay Inn,"37.551964,126.97375"
+hotels,8073848,4.142857142857143,남산게스트하우스 3호점,Namsan Guest House 3,"37.559166,126.98511"
+hotels,8076685,4.5,호텔 도마,,"37.561493,126.99564"
+hotels,8076702,3.9504950495049505,홀리데이 인 익스프레스 서울 을지로,Holiday Inn Express Seoul Euljiro,"37.5666,126.98949"
+hotels,8092982,4.0,문 썬 게스트 하우스,Moon Sun Guesthouse,
+hotels,8093043,4.5,이코노미 호텔 명동 센트럴,Ekonomy Hotel Myeongdong Central,
+hotels,8098623,4.65,남산게스트하우스,Namsan Guesthouse,"37.558033,126.98453"
+hotels,8107311,4.0,린 호텔,Lin Hotel,
+hotels,8110812,4.425925925925926,보리 호텔,Boree Hotel,"37.49497,127.036644"
+hotels,8110867,4.333333333333333,소테츠 호텔즈 더 스프라지르 서울 동대문,,"37.564655,127.00771"
+hotels,8114042,4.125,파크 애비뉴 게스트하우스,Park Avenue Guest House,"37.562386,126.92299"
+hotels,8118189,4.166666666666667,신라스테이 마포,Shilla Stay Mapo,"37.542778,126.94963"
+hotels,8261880,5.0,스테이 나우 게스트하우스,Stay Now Guest House,"37.562965,126.92563"
+hotels,8285182,4.6,스타 호스텔 동대문 스위트,Star Hostel Dongdaemun Suite,"37.571613,127.00291"
+hotels,8285373,4.5,큐브 게스트하우스,Cube Guesthouse,
+hotels,8289152,5.0,더 원 호스텔,The One Hostel,
+hotels,8298647,4.4,더스테이호텔,The Stay Hotel,"37.56171,126.98674"
+hotels,8298699,4.0,나누 게스트하우스 핑크,Nanu Guesthouse Pink,"37.55895,126.92575"
+hotels,8299878,3.5,까사 명동 게스트하우스,Casa Myeongdong Guesthouse,"37.56189,126.98767"
+hotels,8299926,3.8,동대문 맥스타일 게스트하우스,Dongdaemun Maxtyle Guesthouse,
+hotels,8300169,3.0,드림 게스트하우스,Dream Guest House,
+hotels,8300448,4.0,호텔 리치웰,Hotel Richwell,
+hotels,8322447,4.520958083832335,호텔 페이토 강남,Hotel Peyto Gangnam,"37.486523,127.033134"
+hotels,8368838,4.260869565217392,호텔 8 아워즈,Hotel 8 Hours,"37.562202,126.97791"
+hotels,8369100,5.0,비 마이 게스트,Be My Guest,"37.533234,126.993225"
+hotels,8394112,4.5,요트 게스트하우스,,"37.535408,126.99226"
+hotels,8457967,3.6666666666666665,탑 호텔,Top Hotel,"37.55897,126.97985"
+hotels,8458163,4.6,24게스트하우스 명동 타운,24guesthouse Myeongdong Town,"37.559456,126.97897"
+hotels,8458286,4.666666666666667,카림 게스트하우스,Charim Guesthouse,"37.564926,127.007355"
+hotels,8458309,4.454545454545454,루미아 호텔,Lumia Hotel,"37.55804,126.97965"
+hotels,8458325,4.0,필스테이 동대문 이코노믹,Philstay Dongdaemun Economic,"37.5663,127.00394"
+hotels,8458377,4.176470588235294,탑 호텔 &amp; 레지던스,Top Hotel &amp; Residence,"37.57352,126.98886"
+hotels,8476641,4.9,더 메이 하우스,The Mei Haus,"37.567745,126.919075"
+hotels,8476681,4.0,서울달빛 DDP지점,Seoul Dalbit DDP,"37.56165,127.00555"
+hotels,8476780,5.0,하모리 게스트하우스,Hamory Guesthouse,"37.56542,127.00943"
+hotels,8476956,4.0,명동 게스트하우스 ZZ,Myeongdong Guesthouse ZZ,"37.560677,126.986885"
+hotels,8522933,4.631578947368421,L7명동,,"37.56136,126.98682"
+hotels,8522945,4.448888888888889,롯데 시티 호텔 명동,Lotte City Hotel Myeongdong,"37.566803,126.98803"
+hotels,8523099,5.0,타임 트래블러즈 파티 호스텔,,"37.56087,126.92748"
+hotels,8523103,4.2,57 명동 호스텔,57 Myeongdong Hostel,"37.56093,126.98339"
+hotels,8555505,3.4,호텔 더 디자이너스 동대문,Hotel The Designers Dongdaemun,"37.56373,127.00562"
+hotels,8555913,3.3333333333333335,파티오 59 게스트하우스 홍대점 2,Patio 59 Guesthouse Hongdae Branch 2,"37.56231,126.92"
+hotels,8591381,4.0,리안 게스트하우스,,"37.613167,127.01109"
+hotels,8608162,4.0,소테츠호텔즈 더 스프라지르 서울 명동,Sotetsu Hotels the Splaisir Seoul Myeong-Dong,"37.56203,126.9789"
+hotels,8611003,5.0,타라 호텔,Tara Hotel,
+hotels,8630628,3.0,호텔 더 디자이너스 리즈 강남 프리미어,Hotel The Designers LYJ Gangnam Premier,"37.505337,127.02593"
+hotels,8631724,1.0,모닝스카이 호텔,,"37.56399,126.99996"
+hotels,8672688,5.0,한스 하우스,Han&#39;s House,
+hotels,8672927,5.0,한 게스트하우스,Han Guesthouse,
+hotels,8673254,5.0,도담 게스트하우스,Guesthouse Dodam,
+hotels,8673261,4.5,레지던스 유니콘 인 동대문,Residence Unicorn in Dongdaemun,
+hotels,8681682,3.6153846153846154,호텔 포레힐,Hotel Foreheal,"37.51197,127.023735"
+hotels,8681735,4.1308016877637135,호텔 카푸치노,Hotel Cappuccino,"37.5068,127.03149"
+hotels,8686250,5.0,트리앙겔 게스트하우스,Triangel Guesthouse,
+hotels,8686362,4.0,24 게스트하우스 서울시청점,24guesthouse Seoul City Hall,"37.56486,126.97636"
+hotels,8691139,3.6666666666666665,S.A 아파트먼트 서울역,Service Apartment Seoul Station,"37.55504,126.96838"
+hotels,8691279,4.428571428571429,호텔 페이토 삼성,Hotel Peyto Samseong,"37.50849,127.05922"
+hotels,8691294,4.5,서울타워 패밀리 게스트하우스,Seoul Tower Family Guesthouse,
+hotels,8691395,4.666666666666667,스타호스텔 인사동,Star Hostel Insadong,"37.572998,126.99044"
+hotels,8691771,5.0,필스테이 이태원점,,"37.535614,126.99198"
+hotels,8691874,4.5,예하도예 게스트하우스,Yehadoye Guest House,
+hotels,8692195,3.5,바티카 호텔,Vatica Hotel,
+hotels,8692479,4.111111111111111,호텔 슬리피 판다 스트림워크,Hotel Sleepy Panda Stream Walk,
+hotels,8692662,4.444444444444445,크라운 파크 호텔 서울,,"37.563755,126.98076"
+hotels,8692780,5.0,엠버시 게스트하우스,Guesthouse Embassy,"37.53335,127.00554"
+hotels,8701673,2.0,허브 호텔,,"37.50962,127.08549"
+hotels,8701716,4.0,몽모텔,Mong Motel,"37.576447,127.025406"
+hotels,8705143,4.75,코지박스,Cozybox,
+hotels,8705421,4.0,저스트포유 게스트하우스,Just4u Guesthouse,"37.571507,127.00741"
+hotels,8706565,4.0,써니힐 게스트하우스 홍대,Sunnyhill Guesthouse Hongdae,"37.584385,127.00267"
+hotels,8706793,3.0,하우스테이 게스트하우스 2호점,Housetay Guesthouse 2,"37.555607,126.92561"
+hotels,8709460,4.933333333333334,드림인서울,Dream Inn Seoul,"37.486485,126.92988"
+hotels,8713943,4.0,31 페이지,31 Page,"37.582424,127.04865"
+hotels,8773807,4.0,바빌론 관광호텔,Babylon Tourist Hotel,
+hotels,8773892,3.2,호텔 648,,
+hotels,8773968,4.0,큐모텔,Q Motel,"37.553467,126.93575"
+hotels,8790502,4.333333333333333,The AN 호스텔,The AN Hostel,"37.565216,126.98955"
+hotels,8806838,4.368421052631579,글로리 인,Glory Inn,"37.56506,127.00212"
+hotels,9452203,4.223880597014926,신라스테이 광화문,Shilla Stay Gwanghwamun,"37.57244,126.98114"
+hotels,9454059,3.5,아이스테이,Istay,
+hotels,9454368,4.157894736842105,K-게스트하우스 명동 3,K-Guesthouse Myeongdong 3,"37.562454,126.985825"
+hotels,9454415,4.40625,에이큐브 호텔,Acube Hotel,"37.566257,127.00177"
+hotels,9454482,3.8,호텔 밀리오레,Hotel Migliore,"37.568066,127.00848"
+hotels,9454537,4.367924528301887,신라스테이 구로,Shilla Stay Guro,"37.485657,126.9044"
+hotels,9553151,5.0,지월장 게스트하우스,Jiwoljang Guest House,"37.54711,126.9791"
+hotels,9564232,4.75,두 게스트하우스 북촌 2,Doo guesthouse Bukchon 2,"37.579838,126.9865"
+hotels,9594362,2.8,K-게스트하우스 프리미엄 강남 1,K-guesthouse Premium Gangnam 1,"37.50538,127.025246"
+hotels,9594423,3.0,공감 호텔,Gonggam Hotel,
+hotels,9594532,3.7333333333333334,호텔 더 디자이너스 청량리,Hotel the Designers Cheongnyangni,"37.58167,127.0476"
+hotels,9594549,4.833333333333333,K-게스트하우스 인사동 2,K-Guesthouse Insadong 2,"37.56927,126.98406"
+hotels,9709682,4.166666666666667,베니키아 프리미어 호텔 동대문,,"37.573547,127.02015"
+hotels,9722314,4.133333333333334,서울 달빛 게스트하우스,Seoul Dalbit Dongdaemun Guesthouse,"37.571976,127.01455"
+hotels,9751158,4.5,호텔 칸,Hotel Khan,"37.525063,126.90961"
+hotels,9796468,4.8,호텔 베네,Hotel Bene,"37.565052,126.9925"
+hotels,9796501,5.0,벙크 게스트하우스,,"37.554863,126.92709"
+hotels,9806612,3.0,호텔 인피니,Hotel Infini,
+hotels,9811641,4.95,나그네 하우스,NagNe House,"37.576736,126.97163"
+hotels,9820385,5.0,로드하우스 명동,,"37.561893,126.99399"
+hotels,9861332,3.6129032258064515,호텔 베뉴지,Hotel Venue G,"37.568253,126.99102"
+hotels,9861769,4.5,블랑 호텔,Blanc Hotel,
+hotels,9861917,4.142857142857143,E-호텔,E-Hotel,
+hotels,9861925,5.0,모스트 스테이,Most Stay,
+hotels,9865547,4.5,K게스트하우스 프리미엄 명동4호점,K-Guesthouse Premium Myeongdong 4,
+hotels,9981959,4.0,메이커스호텔,,"37.57242,126.98954"
+hotels,9982952,3.6,베스틴 호스텔 명동,Vestin Hostel Myeongdong,"37.561844,126.989426"
+hotels,9986158,4.571428571428571,코트야드 서울 남대문,,"37.56108,126.97658"
+hotels,10308634,5.0,,Paul&#39;s Guesthouse,
+hotels,10435947,4.666666666666667,,Midam Hanok Guesthouse,
+hotels,10517178,4.857142857142857,,Bukchon Guesthouse,
+hotels,10532596,5.0,,Dajayon Hanok Guesthouse,
+hotels,10815717,4.892857142857143,,Michigan House &amp; Pub,
+hotels,1092902,3.857142857142857,,Blue Pearl,
+hotels,1149394,2.6666666666666665,,New Chonji Hotel,
+hotels,1162483,3.0,,Hotel Dodo,
+hotels,1174525,4.5,,Green Grass Hotel,
+hotels,1174908,4.5,,Inn daewon,
+hotels,11858514,4.0,,Hanok Guesthouse 202,
+hotels,1186308,5.0,,Cima Hotel,
+hotels,1186366,4.0,,Hotel Giant,
+hotels,1186436,3.0,,Hilltop Tourist Hotel,
+hotels,11864486,4.0,,Seoul Station Guesthouse,
+hotels,1186456,4.0,,Yeongdeungpo Tourist Hotel,
+hotels,11893470,5.0,,Yeonwoo House,
+hotels,11930690,5.0,,Western River Gangseo Hotel,
+hotels,1196104,3.6,,Goldenpond Guesthouse,
+hotels,11961065,3.5,,96 BUN&#39;Z Travelers Lodge,
+hotels,1201688,5.0,,Zen House,
+hotels,1207481,4.0,,Soo Eun Motel,
+hotels,12222145,2.0,,Kpop Hotel,
+hotels,12276613,4.5,,Gold River Hotel,
+hotels,12404787,5.0,,Bed Station,
+hotels,12581877,4.5,,Oasis Hostel,
+hotels,12711314,4.0,,Hotel Bridge,
+hotels,12881255,4.0,,JM Guest house,
+hotels,13090210,3.0,,Petercat Hotel,
+hotels,13369899,4.2631578947368425,,TravelersA Seoul Hostel,
+hotels,13397073,2.0,,Hostel Gaon,
+hotels,13428462,5.0,,Whitetail Backpacker Hostel,
+hotels,13440554,3.0,,Myeong Dong Tomato Guest House,
+hotels,1373946,4.0,,Tuyosinoie,
+hotels,13952968,3.0,,Hotel Bellagio,
+hotels,13984668,4.0,,MW Guest House,
+hotels,1462092,3.6,,Bali Tourist Hotel,
+hotels,1500586,4.75,,Rakkojae Seoul,
+hotels,1568154,4.690476190476191,,Seoul I Guesthouse,
+hotels,1627213,3.7777777777777777,,JIN Guest House,
+hotels,1628967,4.28125,,Bangrang Hostel,
+hotels,1637184,3.5714285714285716,,Bebop Guesthouse,
+hotels,1745746,3.0,,Chung Jin Motel,
+hotels,1745756,1.0,,Emerald Motel,
+hotels,1745760,2.75,,Green Residence,
+hotels,1745761,4.0,,Hotel Cape Town,
+hotels,1754398,5.0,,Rainbow Guest House,
+hotels,1754763,3.0,,Prada Hotel,
+hotels,1796658,4.173913043478261,,Banyan Tree Club &amp; Spa Seoul,
+hotels,1818900,4.7105263157894735,,Ann Guesthouse,
+hotels,1837003,4.222222222222222,,IB Ville Guesthouse,
+hotels,1871966,4.285714285714286,,Yoo&#39;s Family Guesthouses Yeorumjip,
+hotels,1948629,4.861111111111111,,Namu Guesthouse,
+hotels,1971598,3.5,,Seoul Walker Guest House,
+hotels,2024033,4.0,,Jun Motel,
+hotels,2046600,4.285714285714286,,The WIN Boutique Hotel,
+hotels,2076592,4.695652173913044,,Seoulwise Guesthouse,
+hotels,2097820,4.0,,City Guesthouse,
+hotels,2143287,3.875,,IS@K Traveler&#39;s Lounge,
+hotels,2150190,3.8,,Hotel Tomgi,
+hotels,2150223,5.0,,8 Motel,
+hotels,2150260,4.0,,Toptel Hotel,
+hotels,2150285,4.0,,M Hotel,
+hotels,2150328,5.0,,Carlton Hotel,
+hotels,2150403,4.0,,Motel Mido,
+hotels,2150542,5.0,,Violin Hotel,
+hotels,2150611,1.0,,Mojo Hotel,
+hotels,2150620,4.0,,Noblesse Hotel,
+hotels,2150642,5.0,,Hotel Dubai,
+hotels,2150693,4.333333333333333,,Highway Hotel,
+hotels,2150726,3.0,,Hotel Bellagio,
+hotels,2150913,1.0,,Keumkangjang inn,
+hotels,2150945,2.5,,Ritz Motel,
+hotels,2182167,3.3333333333333335,,Metro Spa Cabin,
+hotels,2198830,4.0,,Traditional Korean Guesthouse,
+hotels,2219111,3.0,,Bongsan Guesthouse,
+hotels,2282463,4.666666666666667,,2C House Wangsimni,
+hotels,2293677,3.75,,Hangul House,
+hotels,2293780,3.75,,Namkyong Hotel,
+hotels,2295120,4.166666666666667,,Kundaemunjip,
+hotels,2303927,4.5,,Seoul Youth Hostel,
+hotels,2337168,3.5,,Hotel Echae,
+hotels,2337194,5.0,,Hotel April,
+hotels,2483958,4.515625,,Guesthouse Phil-house,
+hotels,2513907,4.230769230769231,,Dongdaemun Hostel,
+hotels,2519660,4.794117647058823,,Birdsnest Hostel,
+hotels,2530060,4.0,,ZaZa Hotel Jamsil,
+hotels,2533593,4.5,,Chezlee Hotel,
+hotels,2533673,3.0,,Nex Hotel,
+hotels,2539495,3.5,,Dongdaemun 2C House,
+hotels,2542071,5.0,,Daeyang Motel,
+hotels,2543627,5.0,,Mint Guesthouse in Hongdae - Mr. Kim&#39;s Branch,
+hotels,2546614,5.0,,Homestay Seoul Ahn,
+hotels,2553756,5.0,,An-Nyoung Guesthouse,
+hotels,2571575,4.235294117647059,,Girls Generation Hostel,
+hotels,2629757,5.0,,Soul Guesthouse,
+hotels,2641873,3.0,,Carlton Motel,
+hotels,2641883,3.142857142857143,,Cutee Hotel,
+hotels,2642077,4.0,,Shinchon Eureka Guesthouse,
+hotels,2642160,4.666666666666667,,Hotel S,
+hotels,2642171,4.0,,Stylish Hotel Ditto,
+hotels,2653697,4.0,,FL Hotel,
+hotels,2658445,5.0,,Segumjung Blues Guest House,
+hotels,2658481,5.0,,Big Tree Guesthouse,
+hotels,299776,4.589912280701754,,JW Marriott Hotel Seoul,
+hotels,3154906,3.0,,Nyx Hotel,
+hotels,3154922,4.333333333333333,,Seocho-dong Co-op Residence,
+hotels,3154940,4.0,,Tea Time Share Residence,
+hotels,3161565,3.375,,Seoul Hostel Center,
+hotels,3161571,2.888888888888889,,POP@Itaewon Guesthouse,
+hotels,3249458,4.6,,Space Torra,
+hotels,3254548,3.75,,U &amp; I Hostel,
+hotels,3272476,5.0,,Backpackers Space,
+hotels,3274076,4.25,,KW Pencil Hostel,
+hotels,3274321,4.181818181818182,,Jin&#39;s Paradise,
+hotels,3274728,2.0,,Sky Motel,
+hotels,3291621,1.75,,Morning Guesthouse Gangnam 1,
+hotels,3291643,4.5,,MW Hotel,
+hotels,3291645,4.0,,Red Fish Guesthouse,
+hotels,3291647,5.0,,Guesthouse Beehive,
+hotels,3291684,4.0,,Hotel Yaja Guro,
+hotels,3291686,3.5,,Mi House,
+hotels,3291691,3.675675675675676,,WS Hotel,
+hotels,3295602,4.470588235294118,,Four Seasons House,
+hotels,3349559,4.333333333333333,,Ultari House 1,
+hotels,3354449,4.833333333333333,,Fully House,
+hotels,3356594,4.4,,Yoo&#39;s Family Guesthouses Byeolhadang,
+hotels,3366752,3.25,,Hotel Parfe,
+hotels,3369103,3.5555555555555554,,K Hostel,
+hotels,3370879,4.0,,Hite Motel,
+hotels,3389031,3.6666666666666665,,Hotel Tree shade,
+hotels,3389289,3.75,,Pearl Hotel,
+hotels,3433133,3.7,,Lavinia,
+hotels,3438789,4.5,,Lodge 82,
+hotels,3438793,5.0,,Sloth guesthouse,
+hotels,3447139,2.25,,Hawseongjang,
+hotels,3477036,3.2857142857142856,,Myeongdong Town Guesthouse,
+hotels,3477095,3.0,,Motel Yam Sinchon,
+hotels,3477113,2.75,,Mong Hotel,
+hotels,3477119,4.666666666666667,,Family House Tel,
+hotels,3531768,3.0,,DSBC,
+hotels,3540875,4.6299212598425195,,Boa travel house,
+hotels,3568795,4.0,,Chez Nicolas B&amp;B,
+hotels,3568833,4.0,,May Hotel Dongdaemun,
+hotels,3568904,4.363636363636363,,Kimchi Guesthouse,
+hotels,3568954,4.0,,Hotel Time,
+hotels,3568977,3.0,,Koose Motel,
+hotels,3571239,3.6,,Greentel,
+hotels,3571244,3.25,,Just Stay Hotel,
+hotels,3575500,1.0,,Hotel Star,
+hotels,3575561,3.0,,Hotel Unique by Foret,
+hotels,3581568,5.0,,The Seoul,
+hotels,3595030,3.5,,Hotel Yaja Yeongdeungpo,
+hotels,3600472,4.5,,Ceylon Hotel,
+hotels,3612234,3.0,,Ritz Hotel,
+hotels,3616687,4.333333333333333,,Leo Haus,
+hotels,3618328,3.5,,Hill Livingtel Nambu Terminal,
+hotels,3627578,4.5,,Hotel M,
+hotels,3627933,3.5,,Khaosan In Seoul,
+hotels,3630329,3.6666666666666665,,BNB Chungdam,
+hotels,3640677,1.0,,Park Hill Residence,
+hotels,3642712,4.724137931034483,,KpopStay,
+hotels,3642742,4.777777777777778,,Ewha Dh Guesthouse,
+hotels,3653244,4.75,,Gangnam Guesthouse,
+hotels,3656148,4.666666666666667,,Seochon Guesthouse,
+hotels,3660712,4.8,,New Myeongdong Guesthouse,
+hotels,3682077,5.0,,Gom Hostel Dongdaemun,
+hotels,3687344,5.0,,The JA in Gangnam,
+hotels,3723552,4.0,,Sarangbang Motel,
+hotels,3813601,3.0,,JJ Residence,
+hotels,3814474,4.733333333333333,,FunFunStay Guesthouse,
+hotels,3814669,4.636363636363637,,Guesthouse The Hill,
+hotels,3814735,4.730769230769231,,Soo Guesthouse,
+hotels,3858610,4.90566037735849,,Sopoong Guest House,
+hotels,3950995,5.0,,Two Star Motel,
+hotels,3951109,4.0,,TM Motel,
+hotels,3965332,4.0,,Paras,
+hotels,3974714,5.0,,Samsung Motel,
+hotels,3976703,4.0,,Sky Motel,
+hotels,3977299,4.0,,Piano Motel,
+hotels,3979548,4.0,,Opera Motel,
+hotels,3980745,5.0,,Theme Motel,
+hotels,4006069,4.3076923076923075,,Khaosan Seoul Insadong,
+hotels,4006171,4.852941176470588,,Rio House Hongdae,
+hotels,4009695,4.6,,Crossroad Backpackers,
+hotels,4036576,5.0,,Mrs. Yoon BnB,
+hotels,4054919,3.0,,Motel Rexville,
+hotels,4071531,4.157894736842105,,Dragon Hill Lodge,
+hotels,4105523,4.9491525423728815,,Hostel Tommy,
+hotels,4134889,3.0,,Motel Yam Jongno,
+hotels,4134992,3.8,,Roo Roo Residence,
+hotels,4135824,3.9166666666666665,,Inn-the City Serviced Residence Gangnam,
+hotels,4137680,4.081081081081081,,Hotel Grammos,
+hotels,4153722,4.75,,Maruji Guesthouse,
+hotels,4170938,3.6666666666666665,,Dongdaemun Hostel,
+hotels,4344758,4.620689655172414,,Suitcasers,
+hotels,4354716,5.0,,Agrina Guesthouse,
+hotels,4409027,4.666666666666667,,Jongno Lemontree Hotel,
+hotels,4412264,5.0,,Garosu Stay,
+hotels,4412459,4.428571428571429,,Pigfly House,
+hotels,447939,4.1875,,Mayfield Hotel &amp; Resort,
+hotels,447940,3.5128205128205128,,Hotel Double A,
+hotels,4504693,4.666666666666667,,Bridge Backpackers,
+hotels,454920,3.4,,Yeongdong Hotel,
+hotels,455448,3.0833333333333335,,California Hotel,
+hotels,455859,3.5555555555555554,,Central Tourist,
+hotels,455861,4.0,,The Kims Tourist Hotel,
+hotels,4590180,4.876923076923077,,Travelers Planet Hostel,
+hotels,4590202,3.5,,Samho Park Hotel,
+hotels,4590208,5.0,,K-POP Starz House,
+hotels,4608638,4.8,,May guesthouse,
+hotels,4749758,3.0,,24guesthouse Dongdaemun Style,
+hotels,4763185,3.3846153846153846,,Mamas &amp; Papas Hongdae Guesthouse,
+hotels,4777440,3.75,,24 Guesthouse Dongdaemun,
+hotels,5020087,3.888888888888889,,HueAhn Guesthouse,
+hotels,5039804,3.5,,Sinchon Yasuragi,
+hotels,506326,2.5,,Kyung Nam Tourist Hotel,
+hotels,5122452,2.0,,Sazanami Guesthouse,
+hotels,5252370,4.142857142857143,,Local Stitch,
+hotels,535491,3.0,,California Tourist Hotel,
+hotels,5540642,4.0,,Bigbang Hostel,
+hotels,5541130,4.928571428571429,,Hato Guest House,
+hotels,5541135,5.0,,G.O.D Guest House,
+hotels,5541138,5.0,,Charm House,
+hotels,557914,3.5,,Wow! Guest House,
+hotels,5579765,4.833333333333333,,It Place Korea,
+hotels,558060,3.2,,Hotel River Park,
+hotels,558396,4.0,,Nest B&amp;B,
+hotels,578729,3.0,,Hotel Victoria,
+hotels,582966,3.5,,Tiffany Tourist Hotel,
+hotels,5895936,4.454545454545454,,Uwa Guesthouse,
+hotels,5895982,3.6,,24 guesthouse Edae,
+hotels,5895986,4.5,,24guesthouse Daehakro,
+hotels,5897190,4.0,,Gyeongbokgung Guest House,
+hotels,5897213,4.932203389830509,,Urbanwood Guesthouse,
+hotels,6104325,3.0,,Salut ABC Guesthouse,
+hotels,6104327,4.0,,Gaonjae,
+hotels,6104646,3.25,,Hostel KW Gangnam,
+hotels,6104831,3.4,,Feliz Guesthouse,
+hotels,6104852,3.6666666666666665,,Solarium City,
+hotels,6104872,5.0,,The Rooming House,
+hotels,6160692,4.714285714285714,,Philstay Ehwa Womans Univ.,
+hotels,634779,3.5384615384615383,,Hotel Benhur,
+hotels,6378649,3.25,,I.T.W Hotel,
+hotels,6380504,5.0,,Kimchee Dongnimmun Guesthouse,
+hotels,6400700,4.853658536585366,,Bounce Guesthouse,
+hotels,6476904,4.0,,24guesthouse Dongdaemun Market,
+hotels,649806,4.066666666666666,,Han Suites Serviced Residences,
+hotels,6536275,4.625,,Korstay Jonggak Insadong,
+hotels,6541532,4.714285714285714,,OMG Hostel,
+hotels,6541616,3.25,,Hotel Tong Andante Insadong,
+hotels,6552922,3.5555555555555554,,Morning Sky Residence,
+hotels,6556234,3.0,,Hotel Cullinan Jongno,
+hotels,6556289,2.6666666666666665,,BJ Hotel,
+hotels,655897,4.0,,Vabien Suite I Serviced Residence,
+hotels,6561923,4.714285714285714,,the BOOT Guesthouse,
+hotels,6628354,2.0,,Haechi Hostel,
+hotels,6662767,4.0,,Ujin Motel,
+hotels,6662999,4.7,,24 Guesthouse Namsan Garden,
+hotels,6759626,4.458333333333333,,Small House Big Door,
+hotels,6816705,5.0,,Manaedang Guesthouse,
+hotels,6871335,3.8,,IU Guesthouse,
+hotels,6876146,3.8679245283018866,,Ramada Encore Seoul Dongdaemun,
+hotels,6941478,3.1666666666666665,,YaKorea Hostel Dongdaemun,
+hotels,6941511,5.0,,Hide &amp; Seek GuestHouse,
+hotels,6960801,3.75,,Seoul City Hotel,
+hotels,7043488,3.0,,Hotel Imt,
+hotels,7053601,5.0,,Icos Guesthouse 2,
+hotels,7054436,3.2857142857142856,,Hotel Tong Seoul Myeongdong,
+hotels,7065399,3.0,,The Mei Forestvill,
+hotels,7065406,5.0,,Chachacha Guest House,
+hotels,7074389,3.0,,Hotel Eastern I,
+hotels,7074449,1.0,,Story House Jamsil,
+hotels,7074454,3.5,,Hotel QB,
+hotels,7089473,2.6,,Skycity Residence,
+hotels,7112812,4.962264150943396,,Gateway Korea Guesthouse,
+hotels,7161309,4.5,,Insandong Design Hostel,
+hotels,7178669,4.5,,Hoam Faculty House,
+hotels,7183894,4.0,,Capetown,
+hotels,7186671,5.0,,Albergue Guesthouse,
+hotels,7221558,5.0,,Vin Guest House,
+hotels,7221841,3.6666666666666665,,JNJ Residence,
+hotels,7274718,4.75,,Hostel Vanilla 2,
+hotels,7274742,4.5,,STEP INN Myeongdong 1,
+hotels,7289688,3.5,,K-POP HOTEL Seoul Tower,
+hotels,7296172,4.8,,Cozy Box Guest House,
+hotels,7353793,4.565217391304348,,Bodeum Guest House,
+hotels,7356359,5.0,,Log-Inn Guesthouse Seoul,
+hotels,7367829,1.0,,Jouvence Motel,
+hotels,7390323,4.916666666666667,,Lazy Fox,
+hotels,7619090,4.2272727272727275,,D Seven Suites,
+hotels,7654211,4.25,,Hotel Denim,
+hotels,7654241,5.0,,Dongdaemun Wellbeing Hostel,
+hotels,7658156,3.0,,NJoy Guesthouse,
+hotels,7679094,4.5,,Hostel Korea 10th,
+hotels,7685049,3.3333333333333335,,Gonggam Guesthouse,
+hotels,7687019,1.0,,Golden Pond Guest House,
+hotels,7701462,4.5,,Nanu Guesthouse Black,
+hotels,7701863,4.0,,1969 GuestHouse,
+hotels,7717643,4.25,,Jenna Suite,
+hotels,7762294,5.0,,Jamsil Guest House,
+hotels,7793011,5.0,,Seoul Sweet Style Guest House,
+hotels,7835598,4.0,,Cozyplace Guesthouse,
+hotels,7954585,5.0,,Goguma Hotel,
+hotels,799326,3.2,,CasaVille Residence Sinchon,
+hotels,7998017,4.785714285714286,,Trick Art Guest House Hongdae,
+hotels,8073776,4.0,,Leo Guesthouse,
+hotels,8073792,4.0,,Town Guest House 2,
+hotels,8076781,5.0,,Bauhaus Guesthouse,
+hotels,8107148,5.0,,Seoul Sweet Theme Guest House,
+hotels,8294557,3.0,,Motel Daeha,
+hotels,8299865,4.0,,Housetay 2,
+hotels,8308055,4.733333333333333,,N Guest House Itaewon,
+hotels,8317279,4.666666666666667,,Grand Field Residence Hostel,
+hotels,8323639,1.0,,Haedamchae Stay,
+hotels,8368983,4.0,,Gana Myeongdong Guesthouse,
+hotels,8404072,3.8333333333333335,,Dragon Hill Spa &amp; Resort,
+hotels,8404091,4.0,,Bong Backpackers,
+hotels,8428750,5.0,,Hongdae Chef Guesthouse,
+hotels,8492267,3.0,,Eel Guest House,
+hotels,8611025,4.0,,Donggyeong Hotel,
+hotels,8681406,5.0,,Single House,
+hotels,8681704,5.0,,Olive Guesthouse,
+hotels,8681726,5.0,,IS at K Guesthouse,
+hotels,8705097,4.0,,Daon House,
+hotels,8705103,5.0,,Charlestel Guesthouse,
+hotels,8705408,3.8,,Haha Guesthouse,
+hotels,8705711,3.0,,Hotel Pop 2,
+hotels,8706575,3.0,,Doors Guesthouse,
+hotels,8709450,5.0,,Hotel Nine,
+hotels,8773880,4.25,,Running Man Hostel,
+hotels,8790387,5.0,,Comestay,
+hotels,8806857,4.5,,Mir Residnece,
+hotels,9457183,3.0,,Seoul JJ House,
+hotels,9594414,1.0,,H Myeongdong Stay,
+hotels,9597881,4.0,,Prince Hotel,
+hotels,9735758,3.6666666666666665,,MUST STAY HOTEL Myeongdong,
+hotels,9764289,5.0,,Hotel ROinhome,
+hotels,9770463,4.0,,Usimdang,
+hotels,9799771,5.0,,Villa Seoul Garosugil,
+hotels,9806494,4.0,,24 Guesthouse Gyeongbokgung,
+hotels,9806598,4.0,,Evada Residence,
+hotels,9820471,4.214285714285714,,IBC Hotel,
+hotels,9861024,4.0,,J. Garden,
