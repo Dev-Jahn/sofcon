@@ -63,3 +63,11 @@ fastlane/Preview.html
 fastlane/screenshots
 fastlane/test_output
 fastlane/readme.md
+
+#jupyter notebook checkpoint
+.ipynb_checkpoints/
+#directory to ignore
+.ignore/
+# nltk dataset
+nltk_data/
+
