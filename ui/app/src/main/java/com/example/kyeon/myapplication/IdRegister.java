@@ -161,7 +161,7 @@ public class IdRegister extends Activity {
                 if(id_i == 1 && passwd_i == 1 && passwdCM_i == 1 && name_i == 1 && phone_i == 1) {
                     //Log.d("DATA-OUTPUT", "commited");
                     String save;
-                    save = id+"|"+passwd;
+                    save = id+" "+passwd;
                     Log.d("DATA_SET", save);
 
                     String dirPath = getFilesDir().getAbsolutePath();
