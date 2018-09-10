@@ -6,8 +6,9 @@ console.log("start");
 
 client.invoke("recommend",
 		'attraction',
-		['324890','3808315','590748'],
-		['320359'],
+		['10172901', '10183757'],
+		//['324890','3808315','590748'],
+		//['320359'],
 		function(error, res, more) {
 			console.log(res);
 		});
