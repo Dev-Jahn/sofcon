@@ -1,6 +1,7 @@
 package com.example.kyeon.myapplication;
 
 import android.content.Intent;
+import android.location.Geocoder;
 import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -14,11 +15,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class MyTripFragment extends Fragment {
 
@@ -62,12 +65,13 @@ public class MyTripFragment extends Fragment {
         try
         {
             travel = Travel.load(getContext(), "travel_1");
-            item[4] = new Item(R.drawable.city_tai, travel.title,travel.dailyDiary[0].getReview(0).place_name,
+            item[4] = new Item(R.drawable.city_tai, travel.cityName,travel.title,
                     travel.syy + "." + travel.smm + "." + travel.sdd + " ~ " + travel.eyy +"."+travel.emm+"."+travel.edd
             );
         }catch (Exception e)
         {
             travel = null;
+            Toast.makeText(getContext(), "sibal", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
 

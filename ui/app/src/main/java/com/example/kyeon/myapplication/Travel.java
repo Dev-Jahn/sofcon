@@ -17,18 +17,21 @@ public class Travel implements Serializable {
 
     int travel_id;//travel도 id를 하나 두면 좋지않을까 생각 하는중
     String id;//user id
+    String title;//여행 타이틀
+    String cityName;//여행 장소 이름
     int people_count;//사람 수
-    String title;
     int days;//날짜수 1일차 ~ 4일차 같은거
     int smm, syy, sdd;//시작 날짜
     int emm, eyy, edd;//끝 날짜
     DailyDiary[] dailyDiary;//하루 일지
     transient Context context;// 서버에서는 저장 안해도 ㄱㅊ
 
-    public Travel(Context context, String id, int people_count, int days, int smm, int syy, int sdd, int emm, int eyy, int edd)//여행 하나 초기화
+    public Travel(Context context, String id, String cityName, String title, int people_count, int days, int smm, int syy, int sdd, int emm, int eyy, int edd)//여행 하나 초기화
     {
         this.context = context;
         this.id = id;
+        this.title = title;
+        this.cityName = cityName;
         this.days = days;
         this.people_count = people_count;
         this.dailyDiary = new DailyDiary[days];
