@@ -180,10 +180,8 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
 
     private void determineTrip() {
         MapUtility.saveMapUserMarkers(getContext(), mMap, listMarkersToSave, intentData.getTitle(), intentData.getCurrentDay());
-        captureScreenAndSave();
-        saveIntentDatas();
-        setResult(RESULT_OK, returnIntent);
-        finish();
+        captureScreenAndSaveAndFinish();
+
     }
 
     private void saveIntentDatas() {
@@ -202,54 +200,31 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         }
     }
 
-    @Deprecated
-    private boolean isTravelEnded() {
-        int currentDay = Integer.parseInt(intentData.getCurrentDay());
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
-        String d_yy = intentData.getdYY();
-        String d_mm = intentData.getdMM();
-        String d_dd = intentData.getdDD();
-        String a_yy = intentData.getaYY();
-        String a_mm = intentData.getaMM();
-        String a_dd = intentData.getaDD();
-        Date beginDate;
-        Date endDate;
-        try {
-            beginDate = formatter.parse(d_yy + d_mm + d_dd);
-            endDate = formatter.parse(a_yy + a_mm + a_dd);
-            long diff = endDate.getTime() - beginDate.getTime();
-            long diff_days = diff / (24 * 60 * 60 * 1000);
-
-            if (currentDay > diff_days + 1)
-                return true;
-            else
-                return false;
-
-        } catch (Exception e) {
-            Log.d("Error-Exception", e.getMessage());
-        }
-        return false;
-    }
-
-    private void captureScreenAndSave() {
+    private void captureScreenAndSaveAndFinish() {
         Log.d("DEBUG-TEST", "snapshot is called");
         final GoogleMap.SnapshotReadyCallback snapshotReadyCallback = new GoogleMap.SnapshotReadyCallback() {
             @Override
             public void onSnapshotReady(Bitmap snapshot) {
+                removeAllPlaceMarker();
                 String filePath = getContext().getFilesDir().getPath().toString() + "/"
                         + intentData.getTitle() + intentData.getCurrentDay() + ".png";
                 File file = new File(filePath);
-                Log.d("DEBUG-TEST", file.getAbsolutePath() + " in ChoosePlacesActivity");
+                Log.d("DEBUG-TEST", "스냅샷 시작 in ChoosePlacesActivity");
                 try {
                     file.createNewFile();
                     FileOutputStream fos = new FileOutputStream(file);
                     snapshot.compress(Bitmap.CompressFormat.PNG, 90, fos);
                     fos.close();
+                    Log.d("DEBUG-TEST", file.getAbsolutePath() + " in ChoosePlacesActivity");
+                    Log.d("DEBUG-TEST", "스냅샷 완료 in ChoosePlacesActivity");
                 } catch (IOException e) {
-                    Log.d("DEBUG-TEST", "파일 출력 에러 in ChoosePlacesActivity");
+                    Log.d("DEBUG-TEST", "스냅샷 에러 in ChoosePlacesActivity");
                     Log.d("DEBUG-TEST", e.getMessage());
                 }
                 placeBitmapFilePath = filePath;
+                saveIntentDatas();
+                setResult(RESULT_OK, returnIntent);
+                finish();
             }
         };
         mMap.snapshot(snapshotReadyCallback);
@@ -494,6 +469,10 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         addFirstPlaceMarker();
     }
 
+    private void resetPlaceMarker() {
+
+    }
+
     private void showCustomSelectDialog(final LatLng latLng) {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
         alertDialog.setTitle(getResources().getString(R.string.custom_select_title))
@@ -534,6 +513,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         try {
             List<Address> addressList = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 10);
             if (addressList == null || addressList.size() == 0) {
+                Log.d("DEBUG-TEST", "Why null?");
                 options.title(getResources().getString(R.string.default_place_name));
             } else {
                 Address address = addressList.get(0);
@@ -600,8 +580,8 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
 
         Marker marker = mMap.addMarker(options);
         listLocsOfPlaces.add(position);
-        hashMapPlaceMarker.put(userMarkerCount++, marker);
-        saveMarkerTag(marker, userMarkerCount, InfoWindowData.TYPE_PLACE);
+        hashMapPlaceMarker.put(placeMarkerCount++, marker);
+        saveMarkerTag(marker, placeMarkerCount, InfoWindowData.TYPE_PLACE);
     }
 
     private void saveMarkerTag(Marker marker, int markerCount, int windowType) {
