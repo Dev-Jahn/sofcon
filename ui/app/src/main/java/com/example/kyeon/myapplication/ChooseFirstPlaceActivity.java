@@ -204,7 +204,7 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
             public void onSnapshotReady(Bitmap snapshot) {
                 String filePath = getContext().getFilesDir().getPath().toString() + "/tempImage1.png";
                 File file = new File(filePath);
-                if(file.exists()) {
+                if (file.exists()) {
                     file.delete();
                     file = new File(filePath);
                 }
@@ -214,7 +214,7 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
                     FileOutputStream fos = new FileOutputStream(file);
                     snapshot.compress(Bitmap.CompressFormat.PNG, 90, fos);
                     fos.close();
-                } catch(IOException e) {
+                } catch (IOException e) {
                     Log.d("DEBUG-TEST", "파일 출력 에러 in ChooseFirstPlaceActivity");
                     Log.d("DEBUG-TEST", e.getMessage());
                 }
@@ -395,7 +395,7 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
     }
 
     private void addFirstPlaceMarker(LatLng latLng) {
-        if(selectedMarker == null) {
+        if (selectedMarker == null) {
             Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
             MarkerOptions options = new MarkerOptions();
             options.position(latLng);
@@ -455,6 +455,7 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
                                 returnIntent.putExtra(MapUtility.PLACE_LNG_TAG, String.valueOf(marker.getPosition().longitude));
                                 returnIntent.putExtra(MapUtility.PLACE_NAME_TAG, marker.getTitle());
                                 returnIntent.putExtra(MapUtility.PLACE_TYPE_TAG, marker.getSnippet());
+                                returnIntent.putExtra(MapUtility.CURRENT_DAY_TAG, "1");
                                 captureScreenAndFinish();
                             }
                         })

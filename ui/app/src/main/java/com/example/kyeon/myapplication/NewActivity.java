@@ -26,12 +26,13 @@ import java.util.Locale;
 
 public class NewActivity extends AppCompatActivity {
     String travel_title;
-    String place_text;
     DrawerLayout drawerLayout;
     LinearLayout navigation_new_background;
     Intent intent;
 
     private Button btnPlaceName;
+    private String currentDay;
+    private String placeName;
     private String placeLat;
     private String placeLng;
     private String placeType;
@@ -219,6 +220,7 @@ public class NewActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(isFirstPlaceSet == false || travel_title == null) {
+                    Log.d("DEBUG-TEST", "isFirstPlaceSet : " + isFirstPlaceSet +", travel_title : " + travel_title);
                     showWarningDialog();
                 } else {
                     Intent i = new Intent(NewActivity.this, TripPlanActivity.class);
@@ -243,12 +245,13 @@ public class NewActivity extends AppCompatActivity {
                     i.putExtra("arriving_month", a_mm);
                     i.putExtra("arriving_day", a_dd);
                     i.putExtra("person_count", String.valueOf(personCount));
-                    i.putExtra("title_text", travel_title);
-                    i.putExtra("place_name", place_text);
+                    i.putExtra(MapUtility.TRAVEL_TITLE_TAG, travel_title);
+                    i.putExtra("place_name", travel_title);
                     i.putExtra(MapUtility.PLACE_NAME_TAG, btnPlaceName.getText());
                     i.putExtra(MapUtility.PLACE_LAT_TAG, placeLat);
                     i.putExtra(MapUtility.PLACE_LNG_TAG, placeLng);
                     i.putExtra(MapUtility.PLACE_TYPE_TAG, placeType);
+                    i.putExtra(MapUtility.CURRENT_DAY_TAG, currentDay);
                     if(placeBitmapFilePath == null) {
                         Log.d("DEBUG-TEST", getResources().getString(R.string.intent_bitmap_error) + "in NewActivity");
                     }
@@ -385,7 +388,7 @@ public class NewActivity extends AppCompatActivity {
                 }
             }
         } else if(requestCode == REQUEST_CODE_CHOOSE_PLACE) {
-            String placeName = data.getStringExtra(MapUtility.PLACE_NAME_TAG);
+            placeName = data.getStringExtra(MapUtility.PLACE_NAME_TAG);
             if(placeName == null)
                 placeName = getResources().getString(R.string.default_place_name);
             btnPlaceName.setText(placeName);
@@ -394,6 +397,7 @@ public class NewActivity extends AppCompatActivity {
             placeLat = data.getStringExtra(MapUtility.PLACE_LAT_TAG);
             placeLng = data.getStringExtra(MapUtility.PLACE_LNG_TAG);
             placeType = data.getStringExtra(MapUtility.PLACE_TYPE_TAG);
+            currentDay = data.getStringExtra(MapUtility.CURRENT_DAY_TAG);
             placeBitmapFilePath = data.getStringExtra(MapUtility.PLACE_BITMAP_FILE_PATH_TAG);
             if(placeBitmapFilePath == null)
                 Log.d(".java", getResources().getString(R.string.intent_bitmap_error) + "in NewActivity");
