@@ -1,6 +1,7 @@
 package com.example.kyeon.myapplication;
 
 import android.app.Activity;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +10,14 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class IdRegister extends Activity {
 
@@ -151,6 +160,43 @@ public class IdRegister extends Activity {
                 //Log.d("DATA-OUTPUT", id_i+" "+passwd_i+" "+passwdCM_i+" "+name_i+" "+phone_i+" "+"hello");
                 if(id_i == 1 && passwd_i == 1 && passwdCM_i == 1 && name_i == 1 && phone_i == 1) {
                     //Log.d("DATA-OUTPUT", "commited");
+                    String save;
+                    save = id+"|"+passwd;
+                    Log.d("DATA_SET", save);
+
+                    String dirPath = getFilesDir().getAbsolutePath();
+                    File file = new File(dirPath);
+                    if(!file.exists()) {
+                        file.mkdirs();
+                    }
+                    File savefile = new File(dirPath+File.separator+"account_setup.txt");
+                    try{
+                        FileOutputStream fos = new FileOutputStream(savefile);
+                        fos.write(save.getBytes());
+                        fos.close();
+                        //Log.d("SAVE_SUCCESS", savefile.getPath());
+                    } catch (IOException e) { }
+
+                    if(file.listFiles().length > 0) {
+                        for(File f : file.listFiles()) {
+                            String f_name = f.getName();
+                            //Log.d("FILE_NAME", f_name);
+
+                            String load_path = dirPath+File.separator+f_name;
+                            try {
+                                FileInputStream fis = new FileInputStream(load_path);
+                                BufferedReader bufferdReader = new BufferedReader(new InputStreamReader(fis));
+                                String content="", temp="";
+                                while((temp = bufferdReader.readLine())!= null) {
+                                    content += temp;
+                                }
+                                //Log.d("SAVED_MESSAGE", ""+content);
+
+                            } catch(Exception e) {}
+                        }
+                    }
+
+
                     finish();
                 }
             }
