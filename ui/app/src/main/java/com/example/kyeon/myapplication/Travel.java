@@ -78,14 +78,14 @@ public class Travel implements Serializable {
 
         public class PlaceReview implements Serializable//한장소에 대한 정보와 리뷰 데이터들이 있음
         {
-            int place_id;//장소 id
+            String place_id;//장소 id
             String place_name;//장소 이름
             int score;//장소 점수
             String reviewText;//장소 리뷰
             SerialBitmap image;//장소 이미지
             boolean reviewed;//장소 리뷰 작성 되었는지 여부
 
-            public PlaceReview(int place_id, String place_name)
+            public PlaceReview(String place_id, String place_name)
             {
                 this.place_id = place_id;
                 this.place_name = place_name;
@@ -95,7 +95,7 @@ public class Travel implements Serializable {
                 reviewed = false;
             }
 
-            public void setReview(int place_id, String place_name, int score, String reviewText, SerialBitmap image)
+            public void setReview(String place_id, String place_name, int score, String reviewText, SerialBitmap image)
             {
                 this.place_id = place_id;
                 this.place_name = place_name;
@@ -106,7 +106,7 @@ public class Travel implements Serializable {
             }
         }
 
-        public void addPlace(int place_id, String place_name)//TripPlan단계에서 장소를 추가
+        public void addPlace(String place_id, String place_name)//TripPlan단계에서 장소를 추가
         {
             review.add(new PlaceReview(place_id, place_name));
         }
@@ -115,7 +115,7 @@ public class Travel implements Serializable {
             review.remove(place_index);
         }
 
-        public void setPlaceReview(int place_index,int place_id, String place_name, int score, String reviewText, SerialBitmap image)//내 여행에서 리뷰를 작성하고 완료버튼 눌름
+        public void setPlaceReview(int place_index,String place_id, String place_name, int score, String reviewText, SerialBitmap image)//내 여행에서 리뷰를 작성하고 완료버튼 눌름
         {
             review.get(place_index).setReview(place_id, place_name, score, reviewText, image);
         }
