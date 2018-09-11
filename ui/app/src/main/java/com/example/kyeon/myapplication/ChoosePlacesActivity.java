@@ -221,6 +221,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         for (int i = 0; i < listMarkersToSave.size(); i++) {
             Marker saveMarker = listMarkersToSave.get(i);
 //            Log.d("placeId", saveMarker.getTitle());
+            Log.d("???",((InfoWindowData)saveMarker.getTag()).getPlaceID() + " , "  + saveMarker.getTitle());
             travel.dailyDiary[index - 1].addPlace(((InfoWindowData)saveMarker.getTag()).getPlaceID(), saveMarker.getTitle(), saveMarker.getSnippet());
         }
     }
@@ -366,6 +367,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                                         InfoWindowData infoWindowData = (InfoWindowData) marker.getTag();
                                         infoWindowData.setOrder(userMarkerCount);
                                         infoWindowData.setWindowType(InfoWindowData.TYPE_USER);
+                                        infoWindowData.setPlaceID(((InfoWindowData) marker.getTag()).getPlaceID());
                                         addUserMarker(infoWindowData, false);
                                         removePlaceMarker(marker);
                                     }
@@ -672,7 +674,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         loadMarkerTag(marker, infoWindowData);
         hashMapUserMarker.put(userMarkerCount, marker);
 
-        saveMarkerTag(marker, userMarkerCount, InfoWindowData.TYPE_USER);
+        saveMarkerTag(marker, userMarkerCount, InfoWindowData.TYPE_USER, infoWindowData.getPlaceID());
         listMarkersToSave.add(marker);
         lastUserMarker = marker;
         if (isOptimized) {
