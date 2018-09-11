@@ -52,7 +52,6 @@ public class TripCardAdapter extends RecyclerView.Adapter<TripCardAdapter.ViewHo
         final Travel travel = item.getTravel();
         Drawable drawable = ContextCompat.getDrawable(context, item.getImage());
         holder.image.setBackground(drawable);
-        //holder.place.setText(item.getPlace());
         holder.day.setText(item.getDay());
         holder.title.setText(item.getTitle());
         String filePath = context.getFilesDir().getPath().toString() + "/"

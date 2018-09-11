@@ -213,12 +213,14 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
     }
 
     private void addPlaceDatas() {
-        index = getIntent().getIntExtra(MapUtility.CURRENT_DAY_TAG, 0);
+        //index = getIntent().getIntExtra(MapUtility.CURRENT_DAY_TAG, 0);
+        index = Integer.parseInt(intentData.getCurrentDay());
+        // index = Integer.valueOf(getIntent().getStringExtra(MapUtility.CURRENT_DAY_TAG));
         Bundle b = getIntent().getExtras();
         travel = (Travel) getIntent().getExtras().getSerializable("travelData");
         for (int i = 0; i < listMarkersToSave.size(); i++) {
             Marker saveMarker = listMarkersToSave.get(i);
-            Log.d("placeId", saveMarker.getTitle());
+//            Log.d("placeId", saveMarker.getTitle());
             travel.dailyDiary[index - 1].addPlace(((InfoWindowData)saveMarker.getTag()).getPlaceID(), saveMarker.getTitle(), saveMarker.getSnippet());
         }
     }
