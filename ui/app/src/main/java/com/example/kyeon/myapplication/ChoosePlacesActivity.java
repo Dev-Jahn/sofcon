@@ -213,8 +213,9 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
     }
 
     private void addPlaceDatas() {
-        // index = getIntent().getIntExtra(MapUtility.CURRENT_DAY_TAG, 0);
-        index = Integer.valueOf(getIntent().getStringExtra(MapUtility.CURRENT_DAY_TAG));
+        //index = getIntent().getIntExtra(MapUtility.CURRENT_DAY_TAG, 0);
+        index = Integer.parseInt(intentData.getCurrentDay());
+        // index = Integer.valueOf(getIntent().getStringExtra(MapUtility.CURRENT_DAY_TAG));
         Bundle b = getIntent().getExtras();
         travel = (Travel) getIntent().getExtras().getSerializable("travelData");
         for (int i = 0; i < listMarkersToSave.size(); i++) {

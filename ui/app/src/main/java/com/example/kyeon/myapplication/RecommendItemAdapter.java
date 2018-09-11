@@ -56,7 +56,6 @@ public class RecommendItemAdapter extends RecyclerView.Adapter<RecommendItemAdap
                     IntentData intentData = new IntentData(intent);
                     intentData.transferDataToIntent(i);
                     Log.d("DEBUG-TEST!!!", i.getStringExtra(MapUtility.CURRENT_DAY_TAG));
-
                     i.putExtra("travelData", (intent.getSerializableExtra("travelData")));
                     context.startActivity(i);
                 }
