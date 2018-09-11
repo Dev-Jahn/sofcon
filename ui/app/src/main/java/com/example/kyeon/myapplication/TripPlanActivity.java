@@ -360,6 +360,11 @@ public class TripPlanActivity extends AppCompatActivity {
 
             int currentDay = getArguments().getInt(ARG_SECTION_NUMBER);
 
+            int index = data.getIntExtra("curDay", 0);
+            TripPlanActivity activity = (TripPlanActivity) getActivity();
+            activity.travel = (Travel) data.getExtras().getSerializable("travelData");
+            Log.d("placeId",currentDay + " is"+ activity.travel.dailyDiary[index-1].review.get(0).place_name);
+
             if (requestCode == currentDay) {
                 String filePath = getContext().getFilesDir().getPath().toString() + "/"
                         + getArguments().getString(ARG_SECTION_TITLE) + currentDay + ".png";
@@ -371,7 +376,6 @@ public class TripPlanActivity extends AppCompatActivity {
                     ivTravelMap.setImageBitmap(bitmap);
                 }
 
-                ((TripPlanActivity) getActivity()).travel = (Travel) data.getExtras().getSerializable("travelData");
 
                 Log.d("DEBUG-TEST", "curday : " + currentDay + ", total : " + totalTravelDays);
 
@@ -390,7 +394,7 @@ public class TripPlanActivity extends AppCompatActivity {
                     choose_places.putExtra(ARG_SECTION_PLACE_LNG, arrayPlaceLng[currentDay + 1]);
                     choose_places.putExtra(ARG_SECTION_PLACE_BITMAP, arrayPlaceBitmapFilePath[currentDay + 1]);
                     choose_places.putExtra(ARG_SECTION_CURRENT_DAY, currentDay + 1);
-                    choose_places.putExtra("travelData", ((TripPlanActivity) getActivity()).travel);
+                    choose_places.putExtra("travelData", activity.travel);
                     startActivityForResult(choose_places, currentDay+1);
                 }
             }
