@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity{
     DrawerLayout drawerLayout;
     LinearLayout navigation_main_background;
     private ListView navigationView;
-    private String[] navItems = {"메인 메뉴", "새 여행", "내 여행", "다른 여행","추천 여행"};
+    private String[] navItems = {"메인 메뉴", "새 여행", "내 여행", "다른 여행"/*,"추천 여행"*/};
 
     ImageView blnkImage;
     LinearLayout nav_image_text;
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity{
         navigation_main_background = (LinearLayout)findViewById((R.id.navigation_main_));
 
         mainToolbar = (Toolbar)findViewById(R.id.maintoolbar);
-        mainToolbar.setTitle("메인 메뉴");
+        mainToolbar.setTitle("WELCOME TO WANDER");
         setSupportActionBar(mainToolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setHomeAsUpIndicator(R.drawable.outline_list_black_18dp);
@@ -80,17 +80,17 @@ public class MainActivity extends AppCompatActivity{
                         startActivity(intent);*/
                         break;
                     case 3:
-                        intent = new Intent(
+                        /*intent = new Intent(
                                 getApplicationContext(),
                                 OthersFragment.class);
-                        startActivity(intent);
+                        startActivity(intent);*/
                         break;
-                    case 4:
+                    /*case 4:
                         intent = new Intent(
                                 getApplicationContext(),
                                 RecommendTravel.class);
                         startActivity(intent);
-                        break;
+                        break;*/
                 }
                 drawerLayout.closeDrawer(navigation_main_background);
             }

@@ -39,7 +39,7 @@ public class NewActivity extends AppCompatActivity {
     private String placeBitmapFilePath;
 
     private ListView navigationView;
-    private String[] navItems = {"메인 메뉴", "새 여행", "내 여행", "다른 여행","추천 여행"};
+    private String[] navItems = {"메인 메뉴", "새 여행", "내 여행", "다른 여행"/*,"추천 여행"*/};
 
     public static final String TAG = "Alert_Dialog";
     private boolean isFirstPlaceSet = false;
@@ -157,26 +157,30 @@ public class NewActivity extends AppCompatActivity {
                         break;
 
                     case 2:
-                        intent = new Intent(
+                        /*intent = new Intent(
                                 getApplicationContext(),
                                 MyTripFragment.class);
                         startActivity(intent);
                         finish();
+                        break;*/
+                        finish();
                         break;
                     case 3:
-                        intent = new Intent(
+                        finish();
+                        break;
+                        /*intent = new Intent(
                                 getApplicationContext(),
                                 OthersFragment.class);
                         startActivity(intent);
                         finish();
-                        break;
-                    case 4:
+                        break;*/
+                    /*case 4:
                         intent = new Intent(
                                 getApplicationContext(),
                                 RecommendTravel.class);
                         startActivity(intent);
                         finish();
-                        break;
+                        break;*/
                 }
                 drawerLayout.closeDrawer(navigation_new_background);
             }
