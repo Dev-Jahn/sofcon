@@ -19,11 +19,12 @@ public class PlaceData {
 
     }
 
-    public PlaceData(String title, String snippet, LatLng latLng) {
+    public PlaceData(String title, String snippet, LatLng latLng, String placeId) {
         this.name = title;
         this.type = snippet;
         this.lat = String.valueOf(latLng.latitude);
         this.lng = String.valueOf(latLng.longitude);
+        this.placeId = placeId;
     }
 
     public String getType() {

@@ -186,6 +186,13 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
             }
         });
 
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                marker.hideInfoWindow();
+            }
+        });
+
         mLocationPermissionGranted = PermissionCodes.getPermission(getContext(), getActivity(),
                 Manifest.permission.ACCESS_FINE_LOCATION, PermissionCodes.REQUEST_CODE_FINE_LOCATION);
         PermissionCodes.getPermission(getContext(), getActivity(),
@@ -458,6 +465,7 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
                                 returnIntent.putExtra(MapUtility.PLACE_NAME_TAG, marker.getTitle());
                                 returnIntent.putExtra(MapUtility.PLACE_TYPE_TAG, marker.getSnippet());
                                 returnIntent.putExtra(MapUtility.CURRENT_DAY_TAG, "1");
+                                selectedMarker.hideInfoWindow();
                                 captureScreenAndFinish();
                             }
                         })

@@ -306,8 +306,6 @@ public class MapUtility {
                 br.close();
 
                 result = response.toString();
-                long end = System.currentTimeMillis();
-                // Log.d(String.valueOf((end - start) / 1000.0), "Mylog");
                 return result;
 
             } catch (Exception e) {
