@@ -90,7 +90,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             SharedPreferences.Editor editor = pref.edit();
             editor.putBoolean("isFirst", true);
             editor.commit();
-            //Log.d("FIRST_CHECK", "true");
 
             mEmailSignInButton.setOnClickListener(new OnClickListener() {
                 @Override
@@ -137,10 +136,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             });
 
         }
+        // 최초
         else {
-
-
-            //Log.d("FIRST_CHECK", "false");
             String dirPath = getFilesDir().getAbsolutePath();
             File file  =  new File(dirPath);
             String content ="", temp="";
@@ -197,14 +194,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 return false;
             }
         });
-
-        /*Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                attemptLogin();
-            }
-        });*/
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);

@@ -21,7 +21,7 @@ public class IntentData {
     private String placeType;
     private String placeBitmapFilePath;
     private LatLng placeLatLng;
-    private boolean isLoaded;
+    private boolean isReloaded;
     public static final String isLoadedTag = MapUtility.PLACE_LOAD_TAG;
 
     public IntentData(Intent intent) {
@@ -43,7 +43,7 @@ public class IntentData {
         calcLatLng();
         placeType = intent.getStringExtra(MapUtility.PLACE_TYPE_TAG);
         placeBitmapFilePath = intent.getStringExtra(MapUtility.PLACE_BITMAP_FILE_PATH_TAG);
-        isLoaded = intent.getBooleanExtra(MapUtility.PLACE_LOAD_TAG, false);
+        isReloaded = intent.getBooleanExtra(MapUtility.PLACE_LOAD_TAG, false);
     }
 
     protected void transferDataToIntent(Intent intent) {
@@ -186,5 +186,13 @@ public class IntentData {
 
     public void setPlaceBitmapFilePath(String placeBitmapFilePath) {
         this.placeBitmapFilePath = placeBitmapFilePath;
+    }
+
+    public boolean isReloaded() {
+        return isReloaded;
+    }
+
+    public void setReloaded(boolean reloaded) {
+        isReloaded = reloaded;
     }
 }
