@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Log;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -50,8 +51,15 @@ public class Travel implements Serializable {
 
     public void save(Context context) throws IOException
     {
-        FileOutputStream fos = context.openFileOutput("travel_1", Context.MODE_PRIVATE);
-        Log.d("placeId",context.getFilesDir().toString());
+        int travelCount = 1;
+        File file;
+        file = context.getFileStreamPath("travel_"+travelCount);
+        while(file.exists())
+        {
+            travelCount++;
+            file = context.getFileStreamPath("travel_"+travelCount);
+        }
+        FileOutputStream fos = context.openFileOutput("travel_"+travelCount, Context.MODE_PRIVATE);
         ObjectOutputStream os = new ObjectOutputStream(fos);
         os.writeObject(this);
         os.close();

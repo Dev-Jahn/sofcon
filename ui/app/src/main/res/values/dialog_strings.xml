@@ -17,6 +17,15 @@
     <string name="shopping_tour">쇼핑</string>
     <string name="shopping_explain">쇼퍼 홀릭들을 위한 장소들이 가득</string>
 
+    <string name="historic_place">역사 탐방</string>
+    <string name="historic_explain">살아 숨쉬는 선조들의 삶</string>
+    <string name="customized_tour_landmark">맞춤형 명소</string>
+    <string name="customized_tour_landmark_explain">내가 선호하는 여행명소는?</string>
+    <string name="customized_tour_residence">맞춤형 숙박</string>
+    <string name="customized_tour_residence_explain">잠은 편하게 자야지! 나만의 숙박시설</string>
+    <string name="customized_tour_restaurant">맞춤형 맛집</string>
+    <string name="customized_tour_restaurant_explain">내 입맛에 맞춘 맛집</string>
+
     <string name="remove_marker_title">경유지 제거</string>
     <string name="remove_marker_description">선택한 경유지를 여행 경로에서 제외하시겠습니까?</string>
 
