@@ -1,5 +1,6 @@
 package com.example.kyeon.myapplication;
 
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -17,6 +18,7 @@ import java.util.List;
 public class BottomSheetDialog extends BottomSheetDialogFragment{
     RecyclerView recyclerView;
     final int ITEM_SIZE = 8;
+
     public static BottomSheetDialog getInstance() { return new BottomSheetDialog();}
 
     @Nullable
@@ -48,7 +50,15 @@ public class BottomSheetDialog extends BottomSheetDialogFragment{
             rec_items.add(rec_item[i]);
         }
 
-        recyclerView.setAdapter(new RecommendItemAdapter(getContext(), rec_items, R.layout.bottom_sheet_dialog));
+        Intent intent = new Intent();
+        intent.putExtra(MapUtility.PLACE_TYPE_TAG, getArguments().getString(MapUtility.PLACE_TYPE_TAG));
+        intent.putExtra(MapUtility.PLACE_LAT_TAG, getArguments().getString(MapUtility.PLACE_LAT_TAG));
+        intent.putExtra(MapUtility.PLACE_LNG_TAG, getArguments().getString(MapUtility.PLACE_LNG_TAG));
+        intent.putExtra(MapUtility.PLACE_NAME_TAG, getArguments().getString(MapUtility.PLACE_NAME_TAG));
+        intent.putExtra(MapUtility.CURRENT_DAY_TAG, getArguments().getString(MapUtility.CURRENT_DAY_TAG));
+        intent.putExtra(MapUtility.PLACE_AUTO_TAG, true);
+
+        recyclerView.setAdapter(new RecommendItemAdapter(getContext(), rec_items, R.layout.bottom_sheet_dialog, intent));
 
         return view;
     }

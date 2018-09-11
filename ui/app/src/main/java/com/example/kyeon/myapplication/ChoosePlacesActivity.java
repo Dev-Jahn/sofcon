@@ -40,6 +40,7 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -73,6 +74,8 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
 
     private HashMap<Integer, Marker> hashMapUserMarker = new HashMap<>();
     private HashMap<Integer, Marker> hashMapPlaceMarker = new HashMap<>();
+    private String[] saved_info;
+    private String UID;
     private int userMarkerCount = 0;
     private int placeMarkerCount = 0;
     private View customMarkerOriginDestRoot;
@@ -456,6 +459,59 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             });
 
             addFirstPlaceMarker();
+
+            if(intentData.isAuto()) {
+                String dirPath = getFilesDir().getAbsolutePath();
+                File file  =  new File(dirPath);
+                String content ="", temp="";
+
+                if(file.listFiles().length>0) {
+                    for (File f : file.listFiles()) {
+                        String f_name = f.getName();
+                        String loadPath = dirPath + File.separator + f_name;
+                        if (f_name.equals("account_setup.txt")) {
+                            try {
+                                FileInputStream fis = new FileInputStream(loadPath);
+                                BufferedReader bufferReader = new BufferedReader(new InputStreamReader(fis));
+
+                                while ((temp = bufferReader.readLine()) != null) content += temp;
+                                break;
+                            } catch (Exception e) {
+                            }
+                        }
+                    }
+                    saved_info = content.split(" ");
+                }
+                UID = saved_info[0];
+
+                MapUtility.FindPlacesTask findPlacesTask = new MapUtility.FindPlacesTask(String.valueOf(listLocsToDraw.get(0).latitude), String.valueOf(listLocsToDraw.get(0).longitude),
+                        10, "5", 1, "restaurants", UID);
+                findPlacesTask.execute();
+                try{
+                    adjacencyPlaces = findPlacesTask.get();
+                    Log.d("DEBUG-TEST", "!!!" +adjacencyPlaces);
+                    if(adjacencyPlaces != null) {
+                        ArrayList<PlaceData> placeDataArrayList = MapUtility.placeParsing(adjacencyPlaces);
+                        if(placeDataArrayList != null) {
+                            for(PlaceData placeData : placeDataArrayList) {
+                                InfoWindowData infoWindowData = new InfoWindowData();
+                                infoWindowData.setWindowType(InfoWindowData.TYPE_USER);
+                                infoWindowData.setPlaceID(placeData.getPlaceId());
+                                infoWindowData.setSnippet(placeData.getType());
+                                infoWindowData.setTitle(placeData.getName());
+                                LatLng latLng = new LatLng(Double.parseDouble(placeData.getLat()), Double.parseDouble(placeData.getLng()));
+                                infoWindowData.setLatLng(latLng);
+                                addUserMarker(infoWindowData, true);
+                            }
+                            optimizationRoutes();
+                        }
+                    }
+                } catch(InterruptedException e) {
+
+                } catch(ExecutionException e) {
+
+                }
+            }
         }
     }
 

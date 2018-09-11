@@ -62,6 +62,7 @@ public class MapUtility {
     protected static final String PLACE_TYPE_TAG = "FirstPlaceType";
     protected static final String PLACE_BITMAP_FILE_PATH_TAG = "PlaceBitmapFilePath";
     protected static final String PLACE_LOAD_TAG = "IsPlaceLoaded?";
+    protected static final String PLACE_AUTO_TAG = "IsPlaceAuto?";
     protected static final String D_YY_TAG = "departing_year";
     protected static final String D_MM_TAG = "departing_month";
     protected static final String D_DD_TAG = "departing_day";
@@ -328,6 +329,62 @@ public class MapUtility {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             //Log.d("DEBUG-TEST", s.toString());
+        }
+    }
+
+    public class PresetFindPlacesTask extends AsyncTask<String, Void, String> {
+        String result;
+        String url, lat, lon, lim;
+        float len;
+        String choice;
+
+        /**
+         * shop
+         * history
+         * healing
+         */
+
+        public PresetFindPlacesTask(String lat, String lon, float len, String lim, String choice) {
+            this.lon = lon;
+            this.lat = lat;
+            this.len = len;
+            this.lim = lim;
+            this.choice = choice;
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+                url = "http://35.189.138.177:8080/recomm?lat=" + lat + "&lon=" + lon + "&len=" + len + "&lim=" + lim + "&choice=" + choice;
+                URL obj = new URL(url);
+                HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
+
+                conn.setReadTimeout(10000);
+                conn.setConnectTimeout(15000);
+                conn.setRequestMethod("GET");
+                conn.setDoInput(true);
+
+                int retCode = conn.getResponseCode();
+
+                InputStream is = conn.getInputStream();
+                BufferedReader br = new BufferedReader(new InputStreamReader(is));
+                String line;
+                StringBuilder response = new StringBuilder();
+
+                while ((line = br.readLine()) != null) {
+                    response.append(line);
+                    response.append('\r');
+                }
+                br.close();
+
+                result = response.toString();
+                return result;
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return result;
         }
     }
 

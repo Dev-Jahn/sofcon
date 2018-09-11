@@ -16,16 +16,17 @@ import android.widget.Toast;
 
 import java.util.List;
 
-public class RecommendItemAdapter extends RecyclerView.Adapter<RecommendItemAdapter.ViewHolder>{
+public class RecommendItemAdapter extends RecyclerView.Adapter<RecommendItemAdapter.ViewHolder> {
     Context context;
     List<Rec_Item> items;
     int item_layout;
+    private Intent intent;
 
-    public RecommendItemAdapter(Context context, List<Rec_Item> items, int item_layout)
-    {
+    public RecommendItemAdapter(Context context, List<Rec_Item> items, int item_layout, Intent intent) {
         this.context = context;
         this.items = items;
         this.item_layout = item_layout;
+        this.intent = intent;
     }
 
     @NonNull
@@ -49,9 +50,10 @@ public class RecommendItemAdapter extends RecyclerView.Adapter<RecommendItemAdap
         holder.cardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(holder.title.getText().equals(context.getResources().getString(R.string.customized_tour)))
-                {
-                    Intent i = new Intent(context, TagActivity.class);
+                if (holder.title.getText().equals(context.getResources().getString(R.string.customized_tour))) {
+                    Intent i = new Intent(context, ChoosePlacesActivity.class);
+                    IntentData intentData = new IntentData(intent);
+                    intentData.transferDataToIntent(i);
                     context.startActivity(i);
                 }
                 Toast.makeText(context, rec_item.getTitle(), Toast.LENGTH_SHORT).show();
@@ -59,6 +61,7 @@ public class RecommendItemAdapter extends RecyclerView.Adapter<RecommendItemAdap
         });
 
     }
+
 
     @Override
     public int getItemCount() {
