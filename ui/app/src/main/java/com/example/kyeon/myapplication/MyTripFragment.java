@@ -54,10 +54,10 @@ public class MyTripFragment extends Fragment {
 
         List<Item> items = new ArrayList<>();
         Item[] item = new Item[ITEM_SIZE];
-        item[0] = new Item(R.drawable.city_seoul, "신나게 떠나는 서울여행", "Seoul", "1.1 ~ 1.10");
-        item[1] = new Item(R.drawable.city_fukuoka, "열심히 쇼핑하다오는 후쿠오카", "Fukuoka", "4.3 ~ 4.10");
-        item[2] = new Item(R.drawable.city_beijing, "옛 중국의 향기를 맡으러", "Beijing", "5.1 ~ 5.6");
-        item[3] = new Item(R.drawable.city_busan, "여름에 가기좋은 부산여행", "Busan", "4.13 ~ 4.19");
+        item[0] = new Item(R.drawable.city_seoul, "신나게 떠나는 서울여행", "Seoul", "1.1 ~ 1.10", null);
+        item[1] = new Item(R.drawable.city_fukuoka, "열심히 쇼핑하다오는 후쿠오카", "Fukuoka", "4.3 ~ 4.10", null);
+        item[2] = new Item(R.drawable.city_beijing, "옛 중국의 향기를 맡으러", "Beijing", "5.1 ~ 5.6", null);
+        item[3] = new Item(R.drawable.city_busan, "여름에 가기좋은 부산여행", "Busan", "4.13 ~ 4.19", null);
 
         //for testing travel class
         String dirPath = Environment.getExternalStorageDirectory().getAbsolutePath()+"/TEST/";
@@ -66,7 +66,7 @@ public class MyTripFragment extends Fragment {
         {
             travel = Travel.load(getContext(), "travel_1");
             item[4] = new Item(R.drawable.city_tai, travel.cityName,travel.title,
-                    travel.syy + "." + travel.smm + "." + travel.sdd + " ~ " + travel.eyy +"."+travel.emm+"."+travel.edd
+                    travel.syy + "." + travel.smm + "." + travel.sdd + " ~ " + travel.eyy +"."+travel.emm+"."+travel.edd, travel
             );
         }catch (Exception e)
         {

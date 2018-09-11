@@ -134,7 +134,8 @@ public class TripPlanActivity extends AppCompatActivity {
 
 
             try {
-                travel.save();
+                travel.save(getApplicationContext());
+                Log.d("travelTest", "hisnamesis: " + travel.dailyDiary[0].review.size());
             } catch (IOException e) {
                 e.printStackTrace();
                 Toast.makeText(this, "sibal", Toast.LENGTH_SHORT).show();
@@ -176,6 +177,7 @@ public class TripPlanActivity extends AppCompatActivity {
         private static final String ARG_SECTION_LAST = "last_number";
         private static final String ARG_SECTION_TITLE = "title_text";
         private static final String ARG_SECTION_CURRENT_DAY = MapUtility.CURRENT_DAY_TAG;
+        private static final String ARG_SECTION_CURRENT_DAY_TEMP = "currentDay";
         private static final String ARG_SECTION_FIRST_PLACE = MapUtility.PLACE_NAME_TAG;
         private static final String ARG_SECTION_PLACE_LAT = MapUtility.PLACE_LAT_TAG;
         private static final String ARG_SECTION_PLACE_LNG = MapUtility.PLACE_LNG_TAG;
@@ -299,6 +301,12 @@ public class TripPlanActivity extends AppCompatActivity {
                     choose_places.putExtra(ARG_SECTION_PLACE_LNG, getArguments().getString(ARG_SECTION_PLACE_LNG));
                     choose_places.putExtra(ARG_SECTION_PLACE_BITMAP, getArguments().getString(ARG_SECTION_PLACE_BITMAP));
                     choose_places.putExtra(ARG_SECTION_CURRENT_DAY, getArguments().getString(ARG_SECTION_CURRENT_DAY));
+                    //for saving
+                    choose_places.putExtra(ARG_SECTION_CURRENT_DAY_TEMP, getArguments().getInt(ARG_SECTION_NUMBER));
+                    TripPlanActivity activity = (TripPlanActivity)getActivity();
+                    Travel travel = activity.travel;
+                    choose_places.putExtra("travelData", travel);
+                    //end here
                     startActivityForResult(choose_places, getArguments().getInt(ARG_SECTION_NUMBER));
                     getActivity().overridePendingTransition(R.anim.sliding_up, R.anim.stay);
                 }
@@ -341,6 +349,7 @@ public class TripPlanActivity extends AppCompatActivity {
                     ivTravelMap.setImageBitmap(bitmap);
                 }
 
+                ((TripPlanActivity)getActivity()).travel = (Travel) data.getExtras().getSerializable("travelData");
                 /**
                  * new bitmap (new snapshot of last marker only) is needed.
                  * How can I snapshot only last marker??? (Maybe it doesn't needed at all...)
@@ -374,7 +383,6 @@ public class TripPlanActivity extends AppCompatActivity {
         public android.support.v4.app.Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            Toast.makeText(TripPlanActivity.this, "diff_days = "+diff_days, Toast.LENGTH_SHORT).show();
             if (position == diff_days)
                 return PlaceholderFragment.newInstance(position + 1, day_count, etitle, eCurrentDay,
                         eFirstPlace, ePlaceLat, ePlaceLng, ePlaceType, ePlaceBitmapFilePath);

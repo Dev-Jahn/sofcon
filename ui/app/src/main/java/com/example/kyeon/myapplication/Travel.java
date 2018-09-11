@@ -47,7 +47,7 @@ public class Travel implements Serializable {
         this.edd = edd;
     }
 
-    public void save() throws IOException
+    public void save(Context context) throws IOException
     {
         FileOutputStream fos = context.openFileOutput("travel_1", Context.MODE_PRIVATE);
         ObjectOutputStream os = new ObjectOutputStream(fos);
@@ -80,25 +80,25 @@ public class Travel implements Serializable {
         {
             String place_id;//장소 id
             String place_name;//장소 이름
+            String place_class;//장소 종류
             int score;//장소 점수
             String reviewText;//장소 리뷰
             SerialBitmap image;//장소 이미지
             boolean reviewed;//장소 리뷰 작성 되었는지 여부
 
-            public PlaceReview(String place_id, String place_name)
+            public PlaceReview(String place_id, String place_name, String place_class)
             {
                 this.place_id = place_id;
                 this.place_name = place_name;
+                this.place_class = place_class;
                 this.score = -1;
                 this.reviewText = null;
                 this.image = null;
                 reviewed = false;
             }
 
-            public void setReview(String place_id, String place_name, int score, String reviewText, SerialBitmap image)
+            public void setReview(int score, String reviewText, SerialBitmap image)
             {
-                this.place_id = place_id;
-                this.place_name = place_name;
                 this.score = score;
                 this.reviewText = reviewText;
                 this.image = image;
@@ -106,18 +106,18 @@ public class Travel implements Serializable {
             }
         }
 
-        public void addPlace(String place_id, String place_name)//TripPlan단계에서 장소를 추가
+        public void addPlace(String place_id, String place_name, String place_class)//TripPlan단계에서 장소를 추가
         {
-            review.add(new PlaceReview(place_id, place_name));
+            review.add(new PlaceReview(place_id, place_name, place_class));
         }
         public void deletePlace(int place_index)//TripPlan단계에서 장소를 삭제
         {
             review.remove(place_index);
         }
 
-        public void setPlaceReview(int place_index,String place_id, String place_name, int score, String reviewText, SerialBitmap image)//내 여행에서 리뷰를 작성하고 완료버튼 눌름
+        public void setPlaceReview(int place_index, int score, String reviewText, SerialBitmap image)//내 여행에서 리뷰를 작성하고 완료버튼 눌름
         {
-            review.get(place_index).setReview(place_id, place_name, score, reviewText, image);
+            review.get(place_index).setReview(score, reviewText, image);
         }
 
         public PlaceReview getReview(int place_index)//내여행, 다른 여행에서 원하는 리뷰를 읽어옴

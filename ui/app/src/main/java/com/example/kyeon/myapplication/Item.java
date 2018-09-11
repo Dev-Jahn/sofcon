@@ -5,6 +5,7 @@ public class Item {
     String title;
     String place;
     String day;
+    Travel travel;
 
     public int getImage() {
         return this.image;
@@ -21,11 +22,14 @@ public class Item {
     public String getPlace() {
         return this.place;
     }
-    Item(int image, String title, String place, String day)
+
+    public Travel getTravel() { return this.travel; }
+    Item(int image, String title, String place, String day, Travel travel)
     {
         this.title = title;
         this.image = image;
         this.place = place;
         this.day = day;
+        this.travel = travel;
     }
 }

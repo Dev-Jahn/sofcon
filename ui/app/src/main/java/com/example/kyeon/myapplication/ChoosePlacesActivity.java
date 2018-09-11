@@ -107,6 +107,9 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
 
     private Intent returnIntent;
 
+    //for save travel
+    Travel travel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -181,6 +184,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
 
     private void determineTrip() {
         MapUtility.saveMapUserMarkers(getContext(), mMap, listMarkersToSave, intentData.getTitle(), intentData.getCurrentDay());
+        addPlaceDatas();
         captureScreenAndSaveAndFinish();
 
     }
@@ -197,7 +201,20 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             newIntentData.setPlaceBitmapFilePath(placeBitmapFilePath);
 
             returnIntent = new Intent();
+            returnIntent.putExtra("travelData", travel);
+            Log.d("travelTest", "beforereturn: " + travel.dailyDiary[0].review.get(0).place_name);
             newIntentData.transferDataToIntent(returnIntent);
+        }
+    }
+
+    private void addPlaceDatas()
+    {
+        int index = getIntent().getIntExtra("currentDay", 0);
+        Bundle b = getIntent().getExtras();
+        travel = (Travel) getIntent().getExtras().getSerializable("travelData");
+        for (int i = 0; i < listMarkersToSave.size(); i++) {
+            Marker saveMarker = listMarkersToSave.get(i);
+            travel.dailyDiary[index-1].addPlace(saveMarker.getId(), saveMarker.getTitle(), saveMarker.getSnippet());
         }
     }
 
