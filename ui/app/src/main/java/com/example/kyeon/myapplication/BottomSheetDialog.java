@@ -58,6 +58,7 @@ public static BottomSheetDialog getInstance() { return new BottomSheetDialog();}
         intent.putExtra(MapUtility.PLACE_LNG_TAG, getArguments().getString(MapUtility.PLACE_LNG_TAG));
         intent.putExtra(MapUtility.PLACE_NAME_TAG, getArguments().getString(MapUtility.PLACE_NAME_TAG));
         intent.putExtra(MapUtility.CURRENT_DAY_TAG, getArguments().getString(MapUtility.CURRENT_DAY_TAG));
+        intent.putExtra("travelData", getArguments().getSerializable("travelData"));
         intent.putExtra(MapUtility.PLACE_AUTO_TAG, true);
 
         recyclerView.setAdapter(new RecommendItemAdapter(getContext(), rec_items, R.layout.bottom_sheet_dialog, intent));
