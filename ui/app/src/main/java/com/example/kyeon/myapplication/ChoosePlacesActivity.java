@@ -214,8 +214,8 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         travel = (Travel) getIntent().getExtras().getSerializable("travelData");
         for (int i = 0; i < listMarkersToSave.size(); i++) {
             Marker saveMarker = listMarkersToSave.get(i);
-            Log.d("placeIdtest", saveMarker.getId());
-            travel.dailyDiary[index - 1].addPlace(saveMarker.getId(), saveMarker.getTitle(), saveMarker.getSnippet());
+            Log.d("placeIdtest", ((InfoWindowData)saveMarker.getTag()).getPlaceID());
+            travel.dailyDiary[index - 1].addPlace(((InfoWindowData)saveMarker.getTag()).getPlaceID(), saveMarker.getTitle(), saveMarker.getSnippet());
         }
     }
 

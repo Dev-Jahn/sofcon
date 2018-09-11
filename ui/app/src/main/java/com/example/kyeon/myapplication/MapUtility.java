@@ -49,7 +49,7 @@ public class MapUtility {
     private static final long MIN_DISTANCE = 50;
     // We must discuss about default camera zoom level
     // I think level 16 is appropriate
-    protected static final int ZOOM_LEVEL = 16;
+    protected static final int ZOOM_LEVEL = 12;
     // Current default location is soongsil univ.
     protected static final LatLng DEFAULT_LOCATION = new LatLng(37.495999, 126.957050);
     // default path of snapshot image

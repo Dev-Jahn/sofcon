@@ -380,6 +380,7 @@ public class TripPlanActivity extends AppCompatActivity {
                     choose_places.putExtra(ARG_SECTION_PLACE_LAT, arrayPlaceLat[currentDay + 1]);
                     choose_places.putExtra(ARG_SECTION_PLACE_LNG, arrayPlaceLng[currentDay + 1]);
                     choose_places.putExtra(ARG_SECTION_PLACE_BITMAP, arrayPlaceBitmapFilePath[currentDay + 1]);
+                    choose_places.putExtra(ARG_SECTION_CURRENT_DAY, currentDay + 1);
                     choose_places.putExtra("travelData", ((TripPlanActivity) getActivity()).travel);
                     startActivityForResult(choose_places, currentDay+1);
                 }
