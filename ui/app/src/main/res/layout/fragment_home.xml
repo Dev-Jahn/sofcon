@@ -15,6 +15,7 @@
             android:layout_width="227dp"
             android:layout_height="101dp"
             android:layout_gravity="center"
+            android:layout_marginBottom="20dp"
             app:srcCompat="@drawable/app_logo_origin" />
 
         <android.support.constraint.ConstraintLayout
