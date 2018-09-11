@@ -674,7 +674,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         loadMarkerTag(marker, infoWindowData);
         hashMapUserMarker.put(userMarkerCount, marker);
 
-        saveMarkerTag(marker, userMarkerCount, InfoWindowData.TYPE_USER);
+        saveMarkerTag(marker, userMarkerCount, InfoWindowData.TYPE_USER, infoWindowData.getPlaceID());
         listMarkersToSave.add(marker);
         lastUserMarker = marker;
         if (isOptimized) {
