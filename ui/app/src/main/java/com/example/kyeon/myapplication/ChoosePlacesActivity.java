@@ -74,7 +74,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
     private HashMap<Integer, Marker> hashMapPlaceMarker = new HashMap<>();
     private int userMarkerCount = 0;
     private int placeMarkerCount = 0;
-    private int[] reestablishCount = {0, 0, 0, 3, 9, 19, 34, 55, 83, 119, 164, 219, 285, 363, 454, 559, 679, 815, 968};
+    private final int[] reestablishCount = {0, 0, 0, 3, 6, 10, 15, 21, 28, 36, 164, 219, 285, 363, 454, 559, 679, 815, 968};
     private View customMarkerOriginDestRoot;
     private TextView tvCustomMarkerOriginDest;
     private View customMarkerWayPointRoot;
@@ -375,8 +375,6 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(final Marker marker) {
-                if (marker.isInfoWindowShown())
-                    marker.showInfoWindow();
                 return false;
             }
         });
@@ -468,8 +466,6 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         hashMapUserMarker.clear();
         listMarkersToSave.clear();
         listLocsToOptimize.clear();
-        reestablishCount[0] = 0;
-        reestablishCount[1] = 0;
         isFirstPlaceAdded = false;
         addFirstPlaceMarker();
     }
@@ -709,7 +705,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                 //if (startCheck[optimizationData.getOriginIndex()] == true || startCheck[optimizationData.getDestIndex()] == true)
                 //if (startCheck[startVertex] == true || endCheck[preVertex] == true)
                 //if(startCheck[startVertex] == true)
-                 //   continue;
+                //   continue;
 
                 //Log.d("DEBUG-TEST", "originIndex : " + optimizationData.getOriginIndex());
                 //Log.d("DEBUG-TEST", "destIndex : " + optimizationData.getDestIndex());
@@ -747,6 +743,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             addUserMarker(infoWindowDataArrayList.get(i), true);
         }
         userMarkerCount = originUserMarkerCount;
+        listLocsToOptimize.clear();
     }
 
     /**
@@ -777,9 +774,6 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                     OptimizationData optimizationData = new OptimizationData(originMarker, destMarker);
                     OptimizationTask optimizationTask = new OptimizationTask(optimizationData);
                     optimizationTask.execute(url);
-
-                    Log.d("DEBUG-TTT", (listLocsToDraw.size()) + "번째 마커에서 콜");
-
                 }
             }
         } else {
@@ -853,10 +847,10 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                     points.add(position);
                     // listLocsToOptimize.add(position);
                 }
-                if (result.size() == 0) {
-                    points.add(optimizationData.getOriginMarker().getPosition());
-                    points.add(optimizationData.getDestMarker().getPosition());
-                }
+            }
+            if (result.size() == 0) {
+                points.add(optimizationData.getOriginMarker().getPosition());
+                points.add(optimizationData.getDestMarker().getPosition());
             }
             for (int originIndex = 0; originIndex < points.size() - 1; ++originIndex) {
                 int destIndex = originIndex + 1;
@@ -867,7 +861,6 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                         + (originLatLng.longitude - destLatLng.longitude) * (originLatLng.longitude - destLatLng.longitude));
             }
             optimizationData.setDistance(totalDistance);
-            Log.d("DEBUG-TESTT", totalDistance + ":!");
             listLocsToOptimize.add(optimizationData);
             //Marker tempMarker = optimizationData.getOriginMarker();
             //int tempIndex = optimizationData.getOriginIndex();
@@ -877,14 +870,11 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             //optimizationData.setDestIndex(tempIndex);
             //listLocsToOptimize.add(optimizationData);
 
-
-            int loop = 0;
-            for (int i = 1; i <= userMarkerCount; ++i)
-                loop += i;
-
-            Log.d("DEBUG-TTT", "lo.size : " + listLocsToOptimize.size() + "rec : " + reestablishCount[userMarkerCount]);
-            if (listLocsToOptimize.size() == reestablishCount[userMarkerCount]) {
+            if (listLocsToOptimize.size() == ((userMarkerCount - 1) * userMarkerCount) / 2) {
                 Collections.sort(listLocsToOptimize);
+                for(OptimizationData optimizationData : listLocsToOptimize) {
+                    Log.d("DEBUG-TABLE", optimizationData.getOriginIndex() + " to " + optimizationData.getDestIndex() + " : " + optimizationData.getDistance());
+                }
                 reestablishUserMarker();
             }
         }
@@ -988,7 +978,9 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
              * This is the case of cannot drawing a route
              */
             if (result.size() == 0) {
+                Log.d("DEBUG-TEST", "result size : " +result.size());
                 if (redraw == false) {
+                    /*
                     AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
                     alertDialog.setTitle(getResources().getString(R.string.line_draw_title))
                             .setMessage(getResources().getString(R.string.line_draw_description))
@@ -1019,6 +1011,15 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
 
                     AlertDialog dialog = alertDialog.create();
                     dialog.show();
+                    */
+                    PolylineOptions justLineOptions = new PolylineOptions();
+                    justLineOptions = new PolylineOptions();
+                    justLineOptions.add(origin);
+                    justLineOptions.add(dest);
+                    justLineOptions.width(12);
+                    justLineOptions.color(Color.BLUE);
+                    justLineOptions.geodesic(true);
+                    mMap.addPolyline(justLineOptions);
                 } else {
                     PolylineOptions justLineOptions = new PolylineOptions();
                     justLineOptions = new PolylineOptions();
