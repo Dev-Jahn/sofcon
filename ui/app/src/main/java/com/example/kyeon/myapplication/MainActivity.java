@@ -44,14 +44,6 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if(Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            File file = new File(MapUtility.DEFAULT_SNAPSHOT_EXTERNAL_PATH);
-            if (!file.exists())
-                file.mkdirs();
-        } else {
-            Log.d("DEBUG-TEST", "SD card 인식 실패");
-        }
-
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         navigation_main_background = (LinearLayout)findViewById((R.id.navigation_main_));
 
