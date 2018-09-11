@@ -22,7 +22,9 @@ public class IntentData {
     private String placeBitmapFilePath;
     private LatLng placeLatLng;
     private boolean isReloaded;
+    private boolean isAuto;
     public static final String isLoadedTag = MapUtility.PLACE_LOAD_TAG;
+    public static final String isAutoTag = MapUtility.PLACE_AUTO_TAG;
 
     public IntentData(Intent intent) {
         dYY = intent.getStringExtra(MapUtility.D_YY_TAG);
@@ -44,6 +46,7 @@ public class IntentData {
         placeType = intent.getStringExtra(MapUtility.PLACE_TYPE_TAG);
         placeBitmapFilePath = intent.getStringExtra(MapUtility.PLACE_BITMAP_FILE_PATH_TAG);
         isReloaded = intent.getBooleanExtra(MapUtility.PLACE_LOAD_TAG, false);
+        isAuto = intent.getBooleanExtra(MapUtility.PLACE_AUTO_TAG, false);
     }
 
     protected void transferDataToIntent(Intent intent) {
@@ -60,6 +63,8 @@ public class IntentData {
         intent.putExtra(MapUtility.PLACE_LNG_TAG, placeLng);
         intent.putExtra(MapUtility.PLACE_TYPE_TAG, placeType);
         intent.putExtra(MapUtility.PLACE_BITMAP_FILE_PATH_TAG, placeBitmapFilePath);
+        intent.putExtra(MapUtility.PLACE_LOAD_TAG, isReloaded);
+        intent.putExtra(MapUtility.PLACE_AUTO_TAG, isAuto);
     }
 
     protected void calcLatLng() {
@@ -186,6 +191,14 @@ public class IntentData {
 
     public void setPlaceBitmapFilePath(String placeBitmapFilePath) {
         this.placeBitmapFilePath = placeBitmapFilePath;
+    }
+
+    public boolean isAuto() {
+        return isAuto;
+    }
+
+    public void setAuto(boolean auto) {
+        isAuto = auto;
     }
 
     public boolean isReloaded() {
