@@ -43,6 +43,7 @@ public class TripCardAdapter extends RecyclerView.Adapter<TripCardAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final Item item = items.get(position);
+        final Travel travel = item.getTravel();
         if(item == null)
             return;
         Drawable drawable = ContextCompat.getDrawable(context, item.getImage());
@@ -54,6 +55,7 @@ public class TripCardAdapter extends RecyclerView.Adapter<TripCardAdapter.ViewHo
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(context, TravelActivity.class);
+                i.putExtra("travelData", travel);
                 context.startActivity(i);
             }
         });

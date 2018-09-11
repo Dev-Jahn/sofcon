@@ -82,7 +82,8 @@
             <com.example.kyeon.myapplication.LinedEditText
                 android:id="@+id/reviewtext"
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
+                android:layout_height="wrap_content"
+                android:hint="\n\n\n\n"
                 android:gravity="top"
                 android:background="@color/colorAccentLight"
                 android:layout_marginLeft="8dp"

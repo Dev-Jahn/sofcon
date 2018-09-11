@@ -21,6 +21,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -81,6 +82,12 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.ViewHolder> 
 
         holder.add_image.setOnClickListener(this);
 
+        holder.comp_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     @Override
@@ -98,6 +105,7 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.ViewHolder> 
         ImageButton add_image;
         CardView cardview;
         LinearLayout linearLayout;
+        Button comp_button;
 
         public ViewHolder(View itemView)
         {
@@ -109,6 +117,7 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.ViewHolder> 
             add_image = itemView.findViewById(R.id.add_image);
             cardview = itemView.findViewById(R.id.review_cardview);
             linearLayout = itemView.findViewById(R.id.layout_hide);
+            comp_button = itemView.findViewById(R.id.rating_comp_button);
         }
     }
 

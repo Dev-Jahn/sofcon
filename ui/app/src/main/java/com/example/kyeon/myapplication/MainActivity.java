@@ -13,6 +13,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -30,6 +31,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity{
 
     Toolbar mainToolbar;
+    SearchView mSearchView;
     DrawerLayout drawerLayout;
     LinearLayout navigation_main_background;
     private ListView navigationView;
@@ -110,12 +112,21 @@ public class MainActivity extends AppCompatActivity{
                 {
                     case R.id.action_my:
                         selectedFragment = MyTripFragment.newInstance();
+                        mainToolbar.getMenu().clear();
+                        mainToolbar.inflateMenu(R.menu.menu);
                         break;
                     case R.id.action_home:
                         selectedFragment = HomeFragment.newInstance();
+                        mainToolbar.getMenu().clear();
+                        mainToolbar.inflateMenu(R.menu.menu);
                         break;
                     case R.id.action_others:
                         Toast.makeText(MainActivity.this, "구현중.", Toast.LENGTH_SHORT).show();;
+                        mainToolbar.setTitle("다른 여행");
+
+                        mainToolbar.inflateMenu(R.menu.search);
+                        mSearchView = (SearchView) mainToolbar.getMenu().findItem(R.id.menu_search).getActionView();
+
                         selectedFragment = OthersFragment.newInstance();
                         break;
                 }
@@ -169,7 +180,7 @@ public class MainActivity extends AppCompatActivity{
             public void onClick(View view) {
                 Intent intent = new Intent(
                         getApplicationContext(),
-                        OthersTravel.class);
+                        OthersActivity.class);
                 startActivity(intent);
             }
         });

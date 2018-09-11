@@ -4,6 +4,8 @@ package com.example.kyeon.myapplication;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -23,11 +25,19 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.location.places.GeoDataClient;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.PlacePhotoMetadata;
+import com.google.android.gms.location.places.PlacePhotoMetadataResult;
+import com.google.android.gms.location.places.Places;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class TripPlanActivity extends AppCompatActivity {
@@ -43,13 +53,14 @@ public class TripPlanActivity extends AppCompatActivity {
     private SectionsPagerAdapter mSectionsPagerAdapter;
     String d_yy, d_mm, d_dd;
     String a_yy, a_mm, a_dd;
-    String etitle, person_count, eplace;
+    String etitle, person_count, ePlace;
     private String eFirstPlace;
     private String eCurrentDay;
     private String ePlaceLat;
     private String ePlaceLng;
     private String ePlaceType;
     private String ePlaceBitmapFilePath;
+
     long diff_days;
 
     protected static long totalTravelDays;
@@ -123,7 +134,8 @@ public class TripPlanActivity extends AppCompatActivity {
 
 
             try {
-                travel.save();
+                travel.save(getApplicationContext());
+                Log.d("travelTest", "hisnamesis: " + travel.dailyDiary[0].review.size());
             } catch (IOException e) {
                 e.printStackTrace();
                 Toast.makeText(this, "sibal", Toast.LENGTH_SHORT).show();
@@ -165,6 +177,7 @@ public class TripPlanActivity extends AppCompatActivity {
         private static final String ARG_SECTION_LAST = "last_number";
         private static final String ARG_SECTION_TITLE = "title_text";
         private static final String ARG_SECTION_CURRENT_DAY = MapUtility.CURRENT_DAY_TAG;
+        private static final String ARG_SECTION_CURRENT_DAY_TEMP = "currentDay";
         private static final String ARG_SECTION_FIRST_PLACE = MapUtility.PLACE_NAME_TAG;
         private static final String ARG_SECTION_PLACE_LAT = MapUtility.PLACE_LAT_TAG;
         private static final String ARG_SECTION_PLACE_LNG = MapUtility.PLACE_LNG_TAG;
@@ -233,6 +246,7 @@ public class TripPlanActivity extends AppCompatActivity {
             intent.putExtra(MapUtility.PLACE_LOAD_TAG, true);
             intent.putExtra(MapUtility.CURRENT_DAY_TAG, getArguments().getString(MapUtility.CURRENT_DAY_TAG));
 
+
             return intent;
         }
 
@@ -287,6 +301,12 @@ public class TripPlanActivity extends AppCompatActivity {
                     choose_places.putExtra(ARG_SECTION_PLACE_LNG, getArguments().getString(ARG_SECTION_PLACE_LNG));
                     choose_places.putExtra(ARG_SECTION_PLACE_BITMAP, getArguments().getString(ARG_SECTION_PLACE_BITMAP));
                     choose_places.putExtra(ARG_SECTION_CURRENT_DAY, getArguments().getString(ARG_SECTION_CURRENT_DAY));
+                    //for saving
+                    choose_places.putExtra(ARG_SECTION_CURRENT_DAY_TEMP, getArguments().getInt(ARG_SECTION_NUMBER));
+                    TripPlanActivity activity = (TripPlanActivity)getActivity();
+                    Travel travel = activity.travel;
+                    choose_places.putExtra("travelData", travel);
+                    //end here
                     startActivityForResult(choose_places, getArguments().getInt(ARG_SECTION_NUMBER));
                     getActivity().overridePendingTransition(R.anim.sliding_up, R.anim.stay);
                 }
@@ -329,6 +349,7 @@ public class TripPlanActivity extends AppCompatActivity {
                     ivTravelMap.setImageBitmap(bitmap);
                 }
 
+                ((TripPlanActivity)getActivity()).travel = (Travel) data.getExtras().getSerializable("travelData");
                 /**
                  * new bitmap (new snapshot of last marker only) is needed.
                  * How can I snapshot only last marker??? (Maybe it doesn't needed at all...)
@@ -433,6 +454,21 @@ public class TripPlanActivity extends AppCompatActivity {
         eFirstPlace = intent.getStringExtra(MapUtility.PLACE_NAME_TAG);
         ePlaceLat = intent.getStringExtra(MapUtility.PLACE_LAT_TAG);
         ePlaceLng = intent.getStringExtra(MapUtility.PLACE_LNG_TAG);
+        //for getting english city name
+
+        Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.ENGLISH);
+        try
+        {
+            double lat = Double.parseDouble(ePlaceLat);
+            double lng = Double.parseDouble(ePlaceLng);
+            List<Address> addresses = geocoder.getFromLocation(lat,lng,5);
+            ePlace = addresses.get(0).getLocality();
+        }catch (IOException e)
+        {
+            ePlace = "City not Found";
+        }
+        //getting english city name ended
+
         ePlaceType = intent.getStringExtra(MapUtility.PLACE_TYPE_TAG);
         ePlaceBitmapFilePath = intent.getStringExtra(MapUtility.PLACE_BITMAP_FILE_PATH_TAG);
         if(ePlaceBitmapFilePath == null)
@@ -474,7 +510,8 @@ public class TripPlanActivity extends AppCompatActivity {
             diff = 0;
         }
         diff_days = diff / (24 * 60 * 60 * 1000);
-        travel = new Travel(getApplicationContext(), "psm", Integer.parseInt(person_count), (int) diff_days + 1, s_mm, s_yy, s_mm, e_yy, e_mm, e_dd);
+
+        travel = new Travel(getApplicationContext(), "psm",etitle, ePlace, Integer.parseInt(person_count), (int) diff_days + 1, s_mm, s_yy, s_mm, e_yy, e_mm, e_dd);
 
         //let's test diff days is 3
         /*
