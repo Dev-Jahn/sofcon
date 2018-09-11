@@ -342,6 +342,9 @@ public class TripPlanActivity extends AppCompatActivity {
                     args.putString(ARG_SECTION_PLACE_LNG, getArguments().getString(ARG_SECTION_PLACE_LNG));
                     args.putString(ARG_SECTION_PLACE_BITMAP, getArguments().getString(ARG_SECTION_PLACE_BITMAP));
                     args.putString(ARG_SECTION_CURRENT_DAY_TEMP, getArguments().getString(ARG_SECTION_CURRENT_DAY_TEMP));
+                    TripPlanActivity activity = (TripPlanActivity) getActivity();
+                    Travel travel = activity.travel;
+                    args.putSerializable("travelData", travel);
                     BottomSheetDialog bottomSheetDialog = BottomSheetDialog.getInstance();
                     bottomSheetDialog.setArguments(args);
                     bottomSheetDialog.show(((AppCompatActivity) getActivity()).getSupportFragmentManager(), "bottomsheet");

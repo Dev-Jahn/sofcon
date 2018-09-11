@@ -50,10 +50,12 @@ public class RecommendItemAdapter extends RecyclerView.Adapter<RecommendItemAdap
         holder.cardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (holder.title.getText().equals(context.getResources().getString(R.string.customized_tour))) {
+                if (holder.title.getText().equals(context.getResources().getString(R.string.customized_tour_restaurant))) {
                     Intent i = new Intent(context, ChoosePlacesActivity.class);
                     IntentData intentData = new IntentData(intent);
                     intentData.transferDataToIntent(i);
+
+                    i.putExtra("travelData", (intent.getSerializableExtra("travelData")));
                     context.startActivity(i);
                 }
                 Toast.makeText(context, rec_item.getTitle(), Toast.LENGTH_SHORT).show();
