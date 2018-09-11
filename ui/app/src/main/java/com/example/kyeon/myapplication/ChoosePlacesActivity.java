@@ -84,7 +84,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
     private static final int bottomOffset = 18;
 
     private static final float DEFAULT_LEN = 2.5f;
-    private static final int DEFAULT_LIM = 30;
+    private static final String DEFAULT_LIM = "30";
 
     private MapWrapperLayout wrapperLayout;
     private ViewGroup userInfoWindow;
@@ -132,10 +132,10 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         Button selectButton = (Button) findViewById(R.id.selectButton);
         Button scanButton = (Button) findViewById(R.id.scanButton);
 
-        if(intentData.isReloaded()) {
+        if (intentData.isReloaded()) {
             listDatasToLoad = MapUtility.loadMapUserMarkers(getContext(), intentData.getTitle(), intentData.getCurrentDay());
-            ViewGroup layout = (ViewGroup)cancelButton.getParent();
-            if(layout != null) {
+            ViewGroup layout = (ViewGroup) cancelButton.getParent();
+            if (layout != null) {
                 layout.removeView(cancelButton);
                 layout.removeView(selectButton);
                 layout.removeView(scanButton);
@@ -183,11 +183,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
     }
 
     private void determineTrip() {
-<<<<<<< HEAD
         MapUtility.saveMapUserMarkers(getContext(), listMarkersToSave, intentData.getTitle(), intentData.getCurrentDay());
-=======
-        MapUtility.saveMapUserMarkers(getContext(), mMap, listMarkersToSave, intentData.getTitle(), intentData.getCurrentDay());
->>>>>>> 17185efc538b0372a134f7819be8c8641a82855d
         addPlaceDatas();
         hideAllInfoWindows();
         captureScreenAndSaveAndFinish();
@@ -212,14 +208,13 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         }
     }
 
-    private void addPlaceDatas()
-    {
+    private void addPlaceDatas() {
         int index = getIntent().getIntExtra("currentDay", 0);
         Bundle b = getIntent().getExtras();
         travel = (Travel) getIntent().getExtras().getSerializable("travelData");
         for (int i = 0; i < listMarkersToSave.size(); i++) {
             Marker saveMarker = listMarkersToSave.get(i);
-            travel.dailyDiary[index-1].addPlace(saveMarker.getId(), saveMarker.getTitle(), saveMarker.getSnippet());
+            travel.dailyDiary[index - 1].addPlace(saveMarker.getId(), saveMarker.getTitle(), saveMarker.getSnippet());
         }
     }
 
@@ -442,10 +437,10 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         mMap.moveCamera(CameraUpdateFactory.newLatLng(intentData.getPlaceLatLng()));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(MapUtility.ZOOM_LEVEL));
 
-        if(intentData.isReloaded()) {
+        if (intentData.isReloaded()) {
             placeInfoWindow.removeView(placeInfoButton);
             userInfoWindow.removeView(userInfoButton);
-            for(InfoWindowData infoWindowData : listDatasToLoad) {
+            for (InfoWindowData infoWindowData : listDatasToLoad) {
                 addUserMarker(infoWindowData, true);
             }
         } else {
@@ -463,7 +458,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         }
     }
 
-    private void placesUpdate(float len, int lim) {
+    private void placesUpdate(float len, String lim) {
         removeAllPlaceMarker();
         CameraPosition cameraPosition = mMap.getCameraPosition();
         /**
@@ -473,12 +468,12 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         String currentLat = new Double(cameraPosition.target.latitude).toString();
         String currentLng = new Double(cameraPosition.target.longitude).toString();
         if (len == 0) {
-            len = 2.5f;
+            len = DEFAULT_LEN;
         }
-        if (lim == 0) {
-            lim = 30;
+        if (lim == null) {
+            lim = DEFAULT_LIM;
         }
-        MapUtility.FindPlacesTask findPlacesTask = new MapUtility.FindPlacesTask(currentLat, currentLng, len, lim, false);
+        MapUtility.FindPlacesTask findPlacesTask = new MapUtility.FindPlacesTask(currentLat, currentLng, len, lim, 0);
         findPlacesTask.execute();
         try {
             adjacencyPlaces = findPlacesTask.get();
@@ -669,7 +664,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         // it will be replaced to real score
         infoWindowData.setScore(Integer.toString(markerCount));
         // it will be replaced to real placeID
-        infoWindowData.setPlaceID(Integer.toString(markerCount));
+        infoWindowData.setPlaceID("0");
         infoWindowData.setLatLng(marker.getPosition());
         infoWindowData.setWindowType(windowType);
 

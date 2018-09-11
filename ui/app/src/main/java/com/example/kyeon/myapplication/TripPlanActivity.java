@@ -61,6 +61,11 @@ public class TripPlanActivity extends AppCompatActivity {
     private String ePlaceType;
     private String ePlaceBitmapFilePath;
 
+    private static String[] arrayPlaceLat;
+    private static String[] arrayPlaceLng;
+    private static String[] arrayPlaceType;
+    private static String[] arrayPlaceBitmapFilePath;
+
     long diff_days;
 
     protected static long totalTravelDays;
@@ -92,6 +97,16 @@ public class TripPlanActivity extends AppCompatActivity {
 
         get_datas_for_travel();
         calcTotalTravelDays();
+
+        arrayPlaceLat = new String[(int) totalTravelDays + 1];
+        arrayPlaceLng = new String[(int) totalTravelDays + 1];
+        arrayPlaceType = new String[(int) totalTravelDays + 1];
+        arrayPlaceBitmapFilePath = new String[(int) totalTravelDays + 1];
+
+        arrayPlaceLat[1] = ePlaceLat;
+        arrayPlaceLng[1] = ePlaceLng;
+        arrayPlaceType[1] = ePlaceType;
+        arrayPlaceBitmapFilePath[1] = ePlaceBitmapFilePath;
 
         //ImageButton comp = new ImageButton(getApplicationContext());
         //comp.setImageDrawable(getDrawable(R.drawable.outline_done_black_24dp));
@@ -158,6 +173,7 @@ public class TripPlanActivity extends AppCompatActivity {
             endDate = formatter.parse(a_yy + a_mm + a_dd);
             long diff = endDate.getTime() - beginDate.getTime();
             totalTravelDays = diff / (24 * 60 * 60 * 1000);
+            ++totalTravelDays;
         } catch (ParseException e) {
             e.printStackTrace();
             totalTravelDays = -1;
@@ -255,8 +271,10 @@ public class TripPlanActivity extends AppCompatActivity {
 
             final View rootView = choose_places.inflate(R.layout.fragment_plan, container, false);
             ivTravelMap = (ImageView) rootView.findViewById(R.id.ivTravelMap);
-            String filePath = getContext().getFilesDir().getPath().toString() + "/tempImage1.png";
+
+            String filePath = getArguments().getString(ARG_SECTION_PLACE_BITMAP);
             Log.d("DEBUG-TEST", filePath + "in TripPlanActivity");
+
             Bitmap bitmap = BitmapFactory.decodeFile(filePath);
             ivTravelMap.setImageBitmap(bitmap);
             ivTravelMap.setOnClickListener(new ImageView.OnClickListener() {
@@ -302,7 +320,7 @@ public class TripPlanActivity extends AppCompatActivity {
                     choose_places.putExtra(ARG_SECTION_CURRENT_DAY, getArguments().getString(ARG_SECTION_CURRENT_DAY));
                     //for saving
                     choose_places.putExtra(ARG_SECTION_CURRENT_DAY_TEMP, getArguments().getInt(ARG_SECTION_NUMBER));
-                    TripPlanActivity activity = (TripPlanActivity)getActivity();
+                    TripPlanActivity activity = (TripPlanActivity) getActivity();
                     Travel travel = activity.travel;
                     choose_places.putExtra("travelData", travel);
                     //end here
@@ -324,10 +342,6 @@ public class TripPlanActivity extends AppCompatActivity {
             textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;
         }
-        /**
-         * It must process snapshot of each day's plan...
-         * How????? I don't know now...
-         */
 
         @Override
         public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -342,24 +356,32 @@ public class TripPlanActivity extends AppCompatActivity {
                         + getArguments().getString(ARG_SECTION_TITLE) + currentDay + ".png";
                 File file = new File(filePath);
                 Log.d("DEBUG-TEST", "불러오는 파일의 path : " + file.getAbsolutePath());
-                if(file.exists()) {
+                if (file.exists()) {
                     Log.d("DEBUG-TEST", "스냅샷을 이미지버튼에 불러옵니다. in TripPlanActivity");
                     Bitmap bitmap = BitmapFactory.decodeFile(filePath);
                     ivTravelMap.setImageBitmap(bitmap);
                 }
 
-                ((TripPlanActivity)getActivity()).travel = (Travel) data.getExtras().getSerializable("travelData");
+                ((TripPlanActivity) getActivity()).travel = (Travel) data.getExtras().getSerializable("travelData");
+
+                Log.d("DEBUG-TEST", "curday : " + currentDay + ", total : " + totalTravelDays);
 
                 if (currentDay != totalTravelDays) {
-                    String newFilePath = getContext().getFilesDir().getPath().toString() + "/"
-                            + getArguments().getString(ARG_SECTION_TITLE) + (currentDay + 1) + ".png";
-                     Intent choose_places = new Intent(getActivity(), ChoosePlacesActivity.class);
-                     choose_places.putExtra(ARG_SECTION_TITLE, getArguments().getString(ARG_SECTION_TITLE));
-                     choose_places.putExtra(ARG_SECTION_FIRST_PLACE, getArguments().getString(ARG_SECTION_FIRST_PLACE));
-                     choose_places.putExtra(ARG_SECTION_PLACE_LAT, getArguments().getString(ARG_SECTION_PLACE_LAT));
-                     choose_places.putExtra(ARG_SECTION_PLACE_LNG, getArguments().getString(ARG_SECTION_PLACE_LNG));
-                     choose_places.putExtra(ARG_SECTION_PLACE_BITMAP, newFilePath);
-                     // startActivityForResult(choose_places, currentDay+1);
+                    Intent choose_places = new Intent(getActivity(), ChoosePlacesActivity.class);
+                    arrayPlaceLat[currentDay + 1] = data.getStringExtra(MapUtility.PLACE_LAT_TAG);
+                    arrayPlaceLng[currentDay + 1] = data.getStringExtra(MapUtility.PLACE_LNG_TAG);
+                    arrayPlaceType[currentDay + 1] = data.getStringExtra(MapUtility.PLACE_TYPE_TAG);
+                    arrayPlaceBitmapFilePath[currentDay + 1] = data.getStringExtra(MapUtility.PLACE_BITMAP_FILE_PATH_TAG);
+
+                    Log.d("DEBUG-TEST", "arrayPlaceBitmapFilePath : " + arrayPlaceBitmapFilePath[currentDay + 1]);
+
+                    choose_places.putExtra(ARG_SECTION_TITLE, getArguments().getString(ARG_SECTION_TITLE));
+                    choose_places.putExtra(ARG_SECTION_FIRST_PLACE, arrayPlaceType[currentDay + 1]);
+                    choose_places.putExtra(ARG_SECTION_PLACE_LAT, arrayPlaceLat[currentDay + 1]);
+                    choose_places.putExtra(ARG_SECTION_PLACE_LNG, arrayPlaceLng[currentDay + 1]);
+                    choose_places.putExtra(ARG_SECTION_PLACE_BITMAP, arrayPlaceBitmapFilePath[currentDay + 1]);
+                    choose_places.putExtra("travelData", ((TripPlanActivity) getActivity()).travel);
+                    startActivityForResult(choose_places, currentDay+1);
                 }
             }
         }
@@ -381,10 +403,10 @@ public class TripPlanActivity extends AppCompatActivity {
             // Return a PlaceholderFragment (defined as a static inner class below).
             if (position == diff_days)
                 return PlaceholderFragment.newInstance(position + 1, day_count, etitle, eCurrentDay,
-                        eFirstPlace, ePlaceLat, ePlaceLng, ePlaceType, ePlaceBitmapFilePath);
+                        eFirstPlace, arrayPlaceLat[position + 1], arrayPlaceLng[position + 1], arrayPlaceType[position + 1], arrayPlaceBitmapFilePath[position + 1]);
             else
                 return PlaceholderFragment.newInstance(position + 1, etitle, eCurrentDay,
-                        eFirstPlace, ePlaceLat, ePlaceLng, ePlaceType, ePlaceBitmapFilePath);
+                        eFirstPlace, arrayPlaceLat[position + 1], arrayPlaceLng[position + 1], arrayPlaceType[position + 1], arrayPlaceBitmapFilePath[position + 1]);
         }
 
         @Override
@@ -416,15 +438,13 @@ public class TripPlanActivity extends AppCompatActivity {
     }
 
     private String add_zero_to_string(String number) {
-        try
-        {
+        try {
             if (Integer.parseInt(number) < 10)
                 if (number.charAt(0) == '0')
                     return number;
                 else
                     return "0" + number;
-        }catch (NumberFormatException e)
-        {
+        } catch (NumberFormatException e) {
             Toast.makeText(this, number, Toast.LENGTH_SHORT).show();
             number = "0";
         }
@@ -453,21 +473,19 @@ public class TripPlanActivity extends AppCompatActivity {
         //for getting english city name
 
         Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.ENGLISH);
-        try
-        {
+        try {
             double lat = Double.parseDouble(ePlaceLat);
             double lng = Double.parseDouble(ePlaceLng);
-            List<Address> addresses = geocoder.getFromLocation(lat,lng,5);
+            List<Address> addresses = geocoder.getFromLocation(lat, lng, 5);
             ePlace = addresses.get(0).getLocality();
-        }catch (IOException e)
-        {
+        } catch (IOException e) {
             ePlace = "City not Found";
         }
         //getting english city name ended
 
         ePlaceType = intent.getStringExtra(MapUtility.PLACE_TYPE_TAG);
         ePlaceBitmapFilePath = intent.getStringExtra(MapUtility.PLACE_BITMAP_FILE_PATH_TAG);
-        if(ePlaceBitmapFilePath == null)
+        if (ePlaceBitmapFilePath == null)
             Log.d("DEBUG-TEST", getResources().getString(R.string.intent_bitmap_error) + "in TripPlanActivity");
         eCurrentDay = intent.getStringExtra(MapUtility.CURRENT_DAY_TAG);
     }
@@ -507,24 +525,6 @@ public class TripPlanActivity extends AppCompatActivity {
         }
         diff_days = diff / (24 * 60 * 60 * 1000);
 
-        travel = new Travel(getApplicationContext(), "psm",etitle, ePlace, Integer.parseInt(person_count), (int) diff_days + 1, s_mm, s_yy, s_mm, e_yy, e_mm, e_dd);
-
-        //let's test diff days is 3
-        /*
-        travel.dailyDiary[0].addPlace(123123, "숭실대");
-        travel.dailyDiary[0].addPlace(123123, "숭실대학교");
-        travel.dailyDiary[0].addPlace(123123, "숭실대도서관");
-
-        travel.dailyDiary[1].addPlace(123123, "asd");
-        travel.dailyDiary[1].addPlace(123123, "aosd");
-        travel.dailyDiary[1].addPlace(123123, "123123");
-        travel.dailyDiary[1].addPlace(123123, "239493");
-        travel.dailyDiary[1].addPlace(123123, "1234104");
-
-        travel.dailyDiary[2].addPlace(123123, "qqoo");
-        travel.dailyDiary[2].addPlace(123123, "aoakk");
-        travel.dailyDiary[2].addPlace(123123, "11ww");
-        travel.dailyDiary[2].addPlace(123123, "open");
-        */
+        travel = new Travel(getApplicationContext(), "psm", etitle, ePlace, Integer.parseInt(person_count), (int) diff_days + 1, s_mm, s_yy, s_mm, e_yy, e_mm, e_dd);
     }
 }
