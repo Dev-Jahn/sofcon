@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.ExifInterface;
 import android.net.Uri;
@@ -48,15 +49,16 @@ public class TravelActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     ViewPager viewPager;
+    Travel travel;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_travel);
-
         // tmp data sets
-        days = 5;
+        travel = (Travel) getIntent().getSerializableExtra("travelData");
+        days = travel.days;
 
 
         viewPager = findViewById(R.id.trip_pager);
@@ -74,6 +76,7 @@ public class TravelActivity extends AppCompatActivity {
          * fragment.
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
+        DiaryAdapter.ViewHolder vh;
         RecyclerView recyclerView;
         final int GALLERY_CODE = 1;
 
@@ -98,34 +101,37 @@ public class TravelActivity extends AppCompatActivity {
             final View rootView = inflater.inflate(R.layout.fragment_travel, container, false);
             recyclerView = rootView.findViewById(R.id.diary_recview);
 
-            int index = getArguments().getInt(ARG_SECTION_NUMBER);
+            final int index = getArguments().getInt(ARG_SECTION_NUMBER);
+            TravelActivity travelActivity = (TravelActivity) getActivity();
+            final Travel travel = travelActivity.travel;
 
             List<String> place_names = new ArrayList<>();
 
-            if (index == 0) {
-                place_names.add("보라매 공원");
-                place_names.add("시발");
-                place_names.add("숭실머학교");
-            } else if (index == 1) {
-                place_names.add("부산대");
-                place_names.add("라면맛집");
-            } else if (index == 2) {
-                place_names.add("aiqwdij");
-                place_names.add("asodjadijadoiaw");
-                place_names.add("asdasdasdu");
-                place_names.add("asodjadijadoedjweohdwoed");
-            } else if (index == 3) {
-                place_names.add("asodr개새끼야");
-            } else {
-                place_names.add("아몰랑");
+            for (int i = 0; i < travel.dailyDiary[index-1].review.size(); i++) {
+                place_names.add(travel.dailyDiary[index-1].review.get(i).place_name);
             }
-            place_names.add("asdaccxx");
 
             recyclerView.setAdapter(new DiaryAdapter(this, place_names, R.layout.fragment_travel));
             recyclerView.setItemAnimator(new DefaultItemAnimator());
             LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
             recyclerView.setLayoutManager(layoutManager);
-            //textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+
+            for (int i = 0; i < travel.dailyDiary[index-1].review.size(); i++) {
+                place_names.add(travel.dailyDiary[index-1].review.get(i).place_name);
+            }
+            for (int i = 0; i < travel.dailyDiary[index-1].review.size(); i++) {
+                final int idx = i;
+                vh = (DiaryAdapter.ViewHolder) recyclerView.findViewHolderForAdapterPosition(i);
+                vh.comp_button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        travel.dailyDiary[index-1].setPlaceReview(idx,vh.rating.getNumStars(), vh.review.getText().toString(),
+                                new SerialBitmap(((BitmapDrawable)vh.add_image.getDrawable()).getBitmap()));
+                    }
+                });
+
+            }
+
             return rootView;
         }
 
@@ -135,7 +141,6 @@ public class TravelActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 switch (requestCode) {
                     case 1: {
-                        Toast.makeText(getContext(), "sibal", Toast.LENGTH_SHORT).show();
                         DiaryAdapter.ViewHolder vh;
                         vh = (DiaryAdapter.ViewHolder) recyclerView.findViewHolderForAdapterPosition(((LinearLayoutManager) recyclerView.getLayoutManager()).findFirstVisibleItemPosition());
                         sendPicture(vh.add_image, data.getData());
@@ -191,38 +196,7 @@ public class TravelActivity extends AppCompatActivity {
     }
 
 
-    public void packing() {
-        id = 20142350;//user id
-        place = "Seoul";//장소
-        people_count = 4;//사람수
-        smm = 8;
-        syy = 2018;
-        sdd = 13;//시작~
-        emm = 8;
-        eyy = 2018;
-        edd = 16;//끝
 
-        days = sdd - edd;// 몇일짜리인지
-
-        DailyDiary diaries[] = new DailyDiary[days + 1];//각 날별로 경유지들마다 리뷰들을 받아옴
-
-        Date date;
-        date = new Date();
-        /*
-        for (int i = 0; i <= days; i++) {
-
-            for (int j = 0; j < place_counts[i]; j++) {
-                diaries[i].set_review(j, 121314, 50, "최고의 장소",getDrawable(R.drawable.city_busan));// image is tmp
-            }
-        }
-        */
-
-        /*
-        써야할 데이터 목록 = id, place, smm,syy,sdd, emm,eyy,edd, days
-                             날짜별로 place_counts[days+1], diaries[days+1]
-         */
-
-    }
 
     public void shareOnInternet(View v) {
         // tmp dataset
@@ -251,38 +225,7 @@ public class TravelActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             return "day" + (position + 1);
         }
+
     }
-
-    private class DailyDiary {
-        int place_count;//정유지 갯수
-        int place[];//장소id들
-        int score[];//리뷰점수
-        String review[];//리뷰 텍스트
-        Drawable img[];
-        int yy, mm, dd;
-
-        public DailyDiary(int count, int yy, int mm, int dd) {
-            this.place_count = count;
-            place = new int[place_count];
-            score = new int[place_count];
-            review = new String[place_count];
-            img = new Drawable[place_count];
-            this.yy = yy;
-            this.mm = mm;
-            this.dd = dd;
-        }
-
-        private void set_review(int index, int place_id, int score, String review, Drawable image) {
-            this.place[index] = place_id;
-            this.score[index] = score;
-            this.review[index] = review;
-            this.img[index] = image;
-        }
-
-        public int getPlace_count() {
-            return this.place_count;
-        }
-    }
-
 
 }

@@ -69,6 +69,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
     private ArrayList<LatLng> listLocsOfPlaces = new ArrayList<>();
     private ArrayList<Marker> listMarkersToSave = new ArrayList<>();
     private ArrayList<OptimizationData> listLocsToOptimize = new ArrayList<>();
+    private ArrayList<InfoWindowData> listDatasToLoad;
 
     private HashMap<Integer, Marker> hashMapUserMarker = new HashMap<>();
     private HashMap<Integer, Marker> hashMapPlaceMarker = new HashMap<>();
@@ -107,6 +108,9 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
 
     private Intent returnIntent;
 
+    //for save travel
+    Travel travel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -123,44 +127,43 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             }
         });
 
+
         Button cancelButton = (Button) findViewById(R.id.cancelButton);
         Button selectButton = (Button) findViewById(R.id.selectButton);
         Button scanButton = (Button) findViewById(R.id.scanButton);
 
-        cancelButton.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                resetMap();
+        if(intentData.isReloaded()) {
+            listDatasToLoad = MapUtility.loadMapUserMarkers(getContext(), intentData.getTitle(), intentData.getCurrentDay());
+            ViewGroup layout = (ViewGroup)cancelButton.getParent();
+            if(layout != null) {
+                layout.removeView(cancelButton);
+                layout.removeView(selectButton);
+                layout.removeView(scanButton);
             }
-        });
+        } else {
 
-        scanButton.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                placesUpdate(DEFAULT_LEN, DEFAULT_LIM);
-            }
-        });
 
-        selectButton.setOnClickListener(new Button.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                determineTrip();
-            }
-        });
+            cancelButton.setOnClickListener(new Button.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    resetMap();
+                }
+            });
 
-        /**
-         * Below codes are test code
-         */
+            scanButton.setOnClickListener(new Button.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    placesUpdate(DEFAULT_LEN, DEFAULT_LIM);
+                }
+            });
 
-/**
- listMarkersToSave.clear();
- ArrayList<InfoWindowData> arrayList = MapUtility.loadMapUserMarkers(getContext(), intentData.getTitle() + intentData.getCurrentDay());
- for(InfoWindowData info : arrayList) {
- addUserMarker(info);
- }
- userMarkerCount = arrayList.size();
- });
- */
+            selectButton.setOnClickListener(new Button.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    determineTrip();
+                }
+            });
+        }
         // test code end
         customMarkerOriginDestRoot = LayoutInflater.from(this).inflate(R.layout.marker_custom_origin_dest, null);
         tvCustomMarkerOriginDest = (TextView) customMarkerOriginDestRoot.findViewById(R.id.custom_marker_text);
@@ -181,6 +184,11 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
 
     private void determineTrip() {
         MapUtility.saveMapUserMarkers(getContext(), mMap, listMarkersToSave, intentData.getTitle(), intentData.getCurrentDay());
+<<<<<<< HEAD
+        addPlaceDatas();
+=======
+        hideAllInfoWindows();
+>>>>>>> db79a2d25f14b82d4b1a76c993f31004e61f6900
         captureScreenAndSaveAndFinish();
 
     }
@@ -197,7 +205,20 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             newIntentData.setPlaceBitmapFilePath(placeBitmapFilePath);
 
             returnIntent = new Intent();
+            returnIntent.putExtra("travelData", travel);
+            Log.d("travelTest", "beforereturn: " + travel.dailyDiary[0].review.get(0).place_name);
             newIntentData.transferDataToIntent(returnIntent);
+        }
+    }
+
+    private void addPlaceDatas()
+    {
+        int index = getIntent().getIntExtra("currentDay", 0);
+        Bundle b = getIntent().getExtras();
+        travel = (Travel) getIntent().getExtras().getSerializable("travelData");
+        for (int i = 0; i < listMarkersToSave.size(); i++) {
+            Marker saveMarker = listMarkersToSave.get(i);
+            travel.dailyDiary[index-1].addPlace(saveMarker.getId(), saveMarker.getTitle(), saveMarker.getSnippet());
         }
     }
 
@@ -207,6 +228,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             @Override
             public void onSnapshotReady(Bitmap snapshot) {
                 removeAllPlaceMarker();
+                hideAllInfoWindows();
                 String filePath = getContext().getFilesDir().getPath().toString() + "/"
                         + intentData.getTitle() + intentData.getCurrentDay() + ".png";
                 File file = new File(filePath);
@@ -229,6 +251,11 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             }
         };
         mMap.snapshot(snapshotReadyCallback);
+    }
+
+    private void hideAllInfoWindows() {
+        for (Marker marker : listMarkersToSave)
+            marker.hideInfoWindow();
     }
 
     /**
@@ -264,7 +291,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                                 new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
-                                        PlaceData placeData = new PlaceData(marker.getTitle(), marker.getSnippet(), marker.getPosition());
+                                        PlaceData placeData = new PlaceData(marker.getTitle(), marker.getSnippet(), marker.getPosition(), ((InfoWindowData) marker.getTag()).getPlaceID());
                                         addPlaceMarker(placeData);
                                         removeUserMarker(marker);
                                     }
@@ -361,16 +388,6 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             }
         });
 
-        /**
-         * map click listener
-         */
-        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-            @Override
-            public void onMapClick(LatLng latLng) {
-                showCustomSelectDialog(latLng);
-            }
-        });
-
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(final Marker marker) {
@@ -378,12 +395,35 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             }
         });
 
-        addFirstPlaceMarker();
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(intentData.getPlaceLatLng()));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(MapUtility.ZOOM_LEVEL));
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                marker.hideInfoWindow();
+            }
+        });
 
         PermissionCodes.getPermission(getContext(), getActivity(),
                 Manifest.permission.ACCESS_COARSE_LOCATION, PermissionCodes.REQUEST_CODE_COARSE_LOCATION);
+
+        if(intentData.isReloaded()) {
+            for(InfoWindowData infoWindowData : listDatasToLoad) {
+                addUserMarker(infoWindowData, true);
+            }
+        } else {
+            /**
+             * map click listener
+             */
+            mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+                @Override
+                public void onMapClick(LatLng latLng) {
+                    showCustomSelectDialog(latLng);
+                }
+            });
+
+            addFirstPlaceMarker();
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(intentData.getPlaceLatLng()));
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(MapUtility.ZOOM_LEVEL));
+        }
     }
 
     private void placesUpdate(float len, int lim) {
@@ -436,7 +476,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
              * requests draw a line for origin & dest
              */
             String url = getDirectionsUrl(origin, dest);
-            DownloadTask downloadTask = new DownloadTask(origin, dest);
+            DownloadTask downloadTask = new DownloadTask(origin, dest, false);
             downloadTask.execute(url);
         }
     }
@@ -452,7 +492,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                  * requests draw a line for origin & dest
                  */
                 String url = getDirectionsUrl(origin, dest);
-                DownloadTask downloadTask = new DownloadTask(origin, dest);
+                DownloadTask downloadTask = new DownloadTask(origin, dest, true);
                 downloadTask.execute(url);
             }
         }
@@ -620,6 +660,11 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
     }
 
     private void removeUserMarker(Marker marker) {
+        ArrayList<InfoWindowData> infoWindowDataArrayList = new ArrayList<>();
+        for (Marker saveMarker : listMarkersToSave) {
+            if (saveMarker != marker)
+                infoWindowDataArrayList.add(((InfoWindowData) saveMarker.getTag()));
+        }
         listLocsToDraw.clear();
         listMarkersToSave.clear();
         int newMarkerCount = 0;
@@ -651,9 +696,17 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                 options.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(getContext(), customMarkerWayPointRoot)));
             }
             Marker currentMarker = mMap.addMarker(options);
+            loadMarkerTag(currentMarker, infoWindowDataArrayList.get(i));
+            currentMarker.setTag(infoWindowDataArrayList.get(i));
             hashMapUserMarker.put(i + 1, currentMarker);
-            saveMarkerTag(currentMarker, i + 1, InfoWindowData.TYPE_USER);
+            if (i != 0) {
+                saveMarkerTag(currentMarker, i + 1, InfoWindowData.TYPE_USER);
+            } else {
+                saveMarkerTag(currentMarker, i + 1, InfoWindowData.TYPE_FIRST_PLACE);
+            }
+
             listMarkersToSave.add(currentMarker);
+
         }
         redrawRoute();
         // optimizationRoutes();
@@ -699,9 +752,11 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             OptimizationGraph graph = new OptimizationGraph(userMarkerCount);
             for (int j = 0; j < listLocsToOptimize.size(); ++j) {
                 optimizationData = listLocsToOptimize.get(j);
+
                 graph.input(optimizationData.getOriginIndex(), optimizationData.getDestIndex(), optimizationData.getDistance());
                 for (int k = 1; k < userMarkerCount + 1; ++k) {
                     if (startCheck[k] == true) {
+                        Log.d("DEBUG-TT", "k : " + k);
                         graph.delete(k);
                     }
                 }
@@ -725,7 +780,12 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         int originUserMarkerCount = userMarkerCount;
         userMarkerCount = 0;
         for (int i = 0; i < originUserMarkerCount; i++) {
-            addUserMarker(infoWindowDataArrayList.get(i), true);
+            if (i == 0) {
+                isFirstPlaceAdded = false;
+                addFirstPlaceMarker();
+            } else {
+                addUserMarker(infoWindowDataArrayList.get(i), true);
+            }
         }
         userMarkerCount = originUserMarkerCount;
         listLocsToOptimize.clear();
@@ -866,10 +926,12 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
 
         private LatLng origin;
         private LatLng dest;
+        private boolean redraw;
 
-        public DownloadTask(LatLng origin, LatLng dest) {
+        public DownloadTask(LatLng origin, LatLng dest, boolean redraw) {
             this.origin = origin;
             this.dest = dest;
+            this.redraw = redraw;
         }
 
         @Override
@@ -888,7 +950,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-            ParserTask parserTask = new ParserTask(origin, dest);
+            ParserTask parserTask = new ParserTask(origin, dest, redraw);
             parserTask.execute(result);
         }
     }
@@ -897,10 +959,12 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
 
         private LatLng origin;
         private LatLng dest;
+        private boolean redraw;
 
-        public ParserTask(LatLng origin, LatLng dest) {
+        public ParserTask(LatLng origin, LatLng dest, boolean redraw) {
             this.origin = origin;
             this.dest = dest;
+            this.redraw = redraw;
         }
 
         @Override
@@ -952,14 +1016,25 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
              */
             if (result.size() == 0) {
                 Log.d("DEBUG-TEST", "result size : " + result.size());
-                PolylineOptions justLineOptions = new PolylineOptions();
-                justLineOptions = new PolylineOptions();
-                justLineOptions.add(origin);
-                justLineOptions.add(dest);
-                justLineOptions.width(12);
-                justLineOptions.color(Color.BLUE);
-                justLineOptions.geodesic(true);
-                mMap.addPolyline(justLineOptions);
+                if (redraw == false) {
+                    PolylineOptions justLineOptions = new PolylineOptions();
+                    justLineOptions = new PolylineOptions();
+                    justLineOptions.add(origin);
+                    justLineOptions.add(dest);
+                    justLineOptions.width(12);
+                    justLineOptions.color(Color.BLUE);
+                    justLineOptions.geodesic(true);
+                    mMap.addPolyline(justLineOptions);
+                } else {
+                    PolylineOptions justLineOptions = new PolylineOptions();
+                    justLineOptions = new PolylineOptions();
+                    justLineOptions.add(origin);
+                    justLineOptions.add(dest);
+                    justLineOptions.width(12);
+                    justLineOptions.color(Color.BLUE);
+                    justLineOptions.geodesic(true);
+                    mMap.addPolyline(justLineOptions);
+                }
             } else {
                 mMap.addPolyline(routeLineOptions);
             }
