@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class MyTripFragment extends Fragment {
     LinearLayout navigation_MyTrip_background;
     private ListView navigationView;
     private String[] navItems = {"메인 메뉴", "새 여행", "내 여행", "다른 여행","추천 여행"};
-    final int ITEM_SIZE = 5;
+    final int EXAMPLE_CASES = 4;
     public static MyTripFragment newInstance() {
         MyTripFragment fragment = new MyTripFragment();
         return fragment;
@@ -53,21 +54,33 @@ public class MyTripFragment extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
 
         List<Item> items = new ArrayList<>();
-        Item[] item = new Item[ITEM_SIZE];
+        Item[] item = new Item[EXAMPLE_CASES];
         item[0] = new Item(R.drawable.city_seoul, "신나게 떠나는 서울여행", "Seoul", "1.1 ~ 1.10", null);
         item[1] = new Item(R.drawable.city_fukuoka, "열심히 쇼핑하다오는 후쿠오카", "Fukuoka", "4.3 ~ 4.10", null);
         item[2] = new Item(R.drawable.city_beijing, "옛 중국의 향기를 맡으러", "Beijing", "5.1 ~ 5.6", null);
         item[3] = new Item(R.drawable.city_busan, "여름에 가기좋은 부산여행", "Busan", "4.13 ~ 4.19", null);
 
+        for (int i = 0; i < EXAMPLE_CASES; i++) {
+            items.add(item[i]);
+        }
         //for testing travel class
         String dirPath = Environment.getExternalStorageDirectory().getAbsolutePath()+"/TEST/";
         Travel travel;
         try
         {
-            travel = Travel.load(getContext(), "travel_1");
-            item[4] = new Item(R.drawable.city_tai, travel.cityName,travel.title,
-                    travel.syy + "." + travel.smm + "." + travel.sdd + " ~ " + travel.eyy +"."+travel.emm+"."+travel.edd, travel
-            );
+            int travelCount = 1;
+            File file;
+            file = getContext().getFileStreamPath("travel_"+travelCount);
+            while(file.exists())
+            {
+                travel = Travel.load(getContext(), "travel_"+travelCount);
+                items.add(new Item(R.drawable.city_tai, travel.cityName,travel.title,
+                        travel.syy + "." + travel.smm + "." + travel.sdd + " ~ " +
+                                travel.eyy +"."+travel.emm+"."+travel.edd, travel
+                ));
+                travelCount++;
+            }
+
         }catch (Exception e)
         {
             travel = null;
@@ -79,9 +92,6 @@ public class MyTripFragment extends Fragment {
         //
 
 
-        for (int i = 0; i < ITEM_SIZE; i++) {
-            items.add(item[i]);
-        }
 
         recyclerView.setAdapter(new TripCardAdapter(getContext(), items, R.layout.fragment_my_trip));
 

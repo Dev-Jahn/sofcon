@@ -52,6 +52,10 @@ public class TripCardAdapter extends RecyclerView.Adapter<TripCardAdapter.ViewHo
         final Travel travel = item.getTravel();
         Drawable drawable = ContextCompat.getDrawable(context, item.getImage());
         holder.image.setBackground(drawable);
+<<<<<<< HEAD
+        //holder.place.setText(item.getPlace());
+=======
+>>>>>>> 4af7e50bcc8f09a0edd529dc61ff4e526666a0b0
         holder.day.setText(item.getDay());
         holder.title.setText(item.getTitle());
         String filePath = context.getFilesDir().getPath().toString() + "/"
@@ -83,7 +87,11 @@ public class TripCardAdapter extends RecyclerView.Adapter<TripCardAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder{
         ImageView image;
         TextView title;
+<<<<<<< HEAD
+        //TextView place;
+=======
         ImageView place;
+>>>>>>> 4af7e50bcc8f09a0edd529dc61ff4e526666a0b0
         TextView day;
         CardView cardview;
 
@@ -92,7 +100,11 @@ public class TripCardAdapter extends RecyclerView.Adapter<TripCardAdapter.ViewHo
             super(itemView);
             image =  itemView.findViewById(R.id.placeImg);
             title = itemView.findViewById(R.id.trip_title);
+<<<<<<< HEAD
+            //place =  itemView.findViewById(R.id.placeText);
+=======
             place =  itemView.findViewById(R.id.ivTravelMap);
+>>>>>>> 4af7e50bcc8f09a0edd529dc61ff4e526666a0b0
             day =  itemView.findViewById(R.id.dayText);
             cardview =  itemView.findViewById(R.id.cardview);
         }
