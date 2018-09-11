@@ -224,11 +224,12 @@ public class MapUtility {
         }
     }
 
-    protected static ArrayList<InfoWindowData> loadMapUserMarkers(Context context, String fileName) {
+    protected static ArrayList<InfoWindowData> loadMapUserMarkers(Context context, String tripTitle, String day) {
         /**
          * It should be called in onResume
          */
         try {
+            String fileName = tripTitle + day + ".dat";
             FileInputStream input = context.openFileInput(fileName);
             DataInputStream din = new DataInputStream(input);
             ArrayList<InfoWindowData> arrayList = new ArrayList<>();
