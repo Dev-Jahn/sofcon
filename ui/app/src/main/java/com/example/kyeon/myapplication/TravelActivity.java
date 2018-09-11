@@ -29,9 +29,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.Toast;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -105,6 +107,19 @@ public class TravelActivity extends AppCompatActivity {
             final int index = getArguments().getInt(ARG_SECTION_NUMBER);
             TravelActivity travelActivity = (TravelActivity) getActivity();
             final Travel travel = travelActivity.travel;
+
+            ImageView snapshot = rootView.findViewById(R.id.snapshot_image);
+
+            String filePath = getContext().getFilesDir().getPath().toString() + "/"
+                    + travel.title + "1.png";
+            Log.d("DEBUG-TEST", filePath + " in bindview");
+            File file = new File(filePath);
+            if(file.exists()) {
+                Bitmap bitmap = BitmapFactory.decodeFile(filePath);
+                Drawable drawable = new BitmapDrawable(getContext().getResources(), bitmap);
+                snapshot.setBackground(drawable);
+            }
+
 
             List<String> place_names = new ArrayList<>();
 

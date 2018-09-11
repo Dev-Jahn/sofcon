@@ -724,7 +724,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         // it will be replaced to real score
         infoWindowData.setScore(Integer.toString(markerCount));
         // it will be replaced to real placeID
-        infoWindowData.setPlaceID("0");
+        infoWindowData.setPlaceID("2");
         infoWindowData.setLatLng(marker.getPosition());
         infoWindowData.setWindowType(windowType);
 
