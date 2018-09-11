@@ -497,6 +497,8 @@ public class TripPlanActivity extends AppCompatActivity {
             double lng = Double.parseDouble(ePlaceLng);
             List<Address> addresses = geocoder.getFromLocation(lat, lng, 5);
             ePlace = addresses.get(0).getLocality();
+            if(ePlace == null)
+                ePlace = addresses.get(0).getCountryName();
         } catch (IOException e) {
             ePlace = "City not Found";
         }

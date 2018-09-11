@@ -107,11 +107,13 @@ public class TravelActivity extends AppCompatActivity {
             final int index = getArguments().getInt(ARG_SECTION_NUMBER);
             TravelActivity travelActivity = (TravelActivity) getActivity();
             final Travel travel = travelActivity.travel;
+            Log.d("DEBUG-TEST", "onCreateView: " + travel.title);
 
             ImageView snapshot = rootView.findViewById(R.id.snapshot_image);
 
             String filePath = getContext().getFilesDir().getPath().toString() + "/"
                     + travel.title + "1.png";
+
             Log.d("DEBUG-TEST", filePath + " in bindview");
             File file = new File(filePath);
             if(file.exists()) {
