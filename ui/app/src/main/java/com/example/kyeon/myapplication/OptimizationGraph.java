@@ -79,6 +79,15 @@ public class OptimizationGraph {
             }
             shortest = minIndex;
         }
+        if(shortest == 0) {
+            double min = Double.MAX_VALUE;
+            for(int i = 1; i <= n; ++i) {
+                if(maps[v][i] < min) {
+                    min = maps[v][i];
+                    shortest=i;
+                }
+            }
+        }
         return shortest;
     }
 }
