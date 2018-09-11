@@ -49,7 +49,7 @@ public class MapUtility {
     private static final long MIN_DISTANCE = 50;
     // We must discuss about default camera zoom level
     // I think level 16 is appropriate
-    protected static final int ZOOM_LEVEL = 16;
+    protected static final int ZOOM_LEVEL = 12;
     // Current default location is soongsil univ.
     protected static final LatLng DEFAULT_LOCATION = new LatLng(37.495999, 126.957050);
     // default path of snapshot image
@@ -186,7 +186,7 @@ public class MapUtility {
      * 3. How can I load map instance using filename?
      *    --> In loadMapUserMarkers, argument fileName is hard to receive from other methods
      */
-    protected static void saveMapUserMarkers(Context context, GoogleMap mMap, ArrayList<Marker> markers, String tripTitle, String day) {
+    protected static void saveMapUserMarkers(Context context, ArrayList<Marker> markers, String tripTitle, String day) {
         /**
          * It should be called in onPause
          */
@@ -263,29 +263,36 @@ public class MapUtility {
 
     protected static class FindPlacesTask extends AsyncTask<String, Void, String> {
         String result;
-        String url, lat, lon;
-        int lim;
+        String url, lat, lon, lim;
         float len;
-        boolean serviceOn;
         int flag;
+        String category;
+        String UID;
 
-        public FindPlacesTask(String lat, String lon, float len, int lim, boolean serviceOn) {
+        public FindPlacesTask(String lat, String lon, float len, String lim, int flag, String category, String UID) {
             this.lon = lon;
             this.lat = lat;
             this.len = len;
             this.lim = lim;
-            this.serviceOn = serviceOn;
-            if(serviceOn)
-                flag = 1;
-            else
-                flag = 0;
+            this.flag = flag;
+            this.category = category;
+            this.UID = UID;
+        }
+        public FindPlacesTask(String lat, String lon, float len, String lim, int flag)  {
+            this.lon = lon;
+            this.lat = lat;
+            this.len = len;
+            this.lim = lim;
+            this.flag = flag;
         }
 
         @Override
         protected String doInBackground(String... params) {
             try {
-                // long start = System.currentTimeMillis();
-                url = "http://35.189.138.177:8080/navi/findPlace?lat=" + lat + "&lon=" + lon + "&len=" + len + "&lim=" + lim + "&flag=" + flag;
+                if(flag == 0)
+                    url = "http://35.189.138.177:8080/navi/findPlace?lat=" + lat + "&lon=" + lon + "&len=" + len + "&lim="+lim + "&flag=" + flag;
+                else if(flag == 1)
+                    url = "http://35.189.138.177:8080/navi/findPlace?lat=" + lat + "&lon=" + lon + "&len=" + len + "&lim="+lim + "&flag=" + flag + "&category=" + category + "&UID=" + UID;
                 URL obj = new URL(url);
                 HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
 
@@ -300,13 +307,14 @@ public class MapUtility {
                 BufferedReader br = new BufferedReader(new InputStreamReader(is));
                 String line;
                 StringBuilder response = new StringBuilder();
+
                 while ((line = br.readLine()) != null) {
                     response.append(line);
                     response.append('\r');
                 }
                 br.close();
 
-                result = response.toString();
+                result =response.toString();
                 return result;
 
             } catch (Exception e) {

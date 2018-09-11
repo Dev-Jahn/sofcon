@@ -78,6 +78,7 @@ public class TravelActivity extends AppCompatActivity {
         private static final String ARG_SECTION_NUMBER = "section_number";
         DiaryAdapter.ViewHolder vh;
         RecyclerView recyclerView;
+        DiaryAdapter diaryAdapter;
         final int GALLERY_CODE = 1;
 
         public DiaryholderFragment() {
@@ -111,26 +112,12 @@ public class TravelActivity extends AppCompatActivity {
                 place_names.add(travel.dailyDiary[index-1].review.get(i).place_name);
             }
 
-            recyclerView.setAdapter(new DiaryAdapter(this, place_names, R.layout.fragment_travel));
+
+            diaryAdapter = new DiaryAdapter(this, place_names, R.layout.fragment_travel, travel, index-1);
+            recyclerView.setAdapter(diaryAdapter);
             recyclerView.setItemAnimator(new DefaultItemAnimator());
             LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
             recyclerView.setLayoutManager(layoutManager);
-
-            for (int i = 0; i < travel.dailyDiary[index-1].review.size(); i++) {
-                place_names.add(travel.dailyDiary[index-1].review.get(i).place_name);
-            }
-            for (int i = 0; i < travel.dailyDiary[index-1].review.size(); i++) {
-                final int idx = i;
-                vh = (DiaryAdapter.ViewHolder) recyclerView.findViewHolderForAdapterPosition(i);
-                vh.comp_button.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        travel.dailyDiary[index-1].setPlaceReview(idx,vh.rating.getNumStars(), vh.review.getText().toString(),
-                                new SerialBitmap(((BitmapDrawable)vh.add_image.getDrawable()).getBitmap()));
-                    }
-                });
-
-            }
 
             return rootView;
         }
@@ -148,6 +135,63 @@ public class TravelActivity extends AppCompatActivity {
                     }
                 }
             }
+        }
+
+        @Override
+        public void onStart() {
+            super.onStart();
+            /*
+            final Travel travel = ((TravelActivity)getActivity()).travel;
+            final int index = getArguments().getInt(ARG_SECTION_NUMBER);
+            recyclerView.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+
+                    for (int i = 0; i < travel.dailyDiary[index-1].review.size(); i++) {
+                        final int idx = i;
+
+                        vh = (DiaryAdapter.ViewHolder) recyclerView.findViewHolderForAdapterPosition(i);
+                        Log.d("diaryTest", index+"and"+i);
+
+                        if(travel.dailyDiary[index-1].review.get(i).reviewed == true)
+                        {
+                            Travel.DailyDiary.PlaceReview rev;
+                            rev = travel.dailyDiary[index-1].review.get(i);
+                            Log.d("diaryload", "place = " +rev.place_name);
+                            Log.d("diaryload", "review = " +rev.reviewText);
+                            Log.d("diaryload", "score = " + rev.score+"");
+                            vh.review.setText(rev.reviewText);
+                            vh.add_image.setImageBitmap(rev.image.bitmap);
+                            vh.rating.setNumStars(rev.score);
+                            vh.review.setEnabled(false);
+                            vh.comp_button.setText("수정");
+                        }
+                        else
+                        {
+                            vh.comp_button.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Log.d("diaryTest", "onClick: imhere" + index+" and "+ idx);
+                                    travel.dailyDiary[index-1].setPlaceReview(idx,vh.rating.getNumStars(), vh.review.getText().toString(),
+                                            new SerialBitmap(((BitmapDrawable)vh.add_image.getDrawable()).getBitmap()));
+                                    Log.d("diarysave", "place = "+ vh.place.toString());
+                                    Log.d("diarysave", "review = "+vh.review.getText().toString());
+                                    Log.d("diarysave", "score = "+vh.rating.getNumStars()+"");
+                                    try
+                                    {
+                                        travel.save(getContext());
+                                    }catch (IOException e)
+                                    {
+                                        Toast.makeText(getContext(), "sibal", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                        }
+
+                    }
+                }
+            },100);
+            */
         }
 
         private void sendPicture(ImageButton imageButton, Uri imguri) {
@@ -228,4 +272,9 @@ public class TravelActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+
+        super.onBackPressed();
+    }
 }

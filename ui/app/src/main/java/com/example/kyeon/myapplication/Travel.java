@@ -2,6 +2,7 @@ package com.example.kyeon.myapplication;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -50,6 +51,7 @@ public class Travel implements Serializable {
     public void save(Context context) throws IOException
     {
         FileOutputStream fos = context.openFileOutput("travel_1", Context.MODE_PRIVATE);
+        Log.d("placeId",context.getFilesDir().toString());
         ObjectOutputStream os = new ObjectOutputStream(fos);
         os.writeObject(this);
         os.close();
@@ -81,7 +83,7 @@ public class Travel implements Serializable {
             String place_id;//장소 id
             String place_name;//장소 이름
             String place_class;//장소 종류
-            int score;//장소 점수
+            float score;//장소 점수
             String reviewText;//장소 리뷰
             SerialBitmap image;//장소 이미지
             boolean reviewed;//장소 리뷰 작성 되었는지 여부
@@ -97,7 +99,7 @@ public class Travel implements Serializable {
                 reviewed = false;
             }
 
-            public void setReview(int score, String reviewText, SerialBitmap image)
+            public void setReview(float score, String reviewText, SerialBitmap image)
             {
                 this.score = score;
                 this.reviewText = reviewText;
@@ -115,7 +117,7 @@ public class Travel implements Serializable {
             review.remove(place_index);
         }
 
-        public void setPlaceReview(int place_index, int score, String reviewText, SerialBitmap image)//내 여행에서 리뷰를 작성하고 완료버튼 눌름
+        public void setPlaceReview(int place_index, float score, String reviewText, SerialBitmap image)//내 여행에서 리뷰를 작성하고 완료버튼 눌름
         {
             review.get(place_index).setReview(score, reviewText, image);
         }

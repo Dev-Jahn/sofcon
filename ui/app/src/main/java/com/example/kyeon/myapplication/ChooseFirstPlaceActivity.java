@@ -70,7 +70,7 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
     private static int placeMarkerCount = 0;
 
     private static final float DEFAULT_LEN = 2.5f;
-    private static final int DEFAULT_LIM = 30;
+    private static final String DEFAULT_LIM = "30";
 
     private static final int WIDTH = 50;
     private static final int HEIGHT = 50;
@@ -342,7 +342,7 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
         return this;
     }
 
-    private void placesUpdate(float len, int lim) {
+    private void placesUpdate(float len, String lim) {
         removeAllPlaceMarker();
         CameraPosition cameraPosition = mMap.getCameraPosition();
         /**
@@ -352,12 +352,12 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
         String currentLat = new Double(cameraPosition.target.latitude).toString();
         String currentLng = new Double(cameraPosition.target.longitude).toString();
         if (len == 0) {
-            len = 2.5f;
+            len = DEFAULT_LEN;
         }
-        if (lim == 0) {
-            lim = 30;
+        if (lim == null) {
+            lim = DEFAULT_LIM;
         }
-        MapUtility.FindPlacesTask findPlacesTask = new MapUtility.FindPlacesTask(currentLat, currentLng, len, lim, false);
+        MapUtility.FindPlacesTask findPlacesTask = new MapUtility.FindPlacesTask(currentLat, currentLng, len, lim, 0);
         findPlacesTask.execute();
         try {
             adjacencyPlaces = findPlacesTask.get();
@@ -465,7 +465,8 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
                                 returnIntent.putExtra(MapUtility.PLACE_NAME_TAG, marker.getTitle());
                                 returnIntent.putExtra(MapUtility.PLACE_TYPE_TAG, marker.getSnippet());
                                 returnIntent.putExtra(MapUtility.CURRENT_DAY_TAG, "1");
-                                selectedMarker.hideInfoWindow();
+                                if(selectedMarker != null)
+                                    selectedMarker.hideInfoWindow();
                                 captureScreenAndFinish();
                             }
                         })
