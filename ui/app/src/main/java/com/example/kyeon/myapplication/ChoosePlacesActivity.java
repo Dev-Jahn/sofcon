@@ -183,12 +183,9 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
     }
 
     private void determineTrip() {
-        MapUtility.saveMapUserMarkers(getContext(), mMap, listMarkersToSave, intentData.getTitle(), intentData.getCurrentDay());
-<<<<<<< HEAD
+        MapUtility.saveMapUserMarkers(getContext(), listMarkersToSave, intentData.getTitle(), intentData.getCurrentDay());
         addPlaceDatas();
-=======
         hideAllInfoWindows();
->>>>>>> db79a2d25f14b82d4b1a76c993f31004e61f6900
         captureScreenAndSaveAndFinish();
 
     }
@@ -246,6 +243,40 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                 }
                 placeBitmapFilePath = filePath;
                 saveIntentDatas();
+                captureScreenForNextRoutes();
+            }
+        };
+        mMap.snapshot(snapshotReadyCallback);
+    }
+
+    private void captureScreenForNextRoutes() {
+        Log.d("DEBUG-TEST", "snapshot is called");
+        final GoogleMap.SnapshotReadyCallback snapshotReadyCallback = new GoogleMap.SnapshotReadyCallback() {
+            @Override
+            public void onSnapshotReady(Bitmap snapshot) {
+                InfoWindowData infoWindowData = new InfoWindowData(lastUserMarker);
+                removeAllPlaceMarker();
+                resetMap();
+                addUserMarker(infoWindowData, true);
+
+                mMap.moveCamera(CameraUpdateFactory.newLatLng(infoWindowData.getLatLng()));
+                mMap.animateCamera(CameraUpdateFactory.zoomTo(MapUtility.ZOOM_LEVEL));
+
+                String filePath = getContext().getFilesDir().getPath().toString() + "/"
+                        + intentData.getTitle() + (intentData.getCurrentDay() + 1) + ".png";
+                File file = new File(filePath);
+                Log.d("DEBUG-TEST", "스냅샷 시작 in ChoosePlacesActivity");
+                try {
+                    file.createNewFile();
+                    FileOutputStream fos = new FileOutputStream(file);
+                    snapshot.compress(Bitmap.CompressFormat.PNG, 90, fos);
+                    fos.close();
+                    Log.d("DEBUG-TEST", file.getAbsolutePath() + " in ChoosePlacesActivity");
+                    Log.d("DEBUG-TEST", "스냅샷 완료 in ChoosePlacesActivity");
+                } catch (IOException e) {
+                    Log.d("DEBUG-TEST", "스냅샷 에러 in ChoosePlacesActivity");
+                    Log.d("DEBUG-TEST", e.getMessage());
+                }
                 setResult(RESULT_OK, returnIntent);
                 finish();
             }
@@ -404,8 +435,12 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
 
         PermissionCodes.getPermission(getContext(), getActivity(),
                 Manifest.permission.ACCESS_COARSE_LOCATION, PermissionCodes.REQUEST_CODE_COARSE_LOCATION);
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(intentData.getPlaceLatLng()));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(MapUtility.ZOOM_LEVEL));
 
         if(intentData.isReloaded()) {
+            placeInfoWindow.removeView(placeInfoButton);
+            userInfoWindow.removeView(userInfoButton);
             for(InfoWindowData infoWindowData : listDatasToLoad) {
                 addUserMarker(infoWindowData, true);
             }
@@ -421,8 +456,6 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
             });
 
             addFirstPlaceMarker();
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(intentData.getPlaceLatLng()));
-            mMap.animateCamera(CameraUpdateFactory.zoomTo(MapUtility.ZOOM_LEVEL));
         }
     }
 

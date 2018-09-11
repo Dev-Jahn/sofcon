@@ -246,7 +246,6 @@ public class TripPlanActivity extends AppCompatActivity {
             intent.putExtra(MapUtility.PLACE_LOAD_TAG, true);
             intent.putExtra(MapUtility.CURRENT_DAY_TAG, getArguments().getString(MapUtility.CURRENT_DAY_TAG));
 
-
             return intent;
         }
 
@@ -350,21 +349,18 @@ public class TripPlanActivity extends AppCompatActivity {
                 }
 
                 ((TripPlanActivity)getActivity()).travel = (Travel) data.getExtras().getSerializable("travelData");
-                /**
-                 * new bitmap (new snapshot of last marker only) is needed.
-                 * How can I snapshot only last marker??? (Maybe it doesn't needed at all...)
-                 */
-                /**
+
                 if (currentDay != totalTravelDays) {
+                    String newFilePath = getContext().getFilesDir().getPath().toString() + "/"
+                            + getArguments().getString(ARG_SECTION_TITLE) + (currentDay + 1) + ".png";
                      Intent choose_places = new Intent(getActivity(), ChoosePlacesActivity.class);
                      choose_places.putExtra(ARG_SECTION_TITLE, getArguments().getString(ARG_SECTION_TITLE));
                      choose_places.putExtra(ARG_SECTION_FIRST_PLACE, getArguments().getString(ARG_SECTION_FIRST_PLACE));
                      choose_places.putExtra(ARG_SECTION_PLACE_LAT, getArguments().getString(ARG_SECTION_PLACE_LAT));
                      choose_places.putExtra(ARG_SECTION_PLACE_LNG, getArguments().getString(ARG_SECTION_PLACE_LNG));
                      choose_places.putExtra(ARG_SECTION_PLACE_BITMAP, newFilePath);
-                     startActivityForResult(choose_places, currentDay+1);
+                     // startActivityForResult(choose_places, currentDay+1);
                 }
-                 */
             }
         }
     }
