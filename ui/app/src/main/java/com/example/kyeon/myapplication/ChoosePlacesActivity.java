@@ -184,11 +184,8 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
 
     private void determineTrip() {
         MapUtility.saveMapUserMarkers(getContext(), mMap, listMarkersToSave, intentData.getTitle(), intentData.getCurrentDay());
-<<<<<<< HEAD
         addPlaceDatas();
-=======
         hideAllInfoWindows();
->>>>>>> db79a2d25f14b82d4b1a76c993f31004e61f6900
         captureScreenAndSaveAndFinish();
 
     }
