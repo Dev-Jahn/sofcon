@@ -20,7 +20,7 @@ public class BottomSheetDialog extends BottomSheetDialogFragment{
     RecyclerView recyclerView;
     final int ITEM_SIZE = 6;
 
-    public static BottomSheetDialog getInstance() { return new BottomSheetDialog();}
+public static BottomSheetDialog getInstance() { return new BottomSheetDialog();}
 
     @Nullable
     @Override
@@ -38,8 +38,8 @@ public class BottomSheetDialog extends BottomSheetDialogFragment{
         List<Rec_Item> rec_items = new ArrayList<>();
         Rec_Item[] rec_item = new Rec_Item[ITEM_SIZE];
         rec_item[0] = new Rec_Item(R.drawable.customized, resources.getString(R.string.customized_tour_landmark), resources.getString(R.string.customized_tour_landmark_explain), resources.getColor(R.color.customized_color));
-        rec_item[1] = new Rec_Item(R.drawable.customized, resources.getString(R.string.customized_tour_residence), resources.getString(R.string.customized_tour_residence_explain), resources.getColor(R.color.outdoor_color));
-        rec_item[2] = new Rec_Item(R.drawable.customized, resources.getString(R.string.customized_tour_restaurant), resources.getString(R.string.customized_tour_restaurant_explain), resources.getColor(R.color.gourmet_color));
+        rec_item[1] = new Rec_Item(R.drawable.night, resources.getString(R.string.customized_tour_residence), resources.getString(R.string.customized_tour_residence_explain), resources.getColor(R.color.outdoor_color));
+        rec_item[2] = new Rec_Item(R.drawable.gourmet, resources.getString(R.string.customized_tour_restaurant), resources.getString(R.string.customized_tour_restaurant_explain), resources.getColor(R.color.gourmet_color));
         rec_item[3] = new Rec_Item(R.drawable.healing, resources.getString(R.string.healing_tour), resources.getString(R.string.healing_explain), resources.getColor(R.color.healing_color));
         rec_item[4] = new Rec_Item(R.drawable.landmark, resources.getString(R.string.historic_place), resources.getString(R.string.historic_explain),resources.getColor(R.color.landmark_color));
         rec_item[5] = new Rec_Item(R.drawable.shopping, resources.getString(R.string.shopping_tour), resources.getString(R.string.shopping_explain),resources.getColor(R.color.shopping_color));
