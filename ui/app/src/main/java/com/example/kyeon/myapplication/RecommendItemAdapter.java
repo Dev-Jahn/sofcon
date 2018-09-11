@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,6 +55,7 @@ public class RecommendItemAdapter extends RecyclerView.Adapter<RecommendItemAdap
                     Intent i = new Intent(context, ChoosePlacesActivity.class);
                     IntentData intentData = new IntentData(intent);
                     intentData.transferDataToIntent(i);
+                    Log.d("DEBUG-TEST!!!", i.getStringExtra(MapUtility.CURRENT_DAY_TAG));
 
                     i.putExtra("travelData", (intent.getSerializableExtra("travelData")));
                     context.startActivity(i);

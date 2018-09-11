@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,6 +60,7 @@ public class BottomSheetDialog extends BottomSheetDialogFragment{
         intent.putExtra(MapUtility.PLACE_NAME_TAG, getArguments().getString(MapUtility.PLACE_NAME_TAG));
         intent.putExtra(MapUtility.CURRENT_DAY_TAG, getArguments().getString(MapUtility.CURRENT_DAY_TAG));
         intent.putExtra("travelData", getArguments().getSerializable("travelData"));
+        Log.d("DEBUG-TEST!!!", getArguments().getString(MapUtility.CURRENT_DAY_TAG));
         intent.putExtra(MapUtility.PLACE_AUTO_TAG, true);
 
         recyclerView.setAdapter(new RecommendItemAdapter(getContext(), rec_items, R.layout.bottom_sheet_dialog, intent));
