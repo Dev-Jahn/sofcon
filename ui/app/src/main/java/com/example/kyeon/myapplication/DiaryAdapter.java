@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.ExifInterface;
 import android.net.Uri;
@@ -30,21 +31,30 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.ViewHolder> implements View.OnClickListener{
     Fragment fragment;
     List<String> items;
     int item_layout;
+    int dayPosition;
+    Travel travel;
     final int MY_PERMISSIONS_REQUEST_GALLERY = 108;
     final int GALLERY_CODE = 1;
 
-    public DiaryAdapter(Fragment fragment, List<String> items, int item_layout)
+    public DiaryAdapter(Fragment fragment, List<String> items, int item_layout, Travel travel, int dayPosition)
     {
         this.fragment = fragment;
         this.items = items;
         this.item_layout = item_layout;
+        this.travel = travel;
+        this.dayPosition = dayPosition;
     }
 
     @NonNull
@@ -57,7 +67,7 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DiaryAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final DiaryAdapter.ViewHolder holder, final int position) {
         final String place_name = items.get(position);
         final LinearLayout linearLayout = holder.linearLayout;
         final ImageView imageView = holder.expand_image;
@@ -79,15 +89,59 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.ViewHolder> 
                 }
             }
         });
+        final Travel.DailyDiary.PlaceReview curReview = travel.dailyDiary[dayPosition].review.get(position);
 
-        holder.add_image.setOnClickListener(this);
+        if(curReview.reviewed == true)
+        {
+            holder.review.setText(curReview.reviewText);
+            holder.rating.setRating(curReview.score);
+            holder.add_image.setImageBitmap(curReview.image.bitmap);
+            holder.comp_button.setText("수정");
+        }
+        else
+        {
+            holder.add_image.setOnClickListener(this);
 
-        holder.comp_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            holder.comp_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    travel.dailyDiary[dayPosition].setPlaceReview(position, holder.rating.getRating(), holder.review.getText().toString(),
+                            new SerialBitmap(((BitmapDrawable)holder.add_image.getDrawable()).getBitmap()));
+                    int flag;
+                    if(holder.rating.getRating() >=2.5)
+                        flag = 0;
+                    else
+                        flag = 1;
 
-            }
-        });
+                    String UID = getUID();
+                    Log.d("diary", "onClick: " + UID);
+                    Score score = new Score(flag, UID, curReview.place_id, curReview.place_class);
+                    Log.d("diary", "dataset -> \n flag = " + flag +"\n placeId = " + curReview.place_id + " \n placeClass = " + curReview.place_class);
+                    score.execute();
+                    String test = "";
+                    try {
+                        test = score.get();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    }
+
+                    Log.d("diaryTest", test);
+
+                    try
+                    {
+                        travel.save(fragment.getContext());
+                        holder.comp_button.setText("수정");
+                    }catch (IOException e)
+                    {
+                        Toast.makeText(fragment.getContext(), "sibal", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
+        }
+
     }
 
     @Override
@@ -141,5 +195,31 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.ViewHolder> 
             else
                 Toast.makeText(fragment.getActivity(), "저장소 권한이 없어 이미지를 불러올 수 없습니다.", Toast.LENGTH_SHORT).show();
         }
+    }
+    public String getUID() {
+        String saved_info[] = {""};
+        String dirPath = fragment.getContext().getFilesDir().getAbsolutePath();
+        File file = new File(dirPath);
+        String content = "", temp = "";
+
+        if (file.listFiles().length > 0) {
+            for (File f : file.listFiles()) {
+                String f_name = f.getName();
+                String loadPath = dirPath + File.separator + f_name;
+                if (f_name.equals("account_setup.txt")) {
+                    try {
+                        FileInputStream fis = new FileInputStream(loadPath);
+                        BufferedReader bufferReader = new BufferedReader(new InputStreamReader(fis));
+
+                        while ((temp = bufferReader.readLine()) != null) content += temp;
+                        break;
+                    } catch (Exception e) {
+                    }
+                }
+            }
+            saved_info = content.split(" ");
+
+        }
+        return saved_info[0];
     }
 }

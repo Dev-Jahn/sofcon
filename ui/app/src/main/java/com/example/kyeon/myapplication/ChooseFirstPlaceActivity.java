@@ -465,7 +465,7 @@ public class ChooseFirstPlaceActivity extends AppCompatActivity implements OnMap
                                 returnIntent.putExtra(MapUtility.PLACE_NAME_TAG, marker.getTitle());
                                 returnIntent.putExtra(MapUtility.PLACE_TYPE_TAG, marker.getSnippet());
                                 returnIntent.putExtra(MapUtility.CURRENT_DAY_TAG, "1");
-                                selectedMarker.hideInfoWindow();
+ //                               selectedMarker.hideInfoWindow();
                                 captureScreenAndFinish();
                             }
                         })

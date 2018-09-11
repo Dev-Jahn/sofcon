@@ -185,11 +185,8 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
 
     private void determineTrip() {
         MapUtility.saveMapUserMarkers(getContext(), mMap, listMarkersToSave, intentData.getTitle(), intentData.getCurrentDay());
-<<<<<<< HEAD
         addPlaceDatas();
-=======
         hideAllInfoWindows();
->>>>>>> db79a2d25f14b82d4b1a76c993f31004e61f6900
         captureScreenAndSaveAndFinish();
 
     }
@@ -219,6 +216,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         travel = (Travel) getIntent().getExtras().getSerializable("travelData");
         for (int i = 0; i < listMarkersToSave.size(); i++) {
             Marker saveMarker = listMarkersToSave.get(i);
+            Log.d("placeIdtest", saveMarker.getId());
             travel.dailyDiary[index-1].addPlace(saveMarker.getId(), saveMarker.getTitle(), saveMarker.getSnippet());
         }
     }
@@ -627,7 +625,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         // it will be replaced to real score
         infoWindowData.setScore(Integer.toString(markerCount));
         // it will be replaced to real placeID
-        infoWindowData.setPlaceID(Integer.toString(markerCount));
+        infoWindowData.setPlaceID("0");
         infoWindowData.setLatLng(marker.getPosition());
         infoWindowData.setWindowType(windowType);
 
