@@ -94,7 +94,6 @@ public class TripCardAdapter extends RecyclerView.Adapter<TripCardAdapter.ViewHo
             super(itemView);
             image =  itemView.findViewById(R.id.placeImg);
             title = itemView.findViewById(R.id.trip_title);
-
             place =  itemView.findViewById(R.id.ivTravelMap);
             day =  itemView.findViewById(R.id.dayText);
             cardview =  itemView.findViewById(R.id.cardview);
