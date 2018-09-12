@@ -84,7 +84,7 @@ public class MyTripFragment extends Fragment {
             while(file.exists())
             {
                 travel = Travel.load(getContext(), "travel_"+travelCount);
-                items.add(new Item(drawables.get(travelCount-1), travel.cityName,travel.title,
+                items.add(new Item(drawables.get(travelCount-1), travel.title,travel.cityName,
                         travel.syy + "." + travel.smm + "." + travel.sdd + " ~ " +
                                 travel.eyy +"."+travel.emm+"."+travel.edd, travel
                 ));

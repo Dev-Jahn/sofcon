@@ -504,17 +504,7 @@ public class TripPlanActivity extends AppCompatActivity {
         ePlaceLng = intent.getStringExtra(MapUtility.PLACE_LNG_TAG);
         //for getting english city name
 
-        Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.ENGLISH);
-        try {
-            double lat = Double.parseDouble(ePlaceLat);
-            double lng = Double.parseDouble(ePlaceLng);
-            List<Address> addresses = geocoder.getFromLocation(lat, lng, 5);
-            ePlace = addresses.get(0).getLocality();
-            if(ePlace == null)
-                ePlace = addresses.get(0).getCountryName();
-        } catch (IOException e) {
-            ePlace = "City not Found";
-        }
+
         //getting english city name ended
 
         ePlaceType = intent.getStringExtra(MapUtility.PLACE_TYPE_TAG);
@@ -558,8 +548,18 @@ public class TripPlanActivity extends AppCompatActivity {
             diff = 0;
         }
         diff_days = diff / (24 * 60 * 60 * 1000);
-
-        travel = new Travel(getApplicationContext(), "psm", etitle, ePlace, Integer.parseInt(person_count), (int) diff_days + 1, s_mm, s_yy, s_mm, e_yy, e_mm, e_dd);
+        Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.ENGLISH);
+        try {
+            double lat = Double.parseDouble(ePlaceLat);
+            double lng = Double.parseDouble(ePlaceLng);
+            List<Address> addresses = geocoder.getFromLocation(lat, lng, 5);
+            ePlace = addresses.get(0).getLocality();
+            if(ePlace == null)
+                ePlace = addresses.get(0).getCountryName();
+        } catch (IOException e) {
+            ePlace = "City not Found";
+        }
+        travel = new Travel(getApplicationContext(), "psm", ePlace, etitle, Integer.parseInt(person_count), (int) diff_days + 1, s_mm, s_yy, s_mm, e_yy, e_mm, e_dd);
         Log.d("DEBUG-TEST", "travel title : " + etitle);
     }
 }
