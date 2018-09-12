@@ -49,7 +49,7 @@ public class Travel implements Serializable {
         this.edd = edd;
     }
 
-    public void save(Context context) throws IOException
+    public String save(Context context) throws IOException
     {
         int travelCount = 1;
         File file;
@@ -64,6 +64,7 @@ public class Travel implements Serializable {
         os.writeObject(this);
         os.close();
         fos.close();
+        return file.getPath();
     }
 
     public static Travel load(Context context, String path) throws IOException, ClassNotFoundException

@@ -213,12 +213,15 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
     }
 
     private void addPlaceDatas() {
-        index = getIntent().getIntExtra(MapUtility.CURRENT_DAY_TAG, 0);
+        //index = getIntent().getIntExtra(MapUtility.CURRENT_DAY_TAG, 0);
+        index = Integer.parseInt(intentData.getCurrentDay());
+        // index = Integer.valueOf(getIntent().getStringExtra(MapUtility.CURRENT_DAY_TAG));
         Bundle b = getIntent().getExtras();
         travel = (Travel) getIntent().getExtras().getSerializable("travelData");
         for (int i = 0; i < listMarkersToSave.size(); i++) {
             Marker saveMarker = listMarkersToSave.get(i);
-            Log.d("placeId", saveMarker.getTitle());
+//            Log.d("placeId", saveMarker.getTitle());
+            Log.d("???",((InfoWindowData)saveMarker.getTag()).getPlaceID() + " , "  + saveMarker.getTitle());
             travel.dailyDiary[index - 1].addPlace(((InfoWindowData)saveMarker.getTag()).getPlaceID(), saveMarker.getTitle(), saveMarker.getSnippet());
         }
     }
@@ -267,7 +270,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                 mMap.animateCamera(CameraUpdateFactory.zoomTo(MapUtility.ZOOM_LEVEL));
 
                 String filePath = getContext().getFilesDir().getPath().toString() + "/"
-                        + intentData.getTitle() + (intentData.getCurrentDay() + 1) + ".png";
+                        + intentData.getTitle() + (Integer.parseInt(intentData.getCurrentDay()) + 1) + ".png";
                 File file = new File(filePath);
                 Log.d("DEBUG-TEST", "스냅샷 시작 in ChoosePlacesActivity");
                 try {
@@ -364,6 +367,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                                         InfoWindowData infoWindowData = (InfoWindowData) marker.getTag();
                                         infoWindowData.setOrder(userMarkerCount);
                                         infoWindowData.setWindowType(InfoWindowData.TYPE_USER);
+                                        infoWindowData.setPlaceID(((InfoWindowData) marker.getTag()).getPlaceID());
                                         addUserMarker(infoWindowData, false);
                                         removePlaceMarker(marker);
                                     }
@@ -670,7 +674,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         loadMarkerTag(marker, infoWindowData);
         hashMapUserMarker.put(userMarkerCount, marker);
 
-        saveMarkerTag(marker, userMarkerCount, InfoWindowData.TYPE_USER);
+        saveMarkerTag(marker, userMarkerCount, InfoWindowData.TYPE_USER, infoWindowData.getPlaceID());
         listMarkersToSave.add(marker);
         lastUserMarker = marker;
         if (isOptimized) {
@@ -722,7 +726,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         // it will be replaced to real score
         infoWindowData.setScore(Integer.toString(markerCount));
         // it will be replaced to real placeID
-        infoWindowData.setPlaceID("0");
+        infoWindowData.setPlaceID("2");
         infoWindowData.setLatLng(marker.getPosition());
         infoWindowData.setWindowType(windowType);
 

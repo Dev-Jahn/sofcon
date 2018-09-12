@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import java.util.List;
 public class BottomSheetDialog extends BottomSheetDialogFragment{
     RecyclerView recyclerView;
     final int ITEM_SIZE = 6;
+    private static final String ARG_SECTION_NUMBER = "section_number";
 
 public static BottomSheetDialog getInstance() { return new BottomSheetDialog();}
 
@@ -53,16 +55,19 @@ public static BottomSheetDialog getInstance() { return new BottomSheetDialog();}
         }
 
         Intent intent = new Intent();
+        intent.putExtra(ARG_SECTION_NUMBER, getArguments().getString(ARG_SECTION_NUMBER));
         intent.putExtra(MapUtility.PLACE_TYPE_TAG, getArguments().getString(MapUtility.PLACE_TYPE_TAG));
         intent.putExtra(MapUtility.PLACE_LAT_TAG, getArguments().getString(MapUtility.PLACE_LAT_TAG));
         intent.putExtra(MapUtility.PLACE_LNG_TAG, getArguments().getString(MapUtility.PLACE_LNG_TAG));
         intent.putExtra(MapUtility.PLACE_NAME_TAG, getArguments().getString(MapUtility.PLACE_NAME_TAG));
         intent.putExtra(MapUtility.CURRENT_DAY_TAG, getArguments().getString(MapUtility.CURRENT_DAY_TAG));
         intent.putExtra("travelData", getArguments().getSerializable("travelData"));
+        Log.d("DEBUG-TEST!!!", getArguments().getString(MapUtility.CURRENT_DAY_TAG));
         intent.putExtra(MapUtility.PLACE_AUTO_TAG, true);
 
         recyclerView.setAdapter(new RecommendItemAdapter(getContext(), rec_items, R.layout.bottom_sheet_dialog, intent));
 
         return view;
     }
+
 }

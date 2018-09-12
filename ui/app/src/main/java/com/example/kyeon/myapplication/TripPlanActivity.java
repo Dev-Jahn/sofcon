@@ -50,7 +50,7 @@ public class TripPlanActivity extends AppCompatActivity {
      * may be best to switch to a
      * {@link android.support.v13.app.FragmentStatePagerAdapter}.
      */
-    private SectionsPagerAdapter mSectionsPagerAdapter;
+    public SectionsPagerAdapter mSectionsPagerAdapter;
     String d_yy, d_mm, d_dd;
     String a_yy, a_mm, a_dd;
     String etitle, person_count, ePlace;
@@ -265,6 +265,7 @@ public class TripPlanActivity extends AppCompatActivity {
             return intent;
         }
 
+
         @Override
         public View onCreateView(LayoutInflater choose_places, ViewGroup container,
                                  Bundle savedInstanceState) {
@@ -322,6 +323,7 @@ public class TripPlanActivity extends AppCompatActivity {
                     choose_places.putExtra(ARG_SECTION_CURRENT_DAY_TEMP, getArguments().getInt(ARG_SECTION_NUMBER));
                     TripPlanActivity activity = (TripPlanActivity) getActivity();
                     Travel travel = activity.travel;
+                    travel.title = getArguments().getString(ARG_SECTION_TITLE);
                     choose_places.putExtra("travelData", travel);
                     //end here
                     startActivityForResult(choose_places, getArguments().getInt(ARG_SECTION_NUMBER));
@@ -338,6 +340,8 @@ public class TripPlanActivity extends AppCompatActivity {
                     args.putInt(ARG_SECTION_NUMBER, getArguments().getInt(ARG_SECTION_NUMBER));
                     args.putString(ARG_SECTION_TITLE, getArguments().getString(ARG_SECTION_TITLE));
                     args.putString(ARG_SECTION_CURRENT_DAY, getArguments().getString(ARG_SECTION_CURRENT_DAY));
+                    Log.d("DEBUG-TEST", getArguments().getString(ARG_SECTION_CURRENT_DAY));
+                    Log.d("DEBUG-TEST", getArguments().getString(ARG_SECTION_NUMBER) + "");
                     args.putString(ARG_SECTION_PLACE_LAT, getArguments().getString(ARG_SECTION_PLACE_LAT));
                     args.putString(ARG_SECTION_PLACE_LNG, getArguments().getString(ARG_SECTION_PLACE_LNG));
                     args.putString(ARG_SECTION_PLACE_BITMAP, getArguments().getString(ARG_SECTION_PLACE_BITMAP));
@@ -367,6 +371,8 @@ public class TripPlanActivity extends AppCompatActivity {
             TripPlanActivity activity = (TripPlanActivity) getActivity();
             activity.travel = (Travel) data.getExtras().getSerializable("travelData");
             Log.d("placeId",currentDay + " is"+ activity.travel.dailyDiary[index-1].review.get(0).place_name);
+            Log.d("DEBUG-TEST",activity.travel.title + "이 전달되었음.");
+            activity.travel.title = getArguments().getString(ARG_SECTION_TITLE);
 
             if (requestCode == currentDay) {
                 String filePath = getContext().getFilesDir().getPath().toString() + "/"
@@ -425,6 +431,15 @@ public class TripPlanActivity extends AppCompatActivity {
                 return PlaceholderFragment.newInstance(position + 1, etitle, eCurrentDay,
                         eFirstPlace, arrayPlaceLat[position + 1], arrayPlaceLng[position + 1], arrayPlaceType[position + 1], arrayPlaceBitmapFilePath[position + 1]);
         }
+
+        /*
+        @Override
+        public android.support.v4.app.Fragment getItem(int position, boolean sibal) {
+            // getItem is called to instantiate the fragment for the given page.
+            // Return a PlaceholderFragment (defined as a static inner class below).
+            getSupportFragmentManager().getFragments()
+        }
+        */
 
         @Override
         public int getCount() {
@@ -489,15 +504,7 @@ public class TripPlanActivity extends AppCompatActivity {
         ePlaceLng = intent.getStringExtra(MapUtility.PLACE_LNG_TAG);
         //for getting english city name
 
-        Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.ENGLISH);
-        try {
-            double lat = Double.parseDouble(ePlaceLat);
-            double lng = Double.parseDouble(ePlaceLng);
-            List<Address> addresses = geocoder.getFromLocation(lat, lng, 5);
-            ePlace = addresses.get(0).getLocality();
-        } catch (IOException e) {
-            ePlace = "City not Found";
-        }
+
         //getting english city name ended
 
         ePlaceType = intent.getStringExtra(MapUtility.PLACE_TYPE_TAG);
@@ -541,7 +548,18 @@ public class TripPlanActivity extends AppCompatActivity {
             diff = 0;
         }
         diff_days = diff / (24 * 60 * 60 * 1000);
-
-        travel = new Travel(getApplicationContext(), "psm", etitle, ePlace, Integer.parseInt(person_count), (int) diff_days + 1, s_mm, s_yy, s_mm, e_yy, e_mm, e_dd);
+        Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.ENGLISH);
+        try {
+            double lat = Double.parseDouble(ePlaceLat);
+            double lng = Double.parseDouble(ePlaceLng);
+            List<Address> addresses = geocoder.getFromLocation(lat, lng, 5);
+            ePlace = addresses.get(0).getLocality();
+            if(ePlace == null)
+                ePlace = addresses.get(0).getCountryName();
+        } catch (IOException e) {
+            ePlace = "City not Found";
+        }
+        travel = new Travel(getApplicationContext(), "psm", ePlace, etitle, Integer.parseInt(person_count), (int) diff_days + 1, s_mm, s_yy, s_mm, e_yy, e_mm, e_dd);
+        Log.d("DEBUG-TEST", "travel title : " + etitle);
     }
 }

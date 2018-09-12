@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ public class RecommendItemAdapter extends RecyclerView.Adapter<RecommendItemAdap
     List<Rec_Item> items;
     int item_layout;
     private Intent intent;
+    private static final String ARG_SECTION_NUMBER = "section_number";
 
     public RecommendItemAdapter(Context context, List<Rec_Item> items, int item_layout, Intent intent) {
         this.context = context;
@@ -54,14 +56,16 @@ public class RecommendItemAdapter extends RecyclerView.Adapter<RecommendItemAdap
                     Intent i = new Intent(context, ChoosePlacesActivity.class);
                     IntentData intentData = new IntentData(intent);
                     intentData.transferDataToIntent(i);
-
+                    Log.d("DEBUG-TEST!!!", i.getStringExtra(MapUtility.CURRENT_DAY_TAG));
                     i.putExtra("travelData", (intent.getSerializableExtra("travelData")));
-                    context.startActivity(i);
+                    TripPlanActivity tripPlanActivity = (TripPlanActivity) context;
+//                    tripPlanActivity.mSectionsPagerAdapter.getItem(0).startActivityForResult(i,intent.getIntExtra(ARG_SECTION_NUMBER,0));
+                    ((TripPlanActivity) context).getSupportFragmentManager().getFragments().get(0).startActivityForResult(i,intent.getIntExtra(ARG_SECTION_NUMBER,0));
+                    //((TripPlanActivity)context).PlaceholderFragment.startActivityForResult(i,intent.getIntExtra(ARG_SECTION_NUMBER,0));
                 }
                 Toast.makeText(context, rec_item.getTitle(), Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
 
