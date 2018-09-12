@@ -323,6 +323,7 @@ public class TripPlanActivity extends AppCompatActivity {
                     choose_places.putExtra(ARG_SECTION_CURRENT_DAY_TEMP, getArguments().getInt(ARG_SECTION_NUMBER));
                     TripPlanActivity activity = (TripPlanActivity) getActivity();
                     Travel travel = activity.travel;
+                    travel.title = getArguments().getString(ARG_SECTION_TITLE);
                     choose_places.putExtra("travelData", travel);
                     //end here
                     startActivityForResult(choose_places, getArguments().getInt(ARG_SECTION_NUMBER));
@@ -370,6 +371,8 @@ public class TripPlanActivity extends AppCompatActivity {
             TripPlanActivity activity = (TripPlanActivity) getActivity();
             activity.travel = (Travel) data.getExtras().getSerializable("travelData");
             Log.d("placeId",currentDay + " is"+ activity.travel.dailyDiary[index-1].review.get(0).place_name);
+            Log.d("DEBUG-TEST",activity.travel.title + "이 전달되었음.");
+            activity.travel.title = getArguments().getString(ARG_SECTION_TITLE);
 
             if (requestCode == currentDay) {
                 String filePath = getContext().getFilesDir().getPath().toString() + "/"
@@ -557,5 +560,6 @@ public class TripPlanActivity extends AppCompatActivity {
         diff_days = diff / (24 * 60 * 60 * 1000);
 
         travel = new Travel(getApplicationContext(), "psm", etitle, ePlace, Integer.parseInt(person_count), (int) diff_days + 1, s_mm, s_yy, s_mm, e_yy, e_mm, e_dd);
+        Log.d("DEBUG-TEST", "travel title : " + etitle);
     }
 }

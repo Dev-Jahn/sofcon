@@ -94,7 +94,6 @@ public class MyTripFragment extends Fragment {
         }catch (Exception e)
         {
             travel = null;
-            Toast.makeText(getContext(), "sibal", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
 
