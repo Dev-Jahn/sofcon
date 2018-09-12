@@ -270,7 +270,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                 mMap.animateCamera(CameraUpdateFactory.zoomTo(MapUtility.ZOOM_LEVEL));
 
                 String filePath = getContext().getFilesDir().getPath().toString() + "/"
-                        + intentData.getTitle() + (intentData.getCurrentDay() + 1) + ".png";
+                        + intentData.getTitle() + (Integer.parseInt(intentData.getCurrentDay()) + 1) + ".png";
                 File file = new File(filePath);
                 Log.d("DEBUG-TEST", "스냅샷 시작 in ChoosePlacesActivity");
                 try {
