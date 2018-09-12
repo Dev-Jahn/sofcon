@@ -22,6 +22,7 @@ public class RecommendItemAdapter extends RecyclerView.Adapter<RecommendItemAdap
     List<Rec_Item> items;
     int item_layout;
     private Intent intent;
+    private static final String ARG_SECTION_NUMBER = "section_number";
 
     public RecommendItemAdapter(Context context, List<Rec_Item> items, int item_layout, Intent intent) {
         this.context = context;
@@ -57,12 +58,14 @@ public class RecommendItemAdapter extends RecyclerView.Adapter<RecommendItemAdap
                     intentData.transferDataToIntent(i);
                     Log.d("DEBUG-TEST!!!", i.getStringExtra(MapUtility.CURRENT_DAY_TAG));
                     i.putExtra("travelData", (intent.getSerializableExtra("travelData")));
-                    context.startActivity(i);
+                    TripPlanActivity tripPlanActivity = (TripPlanActivity) context;
+//                    tripPlanActivity.mSectionsPagerAdapter.getItem(0).startActivityForResult(i,intent.getIntExtra(ARG_SECTION_NUMBER,0));
+                    ((TripPlanActivity) context).getSupportFragmentManager().getFragments().get(0).startActivityForResult(i,intent.getIntExtra(ARG_SECTION_NUMBER,0));
+                    //((TripPlanActivity)context).PlaceholderFragment.startActivityForResult(i,intent.getIntExtra(ARG_SECTION_NUMBER,0));
                 }
                 Toast.makeText(context, rec_item.getTitle(), Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
 

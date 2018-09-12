@@ -1,6 +1,7 @@
 package com.example.kyeon.myapplication;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.location.Geocoder;
 import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
@@ -66,6 +67,15 @@ public class MyTripFragment extends Fragment {
         //for testing travel class
         String dirPath = Environment.getExternalStorageDirectory().getAbsolutePath()+"/TEST/";
         Travel travel;
+        ArrayList<Integer> drawables = new ArrayList<>();
+        drawables.add(R.drawable.and_img1);
+        drawables.add(R.drawable.and_img2);
+        drawables.add(R.drawable.and_img3);
+        drawables.add(R.drawable.and_img4);
+        drawables.add(R.drawable.and_img5);
+        drawables.add(R.drawable.and_img6);
+        drawables.add(R.drawable.and_img7);
+        drawables.add(R.drawable.and_img8);
         try
         {
             int travelCount = 1;
@@ -74,7 +84,7 @@ public class MyTripFragment extends Fragment {
             while(file.exists())
             {
                 travel = Travel.load(getContext(), "travel_"+travelCount);
-                items.add(new Item(R.drawable.city_tai, travel.cityName,travel.title,
+                items.add(new Item(drawables.get(travelCount-1), travel.cityName,travel.title,
                         travel.syy + "." + travel.smm + "." + travel.sdd + " ~ " +
                                 travel.eyy +"."+travel.emm+"."+travel.edd, travel
                 ));

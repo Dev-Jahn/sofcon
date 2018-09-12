@@ -19,6 +19,7 @@ import java.util.List;
 public class BottomSheetDialog extends BottomSheetDialogFragment{
     RecyclerView recyclerView;
     final int ITEM_SIZE = 6;
+    private static final String ARG_SECTION_NUMBER = "section_number";
 
 public static BottomSheetDialog getInstance() { return new BottomSheetDialog();}
 
@@ -54,6 +55,7 @@ public static BottomSheetDialog getInstance() { return new BottomSheetDialog();}
         }
 
         Intent intent = new Intent();
+        intent.putExtra(ARG_SECTION_NUMBER, getArguments().getString(ARG_SECTION_NUMBER));
         intent.putExtra(MapUtility.PLACE_TYPE_TAG, getArguments().getString(MapUtility.PLACE_TYPE_TAG));
         intent.putExtra(MapUtility.PLACE_LAT_TAG, getArguments().getString(MapUtility.PLACE_LAT_TAG));
         intent.putExtra(MapUtility.PLACE_LNG_TAG, getArguments().getString(MapUtility.PLACE_LNG_TAG));

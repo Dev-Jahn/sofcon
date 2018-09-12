@@ -50,7 +50,7 @@ public class TripPlanActivity extends AppCompatActivity {
      * may be best to switch to a
      * {@link android.support.v13.app.FragmentStatePagerAdapter}.
      */
-    private SectionsPagerAdapter mSectionsPagerAdapter;
+    public SectionsPagerAdapter mSectionsPagerAdapter;
     String d_yy, d_mm, d_dd;
     String a_yy, a_mm, a_dd;
     String etitle, person_count, ePlace;
@@ -265,6 +265,7 @@ public class TripPlanActivity extends AppCompatActivity {
             return intent;
         }
 
+
         @Override
         public View onCreateView(LayoutInflater choose_places, ViewGroup container,
                                  Bundle savedInstanceState) {
@@ -427,6 +428,15 @@ public class TripPlanActivity extends AppCompatActivity {
                 return PlaceholderFragment.newInstance(position + 1, etitle, eCurrentDay,
                         eFirstPlace, arrayPlaceLat[position + 1], arrayPlaceLng[position + 1], arrayPlaceType[position + 1], arrayPlaceBitmapFilePath[position + 1]);
         }
+
+        /*
+        @Override
+        public android.support.v4.app.Fragment getItem(int position, boolean sibal) {
+            // getItem is called to instantiate the fragment for the given page.
+            // Return a PlaceholderFragment (defined as a static inner class below).
+            getSupportFragmentManager().getFragments()
+        }
+        */
 
         @Override
         public int getCount() {
