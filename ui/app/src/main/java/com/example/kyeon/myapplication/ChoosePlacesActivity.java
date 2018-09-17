@@ -109,6 +109,8 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
     private String adjacencyPlaces;
     private String placeBitmapFilePath;
 
+    private String autoCategory;
+
     private Intent returnIntent;
 
     //for save travel
@@ -182,6 +184,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
     private void getIntentDatas() {
         Intent intent = getIntent();
         intentData = new IntentData(intent);
+        autoCategory = intent.getStringExtra("autoType");
         if (intentData.getPlaceType() == null)
             intentData.setPlaceType(getResources().getString(R.string.custom_place));
     }
@@ -489,8 +492,17 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                 }
                 UID = saved_info[0];
 
+                String category = "";
+                if(autoCategory == getResources().getString(R.string.customized_tour_restaurant)) {
+                    category = "restaurants";
+                } else if(autoCategory == getResources().getString(R.string.customized_tour_landmark)) {
+                    category = "attractions";
+                } else if(autoCategory == getResources().getString(R.string.customized_tour_residence)) {
+                    category = "hotels";
+                }
+
                 MapUtility.FindPlacesTask findPlacesTask = new MapUtility.FindPlacesTask(String.valueOf(listLocsToDraw.get(0).latitude), String.valueOf(listLocsToDraw.get(0).longitude),
-                        10, "5", 1, "restaurants", UID);
+                        2.5f, "5", 1, category, UID);
                 findPlacesTask.execute();
                 try{
                     adjacencyPlaces = findPlacesTask.get();
@@ -929,7 +941,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
 
         @Override
         protected String doInBackground(String... url) {
-
+            Log.d("DEBUG-TEST", "URL : " + url[0]);
             String data = "";
             try {
                 data = downloadUrl(url[0]);
@@ -1104,6 +1116,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                 routeLineOptions.width(12);
                 routeLineOptions.color(Color.RED);
                 routeLineOptions.geodesic(true);
+
             }
             /**
              * This is the case of cannot drawing a route
@@ -1154,8 +1167,8 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         String parameters = originString + "&" + destString + "&" + sensor + "&" + mode;
         String output = "json";
 
-        String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters;
-
+        String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&key=AIzaSyC9F1WDc02j8dcUuAPobQsCctd1lYyVOaA";
+        Log.d("URL " , url);
         return url;
     }
 
@@ -1165,7 +1178,6 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         HttpURLConnection urlConnection = null;
         try {
             URL url = new URL(strUrl);
-
             urlConnection = (HttpURLConnection) url.openConnection();
 
             urlConnection.connect();

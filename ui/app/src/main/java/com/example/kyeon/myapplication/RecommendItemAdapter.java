@@ -58,12 +58,34 @@ public class RecommendItemAdapter extends RecyclerView.Adapter<RecommendItemAdap
                     intentData.transferDataToIntent(i);
                     Log.d("DEBUG-TEST!!!", i.getStringExtra(MapUtility.CURRENT_DAY_TAG));
                     i.putExtra("travelData", (intent.getSerializableExtra("travelData")));
+                    i.putExtra("autoType", R.string.customized_tour_restaurant);
+                    TripPlanActivity tripPlanActivity = (TripPlanActivity) context;
+//                    tripPlanActivity.mSectionsPagerAdapter.getItem(0).startActivityForResult(i,intent.getIntExtra(ARG_SECTION_NUMBER,0));
+                    ((TripPlanActivity) context).getSupportFragmentManager().getFragments().get(0).startActivityForResult(i,intent.getIntExtra(ARG_SECTION_NUMBER,0));
+                    //((TripPlanActivity)context).PlaceholderFragment.startActivityForResult(i,intent.getIntExtra(ARG_SECTION_NUMBER,0));
+                } else if(holder.title.getText().equals(context.getResources().getString(R.string.customized_tour_landmark))) {
+                    Intent i = new Intent(context, ChoosePlacesActivity.class);
+                    IntentData intentData = new IntentData(intent);
+                    intentData.transferDataToIntent(i);
+                    Log.d("DEBUG-TEST!!!", i.getStringExtra(MapUtility.CURRENT_DAY_TAG));
+                    i.putExtra("travelData", (intent.getSerializableExtra("travelData")));
+                    i.putExtra("autoType", R.string.customized_tour_landmark);
+                    TripPlanActivity tripPlanActivity = (TripPlanActivity) context;
+//                    tripPlanActivity.mSectionsPagerAdapter.getItem(0).startActivityForResult(i,intent.getIntExtra(ARG_SECTION_NUMBER,0));
+                    ((TripPlanActivity) context).getSupportFragmentManager().getFragments().get(0).startActivityForResult(i,intent.getIntExtra(ARG_SECTION_NUMBER,0));
+                    //((TripPlanActivity)context).PlaceholderFragment.startActivityForResult(i,intent.getIntExtra(ARG_SECTION_NUMBER,0));
+                } else if(holder.title.getText().equals(context.getResources().getString(R.string.customized_tour_residence))) {
+                    Intent i = new Intent(context, ChoosePlacesActivity.class);
+                    IntentData intentData = new IntentData(intent);
+                    intentData.transferDataToIntent(i);
+                    Log.d("DEBUG-TEST!!!", i.getStringExtra(MapUtility.CURRENT_DAY_TAG));
+                    i.putExtra("travelData", (intent.getSerializableExtra("travelData")));
+                    i.putExtra("autoType", R.string.customized_tour_residence);
                     TripPlanActivity tripPlanActivity = (TripPlanActivity) context;
 //                    tripPlanActivity.mSectionsPagerAdapter.getItem(0).startActivityForResult(i,intent.getIntExtra(ARG_SECTION_NUMBER,0));
                     ((TripPlanActivity) context).getSupportFragmentManager().getFragments().get(0).startActivityForResult(i,intent.getIntExtra(ARG_SECTION_NUMBER,0));
                     //((TripPlanActivity)context).PlaceholderFragment.startActivityForResult(i,intent.getIntExtra(ARG_SECTION_NUMBER,0));
                 }
-                Toast.makeText(context, rec_item.getTitle(), Toast.LENGTH_SHORT).show();
             }
         });
     }
