@@ -185,6 +185,7 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
         Intent intent = getIntent();
         intentData = new IntentData(intent);
         autoCategory = intent.getStringExtra("autoType");
+        Log.d("DEBUG-TEST2", "autocategory : " + autoCategory);
         if (intentData.getPlaceType() == null)
             intentData.setPlaceType(getResources().getString(R.string.custom_place));
     }
@@ -492,41 +493,80 @@ public class ChoosePlacesActivity extends AppCompatActivity implements OnMapRead
                 }
                 UID = saved_info[0];
 
-                String category = "";
-                if(autoCategory == getResources().getString(R.string.customized_tour_restaurant)) {
-                    category = "restaurants";
-                } else if(autoCategory == getResources().getString(R.string.customized_tour_landmark)) {
-                    category = "attractions";
-                } else if(autoCategory == getResources().getString(R.string.customized_tour_residence)) {
-                    category = "hotels";
-                }
-
-                MapUtility.FindPlacesTask findPlacesTask = new MapUtility.FindPlacesTask(String.valueOf(listLocsToDraw.get(0).latitude), String.valueOf(listLocsToDraw.get(0).longitude),
-                        2.5f, "5", 1, category, UID);
-                findPlacesTask.execute();
-                try{
-                    adjacencyPlaces = findPlacesTask.get();
-                    Log.d("DEBUG-TEST", "!!!" +adjacencyPlaces);
-                    if(adjacencyPlaces != null) {
-                        ArrayList<PlaceData> placeDataArrayList = MapUtility.placeParsing(adjacencyPlaces);
-                        if(placeDataArrayList != null) {
-                            for(PlaceData placeData : placeDataArrayList) {
-                                InfoWindowData infoWindowData = new InfoWindowData();
-                                infoWindowData.setWindowType(InfoWindowData.TYPE_USER);
-                                infoWindowData.setPlaceID(placeData.getPlaceId());
-                                infoWindowData.setSnippet(placeData.getType());
-                                infoWindowData.setTitle(placeData.getName());
-                                LatLng latLng = new LatLng(Double.parseDouble(placeData.getLat()), Double.parseDouble(placeData.getLng()));
-                                infoWindowData.setLatLng(latLng);
-                                addUserMarker(infoWindowData, true);
-                            }
-                            optimizationRoutes();
-                        }
+                if(!intentData.isPreset()) {
+                    String category = "";
+                    if (autoCategory.equals(getResources().getString(R.string.customized_tour_restaurant))) {
+                        category = "restaurants";
+                    } else if (autoCategory.equals(getResources().getString(R.string.customized_tour_landmark))) {
+                        category = "attractions";
+                    } else if (autoCategory.equals(getResources().getString(R.string.customized_tour_residence))) {
+                        category = "hotels";
                     }
-                } catch(InterruptedException e) {
 
-                } catch(ExecutionException e) {
+                    MapUtility.FindPlacesTask findPlacesTask = new MapUtility.FindPlacesTask(String.valueOf(listLocsToDraw.get(0).latitude), String.valueOf(listLocsToDraw.get(0).longitude),
+                            10f, "5", 1, category, UID);
+                    findPlacesTask.execute();
+                    try {
+                        adjacencyPlaces = findPlacesTask.get();
+                        Log.d("DEBUG-TEST", "!!!" + adjacencyPlaces);
+                        if (adjacencyPlaces != null) {
+                            ArrayList<PlaceData> placeDataArrayList = MapUtility.placeParsing(adjacencyPlaces);
+                            if (placeDataArrayList != null) {
+                                for (PlaceData placeData : placeDataArrayList) {
+                                    InfoWindowData infoWindowData = new InfoWindowData();
+                                    infoWindowData.setWindowType(InfoWindowData.TYPE_USER);
+                                    infoWindowData.setPlaceID(placeData.getPlaceId());
+                                    infoWindowData.setSnippet(placeData.getType());
+                                    infoWindowData.setTitle(placeData.getName());
+                                    LatLng latLng = new LatLng(Double.parseDouble(placeData.getLat()), Double.parseDouble(placeData.getLng()));
+                                    infoWindowData.setLatLng(latLng);
+                                    addUserMarker(infoWindowData, true);
+                                }
+                                optimizationRoutes();
+                            }
+                        }
+                    } catch (InterruptedException e) {
 
+                    } catch (ExecutionException e) {
+
+                    }
+                } else {
+                    String category = "";
+                    if (autoCategory.equals(getResources().getString(R.string.healing_tour))) {
+                        category = "healing";
+                    } else if (autoCategory.equals(getResources().getString(R.string.shopping_tour))) {
+                        category = "shop";
+                    } else if (autoCategory.equals(getResources().getString(R.string.historic_place))) {
+                        category = "history";
+                    }
+
+                    MapUtility.PresetFindPlacesTask presetFindPlacesTask = new MapUtility.PresetFindPlacesTask(String.valueOf(listLocsToDraw.get(0).latitude), String.valueOf(listLocsToDraw.get(0).longitude),
+                            10f, "5", category);
+                    presetFindPlacesTask.execute();
+                    try {
+                        adjacencyPlaces = presetFindPlacesTask.get();
+                        Log.d("DEBUG-TEST", "!!!" + adjacencyPlaces);
+                        if (adjacencyPlaces != null) {
+                            ArrayList<PlaceData> placeDataArrayList = MapUtility.placeParsing(adjacencyPlaces);
+                            if (placeDataArrayList != null) {
+                                for (PlaceData placeData : placeDataArrayList) {
+                                    InfoWindowData infoWindowData = new InfoWindowData();
+                                    infoWindowData.setWindowType(InfoWindowData.TYPE_USER);
+                                    infoWindowData.setPlaceID(placeData.getPlaceId());
+                                    infoWindowData.setSnippet(placeData.getType());
+                                    infoWindowData.setTitle(placeData.getName());
+                                    LatLng latLng = new LatLng(Double.parseDouble(placeData.getLat()), Double.parseDouble(placeData.getLng()));
+                                    infoWindowData.setLatLng(latLng);
+                                    addUserMarker(infoWindowData, true);
+                                }
+                                optimizationRoutes();
+                            }
+                        }
+                    } catch (InterruptedException e) {
+
+                    } catch (ExecutionException e) {
+
+                    }
                 }
             }
         }

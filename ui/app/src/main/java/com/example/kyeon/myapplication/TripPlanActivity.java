@@ -191,7 +191,7 @@ public class TripPlanActivity extends AppCompatActivity {
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
         private static final String ARG_SECTION_LAST = "last_number";
-        private static final String ARG_SECTION_TITLE = "title_text";
+        private static final String ARG_SECTION_TITLE = MapUtility.TRAVEL_TITLE_TAG;
         private static final String ARG_SECTION_CURRENT_DAY = MapUtility.CURRENT_DAY_TAG;
         private static final String ARG_SECTION_CURRENT_DAY_TEMP = "currentDay";
         private static final String ARG_SECTION_FIRST_PLACE = MapUtility.PLACE_NAME_TAG;

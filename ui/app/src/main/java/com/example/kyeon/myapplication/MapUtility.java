@@ -63,6 +63,7 @@ public class MapUtility {
     protected static final String PLACE_BITMAP_FILE_PATH_TAG = "PlaceBitmapFilePath";
     protected static final String PLACE_LOAD_TAG = "IsPlaceLoaded?";
     protected static final String PLACE_AUTO_TAG = "IsPlaceAuto?";
+    protected static final String PLACE_PRESET_TAG = "IsPlacePreset?";
     protected static final String D_YY_TAG = "departing_year";
     protected static final String D_MM_TAG = "departing_month";
     protected static final String D_DD_TAG = "departing_day";
@@ -295,6 +296,7 @@ public class MapUtility {
                 else if(flag == 1)
                     url = "http://35.189.138.177:8080/navi/findPlace?lat=" + lat + "&lon=" + lon + "&len=" + len + "&lim="+lim + "&flag=" + flag + "&category=" + category + "&UID=" + UID;
                 URL obj = new URL(url);
+                Log.d("DEBUG-TEST2", "url : " + url);
                 HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
 
                 conn.setReadTimeout(10000);
@@ -332,7 +334,7 @@ public class MapUtility {
         }
     }
 
-    public class PresetFindPlacesTask extends AsyncTask<String, Void, String> {
+    protected static class PresetFindPlacesTask extends AsyncTask<String, Void, String> {
         String result;
         String url, lat, lon, lim;
         float len;
@@ -357,6 +359,7 @@ public class MapUtility {
             try {
                 url = "http://35.189.138.177:8080/recomm?lat=" + lat + "&lon=" + lon + "&len=" + len + "&lim=" + lim + "&choice=" + choice;
                 URL obj = new URL(url);
+                Log.d("DEBUG-TEST2", "url : " + url);
                 HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
 
                 conn.setReadTimeout(10000);

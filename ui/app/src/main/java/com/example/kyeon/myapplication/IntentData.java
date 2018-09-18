@@ -23,8 +23,7 @@ public class IntentData {
     private LatLng placeLatLng;
     private boolean isReloaded;
     private boolean isAuto;
-    public static final String isLoadedTag = MapUtility.PLACE_LOAD_TAG;
-    public static final String isAutoTag = MapUtility.PLACE_AUTO_TAG;
+    private boolean isPreset;
 
     public IntentData(Intent intent) {
         dYY = intent.getStringExtra(MapUtility.D_YY_TAG);
@@ -47,6 +46,7 @@ public class IntentData {
         placeBitmapFilePath = intent.getStringExtra(MapUtility.PLACE_BITMAP_FILE_PATH_TAG);
         isReloaded = intent.getBooleanExtra(MapUtility.PLACE_LOAD_TAG, false);
         isAuto = intent.getBooleanExtra(MapUtility.PLACE_AUTO_TAG, false);
+        isPreset = intent.getBooleanExtra(MapUtility.PLACE_PRESET_TAG, false);
     }
 
     protected void transferDataToIntent(Intent intent) {
@@ -71,6 +71,14 @@ public class IntentData {
         if(placeLat != null && placeLng != null) {
             placeLatLng = new LatLng(Double.parseDouble(placeLat), Double.parseDouble(placeLng));
         }
+    }
+
+    public boolean isPreset() {
+        return isPreset;
+    }
+
+    public void setPreset(boolean preset) {
+        isPreset = preset;
     }
 
     public String getdYY() {
