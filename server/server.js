@@ -25,26 +25,40 @@ var server = http.createServer(function(req, res) {
 	var client = new zerorpc.Client();
 	client.connect("tcp://127.0.0.1:4242");
 
-	if(cmds[1] == "Learning") {
+	if(cmds[1] == "score") {
 		if(req.method == "GET") {
-			var result;
-			mongo.connect("mongodb://127.0.0.1:27017",{useNewUrlParser : true} , function(err,db) {
-				if(err) 
-					res.end("db connect error");
-				var dbo = db.db(DbName);
-				client.invoke("recommend",
-								'attraction',
-								['324890', '3808315', '590748'],
-								function(error, res, more) {
-									console.log(res);
-								});
-				//dbo.collection("test").findOne(test).project({"_id":false}).toArray(function(err,result) {
-				//	if(err) throw err;
-				//	res.writeHead(200, {'Content-Type': 'text/plain;charset=utf-8'});
-				//	res.end(JSON.stringify(result));
-				//	db.close();
-				//});
-			});
+			var UID = parsedQuery.UID;
+			var flag = parsedQuery.flag;
+			var category = parsedQuery.category;
+			var data = parsedQuery.placeId;
+			if(data == "0") {
+				res.writeHead(200, {'Conetent-Type': 'text/plain;charset=utf-8'});
+				res.end("true");
+			} else {
+				mongo.connect("mongodb://127.0.0.1:27017",{useNewUrlParser : true} , function(err,db) {
+					if(err) 
+						res.end("db connect error");
+					var dbo = db.db(DbName);
+					dbo.collection(ColUser).findOne({UID:UID}, function(err, User) {
+						if(flag == 0) {
+							User.pos[category].push(data);
+							var savedata = { $set : { pos : User.pos } };
+						} else if(flag == 1) {
+							User.neg[category].push(data);
+							var savedata = { $set : { neg : User.neg } };
+						}
+						dbo.collection(ColUser).updateOne({UID : UID}, savedata, function(err, result) {
+							if(err) {
+								res.writeHead(200, {'Conetent-Type': 'text/plain;charset=utf-8'});
+								res.end("false");
+							} else {
+								res.writeHead(200, {'Conetent-Type': 'text/plain;charset=utf-8'});
+								res.end("true");
+							}
+						});
+					});
+				});
+			}
 		}
 	} else if(cmds[1] == "navi") {
 		if(req.method == "GET") {
@@ -60,7 +74,7 @@ var server = http.createServer(function(req, res) {
 						if(err) throw err;
 						var dbo = db.db(DbName);
 						var resarr = new Array();
-						dbo.collection(ColPlaces).find({}).project({"_id":false,"placeId":false, "name_eng":false}).toArray(function(err, result) {
+						dbo.collection(ColPlaces).find({}).project({"_id":false, "name_eng":false}).toArray(function(err, result) {
 							if(err) throw err;
 							var cnt = 0;
 							result.forEach(function(item, index, array) {
@@ -76,35 +90,67 @@ var server = http.createServer(function(req, res) {
 					});
 				} else if(flag == 1) {
 					var category = parsedQuery.category;
+					var UID = parsedQuery.UID;
 					mongo.connect("mongodb://127.0.0.1:27017",{useNewUrlParser : true} ,function(err,db) {
 						if(err) throw err;
 						var dbo = db.db(DbName);
-						var resarr = new Array();
+						var pyres = {
+									placeId : [],
+									same : []
+									};
 						var temparr = new Array();
+						var resarr = new Array();
 						dbo.collection(ColPlaces).find({"class" : category}).project({"_id":false, "name_eng":false}).toArray(function(err, result) {
 							if(err) throw err;
 							var cnt = 0;
 							result.forEach(function(item, index, array) {
-								if(dis(lat, lon, array[index]["latitude"], array[index]["longitude"]) < len && cnt < lim) {
+								if(dis(lat, lon, array[index]["latitude"], array[index]["longitude"]) < len) {
 									temparr.push(array[index]["placeId"].toString());
-									cnt += 1;
 								}
 							});
+							dbo.collection(ColUser).findOne({"UID":UID}, function(err,User) {
+							console.log(category);
+							console.log(User.pos[category]);
+							console.log(User.neg[category]);
 							console.log(temparr);
-								client.invoke("recommend", 
-												category,
-												temparr,
-												function(error,forres,more) {
-													if(error) {
-														console.log("error : "+error);
-													}else {
-														forres.forEach(function(item, index, array) {
-															resarr.push(forres[index]);
+							client.invoke("recommend", 
+											category,
+											temparr,
+											User.pos[category],
+											User.neg[category],
+											function(error,forres,more) {
+												if(error) {
+													console.log("error : "+error);
+												}else {
+													forres.forEach(function ite(item, index, array) {
+														if(ite.stop) { return; }
+														pyres["placeId"].push(array[index][0].toString());
+														pyres["same"].push(array[index][1]);
+														cnt += 1;
+														if(cnt >= lim) { ite.stop = true; }
+													});
+												}
+
+												var hu = 0;
+												for(index = 0; index < pyres["placeId"].length; index++) {
+													dbo.collection(ColPlaces).findOne({"placeId": parseInt(pyres["placeId"][index])}).then((data) => { 
+														data.same = pyres["same"][hu];
+														hu++;
+														resarr.push(data);
+														if(pyres["placeId"].length == resarr.length) {
+															resarr.sort(function(a,b) {
+																if(a.same > b.same) return -1;
+																if(a.same < b.same) return 1;
+																return 0;
+															});
+															res.writeHead(200, {'Content-Type': 'application/json;charset=utf-8'});
+															res.end(JSON.stringify(resarr));
+														}
 														});
-														console.log("resarr : " + forres);
-													}
-								});
-							//console.log(resarr);
+												}
+											}
+							);
+						});
 						});
 					});
 				}
@@ -162,38 +208,44 @@ var server = http.createServer(function(req, res) {
 			}
 		} 
 	}else if(cmds[1] == "Sign") {
+		console.log("Sign");
 		var UID = parsedQuery.UID;
 		var pwd = parsedQuery.pwd;
 		var User = {UID : UID,
 					PWD : pwd}
 		if(cmds[2] == "Up"){
+			console.log("Up");
 			if(req.method == "GET") {
 				var phonenum = parsedQuery.pnum;
 				mongo.connect("mongodb://127.0.0.1:27017", {useNewUrlParser : true}, function(err, db) {
 					if(err) throw err;
 					var dbo = db.db(DbName);
-					dbo.collection(ColUser).findOne(User , function(err, result) {
+					dbo.collection(ColUser).findOne({UID:UID} , function(err, result) {
 						if(err) throw err;
 						if(result == null) {
-							var InsertUser = { UID : UID,
+							var att = {attractions : [],
+										hotels : [],
+										restaurants : []};
+							var InsertUser = {  UID : UID,
 												PWD : pwd,
 												phonenum : phonenum,
-												pos : [],
-												neg : []
+												pos : att,
+												neg : att
 							};
 							dbo.collection(ColUser).insertOne(InsertUser, function(err, result) {
 								if(err) throw err;
-								res.writeHead(200, {'Contect-Type':'application/json;cherset=utf-8'});
-								res.end(JSON.stringify({"result":true}));
+								res.writeHead(200, {'Contect-Type':'text/plain;cherset=utf-8'});
+								res.end("true");
 							});
 						} else {
-							res.writeHead(200, {'Conetent-Type': 'application/json;charset=utf-8'});
-							res.end(JSON.stringify({'result' : false}));
+							res.writeHead(200, {'Conetent-Type': 'text/plain;charset=utf-8'});
+							res.end("false");
 						}
 					});
 				});
 			}
 		} else if(cmds[2] == "In") {
+			console.log("login");
 			if(req.method == "GET") {
 				mongo.connect("mongodb://127.0.0.1:27017", {useNewUrlParser : true}, function(err, db) {
 					if(err) throw err;
@@ -201,17 +253,93 @@ var server = http.createServer(function(req, res) {
 					dbo.collection(ColUser).findOne(User , function(err, result) {
 						if(err) throw err;
 						if(result == null) {
-							res.writeHead(200, {'Conetent-Type': 'application/json;charset=utf-8'});
-							res.end(JSON.stringify({'result' : false}));
+							res.writeHead(200, {'Conetent-Type': 'text/plain;charset=utf-8'});
+							res.end("false");
 						} else {
-							res.writeHead(200, {'Conetent-Type': 'application/json;charset=utf-8'});
-							res.end(JSON.stringify({'result' : true}));
+							res.writeHead(200, {'Conetent-Type': 'text/plain;charset=utf-8'});
+							res.end("true");
+							console.log("true");
 						}
 					});
 				});
 			}
 		}
-	}else {
+	} else if(cmds[1] == "recomm") {
+		if(req.method == "GET") {
+			var choice = parsedQuery.choice;
+			var lat = parseFloat(parsedQuery.lat);
+			var lon = parseFloat(parsedQuery.lon);
+			var len = parseFloat(parsedQuery.len);
+			var lim = parseFloat(parsedQuery.lim);
+			var Healing = ['1046419','554582','592658','1604009','554528'];
+			var shop = ['8842556','3822061','1990451','1962594','6352852'];
+			var hist = ['324888','1379963','320359','590748','324887'];
+			var pos;
+			if(choice == "healing")
+				pos = Healing;
+			else if(choice == "shop")
+				pos = shop;
+			else if(choice == "history")
+				pos = hist;
+			mongo.connect("mongodb://127.0.0.1:27017", {useNewUrlParser : true}, function(err,db) {
+				if(err) throw err;
+				var dbo = db.db(DbName);
+				var pyres = {
+							placeId : [],
+							same : []
+							};
+				var temparr = new Array();
+				var resarr = new Array();
+				dbo.collection(ColPlaces).find({"class" : "attractions"}).project({"_id" : false, "name_eng" : false}).toArray(function(err, result) {
+					if(err) throw err;
+					var cnt = 0;
+					result.forEach(function(item, index, array) {
+						if(dis(lat, lon, array[index]["latitude"], array[index]["longitude"]) < len) {
+							temparr.push(array[index]["placeId"].toString());
+						}
+					});
+					console.log("pos : "+ pos);
+					client.invoke("recommend",
+									"attractions",
+									temparr,
+									pos,
+									[],
+									function(error, forres, more) {
+										if(error) {
+											console.log("error : " + error);
+										} else {
+											forres.forEach(function ite(item, index, array) {
+												if(ite.stop) {return;}
+												pyres["placeId"].push(array[index][0].toString());
+												pyres["same"].push(array[index][1]);
+												cnt += 1;
+												if(cnt >= lim) { ite.stop = true; }
+											});
+										}
+										console.log(pyres);
+										var hu = 0;
+										for(index = 0; index < pyres["placeId"].length; index++) {
+											dbo.collection(ColPlaces).findOne({"placeId": parseInt(pyres["placeId"][index])}).then((data) => { 
+												data.same = pyres["same"][hu];
+												hu++;
+												resarr.push(data);
+												if(pyres["placeId"].length == resarr.length) {
+													resarr.sort(function(a,b) {
+														if(a.same > b.same) return -1;
+														if(a.same < b.same) return 1;
+														return 0;
+													});
+													res.writeHead(200, {'Content-Type': 'application/json;charset=utf-8'});
+													res.end(JSON.stringify(resarr));
+												}
+											});
+										}
+									}
+					);
+				});
+			});
+		}
+	} else {
 		res.writeHead(404, {'Content-Type': 'text/plain;charset=utf-8'});
 		res.end("wrong Query");
 	}
